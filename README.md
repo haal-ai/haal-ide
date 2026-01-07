@@ -1,4 +1,4 @@
-# HAAL IDE
+# HAAL IDE (Work in Progress as of 08 Jan 2025.. stay tuned)
 
 **HAAL** (Human AI Assistant Layer) IDE provides seamless integration between humans and AI assistants (for both IDE and some CLI-based agents), enabling better communication and collaboration through intelligent skills, tools, templates and guidance.
 
