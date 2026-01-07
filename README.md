@@ -1,8 +1,6 @@
 # HAAL IDE
 
-## 🎯 Purpose
-
-HAAL IDE provides seamless integration between humans and AI assistants (for both IDE and some CLI-based agents), enabling better communication and collaboration through intelligent skills, tools, templates and guidance.
+**HAAL** (Human AI Assistant Layer) IDE provides seamless integration between humans and AI assistants (for both IDE and some CLI-based agents), enabling better communication and collaboration through intelligent skills, tools, templates and guidance.
 
 ## 🏛️ Origin and evolutions
 
