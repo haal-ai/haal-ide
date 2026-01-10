@@ -1,17 +1,17 @@
-# OLAF Self-Contained Installer Guide
+# OLAF Installer Guide
 
 ## Overview
 Create a self-embedded Go installer called `olaf-installer` that embeds all OLAF framework files and manages installation/updates automatically.
 
 ## What Gets Embedded
-- All files starting with `olaf-` in `.github`, `.kiro`, and `.windsurf`
-- Complete `.olaf` directory structure
+- All files starting with `olaf-installer-` in `.github`, `.kiro`, and `.windsurf`
+- Complete `.olaf-installer` directory structure
 - Framework files and competencies
 
 ### Installer Behavior
 
 ### Default Operation (no arguments)
-1. Check if `~/.olaf` exists with required structure:
+1. Check if `~/.olaf-installer` exists with required structure:
    - `/core/skills`
    - `/competencies` 
    - `/reference`
@@ -19,12 +19,12 @@ Create a self-embedded Go installer called `olaf-installer` that embeds all OLAF
    - Condensed framework files
 2. If exists: Update with new/modified files only
 3. If not exists: Create full structure and copy all files
-4. Copy `olaf-*` files from global `~/.olaf` to **local repo** in respective folders:
-   - `.github/olaf-*` → local repo `.github/`
-   - `.kiro/olaf-*` → local repo `.kiro/`
-   - `.windsurf/olaf-*` → local repo `.windsurf/`
+4. Copy `olaf-installer-*` files from global `~/.olaf-installer` to **local repo** in respective folders:
+   - `.github/olaf-installer-*` → local repo `.github/`
+   - `.kiro/olaf-installer-*` → local repo `.kiro/`
+   - `.windsurf/olaf-installer-*` → local repo `.windsurf/`
 5. Check for collection selection:
-   - If collection file exists in `~/.olaf/core/reference`: Do nothing
+   - If collection file exists in `~/.olaf-installer/core/reference`: Do nothing
    - If no collection: Run `select-collection` functionality
 
 ### With --collection Argument
@@ -35,46 +35,46 @@ Trigger the same behavior as `select-collection` command
 #### **Source Repository Structure** (where installer is built)
 ```bash
 repo-root/
-├── .github/          ← Contains olaf-* files
-├── .kiro/            ← Contains olaf-* files  
-├── .windsurf/        ← Contains olaf-* files
-└── .olaf/            ← Complete framework
+├── .github/          ← Contains olaf-installer-* files
+├── .kiro/            ← Contains olaf-installer-* files  
+├── .windsurf/        ← Contains olaf-installer-* files
+└── .olaf-installer/            ← Complete framework
 ```
 
 #### **Target Installation** (user's system)
 ```bash
-~/.olaf/              ← Framework files ONLY
+~/.olaf-installer/              ← Framework files ONLY
 ├── core/
 ├── data/
 ├── docs/
 └── tools/
 
 local-repo/           ← User's working repository
-├── .github/          ← Gets olaf-* files
-├── .kiro/            ← Gets olaf-* files
-├── .windsurf/        ← Gets olaf-* files
-└── .olaf/            ← User's local .olaf (if any)
+├── .github/          ← Gets olaf-installer-* files
+├── .kiro/            ← Gets olaf-installer-* files
+├── .windsurf/        ← Gets olaf-installer-* files
+└── .olaf-installer/            ← User's local .olaf-installer (if any)
 ```
 
 #### **What Goes Where:**
 
-**TO ~/.olaf/ (Framework Installation):**
-- Complete `.olaf/` directory structure
+**TO ~/.olaf-installer/ (Framework Installation):**
+- Complete `.olaf-installer/` directory structure
 - Core framework files
 - Competencies and skills
 - Reference materials
 - Tools and documentation
 
-**NEVER TO ~/.olaf/:**
+**NEVER TO ~/.olaf-installer/:**
 - `.github/` directory
 - `.kiro/` directory  
 - `.windsurf/` directory
 - Repository-specific files
 
 **TO LOCAL REPO (Repository Setup):**
-- `olaf-*` files from `.github/` → local repo `.github/`
-- `olaf-*` files from `.kiro/` → local repo `.kiro/`
-- `olaf-*` files from `.windsurf/` → local repo `.windsurf/`
+- `olaf-installer-*` files from `.github/` → local repo `.github/`
+- `olaf-installer-*` files from `.kiro/` → local repo `.kiro/`
+- `olaf-installer-*` files from `.windsurf/` → local repo `.windsurf/`
 
 ## Project Structure
 
@@ -83,10 +83,10 @@ olaf-installer/
 ├── main.go              # Main installer code
 ├── go.mod              # Go module file
 ├── assets/             # Embedded OLAF files
-│   ├── github/         # .github content with olaf- files
-│   ├── kiro/           # .kiro content with olaf- files  
-│   ├── windsurf/       # .windsurf content with olaf- files
-│   └── olaf/           # Complete .olaf directory
+│   ├── github/         # .github content with olaf-installer- files
+│   ├── kiro/           # .kiro content with olaf-installer- files  
+│   ├── windsurf/       # .windsurf content with olaf-installer- files
+│   └── olaf-installer/           # Complete .olaf-installer directory
 │       ├── core/
 │       │   ├── competencies/
 │       │   ├── reference/
@@ -123,8 +123,8 @@ var embeddedFiles embed.FS
 var versionFile string
 
 const (
-	OLAF_GLOBAL_DIR = ".olaf"
-	OLAF_LOCAL_DIR  = ".olaf"
+	OLAF_GLOBAL_DIR = ".olaf-installer"
+	OLAF_LOCAL_DIR  = ".olaf-installer"
 )
 
 func main() {
@@ -163,7 +163,7 @@ func installOrUpdateOLAF() {
 		installOlafFramework(globalOlafDir)
 	}
 
-	// Copy olaf-* files to local repository
+	// Copy olaf-installer-* files to local repository
 	copyOlafFilesToLocalRepo(globalOlafDir)
 
 	// Check collection selection
@@ -177,7 +177,7 @@ func installOrUpdateOLAF() {
 	fmt.Println("\n🎉 OLAF installation complete!")
 }
 
-func isOlafInstalled(olafDir string) bool {
+func isOlafInstalled(olaf-installerDir string) bool {
 	requiredPaths := []string{
 		"core/skills",
 		"competencies", 
@@ -186,14 +186,14 @@ func isOlafInstalled(olafDir string) bool {
 	}
 
 	for _, path := range requiredPaths {
-		fullPath := filepath.Join(olafDir, path)
+		fullPath := filepath.Join(olaf-installerDir, path)
 		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 			return false
 		}
 	}
 
 	// Check for condensed framework files
-	condensedDir := filepath.Join(olafDir, "reference", ".condensed")
+	condensedDir := filepath.Join(olaf-installerDir, "reference", ".condensed")
 	files, err := os.ReadDir(condensedDir)
 	if err != nil || len(files) == 0 {
 		return false
@@ -202,19 +202,19 @@ func isOlafInstalled(olafDir string) bool {
 	return true
 }
 
-func installOlafFramework(olafDir string) error {
+func installOlafFramework(olaf-installerDir string) error {
 	// Create base directory
-	if err := os.MkdirAll(olafDir, 0755); err != nil {
+	if err := os.MkdirAll(olaf-installerDir, 0755); err != nil {
 		return fmt.Errorf("failed to create OLAF directory: %v", err)
 	}
 
-	// Extract embedded .olaf directory
-	return extractEmbeddedFiles("assets/olaf", olafDir)
+	// Extract embedded .olaf-installer directory
+	return extractEmbeddedFiles("assets/olaf-installer", olaf-installerDir)
 }
 
-func updateOlafInstallation(olafDir string) error {
+func updateOlafInstallation(olaf-installerDir string) error {
 	// Walk through embedded files and update only new/modified
-	return fs.WalkDir(embeddedFiles, "assets/olaf", func(path string, d fs.DirEntry, err error) error {
+	return fs.WalkDir(embeddedFiles, "assets/olaf-installer", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -224,8 +224,8 @@ func updateOlafInstallation(olafDir string) error {
 		}
 
 		// Get relative path from embedded files
-		relPath := strings.TrimPrefix(path, "assets/olaf/")
-		destPath := filepath.Join(olafDir, relPath)
+		relPath := strings.TrimPrefix(path, "assets/olaf-installer/")
+		destPath := filepath.Join(olaf-installerDir, relPath)
 
 		// Check if file needs updating
 		if needsUpdate(path, destPath) {
@@ -281,16 +281,16 @@ func copyOlafFilesToLocalRepo(globalOlafDir string) {
 		return
 	}
 
-	// IMPORTANT: Only copy olaf-* files to local repo
-	// These come from embedded assets, NOT from ~/.olaf
+	// IMPORTANT: Only copy olaf-installer-* files to local repo
+	// These come from embedded assets, NOT from ~/.olaf-installer
 	
-	// Copy olaf-* files from embedded .github to local repo .github
+	// Copy olaf-installer-* files from embedded .github to local repo .github
 	copyOlafFilesFromEmbedded("assets/github", filepath.Join(wd, ".github"))
 	
-	// Copy olaf-* files from embedded .kiro to local repo .kiro
+	// Copy olaf-installer-* files from embedded .kiro to local repo .kiro
 	copyOlafFilesFromEmbedded("assets/kiro", filepath.Join(wd, ".kiro"))
 	
-	// Copy olaf-* files from embedded .windsurf to local repo .windsurf
+	// Copy olaf-installer-* files from embedded .windsurf to local repo .windsurf
 	copyOlafFilesFromEmbedded("assets/windsurf", filepath.Join(wd, ".windsurf"))
 }
 
@@ -306,9 +306,9 @@ func copyOlafFilesFromEmbedded(srcPrefix, destDir string) {
 			return nil
 		}
 
-		// Only copy files starting with "olaf-"
+		// Only copy files starting with "olaf-installer-"
 		filename := filepath.Base(path)
-		if !strings.HasPrefix(filename, "olaf-") {
+		if !strings.HasPrefix(filename, "olaf-installer-") {
 			return nil
 		}
 
@@ -337,8 +337,8 @@ func copyOlafFilesFromEmbedded(srcPrefix, destDir string) {
 	})
 }
 
-func hasCollectionSelection(olafDir string) bool {
-	collectionFile := filepath.Join(olafDir, "core", "reference", "collection")
+func hasCollectionSelection(olaf-installerDir string) bool {
+	collectionFile := filepath.Join(olaf-installerDir, "core", "reference", "collection")
 	if _, err := os.Stat(collectionFile); os.IsNotExist(err) {
 		return false
 	}
@@ -358,8 +358,8 @@ func selectCollection() {
 	fmt.Scan(&choice)
 
 	homeDir := getHomeDir()
-	olafDir := filepath.Join(homeDir, OLAF_GLOBAL_DIR)
-	collectionFile := filepath.Join(olafDir, "core", "reference", "collection")
+	olaf-installerDir := filepath.Join(homeDir, OLAF_GLOBAL_DIR)
+	collectionFile := filepath.Join(olaf-installerDir, "core", "reference", "collection")
 
 	var selectedCollection string
 	switch choice {
@@ -435,15 +435,15 @@ func showHelp() {
 	fmt.Printf("Platform: %s\n", getPlatformInfo())
 	fmt.Println("")
 	fmt.Println("Usage:")
-	fmt.Println("  olaf-installer              Install or update OLAF")
-	fmt.Println("  olaf-installer --collection Select collection")
-	fmt.Println("  olaf-installer version      Show version")
-	fmt.Println("  olaf-installer help         Show this help")
+	fmt.Println("  olaf-installer-installer              Install or update OLAF")
+	fmt.Println("  olaf-installer-installer --collection Select collection")
+	fmt.Println("  olaf-installer-installer version      Show version")
+	fmt.Println("  olaf-installer-installer help         Show this help")
 	fmt.Println("")
 	fmt.Println("What it does:")
-	fmt.Println("- Installs OLAF framework to ~/.olaf")
+	fmt.Println("- Installs OLAF framework to ~/.olaf-installer")
 	fmt.Println("- Updates existing installations")
-	fmt.Println("- Copies olaf-* files to local repository")
+	fmt.Println("- Copies olaf-installer-* files to local repository")
 	fmt.Println("- Manages collection selection")
 	fmt.Println("")
 	fmt.Println("Supported platforms:")
@@ -457,13 +457,13 @@ func showHelp() {
 
 ### 1. Create Project Structure
 ```bash
-mkdir olaf-installer
-cd olaf-installer
+mkdir olaf-installer-installer
+cd olaf-installer-installer
 ```
 
 ### 2. Create Go Module
 ```bash
-go mod init olaf-installer
+go mod init olaf-installer-installer
 ```
 
 ### 3. Prepare Assets
@@ -472,16 +472,16 @@ go mod init olaf-installer
 mkdir -p assets/github
 mkdir -p assets/kiro  
 mkdir -p assets/windsurf
-mkdir -p assets/olaf
+mkdir -p assets/olaf-installer
 
 # Copy OLAF files to assets
-# Copy all olaf-* files from .github, .kiro, .windsurf
-cp -r .github/olaf-* assets/github/ 2>/dev/null || true
-cp -r .kiro/olaf-* assets/kiro/ 2>/dev/null || true  
-cp -r .windsurf/olaf-* assets/windsurf/ 2>/dev/null || true
+# Copy all olaf-installer-* files from .github, .kiro, .windsurf
+cp -r .github/olaf-installer-* assets/github/ 2>/dev/null || true
+cp -r .kiro/olaf-installer-* assets/kiro/ 2>/dev/null || true  
+cp -r .windsurf/olaf-installer-* assets/windsurf/ 2>/dev/null || true
 
-# Copy complete .olaf directory
-cp -r .olaf/* assets/olaf/
+# Copy complete .olaf-installer directory
+cp -r .olaf-installer/* assets/olaf-installer/
 
 # Create VERSION file
 echo "1.0.0" > VERSION
@@ -492,47 +492,47 @@ echo "1.0.0" > VERSION
 #### Windows Builds
 ```bash
 # Windows 64-bit (most common)
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-amd64.exe
 
 # Windows 32-bit (legacy systems)
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-windows-386.exe
 
 # Windows ARM64 (newer Windows on ARM devices)
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-arm64.exe
 ```
 
 #### macOS Builds
 ```bash
 # macOS Intel 64-bit (most common)
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-amd64
 
 # macOS Apple Silicon (M1/M2/M3)
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-arm64
 
 # macOS Universal Binary (combines both Intel and Apple Silicon)
 # Build separately first, then combine:
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-arm64
 # Combine into universal binary
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+lipo -create olaf-installer-installer-macos-amd64 olaf-installer-installer-macos-arm64 -output olaf-installer-installer-macos-universal
 ```
 
 #### Linux Builds
 ```bash
 # Linux 64-bit (most common)
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-amd64
 
 # Linux 32-bit (legacy systems)
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-linux-386
 
 # Linux ARM64 (aarch64 servers, Raspberry Pi 4+)
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-arm64
 
 # Linux ARM v7 (32-bit, Raspberry Pi 3/4)
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv7
 
 # Linux ARM v6 (Raspberry Pi Zero/1)
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv6
 ```
 
 #### Complete Build Script
@@ -544,26 +544,26 @@ echo "🔨 Building OLAF Installer for all platforms..."
 
 # Windows
 echo "Building Windows versions..."
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-amd64.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-windows-386.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-arm64.exe
 
 # macOS
 echo "Building macOS versions..."
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-arm64
+lipo -create olaf-installer-installer-macos-amd64 olaf-installer-installer-macos-arm64 -output olaf-installer-installer-macos-universal
 
 # Linux
 echo "Building Linux versions..."
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-amd64
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-linux-386
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-arm64
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv7
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv6
 
 echo "✅ Build complete!"
-ls -lh olaf-installer-*
+ls -lh olaf-installer-installer-*
 ```
 
 #### Platform Detection in Code
@@ -605,32 +605,32 @@ func getInstallerName() string {
     
     switch {
     case os == "windows" && arch == "amd64":
-        return "olaf-installer-windows-amd64.exe"
+        return "olaf-installer-installer-windows-amd64.exe"
     case os == "windows" && arch == "386":
-        return "olaf-installer-windows-386.exe"
+        return "olaf-installer-installer-windows-386.exe"
     case os == "windows" && arch == "arm64":
-        return "olaf-installer-windows-arm64.exe"
+        return "olaf-installer-installer-windows-arm64.exe"
     case os == "darwin" && arch == "amd64":
-        return "olaf-installer-macos-amd64"
+        return "olaf-installer-installer-macos-amd64"
     case os == "darwin" && arch == "arm64":
-        return "olaf-installer-macos-arm64"
+        return "olaf-installer-installer-macos-arm64"
     case os == "linux" && arch == "amd64":
-        return "olaf-installer-linux-amd64"
+        return "olaf-installer-installer-linux-amd64"
     case os == "linux" && arch == "386":
-        return "olaf-installer-linux-386"
+        return "olaf-installer-installer-linux-386"
     case os == "linux" && arch == "arm64":
-        return "olaf-installer-linux-arm64"
+        return "olaf-installer-installer-linux-arm64"
     case os == "linux" && arch == "arm":
-        return "olaf-installer-linux-armv7"
+        return "olaf-installer-installer-linux-armv7"
     default:
-        return "olaf-installer-" + os + "-" + arch
+        return "olaf-installer-installer-" + os + "-" + arch
     }
 }
 ```
 
 ### 5. Check Binary Size
 ```bash
-ls -lh olaf-installer*
+ls -lh olaf-installer-installer*
 ```
 
 ## Update Mechanism Explained
@@ -643,7 +643,7 @@ Once a user has installed OLAF, the update process is intelligent and efficient.
 When the installer runs (without arguments), it first checks if OLAF is already installed:
 
 ```go
-func isOlafInstalled(olafDir string) bool {
+func isOlafInstalled(olaf-installerDir string) bool {
     // Checks for these required paths:
     requiredPaths := []string{
         "core/skills",
@@ -654,14 +654,14 @@ func isOlafInstalled(olafDir string) bool {
     
     // Verifies each path exists
     for _, path := range requiredPaths {
-        fullPath := filepath.Join(olafDir, path)
+        fullPath := filepath.Join(olaf-installerDir, path)
         if _, err := os.Stat(fullPath); os.IsNotExist(err) {
             return false  // Not installed
         }
     }
     
     // Checks for condensed framework files
-    condensedDir := filepath.Join(olafDir, "reference", ".condensed")
+    condensedDir := filepath.Join(olaf-installerDir, "reference", ".condensed")
     files, err := os.ReadDir(condensedDir)
     return err == nil && len(files) > 0
 }
@@ -671,16 +671,16 @@ func isOlafInstalled(olafDir string) bool {
 If OLAF is detected as installed, the installer switches to **update mode**:
 
 ```go
-func updateOlafInstallation(olafDir string) error {
+func updateOlafInstallation(olaf-installerDir string) error {
     // Walk through embedded files and update only new/modified
-    return fs.WalkDir(embeddedFiles, "assets/olaf", func(path string, d fs.DirEntry, err error) error {
+    return fs.WalkDir(embeddedFiles, "assets/olaf-installer", func(path string, d fs.DirEntry, err error) error {
         if err != nil || d.IsDir() {
             return err
         }
 
         // Get relative path from embedded files
-        relPath := strings.TrimPrefix(path, "assets/olaf/")
-        destPath := filepath.Join(olafDir, relPath)
+        relPath := strings.TrimPrefix(path, "assets/olaf-installer/")
+        destPath := filepath.Join(olaf-installerDir, relPath)
 
         // Check if file needs updating
         if needsUpdate(path, destPath) {
@@ -761,7 +761,7 @@ type GitHubRelease struct {
 }
 
 const (
-    GITHUB_REPO = "haal-ai-org/olaf-installer"
+    GITHUB_REPO = "haal-ai-org/olaf-installer-installer"
     VERSION_CHECK_URL = "https://api.github.com/repos/" + GITHUB_REPO + "/releases/latest"
 )
 
@@ -915,17 +915,17 @@ func showHelp() {
     fmt.Printf("Version: %s\n", getCurrentVersion())
     fmt.Println("")
     fmt.Println("Usage:")
-    fmt.Println("  olaf-installer              Install or update OLAF (checks for updates)")
-    fmt.Println("  olaf-installer --check-updates Check for newer versions")
-    fmt.Println("  olaf-installer --collection Select collection")
-    fmt.Println("  olaf-installer version      Show current version")
-    fmt.Println("  olaf-installer help         Show this help")
+    fmt.Println("  olaf-installer-installer              Install or update OLAF (checks for updates)")
+    fmt.Println("  olaf-installer-installer --check-updates Check for newer versions")
+    fmt.Println("  olaf-installer-installer --collection Select collection")
+    fmt.Println("  olaf-installer-installer version      Show current version")
+    fmt.Println("  olaf-installer-installer help         Show this help")
     fmt.Println("")
     fmt.Println("What it does:")
-    fmt.Println("- Installs OLAF framework to ~/.olaf")
+    fmt.Println("- Installs OLAF framework to ~/.olaf-installer")
     fmt.Println("- Updates existing installations")
     fmt.Println("- Checks for newer versions from GitHub")
-    fmt.Println("- Copies olaf-* files to local repository")
+    fmt.Println("- Copies olaf-installer-* files to local repository")
     fmt.Println("- Manages collection selection")
     fmt.Println("")
     fmt.Println("Supported platforms:")
@@ -1005,7 +1005,7 @@ func showHelp() {
 
 #### 1. Create Release Structure
 ```bash
-# In your GitHub repository (haal-ai-org/olaf-installer)
+# In your GitHub repository (haal-ai-org/olaf-installer-installer)
 # Create releases with proper version tags:
 # - v1.0.0 - Initial release
 # - v1.0.1 - Bug fixes
@@ -1026,9 +1026,9 @@ func showHelp() {
 ### Installation
 ```bash
 # Download the appropriate binary for your platform
-# Windows: olaf-installer-windows-amd64.exe
-# macOS: olaf-installer-macos-universal
-# Linux: olaf-installer-linux-amd64
+# Windows: olaf-installer-installer-windows-amd64.exe
+# macOS: olaf-installer-installer-macos-universal
+# Linux: olaf-installer-installer-linux-amd64
 
 # Run installer
 ./olaf-installer-[platform]
@@ -1072,7 +1072,7 @@ func installOrUpdateOLAF() {
 func getLatestVersionFallback() string {
     sources := []string{
         "https://api.github.com/repos/haal-ai-org/olaf-installer/releases/latest",
-        "https://updates.olaf.ai/latest-version.txt",
+        "https://updates.olaf-installer.ai/latest-version.txt",
         "https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/VERSION",
     }
     
@@ -1181,36 +1181,36 @@ jobs:
         include:
           - goos: windows
             goarch: amd64
-            binary_name: olaf-installer-windows-amd64.exe
+            binary_name: olaf-installer-installer-windows-amd64.exe
           - goos: windows
             goarch: 386
-            binary_name: olaf-installer-windows-386.exe
+            binary_name: olaf-installer-installer-windows-386.exe
           - goos: windows
             goarch: arm64
-            binary_name: olaf-installer-windows-arm64.exe
+            binary_name: olaf-installer-installer-windows-arm64.exe
           - goos: darwin
             goarch: amd64
-            binary_name: olaf-installer-macos-amd64
+            binary_name: olaf-installer-installer-macos-amd64
           - goos: darwin
             goarch: arm64
-            binary_name: olaf-installer-macos-arm64
+            binary_name: olaf-installer-installer-macos-arm64
           - goos: linux
             goarch: amd64
-            binary_name: olaf-installer-linux-amd64
+            binary_name: olaf-installer-installer-linux-amd64
           - goos: linux
             goarch: 386
-            binary_name: olaf-installer-linux-386
+            binary_name: olaf-installer-installer-linux-386
           - goos: linux
             goarch: arm64
-            binary_name: olaf-installer-linux-arm64
+            binary_name: olaf-installer-installer-linux-arm64
           - goos: linux
             goarch: arm
             goarm: 7
-            binary_name: olaf-installer-linux-armv7
+            binary_name: olaf-installer-installer-linux-armv7
           - goos: linux
             goarch: arm
             goarm: 6
-            binary_name: olaf-installer-linux-armv6
+            binary_name: olaf-installer-installer-linux-armv6
         exclude:
           - goos: darwin
             goarch: 386
@@ -1292,14 +1292,14 @@ jobs:
 
     - name: Generate checksums
       run: |
-        sha256sum olaf-installer-* > checksums.txt
+        sha256sum olaf-installer-installer-* > checksums.txt
         sha256sum -c checksums.txt
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          olaf-installer-*
+          olaf-installer-installer-*
           checksums.txt
         generate_release_notes: true
         draft: false
@@ -1314,23 +1314,23 @@ jobs:
 echo "🔧 Preparing OLAF assets for embedding..."
 
 # Create assets directory
-mkdir -p assets/github assets/kiro assets/windsurf assets/olaf
+mkdir -p assets/github assets/kiro assets/windsurf assets/olaf-installer
 
 # Check if we're in the right directory
-if [ ! -d ".olaf" ]; then
-    echo "❌ Error: .olaf directory not found. Run this from the HAAL IDE root."
+if [ ! -d ".olaf-installer" ]; then
+    echo "❌ Error: .olaf-installer directory not found. Run this from the HAAL IDE root."
     exit 1
 fi
 
-# Copy olaf-* files
-echo "📋 Copying olaf-* files..."
-find .github -name "olaf-*" -type f -exec cp {} assets/github/ \; 2>/dev/null || true
-find .kiro -name "olaf-*" -type f -exec cp {} assets/kiro/ \; 2>/dev/null || true
-find .windsurf -name "olaf-*" -type f -exec cp {} assets/windsurf/ \; 2>/dev/null || true
+# Copy olaf-installer-* files
+echo "📋 Copying olaf-installer-* files..."
+find .github -name "olaf-installer-*" -type f -exec cp {} assets/github/ \; 2>/dev/null || true
+find .kiro -name "olaf-installer-*" -type f -exec cp {} assets/kiro/ \; 2>/dev/null || true
+find .windsurf -name "olaf-installer-*" -type f -exec cp {} assets/windsurf/ \; 2>/dev/null || true
 
-# Copy complete .olaf directory
-echo "📁 Copying .olaf directory..."
-cp -r .olaf/* assets/olaf/
+# Copy complete .olaf-installer directory
+echo "📁 Copying .olaf-installer directory..."
+cp -r .olaf-installer/* assets/olaf-installer/
 
 # Create VERSION file from git tag or default
 if [ -n "$GITHUB_REF" ]; then
@@ -1351,29 +1351,29 @@ echo "📊 Files: $(find assets -type f | wc -l) files embedded"
 echo "🔨 Building OLAF Installer for all platforms..."
 
 # Clean previous builds
-rm -f olaf-installer-*
+rm -f olaf-installer-installer-*
 
 # Build for all platforms
 echo "Building Windows versions..."
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-amd64.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-windows-386.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-windows-arm64.exe
 
 echo "Building macOS versions..."
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-macos-arm64
+lipo -create olaf-installer-installer-macos-amd64 olaf-installer-installer-macos-arm64 -output olaf-installer-installer-macos-universal
 
 echo "Building Linux versions..."
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-amd64
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-installer-linux-386
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-installer-linux-arm64
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv7
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-installer-linux-armv6
 
 echo "📊 Build complete!"
 echo "📦 Binary sizes:"
-ls -lh olaf-installer-* | awk '{print "  " $9 ": " $5}'
+ls -lh olaf-installer-installer-* | awk '{print "  " $9 ": " $5}'
 ```
 
 ### Repository README (`README.md`)
@@ -1387,7 +1387,7 @@ ls -lh olaf-installer-* | awk '{print "  " $9 ": " $5}'
 ### Automatic Platform Detection
 ```bash
 # Download and run the universal installer
-curl -sSL https://install.olaf.ai | bash
+curl -sSL https://install.olaf-installer.ai | bash
 ```
 
 ### Manual Download
@@ -1404,23 +1404,23 @@ curl -sSL https://install.olaf.ai | bash
 
 | Platform | Architecture | Download | Size |
 |----------|-------------|----------|------|
-| Windows | Intel/AMD 64-bit | `olaf-installer-windows-amd64.exe` | ~15MB |
-| Windows | Intel/AMD 32-bit | `olaf-installer-windows-386.exe` | ~12MB |
-| Windows | ARM64 | `olaf-installer-windows-arm64.exe` | ~14MB |
-| macOS | Intel 64-bit | `olaf-installer-macos-amd64` | ~13MB |
-| macOS | Apple Silicon | `olaf-installer-macos-arm64` | ~13MB |
-| macOS | Universal | `olaf-installer-macos-universal` | ~20MB |
-| Linux | Intel/AMD 64-bit | `olaf-installer-linux-amd64` | ~14MB |
-| Linux | Intel/AMD 32-bit | `olaf-installer-linux-386` | ~11MB |
-| Linux | ARM64 | `olaf-installer-linux-arm64` | ~13MB |
-| Linux | ARM v7 | `olaf-installer-linux-armv7` | ~12MB |
-| Linux | ARM v6 | `olaf-installer-linux-armv6` | ~11MB |
+| Windows | Intel/AMD 64-bit | `olaf-installer-installer-windows-amd64.exe` | ~15MB |
+| Windows | Intel/AMD 32-bit | `olaf-installer-installer-windows-386.exe` | ~12MB |
+| Windows | ARM64 | `olaf-installer-installer-windows-arm64.exe` | ~14MB |
+| macOS | Intel 64-bit | `olaf-installer-installer-macos-amd64` | ~13MB |
+| macOS | Apple Silicon | `olaf-installer-installer-macos-arm64` | ~13MB |
+| macOS | Universal | `olaf-installer-installer-macos-universal` | ~20MB |
+| Linux | Intel/AMD 64-bit | `olaf-installer-installer-linux-amd64` | ~14MB |
+| Linux | Intel/AMD 32-bit | `olaf-installer-installer-linux-386` | ~11MB |
+| Linux | ARM64 | `olaf-installer-installer-linux-arm64` | ~13MB |
+| Linux | ARM v7 | `olaf-installer-installer-linux-armv7` | ~12MB |
+| Linux | ARM v6 | `olaf-installer-installer-linux-armv6` | ~11MB |
 
 ## 🚀 What It Does
 
-- ✅ **Installs OLAF framework** to `~/.olaf`
+- ✅ **Installs OLAF framework** to `~/.olaf-installer`
 - ✅ **Updates existing installations** intelligently
-- ✅ **Copies olaf-* files** to local repositories
+- ✅ **Copies olaf-installer-* files** to local repositories
 - ✅ **Manages collection selection** automatically
 - ✅ **Checks for updates** from GitHub
 - ✅ **Works offline** after initial download
@@ -1459,11 +1459,11 @@ The installer automatically checks for updates when run. If a newer version is a
 ### Building from Source
 ```bash
 # Clone repository
-git clone https://github.com/haal-ai-org/olaf-installer.git
-cd olaf-installer
+git clone https://github.com/haal-ai-org/olaf-installer-installer.git
+cd olaf-installer-installer
 
 # Build for your platform
-go build -ldflags "-s -w" -o olaf-installer
+go build -ldflags "-s -w" -o olaf-installer-installer
 
 # Build for all platforms
 ./build/build-all.sh
@@ -1497,7 +1497,7 @@ go build -ldflags "-s -w" -o olaf-installer
 
 - 🐛 [Report Issues](https://github.com/haal-ai-org/olaf-installer/issues)
 - 💬 [Discussions](https://github.com/haal-ai-org/olaf-installer/discussions)
-- 📖 [Documentation](https://docs.olaf.ai)
+- 📖 [Documentation](https://docs.olaf-installer.ai)
 
 ---
 
@@ -1526,7 +1526,7 @@ git push origin v1.1.0
 ./build/build-all.sh
 
 # Generate checksums
-sha256sum olaf-installer-* > checksums.txt
+sha256sum olaf-installer-installer-* > checksums.txt
 
 # Create release on GitHub
 # 1. Go to https://github.com/haal-ai-org/olaf-installer/releases/new
@@ -1564,7 +1564,7 @@ You're absolutely correct - **the installer CANNOT update itself** because it's 
 - Check GitHub for newer versions
 - Update the **installed OLAF framework files** on the filesystem
 - Notify user to download a newer installer
-- Copy newer `olaf-*` files to local repositories
+- Copy newer `olaf-installer-*` files to local repositories
 
 ### 🔄 **Two-Layer Update System**
 
@@ -1582,11 +1582,11 @@ Think of it as two separate layers:
                     ↓
 ┌─────────────────────────────────────┐
 │  Layer 2: Installed OLAF Framework  │
-│  (Files in ~/.olaf on filesystem)   │
+│  (Files in ~/.olaf-installer on filesystem)   │
 │  ┌─────────────────────────────────┐ │
-│  │ ~/.olaf/core/skills/            │ │
-│  │ ~/.olaf/core/competencies/      │ │
-│  │ ~/.olaf/data/context/           │ │
+│  │ ~/.olaf-installer/core/skills/            │ │
+│  │ ~/.olaf-installer/core/competencies/      │ │
+│  │ ~/.olaf-installer/data/context/           │ │
 │  │ (can be updated by installer)   │ │
 │  └─────────────────────────────────┘ │
 └─────────────────────────────────────┘
@@ -1603,7 +1603,7 @@ User runs: ./olaf-installer-v1.0.0
 
 Result:
 ✅ Installer checks GitHub → "v1.1.0 available"
-✅ Installer updates ~/.olaf files to v1.0.0 content
+✅ Installer updates ~/.olaf-installer files to v1.0.0 content
 ✅ User sees: "Download v1.1.0 from GitHub"
 ❌ Installer remains v1.0.0 (cannot change itself)
 ```
@@ -1613,7 +1613,7 @@ Result:
 User sees notification: "v1.1.0 available"
 User must:
 1. Go to GitHub releases page
-2. Download olaf-installer-v1.1.0
+2. Download olaf-installer-installer-v1.1.0
 3. Run the new installer
 
 Result:
@@ -1650,13 +1650,13 @@ func installOrUpdateOLAF() {
     if isOlafInstalled(globalOlafDir) {
         // Update framework files on filesystem
         updateOlafInstallation(globalOlafDir)
-        // Uses embedded files (v1.0.0 content) to update ~/.olaf
+        // Uses embedded files (v1.0.0 content) to update ~/.olaf-installer
     } else {
         // Fresh install with embedded files (v1.0.0 content)
         installOlafFramework(globalOlafDir)
     }
     
-    // Copy olaf-* files to local repo
+    // Copy olaf-installer-* files to local repo
     copyOlafFilesToLocalRepo(globalOlafDir)
 }
 ```
@@ -1665,18 +1665,18 @@ func installOrUpdateOLAF() {
 
 #### ✅ **Updated Every Time** (Framework Layer)
 ```
-~/.olaf/core/skills/*           ← Updated from embedded files
-~/.olaf/core/competencies/*     ← Updated from embedded files  
-~/.olaf/core/reference/*        ← Updated from embedded files
-~/.olaf/data/context/*          ← Updated from embedded files
-.local-repo/.github/olaf-*      ← Copied from embedded files
-.local-repo/.kiro/olaf-*        ← Copied from embedded files
-.local-repo/.windsurf/olaf-*    ← Copied from embedded files
+~/.olaf-installer/core/skills/*           ← Updated from embedded files
+~/.olaf-installer/core/competencies/*     ← Updated from embedded files  
+~/.olaf-installer/core/reference/*        ← Updated from embedded files
+~/.olaf-installer/data/context/*          ← Updated from embedded files
+.local-repo/.github/olaf-installer-*      ← Copied from embedded files
+.local-repo/.kiro/olaf-installer-*        ← Copied from embedded files
+.local-repo/.windsurf/olaf-installer-*    ← Copied from embedded files
 ```
 
 #### ❌ **Never Updated** (Installer Layer)
 ```
-olaf-installer-v1.0.0.exe       ← Stays v1.0.0 until user downloads new one
+olaf-installer-installer-v1.0.0.exe       ← Stays v1.0.0 until user downloads new one
 Embedded framework files         ← Stay v1.0.0 until new installer
 ```
 
@@ -1688,7 +1688,7 @@ Embedded framework files         ← Stay v1.0.0 until new installer
 ./olaf-installer-v1.0.0
 
 # Result:
-✅ ~/.olaf/ contains v1.0.0 framework files
+✅ ~/.olaf-installer/ contains v1.0.0 framework files
 ✅ Installer binary is v1.0.0
 ```
 
@@ -1711,7 +1711,7 @@ Embedded framework files         ← Stay v1.0.0 until new installer
 🎉 OLAF installation complete!
 
 # Result:
-✅ ~/.olaf/ contains v1.0.0 framework files (updated)
+✅ ~/.olaf-installer/ contains v1.0.0 framework files (updated)
 ❌ Installer binary is still v1.0.0 (user needs to download v1.0.1)
 ```
 
@@ -1732,7 +1732,7 @@ Embedded framework files         ← Stay v1.0.0 until new installer
 🎉 OLAF installation complete!
 
 # Result:
-✅ ~/.olaf/ contains v1.0.1 framework files
+✅ ~/.olaf-installer/ contains v1.0.1 framework files
 ✅ Installer binary is v1.0.1
 ```
 
@@ -1799,33 +1799,33 @@ When the installer notifies you that a newer version is available, follow these 
 3. **Download Correct Binary**
    
    **Windows:**
-   - `olaf-installer-windows-amd64.exe` (most common)
-   - `olaf-installer-windows-386.exe` (old 32-bit systems)
-   - `olaf-installer-windows-arm64.exe` (Windows on ARM)
+   - `olaf-installer-installer-windows-amd64.exe` (most common)
+   - `olaf-installer-installer-windows-386.exe` (old 32-bit systems)
+   - `olaf-installer-installer-windows-arm64.exe` (Windows on ARM)
 
    **macOS:**
-   - `olaf-installer-macos-universal` (works on all Macs)
-   - `olaf-installer-macos-amd64` (Intel Macs)
-   - `olaf-installer-macos-arm64` (Apple Silicon)
+   - `olaf-installer-installer-macos-universal` (works on all Macs)
+   - `olaf-installer-installer-macos-amd64` (Intel Macs)
+   - `olaf-installer-installer-macos-arm64` (Apple Silicon)
 
    **Linux:**
-   - `olaf-installer-linux-amd64` (most common)
-   - `olaf-installer-linux-386` (old 32-bit systems)
-   - `olaf-installer-linux-arm64` (ARM servers, Pi 4+)
-   - `olaf-installer-linux-armv7` (Raspberry Pi 3/4)
-   - `olaf-installer-linux-armv6` (Raspberry Pi Zero/1)
+   - `olaf-installer-installer-linux-amd64` (most common)
+   - `olaf-installer-installer-linux-386` (old 32-bit systems)
+   - `olaf-installer-installer-linux-arm64` (ARM servers, Pi 4+)
+   - `olaf-installer-installer-linux-armv7` (Raspberry Pi 3/4)
+   - `olaf-installer-installer-linux-armv6` (Raspberry Pi Zero/1)
 
 4. **Verify Download (Optional but Recommended)**
    ```bash
    # Check SHA256 checksum
-   sha256sum olaf-installer-[platform]
+   sha256sum olaf-installer-installer-[platform]
    # Compare with checksums.txt in the release
    ```
 
 5. **Run New Installer**
    ```bash
    # Make executable (Linux/macOS)
-   chmod +x olaf-installer-[platform]
+   chmod +x olaf-installer-installer-[platform]
    
    # Run the new installer
    ./olaf-installer-[platform]
@@ -1848,9 +1848,9 @@ case $ARCH in
 esac
 
 # Download latest version
-LATEST_URL=$(curl -s https://api.github.com/repos/haal-ai-org/olaf-installer/releases/latest | grep "browser_download_url.*olaf-installer-${PLATFORM}-${ARCH}" | cut -d '"' -f 4)
-curl -L -o olaf-installer "$LATEST_URL"
-chmod +x olaf-installer
+LATEST_URL=$(curl -s https://api.github.com/repos/haal-ai-org/olaf-installer/releases/latest | grep "browser_download_url.*olaf-installer-installer-${PLATFORM}-${ARCH}" | cut -d '"' -f 4)
+curl -L -o olaf-installer-installer "$LATEST_URL"
+chmod +x olaf-installer-installer
 ./olaf-installer
 ```
 
@@ -1858,16 +1858,16 @@ chmod +x olaf-installer
 ```powershell
 # Download latest Windows installer
 $LatestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/haal-ai-org/olaf-installer/releases/latest"
-$DownloadUrl = $LatestRelease.assets | Where-Object { $_.name -like "olaf-installer-windows-amd64.exe" } | Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest -Uri $DownloadUrl -OutFile "olaf-installer.exe"
-.\olaf-installer.exe
+$DownloadUrl = $LatestRelease.assets | Where-Object { $_.name -like "olaf-installer-installer-windows-amd64.exe" } | Select-Object -ExpandProperty browser_download_url
+Invoke-WebRequest -Uri $DownloadUrl -OutFile "olaf-installer-installer.exe"
+.\olaf-installer-installer.exe
 ```
 
 #### 📱 **Method 3: One-Line Installer (Future Feature)**
 
 ```bash
 # Universal one-line installer (when implemented)
-curl -sSL https://install.olaf.ai | bash
+curl -sSL https://install.olaf-installer.ai | bash
 ```
 
 ### 🔍 **Finding Your Platform**
@@ -1949,17 +1949,17 @@ Download: https://github.com/haal-ai-org/olaf-installer/releases/tag/v1.1.0
 # 🆕 Update Available! Current: 1.0.0, Latest: 1.1.0
 
 # Step 3: Download new version
-wget https://github.com/haal-ai-org/olaf-installer/releases/download/v1.1.0/olaf-installer-linux-amd64
+wget https://github.com/haal-ai-org/olaf-installer/releases/download/v1.1.0/olaf-installer-installer-linux-amd64
 
 # Step 4: Make executable
-chmod +x olaf-installer-linux-amd64
+chmod +x olaf-installer-installer-linux-amd64
 
 # Step 5: Run new installer
 ./olaf-installer-linux-amd64
 # ✅ You're running the latest version (1.1.0)
 
 # Step 6: Clean up (optional)
-rm olaf-installer-linux-amd64.old
+rm olaf-installer-installer-linux-amd64.old
 ```
 
 #### **Example 2: macOS User Update**
@@ -1972,11 +1972,11 @@ rm olaf-installer-linux-amd64.old
 # https://github.com/haal-ai-org/olaf-installer/releases
 
 # Step 3: Download universal binary
-# Click "olaf-installer-macos-universal"
+# Click "olaf-installer-installer-macos-universal"
 
 # Step 4: Replace old binary
-mv olaf-installer-macos-universal olaf-installer
-chmod +x olaf-installer
+mv olaf-installer-installer-macos-universal olaf-installer-installer
+chmod +x olaf-installer-installer
 
 # Step 5: Run new installer
 ./olaf-installer
@@ -1986,25 +1986,25 @@ chmod +x olaf-installer
 #### **Example 3: Windows User Update**
 ```powershell
 # Step 1: Check current version
-.\olaf-installer-windows-amd64.exe version
+.\olaf-installer-installer-windows-amd64.exe version
 # OLAF Installer v1.0.0 (windows/amd64)
 
 # Step 2: Check for updates
-.\olaf-installer-windows-amd64.exe --check-updates
+.\olaf-installer-installer-windows-amd64.exe --check-updates
 # 🆕 Update Available! Current: 1.0.0, Latest: 1.1.0
 
 # Step 3: Go to GitHub releases
 # https://github.com/haal-ai-org/olaf-installer/releases
 
 # Step 4: Download new installer
-# Click "olaf-installer-windows-amd64.exe"
+# Click "olaf-installer-installer-windows-amd64.exe"
 
 # Step 5: Run new installer
-.\olaf-installer-windows-amd64.exe
+.\olaf-installer-installer-windows-amd64.exe
 # ✅ You're running the latest version (1.1.0)
 
 # Step 6: Clean up (optional)
-del olaf-installer-windows-amd64.old.exe
+del olaf-installer-installer-windows-amd64.old.exe
 ```
 
 ### ⚠️ **Important Notes**
@@ -2023,7 +2023,7 @@ del olaf-installer-windows-amd64.old.exe
 
 #### **Backup**
 - 🔄 **Installer automatically preserves user data**
-- 💾 **Optional: Backup ~/.olaf before major updates**
+- 💾 **Optional: Backup ~/.olaf-installer before major updates**
 - 📋 **Collection selection is always preserved**
 
 ### 🆘 **Troubleshooting Updates**
@@ -2031,15 +2031,15 @@ del olaf-installer-windows-amd64.old.exe
 #### **Download Issues**
 ```bash
 # If download fails, try:
-curl -L -o olaf-installer [download-url]
+curl -L -o olaf-installer-installer [download-url]
 # or
-wget -O olaf-installer [download-url]
+wget -O olaf-installer-installer [download-url]
 ```
 
 #### **Permission Issues**
 ```bash
 # Linux/macOS: Make executable
-chmod +x olaf-installer
+chmod +x olaf-installer-installer
 
 # Windows: Run as Administrator if needed
 # Right-click → "Run as administrator"
@@ -2077,7 +2077,7 @@ If you encounter issues during updates:
 
 The installer needs to compare:
 - **Embedded files** (compiled into the binary, frozen at build time)
-- **Installed files** (in `~/.olaf/`, may be older or newer)
+- **Installed files** (in `~/.olaf-installer/`, may be older or newer)
 
 ### 🔄 **Comparison Methods**
 
@@ -2173,14 +2173,14 @@ type FileMetadata struct {
     Checksum   string `json:"checksum"`
 }
 
-//go:embed assets/olaf-metadata.json
+//go:embed assets/olaf-installer-metadata.json
 var metadataFile embed.FS
 
 func needsUpdateWithMetadata(embeddedPath, destPath string) bool {
     // Get embedded file metadata
     embeddedMeta := getFileMetadata(embeddedPath, true)
     
-    // Get installed file metadata (from .olaf-version file)
+    // Get installed file metadata (from .olaf-installer-version file)
     installedMeta := getFileMetadata(destPath, false)
     
     // Compare versions
@@ -2195,18 +2195,18 @@ func needsUpdateWithMetadata(embeddedPath, destPath string) bool {
 # User runs installer for first time
 ./olaf-installer-v1.0.0
 
-# File: assets/olaf/core/skills/default.md
+# File: assets/olaf-installer/core/skills/default.md
 # Embedded timestamp: 2026-01-10 10:00:00 (build time)
 # Installed file: Doesn't exist
 
 # Result: ✅ Update needed (new file)
-# Action: Copy embedded file to ~/.olaf/core/skills/default.md
+# Action: Copy embedded file to ~/.olaf-installer/core/skills/default.md
 ```
 
 #### **Example 2: Older Installer, Newer Framework**
 ```bash
 # User has newer framework files, runs older installer
-# ~/.olaf/core/skills/default.md modified: 2026-01-15 14:30:00
+# ~/.olaf-installer/core/skills/default.md modified: 2026-01-15 14:30:00
 # Installer built: 2026-01-10 10:00:00
 
 # File comparison:
@@ -2220,7 +2220,7 @@ func needsUpdateWithMetadata(embeddedPath, destPath string) bool {
 #### **Example 3: Newer Installer, Older Framework**
 ```bash
 # User has older framework, runs newer installer
-# ~/.olaf/core/skills/default.md modified: 2026-01-05 09:15:00
+# ~/.olaf-installer/core/skills/default.md modified: 2026-01-05 09:15:00
 # Installer built: 2026-01-10 10:00:00
 
 # File comparison:
@@ -2228,14 +2228,14 @@ func needsUpdateWithMetadata(embeddedPath, destPath string) bool {
 # Installed timestamp: 2026-01-05 09:15:00
 
 # Result: ✅ Update needed (embedded file is newer)
-# Action: Update ~/.olaf/core/skills/default.md
+# Action: Update ~/.olaf-installer/core/skills/default.md
 ```
 
 ### 🔄 **Update Decision Tree**
 
 ```mermaid
 flowchart TD
-    A[Start File Check] --> B{File exists in ~/.olaf?}
+    A[Start File Check] --> B{File exists in ~/.olaf-installer?}
     B -->|No| C[✅ Update needed<br/>Copy new file]
     B -->|Yes| D[Get timestamps]
     D --> E{Embedded > Installed?}
@@ -2253,7 +2253,7 @@ flowchart TD
 **Embedded Files:**
 ```go
 // Embedded file timestamp = build time
-embeddedInfo, _ := fs.Stat(embeddedFiles, "assets/olaf/core/skills/default.md")
+embeddedInfo, _ := fs.Stat(embeddedFiles, "assets/olaf-installer/core/skills/default.md")
 fmt.Println("Embedded time:", embeddedInfo.ModTime())
 // Output: 2026-01-10 10:00:00 +0000 UTC (when installer was built)
 ```
@@ -2261,7 +2261,7 @@ fmt.Println("Embedded time:", embeddedInfo.ModTime())
 **Installed Files:**
 ```go
 // Installed file timestamp = last modification time
-destInfo, _ := os.Stat("/home/user/.olaf/core/skills/default.md")
+destInfo, _ := os.Stat("/home/user/.olaf-installer/core/skills/default.md")
 fmt.Println("Installed time:", destInfo.ModTime())
 // Output: 2026-01-05 09:15:00 +0000 UTC (when file was last updated)
 ```
@@ -2331,17 +2331,17 @@ OLAF_DEBUG=1 ./olaf-installer
 4. **Caching**: Remember results for repeated runs
 
 ```go
-func updateOlafInstallation(olafDir string) error {
+func updateOlafInstallation(olaf-installerDir string) error {
     // Step 1: Collect all files that need updating
     var filesToUpdate []FileInfo
     
-    fs.WalkDir(embeddedFiles, "assets/olaf", func(path string, d fs.DirEntry, err error) error {
+    fs.WalkDir(embeddedFiles, "assets/olaf-installer", func(path string, d fs.DirEntry, err error) error {
         if err != nil || d.IsDir() {
             return err
         }
 
-        relPath := strings.TrimPrefix(path, "assets/olaf/")
-        destPath := filepath.Join(olafDir, relPath)
+        relPath := strings.TrimPrefix(path, "assets/olaf-installer/")
+        destPath := filepath.Join(olaf-installerDir, relPath)
         
         if needsUpdate(path, destPath) {
             filesToUpdate = append(filesToUpdate, FileInfo{path, destPath})
@@ -2387,7 +2387,7 @@ Create simple, memorable one-liners that users can copy-paste to get started wit
 #### **Windows (PowerShell)**
 ```powershell
 # Primary installer
-irm https://install.olaf.ai/ps1 | iex
+irm https://install.olaf-installer.ai/ps1 | iex
 
 # Alternative (GitHub raw)
 irm https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/install.ps1 | iex
@@ -2402,7 +2402,7 @@ irm https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/install.ps
 #### **macOS / Linux (curl + bash)**
 ```bash
 # Primary installer (Universal)
-curl -sSL https://install.olaf.ai | bash
+curl -sSL https://install.olaf-installer.ai | bash
 
 # Alternative (GitHub raw)
 curl -sSL https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/install.sh | bash
@@ -2417,16 +2417,16 @@ curl -sSL https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/inst
 #### **macOS (curl + zsh)**
 ```zsh
 # For zsh users (macOS default)
-curl -sSL https://install.olaf.ai | zsh
+curl -sSL https://install.olaf-installer.ai | zsh
 
 # Or use bash (works everywhere)
-curl -sSL https://install.olaf.ai | bash
+curl -sSL https://install.olaf-installer.ai | bash
 ```
 
 #### **Linux (wget + bash)**
 ```bash
 # If curl not available
-wget -qO- https://install.olaf.ai | bash
+wget -qO- https://install.olaf-installer.ai | bash
 
 # Alternative (GitHub raw)
 wget -qO- https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/install.sh | bash
@@ -2437,11 +2437,11 @@ wget -qO- https://raw.githubusercontent.com/haal-ai-org/olaf-installer/main/inst
 #### **Windows PowerShell Script (`install.ps1`)**
 ```powershell
 # install.ps1 - OLAF Installer for Windows
-# Usage: irm https://install.olaf.ai/ps1 | iex
+# Usage: irm https://install.olaf-installer.ai/ps1 | iex
 
 param(
     [string]$Version = "latest",
-    [string]$InstallDir = "$env:USERPROFILE\.olaf-installer"
+    [string]$InstallDir = "$env:USERPROFILE\.olaf-installer-installer"
 )
 
 Write-Host "🚀 OLAF Framework Installer" -ForegroundColor Green
@@ -2450,9 +2450,9 @@ Write-Host "==============================" -ForegroundColor Green
 # Detect architecture
 $Arch = $env:PROCESSOR_ARCHITECTURE
 switch ($Arch) {
-    "AMD64" { $BinaryName = "olaf-installer-windows-amd64.exe" }
-    "x86" { $BinaryName = "olaf-installer-windows-386.exe" }
-    "ARM64" { $BinaryName = "olaf-installer-windows-arm64.exe" }
+    "AMD64" { $BinaryName = "olaf-installer-installer-windows-amd64.exe" }
+    "x86" { $BinaryName = "olaf-installer-installer-windows-386.exe" }
+    "ARM64" { $BinaryName = "olaf-installer-installer-windows-arm64.exe" }
     default { 
         Write-Host "❌ Unsupported architecture: $Arch" -ForegroundColor Red
         exit 1
@@ -2460,7 +2460,7 @@ switch ($Arch) {
 }
 
 # Create temp directory
-$TempDir = Join-Path $env:TEMP "olaf-installer"
+$TempDir = Join-Path $env:TEMP "olaf-installer-installer"
 New-Item -ItemType Directory -Force -Path $TempDir | Out-Null
 
 # Determine download URL
@@ -2501,14 +2501,14 @@ try {
 Remove-Item -Recurse -Force $TempDir -ErrorAction SilentlyContinue
 
 Write-Host "✅ Installation complete!" -ForegroundColor Green
-Write-Host "📖 Get started: https://docs.olaf.ai" -ForegroundColor Cyan
+Write-Host "📖 Get started: https://docs.olaf-installer.ai" -ForegroundColor Cyan
 ```
 
 #### **Unix Shell Script (`install.sh`)**
 ```bash
 #!/bin/bash
 # install.sh - OLAF Installer for macOS/Linux
-# Usage: curl -sSL https://install.olaf.ai | bash
+# Usage: curl -sSL https://install.olaf-installer.ai | bash
 
 set -e
 
@@ -2547,12 +2547,12 @@ case $ARCH in
 esac
 
 # Determine binary name
-BINARY_NAME="olaf-installer-${PLATFORM}-${ARCH}"
+BINARY_NAME="olaf-installer-installer-${PLATFORM}-${ARCH}"
 if [ "$PLATFORM" = "darwin" ] && [ "$ARCH" = "amd64" ]; then
     # Check for Apple Silicon
     if [ "$(sysctl -n hw.optional.arm64 2>/dev/null)" = "1" ]; then
         ARCH="arm64"
-        BINARY_NAME="olaf-installer-${PLATFORM}-${ARCH}"
+        BINARY_NAME="olaf-installer-installer-${PLATFORM}-${ARCH}"
     fi
 fi
 
@@ -2588,10 +2588,10 @@ if ! "$INSTALLER_PATH"; then
 fi
 
 echo -e "${GREEN}✅ Installation complete!${NC}"
-echo -e "${CYAN}📖 Get started: https://docs.olaf.ai${NC}"
+echo -e "${CYAN}📖 Get started: https://docs.olaf-installer.ai${NC}"
 ```
 
-### 🌐 **Web Landing Page (`install.olaf.ai`)**
+### 🌐 **Web Landing Page (`install.olaf-installer.ai`)**
 
 #### **HTML Structure**
 ```html
@@ -2623,19 +2623,19 @@ echo -e "${CYAN}📖 Get started: https://docs.olaf.ai${NC}"
             <div class="platform-grid">
                 <div>
                     <h3>🪟 Windows</h3>
-                    <div class="code">irm https://install.olaf.ai/ps1 | iex</div>
+                    <div class="code">irm https://install.olaf-installer.ai/ps1 | iex</div>
                     <p><small>Run in PowerShell as Administrator</small></p>
                 </div>
                 
                 <div>
                     <h3>🍎 macOS</h3>
-                    <div class="code">curl -sSL https://install.olaf.ai | bash</div>
+                    <div class="code">curl -sSL https://install.olaf-installer.ai | bash</div>
                     <p><small>Run in Terminal</small></p>
                 </div>
                 
                 <div>
                     <h3>🐧 Linux</h3>
-                    <div class="code">curl -sSL https://install.olaf.ai | bash</div>
+                    <div class="code">curl -sSL https://install.olaf-installer.ai | bash</div>
                     <p><small>Run in your terminal</small></p>
                 </div>
             </div>
@@ -2650,9 +2650,9 @@ echo -e "${CYAN}📖 Get started: https://docs.olaf.ai${NC}"
         <div class="install-box">
             <h2>📖 What It Does</h2>
             <ul>
-                <li>✅ Installs OLAF framework to <code>~/.olaf</code></li>
+                <li>✅ Installs OLAF framework to <code>~/.olaf-installer</code></li>
                 <li>✅ Updates existing installations</li>
-                <li>✅ Copies olaf-* files to local repositories</li>
+                <li>✅ Copies olaf-installer-* files to local repositories</li>
                 <li>✅ Manages collection selection</li>
                 <li>✅ Works offline after initial download</li>
             </ul>
@@ -2679,7 +2679,7 @@ haal-ai-org/olaf-installer/
 │   │   ├── js/
 │   │   │   └── main.js          # Interactivity
 │   │   └── images/
-│   │       └── olaf-logo.png
+│   │       └── olaf-installer-logo.png
 │   ├── install.ps1              # Windows installer script
 │   └── install.sh                # Unix installer script
 ├── src/
@@ -2750,8 +2750,8 @@ jobs:
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="OLAF Framework - Install">
     <meta property="og:description" content="Self-contained installer for the OLAF framework">
-    <meta property="og:image" content="https://haal-ai-org.github.io/olaf-installer/assets/images/olaf-social.png">
-    <meta property="og:url" content="https://install.olaf.ai">
+    <meta property="og:image" content="https://haal-ai-org.github.io/olaf-installer/assets/images/olaf-installer-social.png">
+    <meta property="og:url" content="https://install.olaf-installer.ai">
     <meta name="twitter:card" content="summary_large_image">
     
     <!-- Favicon -->
@@ -2776,7 +2776,7 @@ jobs:
             <div class="nav-links">
                 <a href="#install" class="nav-link">Install</a>
                 <a href="#docs" class="nav-link">Docs</a>
-                <a href="https://github.com/haal-ai-org/olaf-installer" class="nav-link" target="_blank">GitHub</a>
+                <a href="https://github.com/haal-ai-org/olaf-installer-installer" class="nav-link" target="_blank">GitHub</a>
             </div>
         </div>
     </nav>
@@ -2982,8 +2982,8 @@ jobs:
                     <span class="brand-text">OLAF Framework</span>
                 </div>
                 <div class="footer-links">
-                    <a href="https://github.com/haal-ai-org/olaf-installer" target="_blank">GitHub</a>
-                    <a href="https://docs.olaf.ai" target="_blank">Documentation</a>
+                    <a href="https://github.com/haal-ai-org/olaf-installer-installer" target="_blank">GitHub</a>
+                    <a href="https://docs.olaf-installer.ai" target="_blank">Documentation</a>
                     <a href="https://github.com/haal-ai-org/olaf-installer/issues" target="_blank">Issues</a>
                 </div>
                 <div class="footer-info">
@@ -3681,7 +3681,7 @@ git push origin main
 #### **4. Custom Domain (Optional)**
 ```bash
 # Add CNAME file to docs/
-echo "install.olaf.ai" > docs/CNAME
+echo "install.olaf-installer.ai" > docs/CNAME
 git add docs/CNAME
 git commit -m "Add custom domain"
 ```
@@ -3692,7 +3692,7 @@ git commit -m "Add custom domain"
 ✅ **Auto-HTTPS** - SSL certificates included  
 ✅ **CDN** - Fast global distribution  
 ✅ **Version control** - Changes tracked in git  
-✅ **Custom domain** - Use install.olaf.ai  
+✅ **Custom domain** - Use install.olaf-installer.ai  
 ✅ **Beautiful design** - Modern, professional UI  
 ✅ **Interactive** - Copy buttons, animations  
 ✅ **Responsive** - Works on all devices  
@@ -3705,33 +3705,33 @@ This gives you a beautiful, professional installation page served from the same 
 #### **Package Managers (Future)**
 ```bash
 # Homebrew (macOS)
-brew install olaf-installer
+brew install olaf-installer-installer
 
 # Chocolatey (Windows)
-choco install olaf-installer
+choco install olaf-installer-installer
 
 # Snap (Linux)
-snap install olaf-installer
+snap install olaf-installer-installer
 
 # AUR (Arch Linux)
-yay -S olaf-installer
+yay -S olaf-installer-installer
 ```
 
 #### **Container Installation**
 ```bash
 # Docker (if containerized)
-docker run --rm -v ~/.olaf:/root/.olaf olaf/installer
+docker run --rm -v ~/.olaf-installer:/root/.olaf-installer olaf-installer/installer
 
 # Podman
-podman run --rm -v ~/.olaf:/root/.olaf olaf/installer
+podman run --rm -v ~/.olaf-installer:/root/.olaf-installer olaf-installer/installer
 ```
 
 ### 🎯 **Recommended Implementation**
 
 #### **Phase 1: Basic Web Install**
-1. **Create static HTML page** at `install.olaf.ai`
-2. **Host PowerShell script** at `install.olaf.ai/ps1`
-3. **Host shell script** at `install.olaf.ai/install.sh`
+1. **Create static HTML page** at `install.olaf-installer.ai`
+2. **Host PowerShell script** at `install.olaf-installer.ai/ps1`
+3. **Host shell script** at `install.olaf-installer.ai/install.sh`
 4. **Use GitHub releases** for binary distribution
 
 #### **Phase 2: Enhanced Experience**
@@ -3782,7 +3782,7 @@ verify_checksum() {
 #### **Download Tracking**
 ```bash
 # Simple pixel tracking
-curl -s "https://analytics.olaf.ai/install?platform=$PLATFORM&arch=$ARCH" > /dev/null
+curl -s "https://analytics.olaf-installer.ai/install?platform=$PLATFORM&arch=$ARCH" > /dev/null
 
 # Or use GitHub API (already tracked)
 curl -s https://api.github.com/repos/haal-ai-org/olaf-installer/releases/latest
@@ -3838,7 +3838,7 @@ func calculateFileChecksum(path string, isEmbedded bool) string {
 # 📝 Updated: core/skills/new-skill.md
 # 📝 Updated: docs/release-notes/v1.1.0.md
 # 📝 Updated: core/competencies/advanced-collections.md
-# 📋 Copied: olaf-updated-workflow.md
+# 📋 Copied: olaf-installer-updated-workflow.md
 # ✅ Collection already selected
 # 
 # 🎉 OLAF installation complete!
@@ -3871,7 +3871,7 @@ func calculateFileChecksum(path string, isEmbedded bool) string {
 # 📄 Installed: core/templates/new-template.md
 # 📄 Installed: data/peoples/team-members.json
 # 📄 Installed: tools/validation-helper.py
-# 📋 Copied: olaf-new-feature.md
+# 📋 Copied: olaf-installer-new-feature.md
 # ✅ Collection already selected
 # 
 # 🎉 OLAF installation complete!
@@ -3881,17 +3881,17 @@ func calculateFileChecksum(path string, isEmbedded bool) string {
 
 #### ✅ **Updated Files:**
 - All files embedded in the installer binary
-- Framework files in `.olaf/core/`
-- Documentation in `.olaf/docs/`
+- Framework files in `.olaf-installer/core/`
+- Documentation in `.olaf-installer/docs/`
 - Tools and templates
-- `olaf-*` files in local repository
+- `olaf-installer-*` files in local repository
 
 #### 🔄 **Preserved Files:**
-- User's collection selection (`.olaf/core/reference/collection`)
-- User's local context files (`.olaf/data/context/context-current.md`)
-- User's knowledge base entries (`.olaf/data/kb/`)
-- User's people records (`.olaf/data/peoples/`)
-- Any files the user created in `.olaf/` that aren't part of the framework
+- User's collection selection (`.olaf-installer/core/reference/collection`)
+- User's local context files (`.olaf-installer/data/context/context-current.md`)
+- User's knowledge base entries (`.olaf-installer/data/kb/`)
+- User's people records (`.olaf-installer/data/peoples/`)
+- Any files the user created in `.olaf-installer/` that aren't part of the framework
 
 #### ⚠️ **Smart Conflict Handling:**
 The installer is conservative - if it's not sure about a file, it:
@@ -3969,8 +3969,8 @@ This update mechanism ensures users always have the latest OLAF framework while 
 # ================================
 # 📁 Installing OLAF framework...
 # 📄 Installed: core/competencies/default.md
-# 📄 Installed: core/reference/olaf-framework-condensed.md
-# 📋 Copied: olaf-bootstrap.md
+# 📄 Installed: core/reference/olaf-installer-framework-condensed.md
+# 📋 Copied: olaf-installer-bootstrap.md
 # 🎯 No collection selected, running selection...
 # 🎯 Collection Selection
 # ======================
@@ -4013,7 +4013,7 @@ This update mechanism ensures users always have the latest OLAF framework while 
 # 📁 OLAF installation detected, updating...
 # 📝 Updated: core/skills/new-skill.md
 # 📝 Updated: docs/release-notes/v1.1.0.md
-# 📋 Copied: olaf-updated-workflow.md
+# 📋 Copied: olaf-installer-updated-workflow.md
 # ✅ Collection already selected
 # 
 # 🎉 OLAF installation complete!
@@ -4030,15 +4030,15 @@ This update mechanism ensures users always have the latest OLAF framework while 
 # OLAF Installer - Self-contained OLAF framework installer
 # 
 # Usage:
-#   olaf-installer              Install or update OLAF
-#   olaf-installer --collection Select collection
-#   olaf-installer version      Show version
-#   olaf-installer help         Show this help
+#   olaf-installer-installer              Install or update OLAF
+#   olaf-installer-installer --collection Select collection
+#   olaf-installer-installer version      Show version
+#   olaf-installer-installer help         Show this help
 # 
 # What it does:
-# - Installs OLAF framework to ~/.olaf
+# - Installs OLAF framework to ~/.olaf-installer
 # - Updates existing installations
-# - Copies olaf-* files to local repository
+# - Copies olaf-installer-* files to local repository
 # - Manages collection selection
 ```
 
@@ -4081,10 +4081,10 @@ func calculateFileChecksum(path string, isEmbedded bool) string {
 
 ### Progress Indicator
 ```go
-func installOlafFramework(olafDir string) error {
+func installOlafFramework(olaf-installerDir string) error {
 	// Count total files first
 	var totalFiles int
-	fs.WalkDir(embeddedFiles, "assets/olaf", func(path string, d fs.DirEntry, err error) error {
+	fs.WalkDir(embeddedFiles, "assets/olaf-installer", func(path string, d fs.DirEntry, err error) error {
 		if !d.IsDir() {
 			totalFiles++
 		}
@@ -4093,7 +4093,7 @@ func installOlafFramework(olafDir string) error {
 
 	// Install with progress
 	var installedFiles int
-	return fs.WalkDir(embeddedFiles, "assets/olaf", func(path string, d fs.DirEntry, err error) error {
+	return fs.WalkDir(embeddedFiles, "assets/olaf-installer", func(path string, d fs.DirEntry, err error) error {
 		if err != nil || d.IsDir() {
 			return err
 		}
@@ -4111,19 +4111,19 @@ func installOlafFramework(olafDir string) error {
 
 ### Verification After Installation
 ```go
-func verifyInstallation(olafDir string) bool {
+func verifyInstallation(olaf-installerDir string) bool {
 	fmt.Println("\n🔍 Verifying installation...")
 	
 	requiredFiles := []string{
 		"core/competencies/default.md",
-		"core/reference/olaf-framework-condensed.md",
-		"core/skills/olaf-help-me.md",
+		"core/reference/olaf-installer-framework-condensed.md",
+		"core/skills/olaf-installer-help-me.md",
 		"data/context/context-current.md",
 	}
 	
 	allGood := true
 	for _, file := range requiredFiles {
-		fullPath := filepath.Join(olafDir, file)
+		fullPath := filepath.Join(olaf-installerDir, file)
 		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 			fmt.Printf("❌ Missing: %s\n", file)
 			allGood = false
@@ -4146,7 +4146,7 @@ func verifyInstallation(olafDir string) bool {
 mkdir -p dist/windows
 
 # Copy all Windows variants
-cp olaf-installer-windows-*.exe dist/windows/
+cp olaf-installer-installer-windows-*.exe dist/windows/
 
 # Create Windows installer script (setup.bat)
 cat > dist/windows/install.bat << 'EOF'
@@ -4154,12 +4154,12 @@ cat > dist/windows/install.bat << 'EOF'
 echo Installing OLAF Framework...
 if "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
     if "%PROCESSOR_IDENTIFIER:~-3%" == "ARM64" (
-        olaf-installer-windows-arm64.exe
+        olaf-installer-installer-windows-arm64.exe
     ) else (
-        olaf-installer-windows-amd64.exe
+        olaf-installer-installer-windows-amd64.exe
     )
 ) else if "%PROCESSOR_ARCHITECTURE%" == "x86" (
-    olaf-installer-windows-386.exe
+    olaf-installer-installer-windows-386.exe
 ) else (
     echo Unsupported architecture
     pause
@@ -4169,7 +4169,7 @@ EOF
 
 # Create ZIP for distribution
 cd dist/windows
-zip -r olaf-installer-windows-v1.0.0.zip *
+zip -r olaf-installer-installer-windows-v1.0.0.zip *
 ```
 
 #### macOS Distribution
@@ -4178,7 +4178,7 @@ zip -r olaf-installer-windows-v1.0.0.zip *
 mkdir -p dist/macos
 
 # Copy macOS variants
-cp olaf-installer-macos-* dist/macos/
+cp olaf-installer-installer-macos-* dist/macos/
 
 # Create macOS installer script (install.sh)
 cat > dist/macos/install.sh << 'EOF'
@@ -4211,7 +4211,7 @@ chmod +x dist/macos/install.sh
 
 # Create tar.gz for distribution
 cd dist/macos
-tar -czf olaf-installer-macos-v1.0.0.tar.gz *
+tar -czf olaf-installer-installer-macos-v1.0.0.tar.gz *
 ```
 
 #### Linux Distribution
@@ -4220,7 +4220,7 @@ tar -czf olaf-installer-macos-v1.0.0.tar.gz *
 mkdir -p dist/linux
 
 # Copy all Linux variants
-cp olaf-installer-linux-* dist/linux/
+cp olaf-installer-installer-linux-* dist/linux/
 
 # Create Linux installer script (install.sh)
 cat > dist/linux/install.sh << 'EOF'
@@ -4266,7 +4266,7 @@ chmod +x dist/linux/install.sh
 
 # Create tar.gz for distribution
 cd dist/linux
-tar -czf olaf-installer-linux-v1.0.0.tar.gz *
+tar -czf olaf-installer-installer-linux-v1.0.0.tar.gz *
 ```
 
 #### Universal Distribution Package
@@ -4275,7 +4275,7 @@ tar -czf olaf-installer-linux-v1.0.0.tar.gz *
 mkdir -p dist/complete
 
 # Copy all binaries
-cp olaf-installer-* dist/complete/
+cp olaf-installer-installer-* dist/complete/
 
 # Create universal installer script
 cat > dist/complete/install.sh << 'EOF'
@@ -4288,7 +4288,7 @@ OS=$(uname -s)
 case $OS in
     Windows_NT|CYGWIN*|MINGW*|MSYS*)
         echo "Windows detected"
-        if [[ -f "olaf-installer-windows-amd64.exe" ]]; then
+        if [[ -f "olaf-installer-installer-windows-amd64.exe" ]]; then
             ./olaf-installer-windows-amd64.exe
         else
             echo "Windows installer not found"
@@ -4363,21 +4363,21 @@ cat > dist/complete/README.md << 'EOF'
 ## Platform-Specific Installers
 
 ### Windows
-- `olaf-installer-windows-amd64.exe` - Windows 64-bit (Intel/AMD)
-- `olaf-installer-windows-386.exe` - Windows 32-bit (Intel/AMD)
-- `olaf-installer-windows-arm64.exe` - Windows ARM64
+- `olaf-installer-installer-windows-amd64.exe` - Windows 64-bit (Intel/AMD)
+- `olaf-installer-installer-windows-386.exe` - Windows 32-bit (Intel/AMD)
+- `olaf-installer-installer-windows-arm64.exe` - Windows ARM64
 
 ### macOS
-- `olaf-installer-macos-universal` - Universal binary (Intel + Apple Silicon)
-- `olaf-installer-macos-amd64` - Intel Macs
-- `olaf-installer-macos-arm64` - Apple Silicon (M1/M2/M3)
+- `olaf-installer-installer-macos-universal` - Universal binary (Intel + Apple Silicon)
+- `olaf-installer-installer-macos-amd64` - Intel Macs
+- `olaf-installer-installer-macos-arm64` - Apple Silicon (M1/M2/M3)
 
 ### Linux
-- `olaf-installer-linux-amd64` - Linux 64-bit (Intel/AMD)
-- `olaf-installer-linux-386` - Linux 32-bit (Intel/AMD)
-- `olaf-installer-linux-arm64` - Linux ARM64 (servers, Pi 4+)
-- `olaf-installer-linux-armv7` - Linux ARM v7 (Raspberry Pi 3/4)
-- `olaf-installer-linux-armv6` - Linux ARM v6 (Raspberry Pi Zero/1)
+- `olaf-installer-installer-linux-amd64` - Linux 64-bit (Intel/AMD)
+- `olaf-installer-installer-linux-386` - Linux 32-bit (Intel/AMD)
+- `olaf-installer-installer-linux-arm64` - Linux ARM64 (servers, Pi 4+)
+- `olaf-installer-installer-linux-armv7` - Linux ARM v7 (Raspberry Pi 3/4)
+- `olaf-installer-installer-linux-armv6` - Linux ARM v6 (Raspberry Pi Zero/1)
 
 ## Usage
 ```bash
@@ -4397,26 +4397,26 @@ EOF
 
 # Create final distribution packages
 cd dist
-zip -r olaf-installer-v1.0.0-complete.zip complete/
-tar -czf olaf-installer-v1.0.0-complete.tar.gz complete/
+zip -r olaf-installer-installer-v1.0.0-complete.zip complete/
+tar -czf olaf-installer-installer-v1.0.0-complete.tar.gz complete/
 ```
 
 ### Update Server Setup
 ```bash
 # Simple web server for updates
-mkdir -p /var/www/olaf-updates
+mkdir -p /var/www/olaf-installer-updates
 
 # Upload new versions
-cp olaf-installer-v1.0.1.exe /var/www/olaf-updates/
-echo "1.0.1" > /var/www/olaf-updates/latest-version.txt
+cp olaf-installer-installer-v1.0.1.exe /var/www/olaf-installer-updates/
+echo "1.0.1" > /var/www/olaf-installer-updates/latest-version.txt
 
 # Version manifest
-cat > /var/www/olaf-updates/versions.json << EOF
+cat > /var/www/olaf-installer-updates/versions.json << EOF
 {
   "latest": "1.0.1",
   "versions": {
     "1.0.1": {
-      "url": "https://updates.olaf.ai/olaf-installer-1.0.1.exe",
+      "url": "https://updates.olaf-installer.ai/olaf-installer-installer-1.0.1.exe",
       "checksum": "sha256-hash-here",
       "releaseNotes": "Added collection management and bug fixes"
     }
@@ -4430,10 +4430,10 @@ EOF
 ### Code Signing (Windows)
 ```bash
 # Sign the binary (requires certificate)
-signtool sign /f certificate.p12 /p password olaf-installer.exe
+signtool sign /f certificate.p12 /p password olaf-installer-installer.exe
 
 # Verify signature
-signtool verify /pa olaf-installer.exe
+signtool verify /pa olaf-installer-installer.exe
 ```
 
 ### Checksum Verification
@@ -4491,7 +4491,7 @@ if os.Getenv("OLAF_DEBUG") == "1" {
 
 ## Result
 
-You get a complete set of `olaf-installer` binaries (10-50MB each depending on OLAF content) that support:
+You get a complete set of `olaf-installer-installer` binaries (10-50MB each depending on OLAF content) that support:
 
 ### ✅ **Complete Platform Coverage**
 - **Windows**: Intel/AMD 32-bit & 64-bit, ARM64
@@ -4513,7 +4513,7 @@ You get a complete set of `olaf-installer` binaries (10-50MB each depending on O
 - Cross-platform: Works everywhere Go compiles
 - Smart installation: Detects existing OLAF and updates only what's needed
 - Collection management: Handles competency collection selection
-- File synchronization: Copies olaf-* files to local repositories
+- File synchronization: Copies olaf-installer-* files to local repositories
 - Professional UX: Clear progress indicators and error handling
 - Secure: Checksum verification and optional code signing
 - Maintainable: Clean Go codebase with proper structure
@@ -4527,22 +4527,22 @@ You get a complete set of `olaf-installer` binaries (10-50MB each depending on O
 
 | Platform | Architecture | Binary Name | Notes |
 |----------|-------------|-------------|-------|
-| Windows | Intel/AMD 64-bit | `olaf-installer-windows-amd64.exe` | Most common Windows |
-| Windows | Intel/AMD 32-bit | `olaf-installer-windows-386.exe` | Legacy Windows |
-| Windows | ARM64 | `olaf-installer-windows-arm64.exe` | Windows on ARM |
-| macOS | Intel 64-bit | `olaf-installer-macos-amd64` | Intel Macs |
-| macOS | Apple Silicon | `olaf-installer-macos-arm64` | M1/M2/M3 Macs |
-| macOS | Universal | `olaf-installer-macos-universal` | Intel + Apple Silicon |
-| Linux | Intel/AMD 64-bit | `olaf-installer-linux-amd64` | Most common Linux |
-| Linux | Intel/AMD 32-bit | `olaf-installer-linux-386` | Legacy Linux |
-| Linux | ARM64 | `olaf-installer-linux-arm64` | Servers, Pi 4+ |
-| Linux | ARM v7 | `olaf-installer-linux-armv7` | Raspberry Pi 3/4 |
-| Linux | ARM v6 | `olaf-installer-linux-armv6` | Raspberry Pi Zero/1 |
+| Windows | Intel/AMD 64-bit | `olaf-installer-installer-windows-amd64.exe` | Most common Windows |
+| Windows | Intel/AMD 32-bit | `olaf-installer-installer-windows-386.exe` | Legacy Windows |
+| Windows | ARM64 | `olaf-installer-installer-windows-arm64.exe` | Windows on ARM |
+| macOS | Intel 64-bit | `olaf-installer-installer-macos-amd64` | Intel Macs |
+| macOS | Apple Silicon | `olaf-installer-installer-macos-arm64` | M1/M2/M3 Macs |
+| macOS | Universal | `olaf-installer-installer-macos-universal` | Intel + Apple Silicon |
+| Linux | Intel/AMD 64-bit | `olaf-installer-installer-linux-amd64` | Most common Linux |
+| Linux | Intel/AMD 32-bit | `olaf-installer-installer-linux-386` | Legacy Linux |
+| Linux | ARM64 | `olaf-installer-installer-linux-arm64` | Servers, Pi 4+ |
+| Linux | ARM v7 | `olaf-installer-installer-linux-armv7` | Raspberry Pi 3/4 |
+| Linux | ARM v6 | `olaf-installer-installer-linux-armv6` | Raspberry Pi Zero/1 |
 
 The installer provides the exact functionality you specified with comprehensive cross-platform support:
 1. Default operation installs/updates OLAF framework on any supported platform
 2. Checks for required directory structure across all operating systems
-3. Copies olaf-* files to appropriate locations respecting platform differences
+3. Copies olaf-installer-* files to appropriate locations respecting platform differences
 4. Manages collection selection automatically
 5. Supports manual collection selection with `--collection` flag
 6. Works seamlessly on ARM and AMD/Intel, 32-bit and 64-bit systems

@@ -101,7 +101,7 @@
     {
       "id": "003",
       "title": "GitHub Release Version Check",
-      "description": "Installer checks GitHub for newer installer versions and informs user",
+      "description": "Installer checks GitHub for newer olaf versions and informs user",
       "column": "backlog",
       "priority": "medium",
       "effort": "medium",
@@ -114,7 +114,7 @@
         "Graceful offline handling"
       ],
       "acceptance_criteria": [
-        "Shows clear message when newer installer exists",
+        "Shows clear message when newer olaf exists",
         "Does not fail installation when offline"
       ],
       "estimated_hours": 6
@@ -154,7 +154,7 @@
         "Create docs/ site structure",
         "Add index.html + assets/css + assets/js",
         "Host install.ps1 and install.sh under GitHub Pages",
-        "Make commands point to https://haal-ai-org.github.io/olaf-installer/..."
+        "Make commands point to https://haal-ai-org.github.io/olaf/..."
       ],
       "acceptance_criteria": [
         "Page loads on GitHub Pages",
@@ -166,16 +166,16 @@
     {
       "id": "006",
       "title": "Install Scripts (ps1/sh) Download Latest Release",
-      "description": "One-liners that fetch latest release binary and run it",
+      "description": "One-liners that fetch latest olaf release binary and run it",
       "column": "backlog",
       "priority": "medium",
       "effort": "medium",
       "tags": ["powershell", "bash"],
       "dependencies": ["004"],
       "subtasks": [
-        "PowerShell: detect arch and download latest windows binary",
-        "Shell: detect OS/arch and download latest binary",
-        "Run installer",
+        "PowerShell: detect arch and download latest olaf binary",
+        "Shell: detect OS/arch and download latest olaf binary",
+        "Run olaf",
         "Cleanup"
       ],
       "acceptance_criteria": [
