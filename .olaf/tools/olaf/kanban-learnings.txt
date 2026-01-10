@@ -1,0 +1,3 @@
+2026-01-10
+- Initialized learnings log for OLAF installer Kanban execution.
+- Each completed Kanban card should append: what changed, what was verified, decisions, and follow-ups.

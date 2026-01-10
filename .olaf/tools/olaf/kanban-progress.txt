@@ -1,0 +1,9 @@
+[ ] 000 - Dev Environment & Local Testing Setup
+[ ] 001 - Create Go Installer Core
+[ ] 002 - Implement File Update Detection
+[ ] 003 - GitHub Release Version Check
+[ ] 004 - GitHub Actions: Build Binaries
+[ ] 005 - GitHub Pages Install Site (Same Repo)
+[ ] 006 - Install Scripts (ps1/sh) Download Latest Release
+[ ] 007 - Asset Preparation
+[ ] 008 - Testing Matrix

@@ -1,0 +1,235 @@
+{
+  "title": "OLAF Installer Implementation",
+  "description": "Complete implementation of self-contained OLAF framework installer with GitHub Pages deployment",
+  "created": "2026-01-10T09:18:00Z",
+  "version": "1.0.0",
+  "columns": {
+    "backlog": {
+      "title": "Backlog",
+      "description": "Tasks to be planned and prioritized"
+    },
+    "todo": {
+      "title": "To Do",
+      "description": "Ready to start working on"
+    },
+    "in_progress": {
+      "title": "In Progress",
+      "description": "Currently being worked on"
+    },
+    "review": {
+      "title": "Review",
+      "description": "Needs review and testing"
+    },
+    "done": {
+      "title": "Done",
+      "description": "Completed and verified"
+    }
+  },
+  "cards": [
+    {
+      "id": "000",
+      "title": "Dev Environment & Local Testing Setup",
+      "description": "Make sure Go dev/build/test is working locally before implementing the installer",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "medium",
+      "tags": ["dev", "tooling", "windows"],
+      "dependencies": [],
+      "subtasks": [
+        "Install Go toolchain (Go 1.21+) and confirm PATH",
+        "Verify: go version",
+        "Verify: go env GOPATH GOROOT GOOS GOARCH",
+        "Define standard local commands: go fmt ./..., go test ./..., go vet ./..., go build .",
+        "Decide safe local test approach (dry-run mode or temp HOME) so installer does not touch real ~/.olaf during tests",
+        "Document local build constraints (cross-compile vs CI; macOS universal needs lipo on macOS runner)"
+      ],
+      "acceptance_criteria": [
+        "Go toolchain works locally",
+        "You can run unit tests and build a local binary",
+        "You have a safe way to test installer behavior without modifying real user data"
+      ],
+      "estimated_hours": 6
+    },
+    {
+      "id": "001",
+      "title": "Create Go Installer Core",
+      "description": "Implement main installer with embedded files and cross-platform support",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "large",
+      "tags": ["go", "installer", "core"],
+      "dependencies": [],
+      "subtasks": [
+        "Set up Go module and project structure",
+        "Implement file embedding with //go:embed",
+        "Ensure ~/.olaf receives ONLY embedded .olaf content",
+        "Ensure local repo receives ONLY olaf-* files into .github/.kiro/.windsurf",
+        "Implement install/update logic",
+        "Implement collection selection"
+      ],
+      "acceptance_criteria": [
+        "Installer detects existing OLAF installation",
+        "Updates only new/modified framework files",
+        "Does not write .github/.kiro/.windsurf into ~/.olaf",
+        "Copies olaf-* files to local repo",
+        "Works on Windows, macOS, Linux"
+      ],
+      "estimated_hours": 16
+    },
+    {
+      "id": "002",
+      "title": "Implement File Update Detection",
+      "description": "Decide whether embedded file should overwrite ~/.olaf file",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "medium",
+      "tags": ["go", "updates"],
+      "dependencies": ["001"],
+      "subtasks": [
+        "Define update policy (mtime vs checksum)",
+        "Implement needsUpdate()",
+        "Add checksum fallback",
+        "Add debug mode"
+      ],
+      "acceptance_criteria": [
+        "Does not overwrite newer user files",
+        "Reliably updates changed framework files",
+        "Handles missing files and permission errors gracefully"
+      ],
+      "estimated_hours": 8
+    },
+    {
+      "id": "003",
+      "title": "GitHub Release Version Check",
+      "description": "Installer checks GitHub for newer installer versions and informs user",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "medium",
+      "tags": ["github", "updates"],
+      "dependencies": ["001"],
+      "subtasks": [
+        "Implement GitHub Releases API call",
+        "Parse tag_name/name/body/url",
+        "Version compare",
+        "Graceful offline handling"
+      ],
+      "acceptance_criteria": [
+        "Shows clear message when newer installer exists",
+        "Does not fail installation when offline"
+      ],
+      "estimated_hours": 6
+    },
+    {
+      "id": "004",
+      "title": "GitHub Actions: Build Binaries",
+      "description": "CI builds all platform binaries and uploads artifacts",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "medium",
+      "tags": ["github-actions", "build"],
+      "dependencies": [],
+      "subtasks": [
+        "Matrix build for windows/darwin/linux",
+        "Add arm/arm64/386/amd64 variants",
+        "Generate sha256 checksums",
+        "Upload artifacts"
+      ],
+      "acceptance_criteria": [
+        "All target binaries produced",
+        "Checksums produced",
+        "Artifacts downloadable"
+      ],
+      "estimated_hours": 8
+    },
+    {
+      "id": "005",
+      "title": "GitHub Pages Install Site (Same Repo)",
+      "description": "Beautiful install page served from same repository via GitHub Pages",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "large",
+      "tags": ["github-pages", "web"],
+      "dependencies": [],
+      "subtasks": [
+        "Create docs/ site structure",
+        "Add index.html + assets/css + assets/js",
+        "Host install.ps1 and install.sh under GitHub Pages",
+        "Make commands point to https://haal-ai-org.github.io/olaf-installer/..."
+      ],
+      "acceptance_criteria": [
+        "Page loads on GitHub Pages",
+        "Copy buttons work",
+        "Commands download scripts from the same repo"
+      ],
+      "estimated_hours": 12
+    },
+    {
+      "id": "006",
+      "title": "Install Scripts (ps1/sh) Download Latest Release",
+      "description": "One-liners that fetch latest release binary and run it",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "medium",
+      "tags": ["powershell", "bash"],
+      "dependencies": ["004"],
+      "subtasks": [
+        "PowerShell: detect arch and download latest windows binary",
+        "Shell: detect OS/arch and download latest binary",
+        "Run installer",
+        "Cleanup"
+      ],
+      "acceptance_criteria": [
+        "Works for Windows/macOS/Linux",
+        "Handles missing curl/wget (documented)",
+        "Errors are clear"
+      ],
+      "estimated_hours": 6
+    },
+    {
+      "id": "007",
+      "title": "Asset Preparation",
+      "description": "Prepare assets/ folder for embedding (olaf-* + .olaf)",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "small",
+      "tags": ["build", "assets"],
+      "dependencies": [],
+      "subtasks": [
+        "Copy olaf-* from .github/.kiro/.windsurf into assets/*",
+        "Copy .olaf tree into assets/olaf",
+        "Generate VERSION"
+      ],
+      "acceptance_criteria": [
+        "assets/ matches intended embed structure",
+        "VERSION reflects build tag"
+      ],
+      "estimated_hours": 4
+    },
+    {
+      "id": "008",
+      "title": "Testing Matrix",
+      "description": "Validate install/update behavior across platforms",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "large",
+      "tags": ["testing"],
+      "dependencies": ["001", "004", "006"],
+      "subtasks": [
+        "Fresh install tests",
+        "Update tests",
+        "Offline tests",
+        "Permissions tests",
+        "Repo copy tests (.github/.kiro/.windsurf only)"
+      ],
+      "acceptance_criteria": [
+        "No regressions across target platforms",
+        "No repository dirs copied into ~/.olaf"
+      ],
+      "estimated_hours": 16
+    }
+  ],
+  "workflow": {
+    "suggested_order": ["000", "001", "007", "004", "002", "003", "005", "006", "008"],
+    "notes": "You can do 001 and 007 in parallel, and 005 in parallel with core Go work."
+  }
+}
