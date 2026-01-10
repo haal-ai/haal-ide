@@ -30,6 +30,10 @@
       "id": "000",
       "title": "Dev Environment & Local Testing Setup",
       "description": "Confirm Go toolchain works and define a safe local testing approach",
+      "guide_refs": [
+        "create-go-installer-guide.md: Build Instructions",
+        "create-go-installer-guide.md: Testing & Verification"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "small",
@@ -53,12 +57,18 @@
       "id": "001a",
       "title": "Project Skeleton & Embed Wiring",
       "description": "Set up Go module/project layout and wire embed FS",
+      "guide_refs": [
+        "create-go-installer-guide.md: Project Structure",
+        "create-go-installer-guide.md: Complete OLAF Installer Code",
+        "create-go-installer-guide.md: What Gets Embedded"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "small",
       "tags": ["go", "setup"],
       "dependencies": ["000"],
       "subtasks": [
+        "Adopt Go layout: cmd/olaf + internal/ (installer, repo, updates, github)",
         "Create go.mod",
         "Create assets/ structure (assets/olaf, assets/github, assets/kiro, assets/windsurf)",
         "Wire //go:embed assets/* and VERSION",
@@ -72,14 +82,45 @@
       "estimated_hours": 3
     },
     {
+      "id": "001ab",
+      "title": "Filesystem abstraction (injectable FS)",
+      "description": "Introduce minimal filesystem interface so installer logic is unit-testable",
+      "guide_refs": [
+        "implementation-guidance.md: Filesystem abstraction (required for testability)",
+        "create-go-installer-guide.md: Complete OLAF Installer Code"
+      ],
+      "column": "backlog",
+      "priority": "high",
+      "effort": "medium",
+      "tags": ["go", "testing", "solid"],
+      "dependencies": ["001a"],
+      "subtasks": [
+        "Define minimal FS interface for Stat/ReadFile/WriteFile/MkdirAll/ReadDir",
+        "Implement OS-backed FS adapter",
+        "Update installer logic to depend on the interface (no direct os.* in deep logic)",
+        "Add basic unit test using temp dir or fake FS"
+      ],
+      "acceptance_criteria": [
+        "Core installer functions accept an FS dependency",
+        "At least one unit test validates behavior without touching real user home",
+        "No regression in build"
+      ],
+      "estimated_hours": 5
+    },
+    {
       "id": "001b",
       "title": "Install to ~/.olaf (Fresh Install)",
       "description": "Implement fresh installation of embedded .olaf to ~/.olaf",
+      "guide_refs": [
+        "create-go-installer-guide.md: Important: Directory Structure Logic",
+        "create-go-installer-guide.md: extractEmbeddedFiles",
+        "implementation-guidance.md: Error handling (required)"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
       "tags": ["go", "installer"],
-      "dependencies": ["001a"],
+      "dependencies": ["001a", "001ab"],
       "subtasks": [
         "Implement getHomeDir() cross-platform",
         "Create ~/.olaf if missing",
@@ -97,6 +138,11 @@
       "id": "001c",
       "title": "Update ~/.olaf (Incremental Update)",
       "description": "Update an existing ~/.olaf by copying only missing/changed files",
+      "guide_refs": [
+        "create-go-installer-guide.md: Update Mechanism Explained",
+        "create-go-installer-guide.md: Smart Update Process",
+        "implementation-guidance.md: Embedded file timestamps caveat"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
@@ -119,6 +165,10 @@
       "id": "001d",
       "title": "Copy repo config (olaf-* files) to local repo",
       "description": "Copy embedded olaf-* files into local .github/.kiro/.windsurf",
+      "guide_refs": [
+        "create-go-installer-guide.md: What Goes Where",
+        "create-go-installer-guide.md: copyOlafFilesFromEmbedded"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "small",
@@ -141,6 +191,11 @@
       "id": "001e",
       "title": "CLI Surface (help/version/--collection)",
       "description": "Define commands and implement argument parsing",
+      "guide_refs": [
+        "implementation-guidance.md: CLI structure (run() + exit code)",
+        "implementation-guidance.md: Output conventions",
+        "create-go-installer-guide.md: Enhanced Help System"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "small",
@@ -150,10 +205,13 @@
         "Default behavior (no args): install/update",
         "--collection triggers collection selection",
         "version prints version + platform",
-        "help prints usage"
+        "help prints usage",
+        "Use run() + exit codes (non-zero on error)",
+        "Add --verbose and send debug output to stderr"
       ],
       "acceptance_criteria": [
         "Running with unknown args prints help and exits non-zero",
+        "Errors print to stderr and exit code is non-zero",
         "help output documents all supported commands",
         "version output is deterministic and includes GOOS/GOARCH"
       ],
@@ -163,20 +221,24 @@
       "id": "002",
       "title": "File update decision (mtime + optional checksum)",
       "description": "Decide whether an embedded file should overwrite an installed file",
+      "guide_refs": [
+        "implementation-guidance.md: Embedded file timestamps caveat",
+        "create-go-installer-guide.md: How will it know if a file is newer or older"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "medium",
       "tags": ["go", "updates"],
       "dependencies": ["001c"],
       "subtasks": [
-        "Implement mtime comparison (installed older => overwrite)",
-        "Add checksum comparison fallback (optional flag/env)",
+        "Implement checksum-first comparison (SHA256)",
+        "Use mtime only as a hint (never sole source of truth)",
         "Add debug logging mode (OLAF_DEBUG=1)"
       ],
       "acceptance_criteria": [
         "If dest missing => update=true",
-        "If embedded newer => update=true",
-        "If installed newer => update=false",
+        "If checksums differ => update=true",
+        "If checksums equal => update=false",
         "Debug mode explains the decision per file"
       ],
       "estimated_hours": 4
@@ -185,6 +247,10 @@
       "id": "003",
       "title": "Check GitHub Releases for newer olaf binary",
       "description": "Notify user when a newer release exists",
+      "guide_refs": [
+        "create-go-installer-guide.md: Automatic Version Checking from GitHub",
+        "create-go-installer-guide.md: User instructions for obtaining newer versions"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "small",
@@ -207,6 +273,10 @@
       "id": "004",
       "title": "CI build matrix + checksums",
       "description": "Build platform binaries in GitHub Actions and generate checksums",
+      "guide_refs": [
+        "create-go-installer-guide.md: GitHub Actions workflows",
+        "create-go-installer-guide.md: Generate checksums"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
@@ -229,6 +299,10 @@
       "id": "005a",
       "title": "GitHub Pages site (static files)",
       "description": "Add docs/ with a minimal install page",
+      "guide_refs": [
+        "create-go-installer-guide.md: GitHub Pages Setup",
+        "create-go-installer-guide.md: Example HTML landing page"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "small",
@@ -250,6 +324,10 @@
       "id": "005b",
       "title": "One-line install scripts (install.ps1 / install.sh)",
       "description": "Scripts download the right release binary and run it",
+      "guide_refs": [
+        "create-go-installer-guide.md: PowerShell one-liner",
+        "create-go-installer-guide.md: Shell one-liner"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "medium",
@@ -271,6 +349,10 @@
       "id": "006",
       "title": "Asset preparation script",
       "description": "Prepare assets/ folder content consistently for embedding",
+      "guide_refs": [
+        "create-go-installer-guide.md: Asset Preparation Script",
+        "create-go-installer-guide.md: Prepare Assets"
+      ],
       "column": "backlog",
       "priority": "medium",
       "effort": "small",
@@ -292,6 +374,10 @@
       "id": "008a",
       "title": "Unit tests (core path safety + copy rules)",
       "description": "Add unit tests for the most failure-prone logic",
+      "guide_refs": [
+        "implementation-guidance.md: TDD (default)",
+        "implementation-guidance.md: Filesystem abstraction (required for testability)"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
@@ -310,9 +396,39 @@
       "estimated_hours": 6
     },
     {
+      "id": "008c",
+      "title": "Automated e2e test (temp HOME)",
+      "description": "Run the built binary against a temp HOME and assert installed outputs",
+      "guide_refs": [
+        "implementation-guidance.md: Definition of Done (DoD)",
+        "create-go-installer-guide.md: Verification After Installation"
+      ],
+      "column": "backlog",
+      "priority": "high",
+      "effort": "medium",
+      "tags": ["testing", "e2e"],
+      "dependencies": ["001b", "001c", "001d", "001e"],
+      "subtasks": [
+        "Run binary with HOME/USERPROFILE pointed to temp dir",
+        "Assert ~/.olaf required paths exist",
+        "Assert repo copy wrote only olaf-* files",
+        "Assert repeat run is idempotent (no destructive changes)"
+      ],
+      "acceptance_criteria": [
+        "Test runs on local machine without touching real user home",
+        "Test fails if installer writes to unexpected locations",
+        "Test is repeatable"
+      ],
+      "estimated_hours": 6
+    },
+    {
       "id": "008b",
       "title": "Manual smoke tests (local)",
       "description": "Verify install/update behavior using a safe temp HOME strategy",
+      "guide_refs": [
+        "create-go-installer-guide.md: Update Flow Examples",
+        "create-go-installer-guide.md: Troubleshooting Updates"
+      ],
       "column": "backlog",
       "priority": "high",
       "effort": "small",
@@ -332,7 +448,7 @@
     }
   ],
   "workflow": {
-    "suggested_order": ["000", "001a", "001b", "002", "001c", "001d", "001e", "003", "006", "004", "005a", "005b", "008a", "008b"],
+    "suggested_order": ["000", "001a", "001ab", "001b", "002", "001c", "001d", "001e", "003", "006", "004", "005a", "005b", "008a", "008c", "008b"],
     "notes": "Large cards were split into smaller similarly-scoped deliverables; 005a/005b can be done in parallel with core Go work."
   }
 }

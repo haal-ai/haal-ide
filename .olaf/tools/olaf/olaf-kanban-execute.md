@@ -38,6 +38,11 @@ Before implementing any card, read and follow:
    - Then effort (prefer smaller if equal priority/unblock).
 4. Announce the selected card id/title.
 
+## Step 1b — Pull guide context for the selected card
+1. From the selected card, read `guide_refs`.
+2. Open `.olaf/tools/olaf/create-go-installer-guide.md` and locate the referenced sections.
+3. Summarize the relevant constraints/invariants for the card (especially paths, copy rules, and safety rules).
+
 ## Step 2 — Create/confirm a safe verification plan
 For the chosen card, define:
 - Deliverables (files/folders/code changes expected).

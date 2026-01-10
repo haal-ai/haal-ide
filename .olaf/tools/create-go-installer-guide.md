@@ -1,4 +1,4 @@
-# OLAF Installer Guide
+# OLAF Self-Contained Installer Guide
 
 ## Overview
 Create a self-embedded Go installer called `olaf` that embeds all OLAF framework files and manages installation/updates automatically.
@@ -435,10 +435,10 @@ func showHelp() {
 	fmt.Printf("Platform: %s\n", getPlatformInfo())
 	fmt.Println("")
 	fmt.Println("Usage:")
-	fmt.Println("  olaf-installer              Install or update OLAF")
-	fmt.Println("  olaf-installer --collection Select collection")
-	fmt.Println("  olaf-installer version      Show version")
-	fmt.Println("  olaf-installer help         Show this help")
+	fmt.Println("  olaf              Install or update OLAF")
+	fmt.Println("  olaf --collection Select collection")
+	fmt.Println("  olaf version      Show version")
+	fmt.Println("  olaf help         Show this help")
 	fmt.Println("")
 	fmt.Println("What it does:")
 	fmt.Println("- Installs OLAF framework to ~/.olaf")
@@ -457,13 +457,13 @@ func showHelp() {
 
 ### 1. Create Project Structure
 ```bash
-mkdir olaf-installer
-cd olaf-installer
+mkdir olaf
+cd olaf
 ```
 
 ### 2. Create Go Module
 ```bash
-go mod init olaf-installer
+go mod init olaf
 ```
 
 ### 3. Prepare Assets
@@ -492,47 +492,47 @@ echo "1.0.0" > VERSION
 #### Windows Builds
 ```bash
 # Windows 64-bit (most common)
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-windows-amd64.exe
 
 # Windows 32-bit (legacy systems)
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-windows-386.exe
 
 # Windows ARM64 (newer Windows on ARM devices)
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olafrm64.exe
 ```
 
 #### macOS Builds
 ```bash
 # macOS Intel 64-bit (most common)
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf
 
 # macOS Apple Silicon (M1/M2/M3)
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf64
 
 # macOS Universal Binary (combines both Intel and Apple Silicon)
 # Build separately first, then combine:
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-macos-arm64
 # Combine into universal binary
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+lipo -create olaf-macos-amd64 olaf-macos-arm64 -output olaf-macos-universal
 ```
 
 #### Linux Builds
 ```bash
 # Linux 64-bit (most common)
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-linux-amd64
 
 # Linux 32-bit (legacy systems)
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-linux-386
 
 # Linux ARM64 (aarch64 servers, Raspberry Pi 4+)
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-linux-arm64
 
 # Linux ARM v7 (32-bit, Raspberry Pi 3/4)
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-linux-armv7
 
 # Linux ARM v6 (Raspberry Pi Zero/1)
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-linux-armv6
 ```
 
 #### Complete Build Script
@@ -544,26 +544,26 @@ echo "🔨 Building OLAF Installer for all platforms..."
 
 # Windows
 echo "Building Windows versions..."
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-windows-amd64.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-windows-386.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-windows-arm64.exe
 
 # macOS
 echo "Building macOS versions..."
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-macos-arm64
+lipo -create olaf-macos-amd64 olaf-macos-arm64 -output olaf-macos-universal
 
 # Linux
 echo "Building Linux versions..."
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-linux-amd64
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-linux-386
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-linux-arm64
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-linux-armv7
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-linux-armv6
 
 echo "✅ Build complete!"
-ls -lh olaf-installer-*
+ls -lh olaf-*
 ```
 
 #### Platform Detection in Code
@@ -605,32 +605,32 @@ func getInstallerName() string {
     
     switch {
     case os == "windows" && arch == "amd64":
-        return "olaf-installer-windows-amd64.exe"
+        return "olaf-windows-amd64.exe"
     case os == "windows" && arch == "386":
-        return "olaf-installer-windows-386.exe"
+        return "olaf-windows-386.exe"
     case os == "windows" && arch == "arm64":
-        return "olaf-installer-windows-arm64.exe"
+        return "olaf-windows-arm64.exe"
     case os == "darwin" && arch == "amd64":
-        return "olaf-installer-macos-amd64"
+        return "olaf-macos-amd64"
     case os == "darwin" && arch == "arm64":
-        return "olaf-installer-macos-arm64"
+        return "olaf-macos-arm64"
     case os == "linux" && arch == "amd64":
-        return "olaf-installer-linux-amd64"
+        return "olaf-linux-amd64"
     case os == "linux" && arch == "386":
-        return "olaf-installer-linux-386"
+        return "olaf-linux-386"
     case os == "linux" && arch == "arm64":
-        return "olaf-installer-linux-arm64"
+        return "olaf-linux-arm64"
     case os == "linux" && arch == "arm":
-        return "olaf-installer-linux-armv7"
+        return "olaf-linux-armv7"
     default:
-        return "olaf-installer-" + os + "-" + arch
+        return "olaf-" + os + "-" + arch
     }
 }
 ```
 
 ### 5. Check Binary Size
 ```bash
-ls -lh olaf-installer*
+ls -lh olaf*
 ```
 
 ## Update Mechanism Explained
@@ -761,7 +761,7 @@ type GitHubRelease struct {
 }
 
 const (
-    GITHUB_REPO = "haal-ai-org/olaf-installer"
+    GITHUB_REPO = "haal-ai-org/olaf"
     VERSION_CHECK_URL = "https://api.github.com/repos/" + GITHUB_REPO + "/releases/latest"
 )
 
@@ -915,11 +915,11 @@ func showHelp() {
     fmt.Printf("Version: %s\n", getCurrentVersion())
     fmt.Println("")
     fmt.Println("Usage:")
-    fmt.Println("  olaf-installer              Install or update OLAF (checks for updates)")
-    fmt.Println("  olaf-installer --check-updates Check for newer versions")
-    fmt.Println("  olaf-installer --collection Select collection")
-    fmt.Println("  olaf-installer version      Show current version")
-    fmt.Println("  olaf-installer help         Show this help")
+    fmt.Println("  olaf              Install or update OLAF (checks for updates)")
+    fmt.Println("  olaf --check-updates Check for newer versions")
+    fmt.Println("  olaf --collection Select collection")
+    fmt.Println("  olaf version      Show current version")
+    fmt.Println("  olaf help         Show this help")
     fmt.Println("")
     fmt.Println("What it does:")
     fmt.Println("- Installs OLAF framework to ~/.olaf")
@@ -1005,7 +1005,7 @@ func showHelp() {
 
 #### 1. Create Release Structure
 ```bash
-# In your GitHub repository (haal-ai-org/olaf-installer)
+# In your GitHub repository (haal-ai-org/olaf)
 # Create releases with proper version tags:
 # - v1.0.0 - Initial release
 # - v1.0.1 - Bug fixes
@@ -1026,9 +1026,9 @@ func showHelp() {
 ### Installation
 ```bash
 # Download the appropriate binary for your platform
-# Windows: olaf-installer-windows-amd64.exe
-# macOS: olaf-installer-macos-universal
-# Linux: olaf-installer-linux-amd64
+# Windows: olaf-windows-amd64.exe
+# macOS: olaf-macos-universal
+# Linux: olaf-linux-amd64
 
 # Run installer
 ./olaf-[platform]
@@ -1181,36 +1181,36 @@ jobs:
         include:
           - goos: windows
             goarch: amd64
-            binary_name: olaf-installer-windows-amd64.exe
+            binary_name: olaf-windows-amd64.exe
           - goos: windows
             goarch: 386
-            binary_name: olaf-installer-windows-386.exe
+            binary_name: olaf-windows-386.exe
           - goos: windows
             goarch: arm64
-            binary_name: olaf-installer-windows-arm64.exe
+            binary_name: olaf-windows-arm64.exe
           - goos: darwin
             goarch: amd64
-            binary_name: olaf-installer-macos-amd64
+            binary_name: olaf-macos-amd64
           - goos: darwin
             goarch: arm64
-            binary_name: olaf-installer-macos-arm64
+            binary_name: olaf-macos-arm64
           - goos: linux
             goarch: amd64
-            binary_name: olaf-installer-linux-amd64
+            binary_name: olaf-linux-amd64
           - goos: linux
             goarch: 386
-            binary_name: olaf-installer-linux-386
+            binary_name: olaf-linux-386
           - goos: linux
             goarch: arm64
-            binary_name: olaf-installer-linux-arm64
+            binary_name: olaf-linux-arm64
           - goos: linux
             goarch: arm
             goarm: 7
-            binary_name: olaf-installer-linux-armv7
+            binary_name: olaf-linux-armv7
           - goos: linux
             goarch: arm
             goarm: 6
-            binary_name: olaf-installer-linux-armv6
+            binary_name: olaf-linux-armv6
         exclude:
           - goos: darwin
             goarch: 386
@@ -1292,14 +1292,14 @@ jobs:
 
     - name: Generate checksums
       run: |
-        sha256sum olaf-installer-* > checksums.txt
+        sha256sum olaf-* > checksums.txt
         sha256sum -c checksums.txt
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          olaf-installer-*
+          olaf-*
           checksums.txt
         generate_release_notes: true
         draft: false
@@ -1351,29 +1351,29 @@ echo "📊 Files: $(find assets -type f | wc -l) files embedded"
 echo "🔨 Building OLAF Installer for all platforms..."
 
 # Clean previous builds
-rm -f olaf-installer-*
+rm -f olaf-*
 
 # Build for all platforms
 echo "Building Windows versions..."
-GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-windows-amd64.exe
-GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-windows-386.exe
-GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-windows-arm64.exe
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o olaf-windows-amd64.exe
+GOOS=windows GOARCH=386 go build -ldflags "-s -w" -o olaf-windows-386.exe
+GOOS=windows GOARCH=arm64 go build -ldflags "-s -w" -o olaf-windows-arm64.exe
 
 echo "Building macOS versions..."
-GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-macos-amd64
-GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-macos-arm64
-lipo -create olaf-installer-macos-amd64 olaf-installer-macos-arm64 -output olaf-installer-macos-universal
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o olaf-macos-amd64
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o olaf-macos-arm64
+lipo -create olaf-macos-amd64 olaf-macos-arm64 -output olaf-macos-universal
 
 echo "Building Linux versions..."
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-installer-linux-amd64
-GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-installer-linux-386
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-installer-linux-arm64
-GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-installer-linux-armv7
-GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-installer-linux-armv6
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o olaf-linux-amd64
+GOOS=linux GOARCH=386 go build -ldflags "-s -w" -o olaf-linux-386
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o olaf-linux-arm64
+GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w" -o olaf-linux-armv7
+GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w" -o olaf-linux-armv6
 
 echo "📊 Build complete!"
 echo "📦 Binary sizes:"
-ls -lh olaf-installer-* | awk '{print "  " $9 ": " $5}'
+ls -lh olaf-* | awk '{print "  " $9 ": " $5}'
 ```
 
 ### Repository README (`README.md`)
@@ -1404,17 +1404,17 @@ curl -sSL https://install.olaf.ai | bash
 
 | Platform | Architecture | Download | Size |
 |----------|-------------|----------|------|
-| Windows | Intel/AMD 64-bit | `olaf-installer-windows-amd64.exe` | ~15MB |
-| Windows | Intel/AMD 32-bit | `olaf-installer-windows-386.exe` | ~12MB |
-| Windows | ARM64 | `olaf-installer-windows-arm64.exe` | ~14MB |
-| macOS | Intel 64-bit | `olaf-installer-macos-amd64` | ~13MB |
-| macOS | Apple Silicon | `olaf-installer-macos-arm64` | ~13MB |
-| macOS | Universal | `olaf-installer-macos-universal` | ~20MB |
-| Linux | Intel/AMD 64-bit | `olaf-installer-linux-amd64` | ~14MB |
-| Linux | Intel/AMD 32-bit | `olaf-installer-linux-386` | ~11MB |
-| Linux | ARM64 | `olaf-installer-linux-arm64` | ~13MB |
-| Linux | ARM v7 | `olaf-installer-linux-armv7` | ~12MB |
-| Linux | ARM v6 | `olaf-installer-linux-armv6` | ~11MB |
+| Windows | Intel/AMD 64-bit | `olaf-windows-amd64.exe` | ~15MB |
+| Windows | Intel/AMD 32-bit | `olaf-windows-386.exe` | ~12MB |
+| Windows | ARM64 | `olaf-windows-arm64.exe` | ~14MB |
+| macOS | Intel 64-bit | `olaf-macos-amd64` | ~13MB |
+| macOS | Apple Silicon | `olaf-macos-arm64` | ~13MB |
+| macOS | Universal | `olaf-macos-universal` | ~20MB |
+| Linux | Intel/AMD 64-bit | `olaf-linux-amd64` | ~14MB |
+| Linux | Intel/AMD 32-bit | `olaf-linux-386` | ~11MB |
+| Linux | ARM64 | `olaf-linux-arm64` | ~13MB |
+| Linux | ARM v7 | `olaf-linux-armv7` | ~12MB |
+| Linux | ARM v6 | `olaf-linux-armv6` | ~11MB |
 
 ## 🚀 What It Does
 
@@ -1459,11 +1459,11 @@ The installer automatically checks for updates when run. If a newer version is a
 ### Building from Source
 ```bash
 # Clone repository
-git clone https://github.com/haal-ai-org/olaf-installer.git
-cd olaf-installer
+git clone https://github.com/haal-ai-org/olaf.git
+cd olaf
 
 # Build for your platform
-go build -ldflags "-s -w" -o olaf-installer
+go build -ldflags "-s -w" -o olaf
 
 # Build for all platforms
 ./build/build-all.sh
@@ -1526,7 +1526,7 @@ git push origin v1.1.0
 ./build/build-all.sh
 
 # Generate checksums
-sha256sum olaf-installer-* > checksums.txt
+sha256sum olaf-* > checksums.txt
 
 # Create release on GitHub
 # 1. Go to https://github.com/haal-ai-org/olaf/releases/new
@@ -1613,7 +1613,7 @@ Result:
 User sees notification: "v1.1.0 available"
 User must:
 1. Go to GitHub releases page
-2. Download olaf-installer-v1.1.0
+2. Download olaf-v1.1.0
 3. Run the new installer
 
 Result:
@@ -1676,7 +1676,7 @@ func installOrUpdateOLAF() {
 
 #### ❌ **Never Updated** (Installer Layer)
 ```
-olaf-installer-v1.0.0.exe       ← Stays v1.0.0 until user downloads new one
+olaf-v1.0.0.exe       ← Stays v1.0.0 until user downloads new one
 Embedded framework files         ← Stay v1.0.0 until new installer
 ```
 
@@ -1799,33 +1799,33 @@ When the installer notifies you that a newer version is available, follow these 
 3. **Download Correct Binary**
    
    **Windows:**
-   - `olaf-installer-windows-amd64.exe` (most common)
-   - `olaf-installer-windows-386.exe` (old 32-bit systems)
-   - `olaf-installer-windows-arm64.exe` (Windows on ARM)
+   - `olaf-windows-amd64.exe` (most common)
+   - `olaf-windows-386.exe` (old 32-bit systems)
+   - `olaf-windows-arm64.exe` (Windows on ARM)
 
    **macOS:**
-   - `olaf-installer-macos-universal` (works on all Macs)
-   - `olaf-installer-macos-amd64` (Intel Macs)
-   - `olaf-installer-macos-arm64` (Apple Silicon)
+   - `olaf-macos-universal` (works on all Macs)
+   - `olaf-macos-amd64` (Intel Macs)
+   - `olaf-macos-arm64` (Apple Silicon)
 
    **Linux:**
-   - `olaf-installer-linux-amd64` (most common)
-   - `olaf-installer-linux-386` (old 32-bit systems)
-   - `olaf-installer-linux-arm64` (ARM servers, Pi 4+)
-   - `olaf-installer-linux-armv7` (Raspberry Pi 3/4)
-   - `olaf-installer-linux-armv6` (Raspberry Pi Zero/1)
+   - `olaf-linux-amd64` (most common)
+   - `olaf-linux-386` (old 32-bit systems)
+   - `olaf-linux-arm64` (ARM servers, Pi 4+)
+   - `olaf-linux-armv7` (Raspberry Pi 3/4)
+   - `olaf-linux-armv6` (Raspberry Pi Zero/1)
 
 4. **Verify Download (Optional but Recommended)**
    ```bash
    # Check SHA256 checksum
-   sha256sum olaf-installer-[platform]
+   sha256sum olaf-[platform]
    # Compare with checksums.txt in the release
    ```
 
 5. **Run New Installer**
    ```bash
    # Make executable (Linux/macOS)
-   chmod +x olaf-installer-[platform]
+   chmod +x olaf-[platform]
    
    # Run the new installer
    ./olaf-[platform]
@@ -1848,9 +1848,9 @@ case $ARCH in
 esac
 
 # Download latest version
-LATEST_URL=$(curl -s https://api.github.com/repos/haal-ai-org/olaf/releases/latest | grep "browser_download_url.*olaf-installer-${PLATFORM}-${ARCH}" | cut -d '"' -f 4)
-curl -L -o olaf-installer "$LATEST_URL"
-chmod +x olaf-installer
+LATEST_URL=$(curl -s https://api.github.com/repos/haal-ai-org/olaf/releases/latest | grep "browser_download_url.*olaf-${PLATFORM}-${ARCH}" | cut -d '"' -f 4)
+curl -L -o olaf "$LATEST_URL"
+chmod +x olaf
 ./olaf
 ```
 
@@ -1858,9 +1858,9 @@ chmod +x olaf-installer
 ```powershell
 # Download latest Windows installer
 $LatestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/haal-ai-org/olaf/releases/latest"
-$DownloadUrl = $LatestRelease.assets | Where-Object { $_.name -like "olaf-installer-windows-amd64.exe" } | Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest -Uri $DownloadUrl -OutFile "olaf-installer.exe"
-.\olaf-installer.exe
+$DownloadUrl = $LatestRelease.assets | Where-Object { $_.name -like "olaf-windows-amd64.exe" } | Select-Object -ExpandProperty browser_download_url
+Invoke-WebRequest -Uri $DownloadUrl -OutFile "olaf.exe"
+.\olaf.exe
 ```
 
 #### 📱 **Method 3: One-Line Installer (Future Feature)**
@@ -1949,17 +1949,17 @@ Download: https://github.com/haal-ai-org/olaf/releases/tag/v1.1.0
 # 🆕 Update Available! Current: 1.0.0, Latest: 1.1.0
 
 # Step 3: Download new version
-wget https://github.com/haal-ai-org/olaf/releases/download/v1.1.0/olaf-installer-linux-amd64
+wget https://github.com/haal-ai-org/olaf/releases/download/v1.1.0/olaf-linux-amd64
 
 # Step 4: Make executable
-chmod +x olaf-installer-linux-amd64
+chmod +x olaf-linux-amd64
 
 # Step 5: Run new installer
 ./olaf-linux-amd64
 # ✅ You're running the latest version (1.1.0)
 
 # Step 6: Clean up (optional)
-rm olaf-installer-linux-amd64.old
+rm olaf-linux-amd64.old
 ```
 
 #### **Example 2: macOS User Update**
@@ -1972,11 +1972,11 @@ rm olaf-installer-linux-amd64.old
 # https://github.com/haal-ai-org/olaf/releases
 
 # Step 3: Download universal binary
-# Click "olaf-installer-macos-universal"
+# Click "olaf-macos-universal"
 
 # Step 4: Replace old binary
-mv olaf-installer-macos-universal olaf-installer
-chmod +x olaf-installer
+mv olaf-macos-universal olaf
+chmod +x olaf
 
 # Step 5: Run new installer
 ./olaf
@@ -1986,25 +1986,25 @@ chmod +x olaf-installer
 #### **Example 3: Windows User Update**
 ```powershell
 # Step 1: Check current version
-.\olaf-installer-windows-amd64.exe version
+.\olaf-windows-amd64.exe version
 # OLAF Installer v1.0.0 (windows/amd64)
 
 # Step 2: Check for updates
-.\olaf-installer-windows-amd64.exe --check-updates
+.\olaf-windows-amd64.exe --check-updates
 # 🆕 Update Available! Current: 1.0.0, Latest: 1.1.0
 
 # Step 3: Go to GitHub releases
 # https://github.com/haal-ai-org/olaf/releases
 
 # Step 4: Download new installer
-# Click "olaf-installer-windows-amd64.exe"
+# Click "olaf-windows-amd64.exe"
 
 # Step 5: Run new installer
-.\olaf-installer-windows-amd64.exe
+.\olaf-windows-amd64.exe
 # ✅ You're running the latest version (1.1.0)
 
 # Step 6: Clean up (optional)
-del olaf-installer-windows-amd64.old.exe
+del olaf-windows-amd64.old.exe
 ```
 
 ### ⚠️ **Important Notes**
@@ -2031,15 +2031,15 @@ del olaf-installer-windows-amd64.old.exe
 #### **Download Issues**
 ```bash
 # If download fails, try:
-curl -L -o olaf-installer [download-url]
+curl -L -o olaf [download-url]
 # or
-wget -O olaf-installer [download-url]
+wget -O olaf [download-url]
 ```
 
 #### **Permission Issues**
 ```bash
 # Linux/macOS: Make executable
-chmod +x olaf-installer
+chmod +x olaf
 
 # Windows: Run as Administrator if needed
 # Right-click → "Run as administrator"
@@ -2441,7 +2441,7 @@ wget -qO- https://raw.githubusercontent.com/haal-ai-org/olaf/main/install.sh | b
 
 param(
     [string]$Version = "latest",
-    [string]$InstallDir = "$env:USERPROFILE\.olaf-installer"
+    [string]$InstallDir = "$env:USERPROFILE\.olaf"
 )
 
 Write-Host "🚀 OLAF Framework Installer" -ForegroundColor Green
@@ -2450,9 +2450,9 @@ Write-Host "==============================" -ForegroundColor Green
 # Detect architecture
 $Arch = $env:PROCESSOR_ARCHITECTURE
 switch ($Arch) {
-    "AMD64" { $BinaryName = "olaf-installer-windows-amd64.exe" }
-    "x86" { $BinaryName = "olaf-installer-windows-386.exe" }
-    "ARM64" { $BinaryName = "olaf-installer-windows-arm64.exe" }
+    "AMD64" { $BinaryName = "olaf-windows-amd64.exe" }
+    "x86" { $BinaryName = "olaf-windows-386.exe" }
+    "ARM64" { $BinaryName = "olaf-windows-arm64.exe" }
     default { 
         Write-Host "❌ Unsupported architecture: $Arch" -ForegroundColor Red
         exit 1
@@ -2460,7 +2460,7 @@ switch ($Arch) {
 }
 
 # Create temp directory
-$TempDir = Join-Path $env:TEMP "olaf-installer"
+$TempDir = Join-Path $env:TEMP "olaf"
 New-Item -ItemType Directory -Force -Path $TempDir | Out-Null
 
 # Determine download URL
@@ -2547,12 +2547,12 @@ case $ARCH in
 esac
 
 # Determine binary name
-BINARY_NAME="olaf-installer-${PLATFORM}-${ARCH}"
+BINARY_NAME="olaf-${PLATFORM}-${ARCH}"
 if [ "$PLATFORM" = "darwin" ] && [ "$ARCH" = "amd64" ]; then
     # Check for Apple Silicon
     if [ "$(sysctl -n hw.optional.arm64 2>/dev/null)" = "1" ]; then
         ARCH="arm64"
-        BINARY_NAME="olaf-installer-${PLATFORM}-${ARCH}"
+        BINARY_NAME="olaf-${PLATFORM}-${ARCH}"
     fi
 fi
 
@@ -2776,7 +2776,7 @@ jobs:
             <div class="nav-links">
                 <a href="#install" class="nav-link">Install</a>
                 <a href="#docs" class="nav-link">Docs</a>
-                <a href="https://github.com/haal-ai-org/olaf-installer" class="nav-link" target="_blank">GitHub</a>
+                <a href="https://github.com/haal-ai-org/olaf" class="nav-link" target="_blank">GitHub</a>
             </div>
         </div>
     </nav>
@@ -2982,7 +2982,7 @@ jobs:
                     <span class="brand-text">OLAF Framework</span>
                 </div>
                 <div class="footer-links">
-                    <a href="https://github.com/haal-ai-org/olaf-installer" target="_blank">GitHub</a>
+                    <a href="https://github.com/haal-ai-org/olaf" target="_blank">GitHub</a>
                     <a href="https://docs.olaf.ai" target="_blank">Documentation</a>
                     <a href="https://github.com/haal-ai-org/olaf/issues" target="_blank">Issues</a>
                 </div>
@@ -3705,16 +3705,16 @@ This gives you a beautiful, professional installation page served from the same 
 #### **Package Managers (Future)**
 ```bash
 # Homebrew (macOS)
-brew install olaf-installer
+brew install olaf
 
 # Chocolatey (Windows)
-choco install olaf-installer
+choco install olaf
 
 # Snap (Linux)
-snap install olaf-installer
+snap install olaf
 
 # AUR (Arch Linux)
-yay -S olaf-installer
+yay -S olaf
 ```
 
 #### **Container Installation**
@@ -4030,10 +4030,10 @@ This update mechanism ensures users always have the latest OLAF framework while 
 # OLAF Installer - Self-contained OLAF framework installer
 # 
 # Usage:
-#   olaf-installer              Install or update OLAF
-#   olaf-installer --collection Select collection
-#   olaf-installer version      Show version
-#   olaf-installer help         Show this help
+#   olaf              Install or update OLAF
+#   olaf --collection Select collection
+#   olaf version      Show version
+#   olaf help         Show this help
 # 
 # What it does:
 # - Installs OLAF framework to ~/.olaf
@@ -4146,7 +4146,7 @@ func verifyInstallation(olafDir string) bool {
 mkdir -p dist/windows
 
 # Copy all Windows variants
-cp olaf-installer-windows-*.exe dist/windows/
+cp olaf-windows-*.exe dist/windows/
 
 # Create Windows installer script (setup.bat)
 cat > dist/windows/install.bat << 'EOF'
@@ -4154,12 +4154,12 @@ cat > dist/windows/install.bat << 'EOF'
 echo Installing OLAF Framework...
 if "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
     if "%PROCESSOR_IDENTIFIER:~-3%" == "ARM64" (
-        olaf-installer-windows-arm64.exe
+        olaf-windows-arm64.exe
     ) else (
-        olaf-installer-windows-amd64.exe
+        olaf-windows-amd64.exe
     )
 ) else if "%PROCESSOR_ARCHITECTURE%" == "x86" (
-    olaf-installer-windows-386.exe
+    olaf-windows-386.exe
 ) else (
     echo Unsupported architecture
     pause
@@ -4169,7 +4169,7 @@ EOF
 
 # Create ZIP for distribution
 cd dist/windows
-zip -r olaf-installer-windows-v1.0.0.zip *
+zip -r olaf-windows-v1.0.0.zip *
 ```
 
 #### macOS Distribution
@@ -4178,7 +4178,7 @@ zip -r olaf-installer-windows-v1.0.0.zip *
 mkdir -p dist/macos
 
 # Copy macOS variants
-cp olaf-installer-macos-* dist/macos/
+cp olaf-macos-* dist/macos/
 
 # Create macOS installer script (install.sh)
 cat > dist/macos/install.sh << 'EOF'
@@ -4211,7 +4211,7 @@ chmod +x dist/macos/install.sh
 
 # Create tar.gz for distribution
 cd dist/macos
-tar -czf olaf-installer-macos-v1.0.0.tar.gz *
+tar -czf olaf-macos-v1.0.0.tar.gz *
 ```
 
 #### Linux Distribution
@@ -4220,7 +4220,7 @@ tar -czf olaf-installer-macos-v1.0.0.tar.gz *
 mkdir -p dist/linux
 
 # Copy all Linux variants
-cp olaf-installer-linux-* dist/linux/
+cp olaf-linux-* dist/linux/
 
 # Create Linux installer script (install.sh)
 cat > dist/linux/install.sh << 'EOF'
@@ -4266,7 +4266,7 @@ chmod +x dist/linux/install.sh
 
 # Create tar.gz for distribution
 cd dist/linux
-tar -czf olaf-installer-linux-v1.0.0.tar.gz *
+tar -czf olaf-linux-v1.0.0.tar.gz *
 ```
 
 #### Universal Distribution Package
@@ -4275,7 +4275,7 @@ tar -czf olaf-installer-linux-v1.0.0.tar.gz *
 mkdir -p dist/complete
 
 # Copy all binaries
-cp olaf-installer-* dist/complete/
+cp olaf-* dist/complete/
 
 # Create universal installer script
 cat > dist/complete/install.sh << 'EOF'
@@ -4288,7 +4288,7 @@ OS=$(uname -s)
 case $OS in
     Windows_NT|CYGWIN*|MINGW*|MSYS*)
         echo "Windows detected"
-        if [[ -f "olaf-installer-windows-amd64.exe" ]]; then
+        if [[ -f "olaf-windows-amd64.exe" ]]; then
             ./olaf-windows-amd64.exe
         else
             echo "Windows installer not found"
@@ -4363,21 +4363,21 @@ cat > dist/complete/README.md << 'EOF'
 ## Platform-Specific Installers
 
 ### Windows
-- `olaf-installer-windows-amd64.exe` - Windows 64-bit (Intel/AMD)
-- `olaf-installer-windows-386.exe` - Windows 32-bit (Intel/AMD)
-- `olaf-installer-windows-arm64.exe` - Windows ARM64
+- `olaf-windows-amd64.exe` - Windows 64-bit (Intel/AMD)
+- `olaf-windows-386.exe` - Windows 32-bit (Intel/AMD)
+- `olaf-windows-arm64.exe` - Windows ARM64
 
 ### macOS
-- `olaf-installer-macos-universal` - Universal binary (Intel + Apple Silicon)
-- `olaf-installer-macos-amd64` - Intel Macs
-- `olaf-installer-macos-arm64` - Apple Silicon (M1/M2/M3)
+- `olaf-macos-universal` - Universal binary (Intel + Apple Silicon)
+- `olaf-macos-amd64` - Intel Macs
+- `olaf-macos-arm64` - Apple Silicon (M1/M2/M3)
 
 ### Linux
-- `olaf-installer-linux-amd64` - Linux 64-bit (Intel/AMD)
-- `olaf-installer-linux-386` - Linux 32-bit (Intel/AMD)
-- `olaf-installer-linux-arm64` - Linux ARM64 (servers, Pi 4+)
-- `olaf-installer-linux-armv7` - Linux ARM v7 (Raspberry Pi 3/4)
-- `olaf-installer-linux-armv6` - Linux ARM v6 (Raspberry Pi Zero/1)
+- `olaf-linux-amd64` - Linux 64-bit (Intel/AMD)
+- `olaf-linux-386` - Linux 32-bit (Intel/AMD)
+- `olaf-linux-arm64` - Linux ARM64 (servers, Pi 4+)
+- `olaf-linux-armv7` - Linux ARM v7 (Raspberry Pi 3/4)
+- `olaf-linux-armv6` - Linux ARM v6 (Raspberry Pi Zero/1)
 
 ## Usage
 ```bash
@@ -4397,8 +4397,8 @@ EOF
 
 # Create final distribution packages
 cd dist
-zip -r olaf-installer-v1.0.0-complete.zip complete/
-tar -czf olaf-installer-v1.0.0-complete.tar.gz complete/
+zip -r olaf-v1.0.0-complete.zip complete/
+tar -czf olaf-v1.0.0-complete.tar.gz complete/
 ```
 
 ### Update Server Setup
@@ -4407,7 +4407,7 @@ tar -czf olaf-installer-v1.0.0-complete.tar.gz complete/
 mkdir -p /var/www/olaf-updates
 
 # Upload new versions
-cp olaf-installer-v1.0.1.exe /var/www/olaf-updates/
+cp olaf-v1.0.1.exe /var/www/olaf-updates/
 echo "1.0.1" > /var/www/olaf-updates/latest-version.txt
 
 # Version manifest
@@ -4416,7 +4416,7 @@ cat > /var/www/olaf-updates/versions.json << EOF
   "latest": "1.0.1",
   "versions": {
     "1.0.1": {
-      "url": "https://updates.olaf.ai/olaf-installer-1.0.1.exe",
+      "url": "https://updates.olaf.ai/olaf-1.0.1.exe",
       "checksum": "sha256-hash-here",
       "releaseNotes": "Added collection management and bug fixes"
     }
@@ -4430,10 +4430,10 @@ EOF
 ### Code Signing (Windows)
 ```bash
 # Sign the binary (requires certificate)
-signtool sign /f certificate.p12 /p password olaf-installer.exe
+signtool sign /f certificate.p12 /p password olaf.exe
 
 # Verify signature
-signtool verify /pa olaf-installer.exe
+signtool verify /pa olaf.exe
 ```
 
 ### Checksum Verification
@@ -4491,7 +4491,7 @@ if os.Getenv("OLAF_DEBUG") == "1" {
 
 ## Result
 
-You get a complete set of `olaf-installer` binaries (10-50MB each depending on OLAF content) that support:
+You get a complete set of `olaf` binaries (10-50MB each depending on OLAF content) that support:
 
 ### ✅ **Complete Platform Coverage**
 - **Windows**: Intel/AMD 32-bit & 64-bit, ARM64
@@ -4527,17 +4527,17 @@ You get a complete set of `olaf-installer` binaries (10-50MB each depending on O
 
 | Platform | Architecture | Binary Name | Notes |
 |----------|-------------|-------------|-------|
-| Windows | Intel/AMD 64-bit | `olaf-installer-windows-amd64.exe` | Most common Windows |
-| Windows | Intel/AMD 32-bit | `olaf-installer-windows-386.exe` | Legacy Windows |
-| Windows | ARM64 | `olaf-installer-windows-arm64.exe` | Windows on ARM |
-| macOS | Intel 64-bit | `olaf-installer-macos-amd64` | Intel Macs |
-| macOS | Apple Silicon | `olaf-installer-macos-arm64` | M1/M2/M3 Macs |
-| macOS | Universal | `olaf-installer-macos-universal` | Intel + Apple Silicon |
-| Linux | Intel/AMD 64-bit | `olaf-installer-linux-amd64` | Most common Linux |
-| Linux | Intel/AMD 32-bit | `olaf-installer-linux-386` | Legacy Linux |
-| Linux | ARM64 | `olaf-installer-linux-arm64` | Servers, Pi 4+ |
-| Linux | ARM v7 | `olaf-installer-linux-armv7` | Raspberry Pi 3/4 |
-| Linux | ARM v6 | `olaf-installer-linux-armv6` | Raspberry Pi Zero/1 |
+| Windows | Intel/AMD 64-bit | `olaf-windows-amd64.exe` | Most common Windows |
+| Windows | Intel/AMD 32-bit | `olaf-windows-386.exe` | Legacy Windows |
+| Windows | ARM64 | `olaf-windows-arm64.exe` | Windows on ARM |
+| macOS | Intel 64-bit | `olaf-macos-amd64` | Intel Macs |
+| macOS | Apple Silicon | `olaf-macos-arm64` | M1/M2/M3 Macs |
+| macOS | Universal | `olaf-macos-universal` | Intel + Apple Silicon |
+| Linux | Intel/AMD 64-bit | `olaf-linux-amd64` | Most common Linux |
+| Linux | Intel/AMD 32-bit | `olaf-linux-386` | Legacy Linux |
+| Linux | ARM64 | `olaf-linux-arm64` | Servers, Pi 4+ |
+| Linux | ARM v7 | `olaf-linux-armv7` | Raspberry Pi 3/4 |
+| Linux | ARM v6 | `olaf-linux-armv6` | Raspberry Pi Zero/1 |
 
 The installer provides the exact functionality you specified with comprehensive cross-platform support:
 1. Default operation installs/updates OLAF framework on any supported platform

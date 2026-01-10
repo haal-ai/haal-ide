@@ -1,5 +1,6 @@
 [ ] 000 - Dev Environment & Local Testing Setup
 [ ] 001a - Project Skeleton & Embed Wiring
+[ ] 001ab - Filesystem abstraction (injectable FS)
 [ ] 001b - Install to ~/.olaf (Fresh Install)
 [ ] 001c - Update ~/.olaf (Incremental Update)
 [ ] 001d - Copy repo config (olaf-* files) to local repo
@@ -11,4 +12,5 @@
 [ ] 005b - One-line install scripts (install.ps1 / install.sh)
 [ ] 006 - Asset preparation script
 [ ] 008a - Unit tests (core path safety + copy rules)
+[ ] 008c - Automated e2e test (temp HOME)
 [ ] 008b - Manual smoke tests (local)

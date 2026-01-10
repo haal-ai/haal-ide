@@ -21,6 +21,44 @@ This document is the reference standard for implementing Kanban cards in this re
   - HTTP calls (GitHub)
   - time/clock
 
+### Filesystem abstraction (required for testability)
+
+Installer logic must not call `os.*` directly in deep code paths. Define a minimal filesystem interface and inject it.
+
+Guidelines:
+- Keep interfaces tiny (interface segregation).
+- Prefer a dedicated adapter for the OS filesystem.
+- Unit tests must use temp dirs and/or a fake FS.
+
+### Error handling (required)
+
+- Never ignore returned errors.
+- Wrap errors with context: `fmt.Errorf("<action>: %w", err)`.
+- Print user-facing errors to **stderr**.
+
+### CLI structure (run() + exit code)
+
+Use a `run()` function that returns an error, and make `main()` only handle exit codes:
+
+- `main()`:
+  - calls `run()`
+  - prints error to stderr
+  - `os.Exit(1)` on failure
+
+### Output conventions
+
+- **stdout**: normal user-facing output (success/info)
+- **stderr**: errors and verbose/debug output
+- Add `--verbose` (or env var) to enable debug logs.
+
+### Embedded file timestamps caveat
+
+When using `embed.FS`, file `ModTime()` values typically reflect **build time**, not the original source file timestamp.
+
+Therefore:
+- Use **checksum-first** update detection for correctness.
+- If `mtime` is used, treat it as a hint only (never the only source of truth).
+
 ## TDD (default)
 
 Use TDD for any non-trivial logic or anything that can break silently.
