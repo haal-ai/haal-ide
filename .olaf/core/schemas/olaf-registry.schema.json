@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://OLAF-xdlc.github.io/schemas/OLAF-registry.schema.json",
+  "title": "OLAF Registry",
+  "description": "Schema for OLAF registry configuration defining secondary repositories and OSS settings",
+  "type": "object",
+  "required": ["secondary-repos", "use-oss"],
+  "properties": {
+    "secondary-repos": {
+      "type": "array",
+      "description": "List of secondary repository URLs or GitHub references (owner/repo@branch format)",
+      "items": {
+        "type": "string",
+        "description": "Repository URL or GitHub reference in format: owner/repo@branch",
+        "examples": [
+          "OLAF-ide/OLAF-ide@feature/OLAF-feature-system",
+          "https://github.com/org/repo",
+          "OLAFITGroup/OLAF@main"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "use-oss": {
+      "type": "boolean",
+      "description": "Whether to use the OSS (Open Source Software) version of OLAF"
+    },
+    "primary-seed": {
+      "type": "string",
+      "description": "Primary seed repository URL (optional override)",
+      "format": "uri",
+      "examples": ["https://github.com/OLAF-ide/OLAF-ide"]
+    },
+    "oss-url": {
+      "type": "string",
+      "description": "OSS repository URL (optional override)",
+      "format": "uri",
+      "examples": ["https://github.com/OLAFITGroup/OLAF"]
+    }
+  },
+  "additionalProperties": true
+}
+

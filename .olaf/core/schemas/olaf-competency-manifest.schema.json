@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://OLAF-xdlc.github.io/schemas/competency-manifest.schema.json",
+  "title": "OLAF Competency Manifest",
+  "description": "Schema for OLAF competency package manifests",
+  "type": "object",
+  "required": ["metadata", "bom"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Metadata describing the competency",
+      "required": [
+        "id",
+        "name",
+        "shortDescription",
+        "objectives",
+        "tags",
+        "status",
+        "exposure",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique competency identifier in kebab-case format",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "examples": ["developer", "prompt-engineer", "OLAF-specific-tools"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name of the competency",
+          "minLength": 3,
+          "examples": ["Developer Competency Package", "Prompt Engineer", "OLAF Specific Tools"]
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "One-line explanation of what the competency does",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the competency package",
+          "minLength": 10
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version number (MAJOR.MINOR.PATCH)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": ["1.0.0", "2.1.3"]
+        },
+        "objectives": {
+          "type": "array",
+          "description": "List of competency objectives",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags for persona, intents, and use cases",
+          "items": {
+            "type": "string",
+            "minLength": 2
+          },
+          "minItems": 1
+        },
+        "author": {
+          "type": "string",
+          "description": "Author's first and last name or organization",
+          "examples": ["OLAF Framework", "John Doe", "OLAF xDLC"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Competency maturity status",
+          "enum": ["experimental", "proven", "mainstream", "deprecated"]
+        },
+        "exposure": {
+          "type": "string",
+          "description": "Competency visibility level",
+          "enum": ["export", "internal", "kernel"]
+        },
+        "created": {
+          "type": "string",
+          "description": "Creation date in ISO 8601 format",
+          "format": "date",
+          "examples": ["2025-11-14"]
+        },
+        "updated": {
+          "type": "string",
+          "description": "Last update date in ISO 8601 format",
+          "format": "date",
+          "examples": ["2025-11-14"]
+        },
+        "maintenance": {
+          "type": "object",
+          "description": "Maintenance information",
+          "properties": {
+            "team": {
+              "type": "string",
+              "description": "Maintaining team name"
+            },
+            "primary_maintainer": {
+              "type": "string",
+              "description": "Primary maintainer name"
+            },
+            "created_by": {
+              "type": "string",
+              "description": "Creator name"
+            }
+          }
+        },
+        "technical_requirements": {
+          "type": "object",
+          "description": "Technical requirements and dependencies",
+          "properties": {
+            "recommended_llm": {
+              "type": "string",
+              "description": "Recommended LLM model"
+            },
+            "tool_dependency": {
+              "type": "string",
+              "description": "Required tools and dependencies"
+            },
+            "platform_limitations": {
+              "type": "string",
+              "description": "Platform compatibility notes"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "bom": {
+      "type": "object",
+      "description": "Bill of materials - components of the competency package",
+      "properties": {
+        "skills": {
+          "type": "array",
+          "description": "List of skill IDs included in this competency",
+          "items": {
+            "type": "string",
+            "description": "Skill ID (kebab-case)",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "entry_points": {
+          "type": "array",
+          "description": "Entry points (skills) exposed by this competency package",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "required": ["id", "manifest"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the skill (kebab-case)",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "examples": ["time-retrieval", "review-code", "create-prompt-template"]
+              },
+              "manifest": {
+                "type": "string",
+                "description": "Relative path to the skill manifest file",
+                "pattern": "^skills/.+/skill-manifest\\.json$",
+                "examples": ["skills/time-retrieval/skill-manifest.json", "skills/review-code/skill-manifest.json"]
+              },
+              "location": {
+                "type": "string",
+                "description": "Skill location - where this skill should be found",
+                "enum": ["local", "global"],
+                "default": "global",
+                "examples": ["global", "local"]
+              },
+              "name": {
+                "type": "string",
+                "description": "Human-readable name of the skill",
+                "minLength": 3
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of what this skill does",
+                "minLength": 10
+              },
+              "required": {
+                "type": "boolean",
+                "description": "Whether this entry point is required"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
+

@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OLAF Task Registry Schema",
+  "description": "Schema for centralized task registry to track reusable tasks across skills",
+  "type": "object",
+  "required": ["version", "tasks"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "version": {
+      "type": "string",
+      "description": "Registry version following semver",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Overview of the registry purpose"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "Last modification date (YYYY-MM-DD)"
+    },
+    "tasks": {
+      "type": "array",
+      "description": "List of registered tasks",
+      "items": {
+        "$ref": "#/definitions/task"
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Category definitions and descriptions",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "task": {
+      "type": "object",
+      "required": ["id", "name", "description", "category", "current_location", "used_in_skills", "dependencies", "outputs"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique task identifier (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable task name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of what the task does"
+        },
+        "category": {
+          "type": "string",
+          "description": "Task category (environment, github, analysis, cleanup, etc.)"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags for task discovery",
+          "items": {
+            "type": "string"
+          }
+        },
+        "current_location": {
+          "type": "string",
+          "description": "Relative path to the task markdown file from repo root",
+          "pattern": "^\\.OLAF/"
+        },
+        "used_in_skills": {
+          "type": "array",
+          "description": "List of skills currently using this task",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "description": "Resources required by this task",
+          "required": ["tools", "templates", "state_variables"],
+          "properties": {
+            "tools": {
+              "type": "array",
+              "description": "External tools/scripts required",
+              "items": {
+                "$ref": "#/definitions/tool"
+              }
+            },
+            "templates": {
+              "type": "array",
+              "description": "Template files required",
+              "items": {
+                "$ref": "#/definitions/template"
+              }
+            },
+            "state_variables": {
+              "type": "array",
+              "description": "Required input state variables from previous tasks",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "What the task produces",
+          "required": ["state_variables", "files_created"],
+          "properties": {
+            "state_variables": {
+              "type": "array",
+              "description": "State variables set by this task",
+              "items": {
+                "type": "string"
+              }
+            },
+            "files_created": {
+              "type": "array",
+              "description": "Files created by this task (with placeholders)",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reusability_score": {
+          "type": "integer",
+          "description": "Reusability score from 1-10 (10 = highest)",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about reusability or special considerations"
+        }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name", "location"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tool/script filename"
+        },
+        "location": {
+          "type": "string",
+          "description": "Relative path to tool from repo root"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the tool does"
+        }
+      }
+    },
+    "template": {
+      "type": "object",
+      "required": ["name", "location"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Template filename"
+        },
+        "location": {
+          "type": "string",
+          "description": "Relative path to template from repo root"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the template is for"
+        }
+      }
+    }
+  }
+}
