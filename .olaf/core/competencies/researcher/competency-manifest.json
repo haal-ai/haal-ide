@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": "researcher",
+    "name": "Researcher Competency Package",
+    "shortDescription": "Researcher: comprehensive research, analysis, and knowledge synthesis",
+    "description": "Comprehensive researcher competency package for conducting research, learning from sources, and generating analytical reports with specialized workflows for knowledge synthesis and investigation",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide research and analysis capabilities",
+      "Enable knowledge synthesis and learning workflows",
+      "Support comprehensive research reporting"
+    ],
+    "tags": ["researcher", "research", "analysis", "learning", "knowledge-synthesis", "reporting"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-11-19",
+    "updated": "2025-11-19",
+    "maintenance": {
+      "team": "researcher",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "OLAF Framework"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Optional: Web search tools, document analysis tools",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "research-and-report",
+      "search-and-learn"
+    ],
+    "entry_points": [
+      { "id": "research-and-report", "manifest": "skills/research-and-report/skill-manifest.json" },
+      { "id": "search-and-learn", "manifest": "skills/search-and-learn/skill-manifest.json" }
+    ]
+  }
+}

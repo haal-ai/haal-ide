@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "id": "business-analyst",
+    "name": "Business Analyst Competency Package",
+    "shortDescription": "Business Analyst: requirements analysis, specification management, and user story validation",
+    "description": "Comprehensive business analyst competency package for requirements gathering, specification management, and user story validation with specialized workflows for product and business analysis",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide business analysis capabilities",
+      "Enable core workflows for business-analyst"
+    ],
+    "tags": ["business-analyst", "requirements", "specification", "user-story", "product-analysis"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-10-21",
+    "updated": "2025-11-19",
+    "maintenance": {
+      "team": "business-analyst",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Kiro AI Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Optional: Document analysis tools",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "analyze-business-requirements",
+      "analyze-spec-vs-code",
+      "bootstrap-functional-spec-from-code",
+      "generate-questionnaire",
+      "review-prd-spec",
+      "review-user-story"
+    ],
+    "entry_points": [
+      { "id": "analyze-business-requirements", "manifest": "skills/analyze-business-requirements/skill-manifest.json" },
+      { "id": "analyze-spec-vs-code", "manifest": "skills/analyze-spec-vs-code/skill-manifest.json" },
+      { "id": "bootstrap-functional-spec-from-code", "manifest": "skills/bootstrap-functional-spec-from-code/skill-manifest.json" },
+      { "id": "generate-questionnaire", "manifest": "skills/generate-questionnaire/skill-manifest.json" },
+      { "id": "review-prd-spec", "manifest": "skills/review-prd-spec/skill-manifest.json" },
+      { "id": "review-user-story", "manifest": "skills/review-user-story/skill-manifest.json" }
+    ]
+  }
+}

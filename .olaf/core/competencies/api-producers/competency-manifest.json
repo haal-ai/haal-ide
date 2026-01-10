@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "id": "api-producers",
+    "name": "API Producers Competency Package",
+    "shortDescription": "API Producers: turn business specifications into challenge questions and API-ready inputs.",
+    "description": "Competency package focused on producing APIs from specifications: reviewing human-written specs, challenging ambiguities, and preparing inputs for API contract design.",
+    "version": "1.0.0",
+    "objectives": [
+      "Challenge specifications to unblock API design",
+      "Produce structured inputs for API contract definition"
+    ],
+    "tags": ["api", "openapi", "producer", "spec-review", "requirements"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-12-15",
+    "updated": "2025-12-15"
+  },
+  "bom": {
+    "skills": ["review-human-written-spec", "analyze-db-api-fit", "plan-db-api-remediation", "generate-ddl-and-seed", "scaffold-api-from-spec", "align-spec-openapi-code-tests", "generate-contract-kit"],
+    "entry_points": [
+      {
+        "id": "review-human-written-spec",
+        "manifest": "skills/review-human-written-spec/skill-manifest.json",
+        "name": "Review Human Written Spec",
+        "description": "Analyze a human specification to challenge it and produce SME questions required for API design.",
+        "required": true
+      },
+      {
+        "id": "analyze-db-api-fit",
+        "manifest": "skills/analyze-db-api-fit/skill-manifest.json",
+        "name": "Analyze DB API Fit",
+        "description": "Analyze functional spec + OpenAPI against existing database schemas to identify data gaps and integration risks for microservices.",
+        "required": false
+      },
+      {
+        "id": "plan-db-api-remediation",
+        "manifest": "skills/plan-db-api-remediation/skill-manifest.json",
+        "name": "Plan DB API Remediation",
+        "description": "Translate DB↔API fit mismatches into delivery impact decisions and a phased remediation plan.",
+        "required": false
+      },
+      {
+        "id": "generate-ddl-and-seed",
+        "manifest": "skills/generate-ddl-and-seed/skill-manifest.json",
+        "name": "Generate DDL And Seed",
+        "description": "Generate a new database schema (DDL) and initialization data from the latest OpenAPI contract and DB↔API fit analysis when no DB exists yet.",
+        "required": false
+      },
+      {
+        "id": "scaffold-api-from-spec",
+        "manifest": "skills/scaffold-api-from-spec/skill-manifest.json",
+        "name": "Scaffold API From Spec",
+        "description": "Incrementally scaffold a Quarkus API, TypeScript SDK, and Bruno CLI tests from the latest functional spec, OpenAPI contract, and DB↔API fit analysis.",
+        "required": false
+      },
+      {
+        "id": "align-spec-openapi-code-tests",
+        "manifest": "skills/align-spec-openapi-code-tests/skill-manifest.json",
+        "name": "Align Spec, OpenAPI, Code, and Tests",
+        "description": "Detect drift and align functional spec, OpenAPI, implementation code, and tests with least-impact recommendations.",
+        "required": false
+      },
+      {
+        "id": "generate-contract-kit",
+        "manifest": "skills/generate-contract-kit/skill-manifest.json",
+        "name": "Generate Contract Kit",
+        "description": "Collect OpenAPI, specifications, SDK, and tests into a consumer-ready contract-kit with examples and scenario walkthroughs.",
+        "required": false
+      }
+    ]
+  }
+}

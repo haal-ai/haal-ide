@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "1a-git-assistant",
+    "name": "1A Git Assistant",
+    "shortDescription": "Internal superset of Git Assistant",
+    "description": "Internal git assistant competency including all OSS skills; can host organization-specific git workflows.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide Git workflow management capabilities",
+      "Enable core workflows for git-assistant"
+    ],
+    "tags": ["git", "version-control", "workflow", "merge", "tagging", "commit", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": { "team": "1a-git-assistant", "primary_maintainer": "OLAF Framework Core Team" }
+  },
+  "bom": {
+    "skills": [
+      "create-feature-for-pr",
+      "propose-commit-thread",
+      "merge-branch-with-safety",
+      "git-add-commit"
+    ],
+    "entry_points": [
+      { "id": "create-feature-for-pr", "manifest": "skills/create-feature-for-pr/skill-manifest.json" },
+      { "id": "propose-commit-thread", "manifest": "skills/propose-commit-thread/skill-manifest.json" },
+      { "id": "merge-branch-with-safety", "manifest": "skills/merge-branch-with-safety/skill-manifest.json" },
+      { "id": "git-add-commit", "manifest": "skills/git-add-commit/skill-manifest.json" }
+    ]
+  }
+}

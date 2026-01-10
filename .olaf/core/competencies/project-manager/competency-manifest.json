@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "id": "project-manager",
+    "name": "Project Manager Competency Package",
+    "shortDescription": "Project Manager: project tracking, task management, and team coordination",
+    "description": "Comprehensive project manager competency package for project tracking, task management, and team coordination with specialized workflows for project management activities",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide project tracking and task management capabilities",
+      "Enable core workflows for project-manager"
+    ],
+    "tags": ["project-manager", "project-tracking", "task-management", "coordination", "planning"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-10-21",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "project-manager",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Kiro AI Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Git for version control and tracking",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "add-product-changelog-entry",
+      "analyze-contributor-risk",
+      "create-decision-record",
+      "create-job",
+      "create-person-record",
+      "find-expert-contact",
+      "generate-tasklist",
+      "review-progress",
+      "work-on-job"
+    ],
+    "entry_points": [
+      { "id": "add-product-changelog-entry", "manifest": "skills/add-product-changelog-entry/skill-manifest.json" },
+      { "id": "analyze-contributor-risk", "manifest": "skills/analyze-contributor-risk/skill-manifest.json" },
+      { "id": "create-decision-record", "manifest": "skills/create-decision-record/skill-manifest.json" },
+      { "id": "create-job", "manifest": "skills/create-job/skill-manifest.json" },
+      { "id": "create-person-record", "manifest": "skills/create-person-record/skill-manifest.json" },
+      { "id": "find-expert-contact", "manifest": "skills/find-expert-contact/skill-manifest.json" },
+      { "id": "generate-tasklist", "manifest": "skills/generate-tasklist/skill-manifest.json" },
+      { "id": "review-progress", "manifest": "skills/review-progress/skill-manifest.json" },
+      { "id": "work-on-job", "manifest": "skills/work-on-job/skill-manifest.json" }
+    ]
+  }
+}

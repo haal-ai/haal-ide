@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "id": "prompt-engineer",
+    "name": "Prompt Engineer Competency",
+    "shortDescription": "Prompt engineering: create, test, convert, and optimize LLM prompts",
+    "description": "Complete prompt engineering competency package aggregating all prompt creation, testing, conversion, and documentation capabilities with templates and best practices",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide prompt creation, conversion, and validation capabilities",
+      "Enable core workflows for prompt-engineer"
+    ],
+    "tags": [
+      "prompt",
+      "engineering",
+      "llm",
+      "prompt-generation",
+      "workflow",
+      "templates",
+      "best-practices"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-10-21",
+    "updated": "2025-11-18",
+    "maintenance": {
+      "team": "prompt-engineer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Kiro AI Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "File system access, terminal access",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "convert-prompt-to-skill",
+      "generate-step-by-step-tutorial",
+      "select-competency-collection"
+    ],
+    "entry_points": [
+      {
+        "id": "convert-prompt-to-skill",
+        "manifest": "skills/convert-prompt-to-skill/skill-manifest.json"
+      },
+      {
+        "id": "generate-step-by-step-tutorial",
+        "manifest": "skills/generate-step-by-step-tutorial/skill-manifest.json"
+      },
+      {
+        "id": "select-competency-collection",
+        "manifest": "skills/select-competency-collection/skill-manifest.json"
+      }
+    ]
+  }
+}

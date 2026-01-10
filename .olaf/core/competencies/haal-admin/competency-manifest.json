@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "1a-olaf-admin",
+    "name": "1A OLAF Administrator",
+    "shortDescription": "hall-specific OLAF framework management",
+    "description": "Provides hall-specific OLAF framework administration capabilities including schema drift detection and enterprise-specific tooling.",
+    "version": "1.0.0",
+    "objectives": [
+      "Detect and manage schema drift in OLAF artifacts",
+      "Support hall-specific framework operations"
+    ],
+    "tags": ["olaf", "admin", "framework", "1a", "hall", "schema-drift"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "1a-olaf-admin",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "detect-schema-drift"
+    ],
+    "entry_points": [
+      {
+        "id": "detect-schema-drift",
+        "manifest": "skills/detect-schema-drift/skill-manifest.json"
+      }
+    ]
+  }
+}

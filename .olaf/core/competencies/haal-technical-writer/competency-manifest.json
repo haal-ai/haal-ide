@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "id": "1a-technical-writer",
+    "name": "1A Technical Writer",
+    "shortDescription": "Internal superset of Technical Writer",
+    "description": "Internal technical writer competency including all OSS skills; can host organization-specific documentation workflows.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide content creation and documentation capabilities",
+      "Enable presentation planning and development workflows",
+      "Support professional release notes and documentation"
+    ],
+    "tags": ["technical-writer", "content", "presentation", "documentation", "release-notes", "workflow", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": { "team": "1a-technical-writer", "primary_maintainer": "OLAF Framework Core Team" }
+  },
+  "bom": {
+    "skills": [
+      "generate-post-from-plan",
+      "create-presentation-plan",
+      "create-presentation-and-posts-workflow",
+      "generate-pptx-from-plan"
+    ],
+    "entry_points": [
+      { "id": "generate-post-from-plan", "manifest": "skills/generate-post-from-plan/skill-manifest.json" },
+      { "id": "create-presentation-plan", "manifest": "skills/create-presentation-plan/skill-manifest.json" },
+      { "id": "create-presentation-and-posts-workflow", "manifest": "skills/create-presentation-and-posts-workflow/skill-manifest.json" },
+      { "id": "generate-pptx-from-plan", "manifest": "skills/generate-pptx-from-plan/skill-manifest.json" }
+    ]
+  }
+}

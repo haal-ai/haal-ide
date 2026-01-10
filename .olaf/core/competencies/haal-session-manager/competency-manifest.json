@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "1a-session-manager",
+    "name": "1A Session Manager",
+    "shortDescription": "Internal superset of Session Manager",
+    "description": "Internal session manager competency including all OSS skills; can host organization-specific context workflows.",
+    "version": "1.0.0",
+    "objectives": [
+      "Manage session context switching between projects",
+      "Handle work stashing and restoration",
+      "Create and restore conversation handovers",
+      "Enable session continuity and carry-over"
+    ],
+    "tags": ["session", "context", "stash", "handover", "carry-over", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "mainstream",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": { "team": "1a-session-manager", "primary_maintainer": "OLAF Framework Core Team" }
+  },
+  "bom": {
+    "skills": [
+      "carry-on-session",
+      "carry-over-session",
+      "switch-context"
+    ],
+    "entry_points": [
+      { "id": "carry-on-session", "manifest": "skills/carry-on-session/skill-manifest.json" },
+      { "id": "carry-over-session", "manifest": "skills/carry-over-session/skill-manifest.json" },
+      { "id": "switch-context", "manifest": "skills/switch-context/skill-manifest.json" }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "id": "session-manager",
+    "name": "Session Manager",
+    "shortDescription": "Session lifecycle and context management",
+    "description": "Manages AI session lifecycle including context switching, work stashing, session handovers, and carry-over operations to maintain continuity across conversations and work sessions.",
+    "version": "1.0.0",
+    "objectives": [
+      "Manage session context switching between projects",
+      "Handle work stashing and restoration",
+      "Create and restore conversation handovers",
+      "Enable session continuity and carry-over",
+      "Track and manage multiple work contexts"
+    ],
+    "tags": ["session", "context", "stash", "handover", "carry-over"],
+    "author": "OLAF Framework Core Team",
+    "status": "mainstream",
+    "exposure": "export",
+    "created": "2025-11-24",
+    "updated": "2025-11-24",
+    "maintenance": {
+      "team": "session-manager",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "carry-on-session",
+      "carry-over-session",
+      "switch-context"
+    ],
+    "entry_points": [
+      {
+        "id": "carry-on-session",
+        "manifest": "skills/carry-on-session/skill-manifest.json"
+      },
+      {
+        "id": "carry-over-session",
+        "manifest": "skills/carry-over-session/skill-manifest.json"
+      },
+      {
+        "id": "switch-context",
+        "manifest": "skills/switch-context/skill-manifest.json"
+      }
+    ]
+  }
+}
