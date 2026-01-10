@@ -8,6 +8,7 @@ description: Execute the next most important OLAF installer Kanban card end-to-e
 - Kanban file: `.olaf/tools/olaf/olaf-kanban.json`
 - Progress file: `.olaf/tools/olaf/kanban-progress.txt`
 - Learnings file: `.olaf/tools/olaf/kanban-learnings.txt`
+- Implementation guidance: `.olaf/tools/olaf/implementation-guidance.md`
 
 ## Operating rules
 - Always pick the **single most important** Kanban card to do next.
@@ -22,39 +23,10 @@ description: Execute the next most important OLAF installer Kanban card end-to-e
 - After each card is completed and verified, create a git commit with a clear message.
 - You may create new Kanban cards if learnings show missing work; keep them small and explicit.
 
-## Implementation standards (apply on every card)
+## Implementation standards
 
-### SOLID (practical rules)
-- Prefer small packages/modules with a single responsibility.
-- Depend on interfaces, not concrete implementations (especially for filesystem, network, clock/time).
-- Avoid large functions; keep logic composable and testable.
-- Favor pure functions for decision logic (e.g., path mapping, update decision).
-
-### TDD (default for non-trivial logic)
-- Write a failing test first for the next small behavior.
-- Implement the minimum code to make it pass.
-- Refactor (without changing behavior) to keep code clean.
-
-### BDD (for user-visible behavior)
-- Express scenarios as “Given/When/Then” in the card notes and/or learnings.
-- Ensure acceptance criteria map directly to these scenarios.
-
-### Definition of Done (DoD)
-- Acceptance criteria satisfied.
-- Tests:
-  - Add/adjust unit tests for new logic.
-  - `go test ./...` passes.
-  - Tests use temp dirs and do not touch real user home/`~/.olaf`.
-- Safety:
-  - No accidental writes outside intended target dirs.
-  - No deletion of user data unless explicitly required.
-- Quality:
-  - No unused code/exports.
-  - Errors are explicit and actionable.
-- Docs/trace:
-  - `kanban-learnings.txt` updated.
-  - `kanban-progress.txt` updated.
-  - Commit created.
+Before implementing any card, read and follow:
+- `.olaf/tools/olaf/implementation-guidance.md`
 
 ## Step 1 — Select the next card
 1. Open `.olaf/tools/olaf/olaf-kanban.json`.
