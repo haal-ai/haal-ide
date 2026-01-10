@@ -5,9 +5,9 @@ description: Execute the next most important OLAF installer Kanban card end-to-e
 # OLAF Kanban Execution Prompt
 
 ## Inputs
-- Kanban file: `.olaf/tools/olaf-installer-kanban.json`
-- Progress file: `kanban-progress.txt`
-- Learnings file: `kanban-learnings.txt`
+- Kanban file: `.olaf/tools/olaf/olaf-kanban.json`
+- Progress file: `.olaf/tools/olaf/kanban-progress.txt`
+- Learnings file: `.olaf/tools/olaf/kanban-learnings.txt`
 
 ## Operating rules
 - Always pick the **single most important** Kanban card to do next.
@@ -23,7 +23,7 @@ description: Execute the next most important OLAF installer Kanban card end-to-e
 - You may create new Kanban cards if learnings show missing work; keep them small and explicit.
 
 ## Step 1 — Select the next card
-1. Open `.olaf/tools/olaf-installer-kanban.json`.
+1. Open `.olaf/tools/olaf/olaf-kanban.json`.
 2. Consider all cards with `column != "done"`.
 3. Choose the “most important” card using this heuristic:
    - Highest priority first (`high` > `medium` > `low`).

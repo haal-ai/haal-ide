@@ -29,207 +29,310 @@
     {
       "id": "000",
       "title": "Dev Environment & Local Testing Setup",
-      "description": "Make sure Go dev/build/test is working locally before implementing the installer",
+      "description": "Confirm Go toolchain works and define a safe local testing approach",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "small",
+      "tags": ["dev", "tooling"],
+      "dependencies": [],
+      "subtasks": [
+        "Install Go 1.21+ and verify PATH",
+        "Run: go version",
+        "Run: go env GOPATH GOROOT GOOS GOARCH",
+        "Agree on standard local commands: go fmt ./..., go test ./..., go vet ./..., go build .",
+        "Pick a safe test strategy (temp dir / dry-run) so tests never touch real ~/.olaf"
+      ],
+      "acceptance_criteria": [
+        "go version succeeds and reports >= 1.21",
+        "go test ./... runs (even if no tests yet, it exits 0)",
+        "A written test strategy exists to avoid modifying real ~/.olaf"
+      ],
+      "estimated_hours": 2
+    },
+    {
+      "id": "001a",
+      "title": "Project Skeleton & Embed Wiring",
+      "description": "Set up Go module/project layout and wire embed FS",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "small",
+      "tags": ["go", "setup"],
+      "dependencies": ["000"],
+      "subtasks": [
+        "Create go.mod",
+        "Create assets/ structure (assets/olaf, assets/github, assets/kiro, assets/windsurf)",
+        "Wire //go:embed assets/* and VERSION",
+        "Add a minimal main() that prints help/version"
+      ],
+      "acceptance_criteria": [
+        "go build succeeds",
+        "Binary can read embedded assets (walk/list succeeds)",
+        "VERSION is embedded and printed by a command"
+      ],
+      "estimated_hours": 3
+    },
+    {
+      "id": "001b",
+      "title": "Install to ~/.olaf (Fresh Install)",
+      "description": "Implement fresh installation of embedded .olaf to ~/.olaf",
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
-      "tags": ["dev", "tooling", "windows"],
-      "dependencies": [],
+      "tags": ["go", "installer"],
+      "dependencies": ["001a"],
       "subtasks": [
-        "Install Go toolchain (Go 1.21+) and confirm PATH",
-        "Verify: go version",
-        "Verify: go env GOPATH GOROOT GOOS GOARCH",
-        "Define standard local commands: go fmt ./..., go test ./..., go vet ./..., go build .",
-        "Decide safe local test approach (dry-run mode or temp HOME) so installer does not touch real ~/.olaf during tests",
-        "Document local build constraints (cross-compile vs CI; macOS universal needs lipo on macOS runner)"
+        "Implement getHomeDir() cross-platform",
+        "Create ~/.olaf if missing",
+        "Extract embedded assets/olaf -> ~/.olaf",
+        "Create directories with correct permissions"
       ],
       "acceptance_criteria": [
-        "Go toolchain works locally",
-        "You can run unit tests and build a local binary",
-        "You have a safe way to test installer behavior without modifying real user data"
+        "When ~/.olaf does not exist, running the program creates it",
+        "Installed tree contains required paths: core/skills, competencies, reference, reference/.condensed",
+        "Installer never writes .github/.kiro/.windsurf under ~/.olaf"
       ],
       "estimated_hours": 6
     },
     {
-      "id": "001",
-      "title": "Create Go Installer Core",
-      "description": "Implement main installer with embedded files and cross-platform support",
-      "column": "backlog",
-      "priority": "high",
-      "effort": "large",
-      "tags": ["go", "installer", "core"],
-      "dependencies": [],
-      "subtasks": [
-        "Set up Go module and project structure",
-        "Implement file embedding with //go:embed",
-        "Ensure ~/.olaf receives ONLY embedded .olaf content",
-        "Ensure local repo receives ONLY olaf-* files into .github/.kiro/.windsurf",
-        "Implement install/update logic",
-        "Implement collection selection"
-      ],
-      "acceptance_criteria": [
-        "Installer detects existing OLAF installation",
-        "Updates only new/modified framework files",
-        "Does not write .github/.kiro/.windsurf into ~/.olaf",
-        "Copies olaf-* files to local repo",
-        "Works on Windows, macOS, Linux"
-      ],
-      "estimated_hours": 16
-    },
-    {
-      "id": "002",
-      "title": "Implement File Update Detection",
-      "description": "Decide whether embedded file should overwrite ~/.olaf file",
+      "id": "001c",
+      "title": "Update ~/.olaf (Incremental Update)",
+      "description": "Update an existing ~/.olaf by copying only missing/changed files",
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
       "tags": ["go", "updates"],
-      "dependencies": ["001"],
+      "dependencies": ["001b"],
       "subtasks": [
-        "Define update policy (mtime vs checksum)",
-        "Implement needsUpdate()",
-        "Add checksum fallback",
-        "Add debug mode"
+        "Detect installed state via required paths",
+        "Walk embedded assets/olaf and update missing/changed files",
+        "Preserve user content under data/ (do not delete)",
+        "Clear logging of updated/skipped files"
       ],
       "acceptance_criteria": [
-        "Does not overwrite newer user files",
-        "Reliably updates changed framework files",
-        "Handles missing files and permission errors gracefully"
-      ],
-      "estimated_hours": 8
-    },
-    {
-      "id": "003",
-      "title": "GitHub Release Version Check",
-      "description": "Installer checks GitHub for newer olaf versions and informs user",
-      "column": "backlog",
-      "priority": "medium",
-      "effort": "medium",
-      "tags": ["github", "updates"],
-      "dependencies": ["001"],
-      "subtasks": [
-        "Implement GitHub Releases API call",
-        "Parse tag_name/name/body/url",
-        "Version compare",
-        "Graceful offline handling"
-      ],
-      "acceptance_criteria": [
-        "Shows clear message when newer olaf exists",
-        "Does not fail installation when offline"
+        "Second run performs an update path rather than re-install",
+        "Only missing/changed files are written",
+        "No deletion of user files (especially under data/)"
       ],
       "estimated_hours": 6
     },
     {
+      "id": "001d",
+      "title": "Copy repo config (olaf-* files) to local repo",
+      "description": "Copy embedded olaf-* files into local .github/.kiro/.windsurf",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "small",
+      "tags": ["go", "repo"],
+      "dependencies": ["001a"],
+      "subtasks": [
+        "Copy olaf-* from assets/github to .github",
+        "Copy olaf-* from assets/kiro to .kiro",
+        "Copy olaf-* from assets/windsurf to .windsurf",
+        "Do not overwrite non-olaf files"
+      ],
+      "acceptance_criteria": [
+        "Only files matching prefix olaf- are copied",
+        "Target directories are created if missing",
+        "No writes occur under ~/.olaf for these files"
+      ],
+      "estimated_hours": 3
+    },
+    {
+      "id": "001e",
+      "title": "CLI Surface (help/version/--collection)",
+      "description": "Define commands and implement argument parsing",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "small",
+      "tags": ["go", "cli"],
+      "dependencies": ["001b"],
+      "subtasks": [
+        "Default behavior (no args): install/update",
+        "--collection triggers collection selection",
+        "version prints version + platform",
+        "help prints usage"
+      ],
+      "acceptance_criteria": [
+        "Running with unknown args prints help and exits non-zero",
+        "help output documents all supported commands",
+        "version output is deterministic and includes GOOS/GOARCH"
+      ],
+      "estimated_hours": 2
+    },
+    {
+      "id": "002",
+      "title": "File update decision (mtime + optional checksum)",
+      "description": "Decide whether an embedded file should overwrite an installed file",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "medium",
+      "tags": ["go", "updates"],
+      "dependencies": ["001c"],
+      "subtasks": [
+        "Implement mtime comparison (installed older => overwrite)",
+        "Add checksum comparison fallback (optional flag/env)",
+        "Add debug logging mode (OLAF_DEBUG=1)"
+      ],
+      "acceptance_criteria": [
+        "If dest missing => update=true",
+        "If embedded newer => update=true",
+        "If installed newer => update=false",
+        "Debug mode explains the decision per file"
+      ],
+      "estimated_hours": 4
+    },
+    {
+      "id": "003",
+      "title": "Check GitHub Releases for newer olaf binary",
+      "description": "Notify user when a newer release exists",
+      "column": "backlog",
+      "priority": "medium",
+      "effort": "small",
+      "tags": ["github", "updates"],
+      "dependencies": ["001e"],
+      "subtasks": [
+        "Call GitHub Releases API",
+        "Parse tag_name/name/body/html_url",
+        "Compare semver tags",
+        "Offline/HTTP failure does not block install"
+      ],
+      "acceptance_criteria": [
+        "When online and newer exists, user sees a single clear message with download URL",
+        "When offline, install continues without error",
+        "No crash on unexpected API response"
+      ],
+      "estimated_hours": 3
+    },
+    {
       "id": "004",
-      "title": "GitHub Actions: Build Binaries",
-      "description": "CI builds all platform binaries and uploads artifacts",
+      "title": "CI build matrix + checksums",
+      "description": "Build platform binaries in GitHub Actions and generate checksums",
       "column": "backlog",
       "priority": "high",
       "effort": "medium",
       "tags": ["github-actions", "build"],
       "dependencies": [],
       "subtasks": [
-        "Matrix build for windows/darwin/linux",
-        "Add arm/arm64/386/amd64 variants",
+        "Workflow builds windows/darwin/linux",
+        "Include amd64/386/arm64 (+ arm GOARM where needed)",
         "Generate sha256 checksums",
         "Upload artifacts"
       ],
       "acceptance_criteria": [
-        "All target binaries produced",
-        "Checksums produced",
-        "Artifacts downloadable"
+        "All expected binaries are produced",
+        "checksums.txt is produced",
+        "Artifacts are downloadable from CI"
       ],
-      "estimated_hours": 8
+      "estimated_hours": 4
     },
     {
-      "id": "005",
-      "title": "GitHub Pages Install Site (Same Repo)",
-      "description": "Beautiful install page served from same repository via GitHub Pages",
+      "id": "005a",
+      "title": "GitHub Pages site (static files)",
+      "description": "Add docs/ with a minimal install page",
       "column": "backlog",
       "priority": "medium",
-      "effort": "large",
+      "effort": "small",
       "tags": ["github-pages", "web"],
       "dependencies": [],
       "subtasks": [
-        "Create docs/ site structure",
-        "Add index.html + assets/css + assets/js",
-        "Host install.ps1 and install.sh under GitHub Pages",
-        "Make commands point to https://haal-ai-org.github.io/olaf/..."
+        "Create docs/index.html",
+        "Add minimal CSS/JS for copy-to-clipboard",
+        "Link to releases"
       ],
       "acceptance_criteria": [
-        "Page loads on GitHub Pages",
+        "Static page renders locally (file open) and in GitHub Pages",
         "Copy buttons work",
-        "Commands download scripts from the same repo"
+        "Links point to correct repo"
       ],
-      "estimated_hours": 12
+      "estimated_hours": 4
     },
     {
-      "id": "006",
-      "title": "Install Scripts (ps1/sh) Download Latest Release",
-      "description": "One-liners that fetch latest olaf release binary and run it",
+      "id": "005b",
+      "title": "One-line install scripts (install.ps1 / install.sh)",
+      "description": "Scripts download the right release binary and run it",
       "column": "backlog",
       "priority": "medium",
       "effort": "medium",
       "tags": ["powershell", "bash"],
       "dependencies": ["004"],
       "subtasks": [
-        "PowerShell: detect arch and download latest olaf binary",
-        "Shell: detect OS/arch and download latest olaf binary",
-        "Run olaf",
-        "Cleanup"
+        "Write install.ps1 with arch detection",
+        "Write install.sh with OS/arch detection",
+        "Host scripts under docs/"
       ],
       "acceptance_criteria": [
-        "Works for Windows/macOS/Linux",
-        "Handles missing curl/wget (documented)",
-        "Errors are clear"
+        "Scripts select the correct asset name for current platform",
+        "Scripts fail with a clear error if download URL not found",
+        "Scripts execute the downloaded olaf binary"
       ],
-      "estimated_hours": 6
+      "estimated_hours": 4
     },
     {
-      "id": "007",
-      "title": "Asset Preparation",
-      "description": "Prepare assets/ folder for embedding (olaf-* + .olaf)",
+      "id": "006",
+      "title": "Asset preparation script",
+      "description": "Prepare assets/ folder content consistently for embedding",
       "column": "backlog",
       "priority": "medium",
       "effort": "small",
       "tags": ["build", "assets"],
       "dependencies": [],
       "subtasks": [
-        "Copy olaf-* from .github/.kiro/.windsurf into assets/*",
-        "Copy .olaf tree into assets/olaf",
-        "Generate VERSION"
+        "Script copies olaf-* from .github/.kiro/.windsurf into assets/",
+        "Script copies .olaf tree into assets/olaf",
+        "Script writes VERSION"
       ],
       "acceptance_criteria": [
-        "assets/ matches intended embed structure",
-        "VERSION reflects build tag"
+        "Running the script produces the same assets layout every time",
+        "No accidental copy of repo root into assets",
+        "VERSION exists and is embedded"
       ],
-      "estimated_hours": 4
+      "estimated_hours": 2
     },
     {
-      "id": "008",
-      "title": "Testing Matrix",
-      "description": "Validate install/update behavior across platforms",
+      "id": "008a",
+      "title": "Unit tests (core path safety + copy rules)",
+      "description": "Add unit tests for the most failure-prone logic",
       "column": "backlog",
       "priority": "high",
-      "effort": "large",
-      "tags": ["testing"],
-      "dependencies": ["001", "004", "006"],
+      "effort": "medium",
+      "tags": ["testing", "go"],
+      "dependencies": ["001d", "001c", "002"],
       "subtasks": [
-        "Fresh install tests",
-        "Update tests",
-        "Offline tests",
-        "Permissions tests",
-        "Repo copy tests (.github/.kiro/.windsurf only)"
+        "Test: repo copy only copies olaf-*",
+        "Test: installer never targets ~/.olaf for repo dirs",
+        "Test: needsUpdate decision table"
       ],
       "acceptance_criteria": [
-        "No regressions across target platforms",
-        "No repository dirs copied into ~/.olaf"
+        "go test ./... includes these tests",
+        "Tests create temp dirs only and do not touch real home",
+        "At least one failing test is demonstrated and then fixed during implementation"
       ],
-      "estimated_hours": 16
+      "estimated_hours": 6
+    },
+    {
+      "id": "008b",
+      "title": "Manual smoke tests (local)",
+      "description": "Verify install/update behavior using a safe temp HOME strategy",
+      "column": "backlog",
+      "priority": "high",
+      "effort": "small",
+      "tags": ["testing"],
+      "dependencies": ["001b", "001c", "001d"],
+      "subtasks": [
+        "Fresh install smoke test",
+        "Second-run update smoke test",
+        "Verify no .github/.kiro/.windsurf content under ~/.olaf"
+      ],
+      "acceptance_criteria": [
+        "Smoke tests are documented and repeatable",
+        "All checks pass using temp dirs",
+        "No writes occur outside the temp test area"
+      ],
+      "estimated_hours": 3
     }
   ],
   "workflow": {
-    "suggested_order": ["000", "001", "007", "004", "002", "003", "005", "006", "008"],
-    "notes": "You can do 001 and 007 in parallel, and 005 in parallel with core Go work."
+    "suggested_order": ["000", "001a", "001b", "002", "001c", "001d", "001e", "003", "006", "004", "005a", "005b", "008a", "008b"],
+    "notes": "Large cards were split into smaller similarly-scoped deliverables; 005a/005b can be done in parallel with core Go work."
   }
 }
