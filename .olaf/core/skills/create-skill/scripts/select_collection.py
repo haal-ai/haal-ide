@@ -70,8 +70,9 @@ class CollectionSelector:
             preferred_local_collections if preferred_local_collections.exists() else legacy_local_collections
         )
         
-        # Default to global collections; local collections are merged in load_hybrid_collections()
-        self.collections_file = self.global_collections_file
+        # Collections are always read from the project-local manifest.
+        # This file also defines which competencies are local vs global.
+        self.collections_file = self.local_collections_file
         
         # Output index to local project's reference directory
         self.index_output = self.local_core_dir / "reference" / self.INDEX_FILENAME
@@ -148,21 +149,59 @@ class CollectionSelector:
         
         print(f"✓ Merged collections: {len(merged['collections'])} total")
         return merged
+
+    def _get_competency_locations(self, collections: Dict) -> dict[str, str]:
+        loc = collections.get("competency_locations")
+        if isinstance(loc, dict):
+            out: dict[str, str] = {}
+            for k, v in loc.items():
+                if isinstance(k, str) and isinstance(v, str):
+                    out[k] = v
+            return out
+        return {}
+
+    def _competency_declared_location(self, competency_id: str, locations: dict[str, str]) -> str:
+        return locations.get(competency_id) or locations.get("default") or "global"
     
     def clean_invalid_competencies(self, collections: Dict) -> Dict:
-        """Remove any competencies that don't exist from all collections"""
-        available_competencies = self.get_available_competencies()
-        available_ids = [c['metadata']['id'] for c in available_competencies]
-        
+        """Remove competencies that don't exist in their declared location (global/local)."""
+        locations = self._get_competency_locations(collections)
+
         for collection in collections.get('collections', []):
             current_comps = collection.get('competencies', [])
-            valid_comps = [comp for comp in current_comps if comp in available_ids]
-            invalid_comps = [comp for comp in current_comps if comp not in available_ids]
-            
-            if invalid_comps:
-                print(f"[CLEAN] {collection.get('id')}: Removing non-existent competencies: {', '.join(invalid_comps)}")
-                collection['competencies'] = valid_comps
-        
+            valid: list[str] = []
+            removed_msgs: list[str] = []
+
+            for comp_id in current_comps:
+                declared = self._competency_declared_location(comp_id, locations)
+
+                global_manifest = self.global_competencies_dir / comp_id / self.MANIFEST_FILENAME
+                local_manifest = self.local_competencies_dir / comp_id / self.MANIFEST_FILENAME
+
+                global_exists = global_manifest.exists()
+                local_exists = local_manifest.exists()
+
+                if declared == "local":
+                    if local_exists:
+                        valid.append(comp_id)
+                    else:
+                        note = "missing"
+                        if global_exists:
+                            note = "exists globally but declared local"
+                        removed_msgs.append(f"{comp_id} ({note})")
+                else:  # global (default)
+                    if global_exists:
+                        valid.append(comp_id)
+                    else:
+                        note = "missing"
+                        if local_exists:
+                            note = "exists locally but declared global"
+                        removed_msgs.append(f"{comp_id} ({note})")
+
+            if removed_msgs:
+                print(f"[CLEAN] {collection.get('id')}: Removing competencies: {', '.join(removed_msgs)}")
+                collection['competencies'] = valid
+
         return collections
     
     def _get_timestamp(self) -> str:
@@ -377,7 +416,11 @@ class CollectionSelector:
         """Generate the skill index from competency manifests"""
         print("\n🔧 Generating index from selected competencies...")
         
-        index_entries = []
+        # Deduplicate entries by skill_id (aligns with generated /olaf-* commands).
+        # If the same skill_id appears in multiple competencies, keep a single mapping and merge aliases.
+        entries: dict[str, tuple[str, str, set[str]]] = {}
+        legacy_entries: list[str] = []
+        duplicates_removed = 0
         timestamp = self._get_timestamp()
         
         for competency_id in selected_competencies:
@@ -400,7 +443,7 @@ class CollectionSelector:
                     print(f"  ⚠️  Using legacy entry_points format for {competency_id}")
                     for entry_point in entry_points:
                         entry = self.build_index_entry(entry_point, competency_id)
-                        index_entries.append(entry)
+                        legacy_entries.append(entry)
                 continue
             
             # Process BOM entry_points: each references a skill manifest
@@ -466,13 +509,30 @@ class CollectionSelector:
                 else:  # global or any other value defaults to global
                     full_path = f"[id:global_skills_dir]{full_path}"
                 
-                # Format aliases
-                aliases_str = ', '.join(f'"{a}"' for a in aliases)
-                entry = f'  [{{{aliases_str}}}, "{full_path}", "{protocol}"]'
-                index_entries.append(entry)
+                # Deduplicate by skill_id and merge aliases
+                if not skill_id:
+                    skill_id = f"{full_path}|{protocol}"
+
+                if skill_id in entries:
+                    duplicates_removed += 1
+                    prev_path, prev_protocol, prev_aliases = entries[skill_id]
+                    prev_aliases.update(aliases)
+                    entries[skill_id] = (prev_path, prev_protocol, prev_aliases)
+                else:
+                    entries[skill_id] = (full_path, protocol, set(aliases))
 
 
         
+        index_entries: list[str] = []
+        for _, (full_path, protocol, aliases_set) in entries.items():
+            aliases_str = ', '.join(f'"{a}"' for a in sorted(aliases_set))
+            index_entries.append(f'  [{{{aliases_str}}}, "{full_path}", "{protocol}"]')
+
+        index_entries.extend(legacy_entries)
+
+        if duplicates_removed:
+            print(f"ℹ️  Deduplicated mappings: removed {duplicates_removed} duplicate entries")
+
         # Build the markdown content
         content = f"""<olaf-query-competency-index>
 # Skill Index
@@ -839,9 +899,9 @@ end-of-competency-index
         print("\n✨ Done! Your competency index is ready to use.\n")
     
     def _initialize_collections(self) -> Dict:
-        """Initialize and clean collections data using hybrid global/local approach"""
-        collections = self.load_hybrid_collections()
-        print("✓ Collections loaded (global + local)")
+        """Initialize and clean collections from the local manifest only"""
+        collections = self.load_collections()
+        print("✓ Collections loaded (local)")
         return self.clean_invalid_competencies(collections)
     
     def _prepare_kernel_competencies(self, collections: Dict) -> List[str]:

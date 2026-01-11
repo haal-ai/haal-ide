@@ -8,7 +8,7 @@
 
 ### Load and Apply Standards (REQUIRED)
 **BEFORE ANALYSIS**: Read the complete content of:
-- `c:\Users\ppaccaud\coderepos\haal-ide\.olaf\data\practices\pr-review\comprehensive-pr-standards.md`
+- `{workspace_root}\.olaf\data\practices\pr-review\comprehensive-pr-standards.md`
 
 **THEN CONDUCT REVIEW**: Using the loaded Comprehensive PR Standards, systematically evaluate ALL aspects by applying each standard section to the actual PR data:
 

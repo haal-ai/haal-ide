@@ -225,24 +225,24 @@ To preview documentation:
 ```
 User: "olaf generate external docs"
 
-→ root_folder: c:\Users\ppaccaud\coderepos\haal-ide
-→ output_folder: c:\Users\ppaccaud\coderepos\haal-ide\.olaf\data\product\documentations\haal-ide\root
+→ root_folder: {workspace_root}
+→ output_folder: {workspace_root}\.olaf\data\product\documentations\<repo-name>\root
 ```
 
 ### Example 2: Generate docs for specific subfolder
 ```
 User: "olaf generate external docs for .olaf/core/scripts"
 
-→ root_folder: c:\Users\ppaccaud\coderepos\haal-ide\.olaf\core\scripts
-→ output_folder: c:\Users\ppaccaud\coderepos\haal-ide\.olaf\data\product\documentations\haal-ide\core-scripts
+→ root_folder: {workspace_root}\.olaf\core\scripts
+→ output_folder: {workspace_root}\.olaf\data\product\documentations\<repo-name>\core-scripts
 ```
 
 ### Example 3: Custom root and output
 ```
-User: "olaf generate external docs from c:\my\project to c:\my\docs"
+User: "olaf generate external docs from C:\path\to\project to C:\path\to\docs"
 
-→ root_folder: c:\my\project
-→ output_folder: c:\my\docs
+→ root_folder: C:\path\to\project
+→ output_folder: C:\path\to\docs
 ```
 
 ## Success Criteria

@@ -8,6 +8,7 @@ import sys
 import time
 import json
 import tempfile
+from datetime import datetime
 from pathlib import Path
 
 
@@ -90,7 +91,11 @@ def generate_query_competency_index(
     if not collection_id:
         collection_id = "core"
 
-    output_path = target_dir / "core" / "reference" / "query-competency-index.md"
+    if local_root is not None:
+        output_path = local_root / ".olaf" / "core" / "reference" / "query-competency-index.md"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+    else:
+        output_path = target_dir / "core" / "reference" / "query-competency-index.md"
     cmd = [sys.executable, str(script), "--collection", collection_id, "--output", str(output_path)]
     if local_root is not None:
         cmd.extend(["--local-root", str(local_root)])
@@ -98,8 +103,8 @@ def generate_query_competency_index(
         run(cmd, quiet=True)
     except RuntimeError:
         # Rerun with output visible to surface the underlying cause.
+        # If the rerun succeeds and produces the expected file, do not treat as fatal.
         run(cmd, quiet=False)
-        raise
     if not output_path.exists():
         raise RuntimeError(f"Competency index generation did not produce expected file: {output_path}")
     return output_path
@@ -116,6 +121,119 @@ def ensure_local_competency_collections(local_root: Path, target_dir: Path) -> P
     if src.exists() and src.is_file():
         shutil.copy2(src, local_file)
     return local_file
+
+
+def _load_competency_locations(collections_file: Path) -> dict[str, str]:
+    try:
+        data = json.load(open(collections_file, "r", encoding="utf-8"))
+    except Exception:
+        return {}
+
+    locations = data.get("competency_locations")
+    if not isinstance(locations, dict):
+        return {}
+
+    out: dict[str, str] = {}
+    for k, v in locations.items():
+        if isinstance(k, str) and isinstance(v, str):
+            out[k] = v
+    return out
+
+
+def copy_local_competencies_from_clone(clone_root: Path, local_root: Path, local_competency_ids: set[str]) -> None:
+    if not local_competency_ids:
+        return
+
+    src_competencies = clone_root / ".olaf" / "core" / "competencies"
+    if not src_competencies.exists():
+        raise RuntimeError(f"Missing expected competencies folder in clone: {src_competencies}")
+
+    local_olaf = ensure_local_olaf_skeleton(local_root)
+    dest_competencies = local_olaf / "core" / "competencies"
+    dest_competencies.mkdir(parents=True, exist_ok=True)
+
+    for comp_id in sorted(local_competency_ids):
+        src_dir = src_competencies / comp_id
+        if not src_dir.exists() or not src_dir.is_dir():
+            print(f"⚠️  Local competency not found in clone: {comp_id}")
+            continue
+        dst_dir = dest_competencies / comp_id
+        rmtree_if_exists(dst_dir)
+        dst_dir.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(src_dir, dst_dir)
+
+
+def sanitize_global_competency_collections(target_dir: Path) -> None:
+    collections_file = target_dir / "core" / "reference" / "competency-collections.json"
+    if not collections_file.exists():
+        return
+
+    try:
+        data = json.load(open(collections_file, "r", encoding="utf-8"))
+    except Exception:
+        return
+
+    collections = data.get("collections")
+    if not isinstance(collections, list):
+        return
+
+    global_competencies_dir = target_dir / "core" / "competencies"
+
+    def exists_globally(comp_id: str) -> bool:
+        manifest = global_competencies_dir / comp_id / "competency-manifest.json"
+        if manifest.exists():
+            return True
+        return (global_competencies_dir / comp_id).exists()
+
+    # Normalize legacy IDs to current IDs.
+    # Note: keep this conservative; anything not present globally will be removed afterwards.
+    replacements: dict[str, str] = {
+        "my-prompts": "team-competencies",
+        "olaf-olaf-admin": "haal-admin",
+        "olaf-admin": "haal-admin",
+    }
+
+    changed = False
+    new_collections: list[dict] = []
+
+    for coll in collections:
+        if not isinstance(coll, dict):
+            continue
+
+        comps = coll.get("competencies")
+        if not isinstance(comps, list):
+            new_collections.append(coll)
+            continue
+
+        normalized: list[str] = []
+        for c in comps:
+            if not isinstance(c, str):
+                continue
+            normalized.append(replacements.get(c, c))
+
+        filtered = [c for c in normalized if exists_globally(c)]
+        if filtered != comps:
+            changed = True
+            coll["competencies"] = filtered
+
+        # Drop empty collections (no competencies after filtering)
+        if filtered:
+            new_collections.append(coll)
+        else:
+            changed = True
+
+    if not changed:
+        return
+
+    data["collections"] = new_collections
+    meta = data.get("metadata")
+    if not isinstance(meta, dict):
+        meta = {}
+        data["metadata"] = meta
+    meta["lastUpdated"] = datetime.now().isoformat()
+
+    with open(collections_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 
 def ensure_git_available() -> None:
@@ -211,6 +329,38 @@ def copy_olaf_prefixed_files(src_root: Path, dst_root: Path) -> int:
     return copied
 
 
+def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
+    target_pattern = f"{target_dir.as_posix()}/**"
+
+    readonly = settings.get("files.readonlyInclude")
+    if readonly is None:
+        readonly = {}
+        settings["files.readonlyInclude"] = readonly
+    if isinstance(readonly, dict):
+        readonly[target_pattern] = True
+
+    files_exclude = settings.get("files.exclude")
+    if files_exclude is None:
+        files_exclude = {}
+        settings["files.exclude"] = files_exclude
+    if isinstance(files_exclude, dict):
+        files_exclude[target_pattern] = True
+
+    search_exclude = settings.get("search.exclude")
+    if search_exclude is None:
+        search_exclude = {}
+        settings["search.exclude"] = search_exclude
+    if isinstance(search_exclude, dict):
+        search_exclude[target_pattern] = True
+
+    watcher_exclude = settings.get("files.watcherExclude")
+    if watcher_exclude is None:
+        watcher_exclude = {}
+        settings["files.watcherExclude"] = watcher_exclude
+    if isinstance(watcher_exclude, dict):
+        watcher_exclude[target_pattern] = True
+
+
 def write_code_workspace(repo_root: Path, target_dir: Path, *, window_title: str) -> Path:
     workspace_path = repo_root / "olaf.code-workspace"
     workspace = {
@@ -222,6 +372,7 @@ def write_code_workspace(repo_root: Path, target_dir: Path, *, window_title: str
             "window.title": window_title,
         },
     }
+    _ensure_workspace_readonly_settings(workspace["settings"], target_dir)
     workspace_path.write_text(json.dumps(workspace, indent=2) + "\n", encoding="utf-8")
     return workspace_path
 
@@ -280,6 +431,7 @@ def ensure_workspace_has_target(workspace_path: Path, target_dir: Path, *, windo
             break
 
     settings["window.title"] = window_title
+    _ensure_workspace_readonly_settings(settings, target_dir)
 
     if already:
         workspace_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
@@ -288,6 +440,68 @@ def ensure_workspace_has_target(workspace_path: Path, target_dir: Path, *, windo
     folders.append({"path": target_str})
     workspace_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     return True
+
+
+def _merge_dict_bool_settings(dst: dict, src: dict) -> dict:
+    if not isinstance(dst, dict):
+        return dst
+    for k, v in src.items():
+        if k not in dst:
+            dst[k] = v
+        else:
+            if isinstance(v, bool) and isinstance(dst.get(k), bool):
+                dst[k] = dst[k] or v
+    return dst
+
+
+def ensure_global_olaf_folder_protection(target_dir: Path) -> None:
+    vscode_dir = target_dir / ".vscode"
+    vscode_dir.mkdir(parents=True, exist_ok=True)
+    settings_path = vscode_dir / "settings.json"
+
+    existing: dict = {}
+    if settings_path.exists():
+        try:
+            raw = settings_path.read_text(encoding="utf-8")
+            existing = json.loads(raw) if raw.strip() else {}
+        except Exception:
+            existing = {}
+
+    if not isinstance(existing, dict):
+        existing = {}
+
+    desired_readonly = {"**": True}
+    desired_exclude = {"**": True}
+
+    readonly = existing.get("files.readonlyInclude")
+    if readonly is None:
+        readonly = {}
+        existing["files.readonlyInclude"] = readonly
+    if isinstance(readonly, dict):
+        _merge_dict_bool_settings(readonly, desired_readonly)
+
+    files_exclude = existing.get("files.exclude")
+    if files_exclude is None:
+        files_exclude = {}
+        existing["files.exclude"] = files_exclude
+    if isinstance(files_exclude, dict):
+        _merge_dict_bool_settings(files_exclude, desired_exclude)
+
+    search_exclude = existing.get("search.exclude")
+    if search_exclude is None:
+        search_exclude = {}
+        existing["search.exclude"] = search_exclude
+    if isinstance(search_exclude, dict):
+        _merge_dict_bool_settings(search_exclude, desired_exclude)
+
+    watcher_exclude = existing.get("files.watcherExclude")
+    if watcher_exclude is None:
+        watcher_exclude = {}
+        existing["files.watcherExclude"] = watcher_exclude
+    if isinstance(watcher_exclude, dict):
+        _merge_dict_bool_settings(watcher_exclude, desired_exclude)
+
+    settings_path.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
 
 
 def _is_text_file(path: Path) -> bool:
@@ -518,8 +732,8 @@ def main() -> int:
     try:
         ensure_git_available()
 
-        repo_root = Path.cwd()
-        local_root = Path(os.path.expanduser(args.local)).resolve()
+        launch_root = Path.cwd()
+        local_root = Path(os.path.expanduser(args.local)).resolve() if args.local else launch_root
         window_title = f"{local_root.name} (olaf)"
 
         # fixed temp clone directory
@@ -530,7 +744,7 @@ def main() -> int:
         clone_dir.parent.mkdir(parents=True, exist_ok=True)
 
         url = f"https://github.com/{args.repo}.git"
-        print(f"Installing OLAF for user -> {Path(os.path.expanduser(args.target)).resolve()}")
+        print(f"Installing OLAF (global) -> {Path(os.path.expanduser(args.target)).resolve()}")
         run(["git", "clone", "--depth", "1", "--branch", args.branch, url, str(clone_dir)], quiet=True)
 
         # install .olaf to target
@@ -542,10 +756,14 @@ def main() -> int:
                 "This branch may not include OLAF yet; try --branch develop."
             )
 
-        print("User install: updating global .olaf")
+        print("Global install: updating ~/.olaf")
         copy_dir_excluding_top_level(src_olaf, target_dir, exclude_names={"docs", "tools"})
 
+        sanitize_global_competency_collections(target_dir)
+
         install_minimal_tools(target_dir, clone_dir)
+
+        ensure_global_olaf_folder_protection(target_dir)
 
         # Rewrite any hardcoded references to ~/.olaf inside the installed target
         rewritten = rewrite_olaf_paths(target_dir, target_dir)
@@ -558,14 +776,14 @@ def main() -> int:
             collection_id = _pick_collection_id_from_file(target_dir / "core" / "reference" / "competency-collections.json")
 
         index_path = generate_query_competency_index(target_dir, collection_id=collection_id, local_root=local_root)
-        print(f"User install: competency index generated -> {index_path}")
+        print(f"Local install: competency index generated -> {index_path}")
 
-        print(f"Repo install: syncing helper files into {repo_root}")
+        print(f"Local install: syncing helper files into {local_root}")
 
-        # Copy olaf-* files into repo folders (and also into --local when different)
+        # Copy olaf-* files into local project folders
         for tool_dir in [".github", ".kiro", ".windsurf"]:
             src_dir = clone_dir / tool_dir
-            dst_dir = repo_root / tool_dir
+            dst_dir = local_root / tool_dir
             copied = copy_olaf_prefixed_files(src_dir, dst_dir)
             _ = copied
 
@@ -573,35 +791,29 @@ def main() -> int:
             rewritten = rewrite_olaf_paths(dst_dir, target_dir, name_prefix="olaf-")
             _ = rewritten
 
-            if local_root != repo_root:
-                local_dst_dir = local_root / tool_dir
-                copied_local = copy_olaf_prefixed_files(src_dir, local_dst_dir)
-                _ = copied_local
-
-                rewritten_local = rewrite_olaf_paths(local_dst_dir, target_dir, name_prefix="olaf-")
-                _ = rewritten_local
-
         # ensure local .olaf skeleton exists (only created if missing)
         ensure_local_olaf_skeleton(local_root)
 
-        # copy team competencies manifest into local repo .olaf/core/competencies
-        copy_team_competencies_manifest(clone_dir, local_root)
+        # copy only competencies marked as local in competency-collections.json
+        locations = _load_competency_locations(local_collections_file)
+        local_competency_ids = {k for k, v in locations.items() if k != "default" and v == "local"}
+        copy_local_competencies_from_clone(clone_dir, local_root, local_competency_ids)
 
         # copy installed target /data into local repo .olaf/data without overwriting anything
         copied_data = copy_data_from_target_no_overwrite(target_dir, local_root)
-        print(f"Repo install: local .olaf updated -> {local_root / '.olaf'} (added {copied_data} files)")
+        print(f"Local install: updated -> {local_root / '.olaf'} (added {copied_data} files)")
 
-        # Update an existing workspace if present, otherwise create a new one at repo root.
-        existing_workspace = find_existing_code_workspace(repo_root)
+        # Update an existing workspace if present, otherwise create a new one at local project root.
+        existing_workspace = find_existing_code_workspace(local_root)
         if existing_workspace:
             changed = ensure_workspace_has_target(existing_workspace, target_dir, window_title=window_title)
             workspace_to_open = existing_workspace
         else:
-            workspace_path = write_code_workspace(repo_root, target_dir, window_title=window_title)
+            workspace_path = write_code_workspace(local_root, target_dir, window_title=window_title)
             workspace_to_open = workspace_path
 
-        # ensure git excludes olaf-* in this repo
-        ensure_git_exclude(repo_root)
+        # ensure git excludes olaf-* in the local project
+        ensure_git_exclude(local_root)
 
         print("Open workspace:")
         print(f"  windsurf {workspace_to_open}")

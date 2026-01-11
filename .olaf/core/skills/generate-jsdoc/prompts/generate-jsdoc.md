@@ -279,9 +279,9 @@ When complete, documented files will be available at:
 ```
 User: "olaf generate jsdoc"
 
-→ repo_folder: c:\Users\ppaccaud\coderepos\haal-ide
+→ repo_folder: {workspace_root}
 → output_mode: in-place
-→ output_folder: c:\Users\ppaccaud\coderepos\haal-ide (MODIFIES SOURCE)
+→ output_folder: {workspace_root} (MODIFIES SOURCE)
 → create_branch: true
 → branch_name: docs-jsdoc-gen-20251125-143022 (auto-created)
 → ⚠️ WARNING: Source files will be modified with JSDoc comments
@@ -291,20 +291,20 @@ User: "olaf generate jsdoc"
 ```
 User: "olaf generate jsdoc for vscode-extension"
 
-→ repo_folder: c:\Users\ppaccaud\coderepos\haal-ide\vscode-extension
+→ repo_folder: {workspace_root}\vscode-extension
 → output_mode: in-place
-→ output_folder: c:\Users\ppaccaud\coderepos\haal-ide\vscode-extension (MODIFIES SOURCE)
+→ output_folder: {workspace_root}\vscode-extension (MODIFIES SOURCE)
 → create_branch: true
 → ⚠️ WARNING: Source files in vscode-extension/ will be modified
 ```
 
 ### Example 3: Generate JSDoc to separate output folder (copy mode)
 ```
-User: "olaf generate jsdoc to c:\temp\jsdoc-output"
+User: "olaf generate jsdoc to C:\\path\\to\\jsdoc-output"
 
-→ repo_folder: c:\Users\ppaccaud\coderepos\haal-ide
+→ repo_folder: {workspace_root}
 → output_mode: copy-to-folder
-→ output_folder: c:\temp\jsdoc-output
+→ output_folder: C:\\path\\to\\jsdoc-output
 → create_branch: false (not needed - no source modification)
 → ℹ️ Original source files will NOT be modified
 ```
@@ -313,9 +313,9 @@ User: "olaf generate jsdoc to c:\temp\jsdoc-output"
 ```
 User: "olaf generate jsdoc --no-branch"
 
-→ repo_folder: c:\Users\ppaccaud\coderepos\haal-ide
+→ repo_folder: {workspace_root}
 → output_mode: in-place
-→ output_folder: c:\Users\ppaccaud\coderepos\haal-ide (MODIFIES SOURCE)
+→ output_folder: {workspace_root} (MODIFIES SOURCE)
 → create_branch: false
 → ⚠️ WARNING: Source files will be modified WITHOUT git branch protection!
 ```
