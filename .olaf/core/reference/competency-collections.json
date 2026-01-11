@@ -3,7 +3,8 @@
   "last_updated": "2025-12-15T11:10:53.000000",
   "competency_locations": {
     "default": "global",
-    "team-competencies": "local"
+    "team-competencies": "local",
+    "my-competencies": "global"
   },
   "collections": [
     {
@@ -12,6 +13,7 @@
       "description": "Kernel competencies only - universal base skills essential for HAAL framework operation.",
       "competencies": [
         "team-competencies",
+        "my-competencies",
         "olaf-base-skills"
       ],
       "locked": true,
@@ -25,6 +27,7 @@
       "description": "Open source distribution - all public/export competencies for community use",
       "competencies": [
         "team-competencies",
+        "my-competencies",
         "olaf-base-skills",
         "session-manager",
         "architect",
@@ -47,6 +50,7 @@
       "description": "HAAL-specific competencies for internal use (haal-* prefixed)",
       "competencies": [
         "team-competencies",
+        "my-competencies",
         "olaf-base-skills",
         "haal-architects",
         "haal-business-analyst",
@@ -73,6 +77,7 @@
       "description": "All competencies available in this repository (includes internal and experimental).",
       "competencies": [
         "team-competencies",
+        "my-competencies",
         "olaf-base-skills",
         "olaf-specific-tools",
         "olaf-testers",

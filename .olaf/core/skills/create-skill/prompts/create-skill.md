@@ -13,7 +13,7 @@ You MUST request these parameters if not provided by the user:
 - **skill_name**: string - Desired name for the skill (max 4 words, kebab-case) (REQUIRED)
 - **skill_type**: string - Type of skill: "orchestrator", "workflow", "prompt" (REQUIRED)
 - **skill_location**: string - Where to create skill: "global" (user-wide) or "local" (project-specific) (REQUIRED - default: "global")
-- **target_competency**: string - Existing competency name or "new:[competency-name]" to create new (REQUIRED)
+- **target_competency**: string - Existing competency name or "new:[competency-name]" to create new (REQUIRED - default: "my-competencies")
 - **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
 - **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
 - **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)

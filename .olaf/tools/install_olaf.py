@@ -73,12 +73,50 @@ def install_minimal_tools(target_dir: Path, clone_dir: Path) -> None:
             shutil.copy2(src_select, tools_dir / "select-collection.py")
 
 
+def ensure_global_my_competencies(target_dir: Path) -> Path:
+    comp_dir = target_dir / "core" / "competencies" / "my-competencies"
+    manifest_path = comp_dir / "competency-manifest.json"
+    if manifest_path.exists():
+        return manifest_path
+
+    comp_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.now().date().isoformat()
+    manifest = {
+        "metadata": {
+            "id": "my-competencies",
+            "name": "My Competencies",
+            "shortDescription": "User-maintained competency that aggregates personal skills.",
+            "description": "Personal competency package intended to hold user-created skills.",
+            "version": "1.0.0",
+            "objectives": [
+                "Group personal skills",
+                "Expose personal skills via the OLAF competency index",
+            ],
+            "tags": ["user", "personal"],
+            "author": "User",
+            "status": "experimental",
+            "exposure": "internal",
+            "created": today,
+            "updated": today,
+        },
+        "bom": {
+            "skills": [],
+            "entry_points": [],
+        },
+    }
+    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return manifest_path
+
+
 def generate_query_competency_index(
     target_dir: Path,
     *,
     collection_id: str | None = None,
     local_root: Path | None = None,
 ) -> Path:
+    # Ensure kernel/global user competency exists before index generation so it isn't pruned.
+    ensure_global_my_competencies(target_dir)
+
     preferred = target_dir / "tools" / "select-collection.py"
     fallback = target_dir / "core" / "skills" / "create-skill" / "scripts" / "select_collection.py"
     script = preferred if preferred.exists() else fallback
@@ -236,6 +274,116 @@ def sanitize_global_competency_collections(target_dir: Path) -> None:
         json.dump(data, f, indent=2)
 
 
+def _read_json_sanitized(path: Path) -> dict:
+    raw = path.read_bytes().replace(b"\x00", b"")
+    return json.loads(raw.decode("utf-8", errors="replace"))
+
+
+def preserve_my_competencies(target_dir: Path) -> tuple[Path | None, set[str]]:
+    """Backup ~/.olaf/core/competencies/my-competencies and its referenced skills.
+
+    Returns (backup_root, referenced_skill_ids). If nothing to preserve, returns (None, set()).
+    """
+
+    comp_dir = target_dir / "core" / "competencies" / "my-competencies"
+    manifest_path = comp_dir / "competency-manifest.json"
+    if not manifest_path.exists():
+        return None, set()
+
+    try:
+        manifest = _read_json_sanitized(manifest_path)
+    except Exception:
+        manifest = {}
+
+    skill_ids: set[str] = set()
+    bom = manifest.get("bom")
+    if isinstance(bom, dict):
+        skills = bom.get("skills")
+        if isinstance(skills, list):
+            for s in skills:
+                if isinstance(s, str) and s:
+                    skill_ids.add(s)
+
+    backup_root = Path(tempfile.mkdtemp(prefix="olaf_preserve_"))
+    preserved_comp = backup_root / "competencies" / "my-competencies"
+    preserved_comp.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(comp_dir, preserved_comp)
+
+    preserved_skills_dir = backup_root / "skills"
+    preserved_skills_dir.mkdir(parents=True, exist_ok=True)
+    for sid in sorted(skill_ids):
+        src = target_dir / "core" / "skills" / sid
+        if not src.exists() or not src.is_dir():
+            continue
+        shutil.copytree(src, preserved_skills_dir / sid)
+
+    return backup_root, skill_ids
+
+
+def restore_my_competencies(target_dir: Path, backup_root: Path | None) -> None:
+    if backup_root is None:
+        return
+
+    preserved_comp = backup_root / "competencies" / "my-competencies"
+    if preserved_comp.exists():
+        dst_comp = target_dir / "core" / "competencies" / "my-competencies"
+        rmtree_if_exists(dst_comp)
+        dst_comp.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(preserved_comp, dst_comp)
+
+    preserved_skills_dir = backup_root / "skills"
+    if preserved_skills_dir.exists():
+        for src in preserved_skills_dir.iterdir():
+            if not src.is_dir():
+                continue
+            dst = target_dir / "core" / "skills" / src.name
+            rmtree_if_exists(dst)
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copytree(src, dst)
+
+
+def _normalize_registry_repo(value: str) -> str:
+    v = value.strip()
+    if not v:
+        return v
+    # Accept full GitHub URLs like https://github.com/org/repo
+    if v.startswith("http://") or v.startswith("https://"):
+        if "github.com/" in v:
+            v = v.split("github.com/", 1)[1]
+        v = v.removesuffix(".git")
+    # Strip any leading slashes
+    v = v.lstrip("/")
+    return v
+
+
+def load_install_seed_from_local_config(local_root: Path) -> tuple[str | None, str | None]:
+    """Load install seed from local repo olaf-config.json.
+
+    Expected format:
+      {
+        "registry-repo": "https://github.com/haal-ai/haal-ide",
+        "branch": "main"
+      }
+    """
+
+    config_path = local_root / "olaf-config.json"
+    if not config_path.exists() or not config_path.is_file():
+        return None, None
+
+    try:
+        data = json.load(open(config_path, "r", encoding="utf-8"))
+    except Exception:
+        return None, None
+
+    repo = data.get("registry-repo")
+    branch = data.get("branch")
+
+    repo_out = _normalize_registry_repo(repo) if isinstance(repo, str) else None
+    branch_out = branch.strip() if isinstance(branch, str) and branch.strip() else None
+
+    return repo_out, branch_out
+
+
 def ensure_git_available() -> None:
     try:
         subprocess.run(["git", "--version"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -307,6 +455,95 @@ def copy_dir_excluding_top_level(src: Path, dst: Path, *, exclude_names: set[str
     rmtree_if_exists(dst)
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(src, dst, ignore=_ignore)
+
+
+def merge_dir_excluding_top_level(src: Path, dst: Path, *, exclude_names: set[str]) -> None:
+    """Merge-copy src into dst, excluding some top-level names.
+
+    Unlike copy_dir_excluding_top_level, this does NOT delete the destination.
+    Later installs override earlier ones file-by-file.
+    """
+
+    if not src.exists() or not src.is_dir():
+        raise RuntimeError(f"Expected directory does not exist: {src}")
+
+    dst.mkdir(parents=True, exist_ok=True)
+
+    for child in src.iterdir():
+        if child.name in exclude_names:
+            continue
+
+        dest = dst / child.name
+        if child.is_dir():
+            # Merge directory tree, overwriting files.
+            shutil.copytree(child, dest, dirs_exist_ok=True)
+        else:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(child, dest)
+
+
+def parse_repo_branch(spec: str) -> tuple[str, str]:
+    """Parse 'owner/repo@branch' (branch optional, defaults to main)."""
+    s = spec.strip()
+    if not s:
+        raise ValueError("Empty repo spec")
+    if "@" in s:
+        repo, branch = s.split("@", 1)
+        repo = repo.strip()
+        branch = branch.strip() or "main"
+        return repo, branch
+    return s, "main"
+
+
+def load_registry_from_clone(clone_dir: Path) -> list[tuple[str, str]]:
+    """Load secondary repos from olaf-registry.json at repo root in clone."""
+
+    registry_path = clone_dir / "olaf-registry.json"
+    if not registry_path.exists() or not registry_path.is_file():
+        return []
+
+    try:
+        data = json.load(open(registry_path, "r", encoding="utf-8"))
+    except Exception:
+        return []
+
+    items = data.get("secondary-repos")
+    if not isinstance(items, list):
+        return []
+
+    out: list[tuple[str, str]] = []
+    for it in items:
+        if not isinstance(it, str):
+            continue
+        try:
+            out.append(parse_repo_branch(it))
+        except ValueError:
+            continue
+
+    return out
+
+
+def clone_repo_to(
+    *,
+    repo: str,
+    branch: str,
+    dst: Path,
+) -> None:
+    url = f"https://github.com/{repo}.git"
+    rmtree_if_exists(dst)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    run(["git", "clone", "--depth", "1", "--branch", branch, url, str(dst)], quiet=True)
+
+
+def merge_install_from_clone(
+    *,
+    clone_dir: Path,
+    target_dir: Path,
+) -> None:
+    src_olaf = clone_dir / ".olaf"
+    if not src_olaf.exists():
+        raise RuntimeError(f"Clone does not contain .olaf folder: {src_olaf}")
+    merge_dir_excluding_top_level(src_olaf, target_dir, exclude_names={"docs", "tools"})
 
 
 def copy_olaf_prefixed_files(src_root: Path, dst_root: Path) -> int:
@@ -714,8 +951,8 @@ def copy_data_from_target_no_overwrite(target_dir: Path, repo_root: Path) -> int
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Clone OLAF repo and install .olaf plus olaf-* helper files")
-    parser.add_argument("--repo", default="haal-ai/haal-ide", help="GitHub repo in owner/repo form")
-    parser.add_argument("--branch", default="main", help="Git branch name")
+    parser.add_argument("--repo", default=None, help="GitHub repo in owner/repo form (defaults from olaf-config.json if present)")
+    parser.add_argument("--branch", default=None, help="Git branch name (defaults from olaf-config.json if present)")
     parser.add_argument(
         "--target",
         default=str(Path.home() / ".olaf"),
@@ -736,28 +973,40 @@ def main() -> int:
         local_root = Path(os.path.expanduser(args.local)).resolve() if args.local else launch_root
         window_title = f"{local_root.name} (olaf)"
 
+        cfg_repo, cfg_branch = load_install_seed_from_local_config(local_root)
+        repo = args.repo if isinstance(args.repo, str) and args.repo.strip() else cfg_repo
+        branch = args.branch if isinstance(args.branch, str) and args.branch.strip() else cfg_branch
+        if not repo:
+            repo = "haal-ai/haal-ide"
+        if not branch:
+            branch = "main"
+
         # fixed temp clone directory
         temp_base = Path(tempfile.gettempdir())
         clone_dir = temp_base / "haal_olaf_clone"
 
-        rmtree_if_exists(clone_dir)
-        clone_dir.parent.mkdir(parents=True, exist_ok=True)
-
-        url = f"https://github.com/{args.repo}.git"
         print(f"Installing OLAF (global) -> {Path(os.path.expanduser(args.target)).resolve()}")
-        run(["git", "clone", "--depth", "1", "--branch", args.branch, url, str(clone_dir)], quiet=True)
+        clone_repo_to(repo=repo, branch=branch, dst=clone_dir)
 
-        # install .olaf to target
+        # install .olaf to target (cumulative)
         target_dir = Path(os.path.expanduser(args.target)).resolve()
-        src_olaf = clone_dir / ".olaf"
-        if not src_olaf.exists():
-            raise RuntimeError(
-                f"Clone does not contain .olaf folder: {src_olaf}. "
-                "This branch may not include OLAF yet; try --branch develop."
-            )
 
-        print("Global install: updating ~/.olaf")
-        copy_dir_excluding_top_level(src_olaf, target_dir, exclude_names={"docs", "tools"})
+        print("Global install: updating ~/.olaf (cumulative registry install)")
+        preserve_root, _ = preserve_my_competencies(target_dir)
+
+        secondary = load_registry_from_clone(clone_dir)
+        if secondary:
+            print(f"Global install: found {len(secondary)} secondary repo(s) in olaf-registry.json")
+        for idx, (srepo, sbranch) in enumerate(secondary, start=1):
+            sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
+            print(f"Global install: merging secondary [{idx}/{len(secondary)}] {srepo}@{sbranch}")
+            clone_repo_to(repo=srepo, branch=sbranch, dst=sec_clone)
+            merge_install_from_clone(clone_dir=sec_clone, target_dir=target_dir)
+
+        print(f"Global install: merging seed {repo}@{branch}")
+        merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
+
+        restore_my_competencies(target_dir, preserve_root)
 
         sanitize_global_competency_collections(target_dir)
 
