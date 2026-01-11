@@ -47,9 +47,9 @@
 
 ### Core solution [id:core_olaf_dir] = `/.olaf/`
 # Example usage:
-# [id:core_olaf_dir]README.md → refers to ~/.olaf/README.md
+# [id:core_olaf_dir]README.md → refers to C:\Users\ppaccaud\.olaf/README.md
 
-### Global OLAF [id:global_olaf_dir] = `~/.olaf/`
+### Global OLAF [id:global_olaf_dir] = `C:\Users\ppaccaud\.olaf/`
 
 ### Additional Directories
 - **Docs Directory** [id:docs_dir] = `[id:core_olaf_dir]docs/`
