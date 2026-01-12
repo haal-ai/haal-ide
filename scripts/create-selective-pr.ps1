@@ -58,10 +58,18 @@ function Invoke-Git {
     return ''
   }
 
-  if ($WorkingDirectory) {
-    $output = & git @Args 2>&1 | Out-String
-  } else {
-    $output = & git @Args 2>&1 | Out-String
+  $prevEap = $ErrorActionPreference
+  $ErrorActionPreference = 'Continue'
+  try {
+    if ($WorkingDirectory) {
+      $lines = & git -C $WorkingDirectory @Args 2>&1
+    } else {
+      $lines = & git @Args 2>&1
+    }
+    $output = ($lines | ForEach-Object { "$_" }) -join "`n"
+  }
+  finally {
+    $ErrorActionPreference = $prevEap
   }
 
   if ($LASTEXITCODE -ne 0) {
