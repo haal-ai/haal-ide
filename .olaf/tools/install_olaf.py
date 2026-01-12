@@ -868,9 +868,7 @@ def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None 
 
 def ensure_local_olaf_skeleton(repo_root: Path) -> Path:
     local_olaf = repo_root / ".olaf"
-    if local_olaf.exists():
-        return local_olaf
-
+    
     # create minimal skeleton only if missing
     (local_olaf / "core" / "competencies").mkdir(parents=True, exist_ok=True)
     (local_olaf / "core" / "reference").mkdir(parents=True, exist_ok=True)
@@ -879,8 +877,6 @@ def ensure_local_olaf_skeleton(repo_root: Path) -> Path:
     (local_olaf / "core" / "skills").mkdir(parents=True, exist_ok=True)
     (local_olaf / "data").mkdir(parents=True, exist_ok=True)
     (local_olaf / "work" / "staging").mkdir(parents=True, exist_ok=True)
-    (local_olaf / "work" / "carry-over").mkdir(parents=True, exist_ok=True)
-    (local_olaf / "work" / "stash").mkdir(parents=True, exist_ok=True)
     return local_olaf
 
 
