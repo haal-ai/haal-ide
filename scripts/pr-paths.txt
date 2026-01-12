@@ -3,9 +3,9 @@
 # Blank lines and lines starting with # are ignored.
 
 .olaf/tools/install_olaf.py
-.olaf/tools/olaf-init.ps1
-.olaf/tools/olaf-init.sh
-.olaf/tools/olaf-init.zsh
+.olaf/tools/init-olaf.ps1
+.olaf/tools/init-olaf.sh
+.olaf/tools/init-olaf.zsh
 .olaf/tools/select-collection.py
 
 .olaf/core/reference/competency-collections.json
@@ -49,7 +49,7 @@ docs/
 docs/install/
 
 .olaf/data/
-.olaf/work/staging/
+.olaf/work/staging/.gitkeep
 
 .github/instructions/olaf-bootstrap.instructions.md
 .github/instructions/olaf-intent-based-context-injector.instructions.md
@@ -66,4 +66,3 @@ scripts/
 
 _olaf-registry.json
 olaf-config.json
-olaf.code-workspace

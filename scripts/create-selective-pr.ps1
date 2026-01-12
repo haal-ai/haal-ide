@@ -86,6 +86,25 @@ function Get-RepoRoot {
   return $root.Trim()
 }
 
+function Assert-CleanWorkingTree {
+  param([Parameter(Mandatory = $true)][string]$RepoRoot)
+
+  if ($DryRun) {
+    Write-Host '(dry-run) skipping clean working tree check'
+    return
+  }
+
+  $status = & git -C $RepoRoot status --porcelain -uall 2>$null
+  if ($LASTEXITCODE -ne 0) {
+    throw 'Failed to check git status.'
+  }
+
+  $statusText = ($status | Out-String).Trim()
+  if (-not [string]::IsNullOrWhiteSpace($statusText)) {
+    throw "Working tree is not clean. Commit/stash/revert changes (including untracked files) before running this script.\n\n$statusText"
+  }
+}
+
 function Get-PathList {
   param([Parameter(Mandatory = $true)][string]$File)
 
@@ -96,7 +115,8 @@ function Get-PathList {
   $lines = Get-Content -LiteralPath $File -ErrorAction Stop
   $paths = @()
   foreach ($line in $lines) {
-    $trimmed = ($line ?? '').Trim()
+    $safeLine = if ($null -eq $line) { '' } else { [string]$line }
+    $trimmed = $safeLine.Trim()
     if ([string]::IsNullOrWhiteSpace($trimmed)) { continue }
     if ($trimmed.StartsWith('#')) { continue }
     $paths += $trimmed
@@ -169,7 +189,8 @@ function Assert-PathsExistInRef {
   foreach ($p in $Paths) {
     # For both files and directories, ls-tree will return matches if they exist.
     $out = & git ls-tree -r --name-only $Ref -- $p 2>$null
-    if ($LASTEXITCODE -ne 0 -or -not $out -or $out.Count -eq 0) {
+    $outText = ($out | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($outText)) {
       $missing += $p
     }
   }
@@ -182,6 +203,7 @@ function Assert-PathsExistInRef {
 
 Require-Command git
 $repoRoot = Get-RepoRoot
+Assert-CleanWorkingTree -RepoRoot $repoRoot
 
 $pathsFileFull = if ([System.IO.Path]::IsPathRooted($PathsFile)) { $PathsFile } else { Join-Path $repoRoot $PathsFile }
 $paths = Get-PathList -File $pathsFileFull

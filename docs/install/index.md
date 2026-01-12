@@ -7,7 +7,7 @@ This page provides copy/paste commands to install OLAF into your repository.
 Run from your repo root:
 
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/olaf-init.ps1 | iex"
+pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/init-olaf.ps1 | iex"
 ```
 
 ## Linux (bash/sh)
@@ -15,7 +15,7 @@ pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubus
 Run from your repo root:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/olaf-init.sh | sh
+curl -fsSL https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/init-olaf.sh | sh
 ```
 
 ## macOS (zsh)
@@ -23,5 +23,5 @@ curl -fsSL https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/o
 Run from your repo root:
 
 ```zsh
-curl -fsSL https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/olaf-init.zsh | zsh
+curl -fsSL https://raw.githubusercontent.com/haal-ai/haal-ide/main/.olaf/tools/init-olaf.zsh | zsh
 ```
