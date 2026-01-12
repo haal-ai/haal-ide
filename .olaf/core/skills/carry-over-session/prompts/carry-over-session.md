@@ -4,9 +4,12 @@ description: Create a simple carry-over note with next prompt and files needed f
 tags: [session, carry-over, continuation, workflow]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+CRITICAL: Skill-local resource resolution: any reference to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp in `YYYYMMDD-HHmm` format
 
 # Create Carry-Over Session Note
 

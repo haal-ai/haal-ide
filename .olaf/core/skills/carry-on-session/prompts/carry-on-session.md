@@ -4,7 +4,9 @@ description: Load the latest carry-over note and propose the immediate next acti
 tags: [session, carry-on, continuation, workflow]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+
+CRITICAL: Skill-local resource resolution: any reference to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to this skill root directory (the parent folder of `prompts/`).
 
 # Carry On Session
 
@@ -15,7 +17,8 @@ Load the latest carry-over note and propose the immediate next action. Wait for 
 - Do NOT auto-run workflows or competencies.
 - Do NOT modify files until the user approves.
 
-## Instructions1. Find latest carry-over file in `[id:carryover_dir]` matching `carry-over-YYYYMMDD-HHmm.txt` (most recent by timestamp).
+## Instructions
+1. Find latest carry-over file in `[id:carryover_dir]` matching `carry-over-YYYYMMDD-HHmm.txt` (most recent by timestamp).
 2. Parse sections:
    - `## NEXT PROMPT` (required)
    - `## FILES NEEDED` (optional)
