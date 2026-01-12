@@ -449,6 +449,27 @@ def ensure_git_available() -> None:
         raise RuntimeError("git is required but could not be executed (git --version failed).") from ex
 
 
+def ensure_git_repo(local_root: Path, *, init_if_missing: bool) -> None:
+    if (local_root / ".git").exists():
+        return
+    if not init_if_missing:
+        raise RuntimeError(
+            f"Local path is not a git repository (missing .git): {local_root}\n"
+            "Either run 'git init' (or clone a repo) first, or re-run with --init-git."
+        )
+
+    local_root.mkdir(parents=True, exist_ok=True)
+    run(["git", "init"], cwd=local_root, quiet=True)
+
+
+def _normalize_windows_drive_letter(path_str: str) -> str:
+    # Some tooling treats workspace paths as case-sensitive on Windows.
+    # Normalize drive letter to lowercase to avoid C: vs c: mismatches.
+    if len(path_str) >= 2 and path_str[1] == ":" and path_str[0].isalpha():
+        return path_str[0].lower() + path_str[1:]
+    return path_str
+
+
 def rmtree_if_exists(path: Path) -> None:
     if not path.exists():
         return
@@ -635,7 +656,7 @@ def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) ->
 
 
 def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
-    target_pattern = f"{target_dir.as_posix()}/**"
+    target_pattern = f"{_normalize_windows_drive_letter(target_dir.as_posix())}/**"
 
     readonly = settings.get("files.readonlyInclude")
     if readonly is None:
@@ -671,7 +692,7 @@ def write_code_workspace(repo_root: Path, target_dir: Path, *, window_title: str
     workspace = {
         "folders": [
             {"path": "."},
-            {"path": str(target_dir)},
+            {"path": _normalize_windows_drive_letter(str(target_dir))},
         ],
         "settings": {
             "window.title": window_title,
@@ -728,7 +749,7 @@ def ensure_workspace_has_target(workspace_path: Path, target_dir: Path, *, windo
     if not isinstance(settings, dict):
         raise RuntimeError(f"Workspace 'settings' must be an object: {workspace_path}")
 
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     already = False
     for f in folders:
         if isinstance(f, dict) and f.get("path") == target_str:
@@ -827,7 +848,7 @@ def _is_text_file(path: Path) -> bool:
 
 def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None = None) -> int:
     replaced = 0
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     replacements = {
         "~/.olaf": target_str,
         "~/.olaf/": target_str + os.sep,
@@ -927,6 +948,12 @@ def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
 
 
 def copy_team_competencies_manifest(clone_root: Path, repo_root: Path) -> None:
+    # Preserve an existing local team competency.
+    # This competency represents the team's local state; only seed it if missing.
+    local_existing = repo_root / ".olaf" / "core" / "competencies" / "team-competencies"
+    if local_existing.exists():
+        return
+
     src_competencies = clone_root / ".olaf" / "core" / "competencies"
     if not src_competencies.exists():
         raise RuntimeError(f"Missing expected competencies folder in clone: {src_competencies}")
@@ -1062,6 +1089,27 @@ def main() -> int:
     parser.add_argument("--repo", default=None, help="GitHub repo in owner/repo form (defaults from olaf-config.json if present)")
     parser.add_argument("--branch", default=None, help="Git branch name (defaults from olaf-config.json if present)")
     parser.add_argument(
+        "--init-git",
+        "--git-init",
+        action="store_true",
+        help="If --local is not a git repo, run 'git init' in that folder",
+    )
+    parser.add_argument(
+        "--clean-global",
+        action="store_true",
+        help="Delete the global target folder (default: ~/.olaf) before reinstalling",
+    )
+    parser.add_argument(
+        "--clean-local",
+        action="store_true",
+        help="Delete the local .olaf folder under --local before reinstalling",
+    )
+    parser.add_argument(
+        "--no-preserve-my-competencies",
+        action="store_true",
+        help="When doing --clean-global, do not preserve ~/.olaf/core/competencies/my-competencies",
+    )
+    parser.add_argument(
         "--target",
         default=str(Path.home() / ".olaf"),
         help="Target folder for installed .olaf (default: ~/.olaf)",
@@ -1080,6 +1128,8 @@ def main() -> int:
         launch_root = Path.cwd()
         local_root = Path(os.path.expanduser(args.local)).resolve() if args.local else launch_root
         window_title = f"{local_root.name} (olaf)"
+
+        ensure_git_repo(local_root, init_if_missing=bool(args.init_git))
 
         cfg_repo, cfg_branch = load_install_seed_from_local_config(local_root)
         repo = args.repo if isinstance(args.repo, str) and args.repo.strip() else cfg_repo
@@ -1105,14 +1155,28 @@ def main() -> int:
         temp_base = Path(tempfile.gettempdir())
         clone_dir = temp_base / "haal_olaf_clone"
 
-        print(f"Installing OLAF (global) -> {Path(os.path.expanduser(args.target)).resolve()}")
+        target_dir = Path(os.path.expanduser(args.target)).resolve()
+        if args.clean_global:
+            if args.no_preserve_my_competencies:
+                rmtree_if_exists(target_dir)
+            else:
+                preserve_root, _ = preserve_my_competencies(target_dir)
+                rmtree_if_exists(target_dir)
+                target_dir.mkdir(parents=True, exist_ok=True)
+                restore_my_competencies(target_dir, preserve_root)
+
+        local_olaf_dir = local_root / ".olaf"
+        if args.clean_local:
+            rmtree_if_exists(local_olaf_dir)
+
+        print(f"Installing OLAF (global) -> {target_dir}")
         clone_repo_to(repo=repo, branch=branch, dst=clone_dir)
 
         # install .olaf to target (cumulative)
-        target_dir = Path(os.path.expanduser(args.target)).resolve()
-
         print("Global install: updating ~/.olaf (cumulative registry install)")
-        preserve_root, _ = preserve_my_competencies(target_dir)
+        preserve_root = None
+        if not args.clean_global and not args.no_preserve_my_competencies:
+            preserve_root, _ = preserve_my_competencies(target_dir)
 
         secondary, registry_msg = load_registry_with_diagnostics(clone_dir)
         if secondary:
@@ -1140,9 +1204,9 @@ def main() -> int:
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
 
-        print("Global install: restoring user competency my-competencies")
-
-        restore_my_competencies(target_dir, preserve_root)
+        if preserve_root is not None:
+            print("Global install: restoring user competency my-competencies")
+            restore_my_competencies(target_dir, preserve_root)
 
         sanitize_global_competency_collections(target_dir)
 
@@ -1188,6 +1252,8 @@ def main() -> int:
         # copy only competencies marked as local in competency-collections.json
         locations = _load_competency_locations(local_collections_file)
         local_competency_ids = {k for k, v in locations.items() if k != "default" and v == "local"}
+        # team-competencies is handled separately and should never be overwritten.
+        local_competency_ids.discard("team-competencies")
         copy_local_competencies_from_clone(clone_dir, local_root, local_competency_ids)
 
         # copy installed target /data into local repo .olaf/data without overwriting anything

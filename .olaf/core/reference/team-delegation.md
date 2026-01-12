@@ -5,9 +5,9 @@
 ## Session Initialization
 
 **CRITICAL FIRST STEP**: At the beginning of a new session, read and apply once:
-1.  `core/memory-map.md` - Project structure and file locations
-2.  `core/reference/core-principles.md` - Core behavioral rules
-3.  `core/reference/query-competency-index.md` - Task competency mapping (read FULL file including all mappings)
+1.  `[id:memory_map]` - Project structure and file locations
+2.  `[id:core_principles]` - Core behavioral rules
+.  `[id:competency_index]` - Task competency mapping (this file is wrapped in the <olaf-query-competency-index> tag; read FULL file including all mappings)
 </olaf-session-initialization>
 
 <olaf-general-role-and-behavior>
