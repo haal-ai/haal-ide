@@ -1,0 +1,17 @@
+# Core Features
+
+- [README](README.md)
+- [Best Practices](best-practices.md)
+- [Chapter Mode](chapter-mode.md)
+- [Competency Driven Workflow](competency-driven-workflow.md)
+- [Core Principles Explained](core-principles-explained.md)
+- [Framework Management](framework-management.md)
+- [Integration](integration.md)
+- [Intent Based Context Injection](intent-based-context-injection.md)
+- [Interaction Protocols Explained](interaction-protocols-explained.md)
+- [Memory Map Explained](memory-map-explained.md)
+- [Meta Prompting](meta-prompting.md)
+- [HAAL Bootstrap](olaf-bootstrap.md)
+- [HAAL Context Switch](olaf-context-switch.md)
+- [Organization](organization.md)
+- [Prompt Engineering](prompt-engineering.md)
