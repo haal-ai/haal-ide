@@ -254,10 +254,10 @@ Invoke-Git -Args @('worktree', 'add', '-B', $BranchName, $worktreeDir, $resolved
 
 try {
   # Copy only the requested paths from source into this worktree
-  Invoke-Git -Args @('restore', "--source=$resolvedSourceRef", '--') + $paths -WorkingDirectory $worktreeDir
+  Invoke-Git -Args (@('restore', "--source=$resolvedSourceRef", '--') + $paths) -WorkingDirectory $worktreeDir
 
   # Stage only those paths
-  Invoke-Git -Args @('add', '--') + $paths -WorkingDirectory $worktreeDir
+  Invoke-Git -Args (@('add', '--') + $paths) -WorkingDirectory $worktreeDir
 
   $status = if ($DryRun) { '' } else { (& git -C $worktreeDir status -sb | Out-String) }
   if (-not $DryRun) {
