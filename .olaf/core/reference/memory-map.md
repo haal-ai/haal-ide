@@ -55,8 +55,10 @@ changes: "Updated memory map to match current .olaf structure: corrected data pa
   - **Context Default** [id:context_default] = `[id:context_dir]context-default.md`
   - **Context Current** [id:context_current] = `[id:context_dir]context-current.md`
 - **Peoples** [id:peoples_dir] = `[id:data_dir]peoples/`
+- **People Register** [id:people_register] = `[id:peoples_dir]people-register.md`
 - **Projects** [id:projects_dir] = `[id:data_dir]projects/`
   - **Jobs Register** [id:jobs_register] = `[id:projects_dir]jobs-register.md` 
+  - **Changelog Register** [id:changelog_register] = `[id:projects_dir]changelog-register.md`
 - **Product** [id:product_dir] = `[id:data_dir]product/`
   - **Functional Directory** [id:functional_dir] = `[id:product_dir]functional/`
   - **Technical Directory** [id:technical_dir] = `[id:product_dir]technical/`
