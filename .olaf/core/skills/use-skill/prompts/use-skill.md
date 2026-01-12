@@ -1,11 +1,16 @@
 ---
 name: use-skill
-description: Intelligent skill discovery and execution router that searches condensed framework, local filesystem, and invokes olaf-help-me when needed
+description: Intelligent skill discovery and execution router that searches condensed framework, local filesystem, and invokes help-me-olaf when needed
 tags: [skill, discovery, routing, search, execution, workflow]
 aliases: [find skill, search skill, use workflow, execute skill, run skill]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -21,7 +26,7 @@ You MUST follow the established interaction protocol strictly:
 ## Purpose
 This skill acts as the primary router for all user requests, implementing a cascading search strategy:
 1. Search condensed OLAF framework embedded patterns2. Search local filesystem skills if no match
-3. Invoke olaf-help-me if still no match4. Execute matched skill with appropriate protocol
+3. Invoke help-me-olaf if still no match4. Execute matched skill with appropriate protocol
 
 ## Process
 
@@ -58,12 +63,12 @@ If Step 1 fails, you WILL:
 - Minimum threshold: 65%
 **Success criterion**: Match found with confidence ≥ 65%
 
-### Step 3: Invoke olaf-help-me (If Still No Match)
+### Step 3: Invoke help-me-olaf (If Still No Match)
 
 If Steps 1 and 2 fail, you WILL:
-- Invoke the `olaf-help-me` skill
-- Pass the user's original request to olaf-help-me
-- Let olaf-help-me guide the user through:
+- Invoke the `help-me-olaf` skill
+- Pass the user's original request to help-me-olaf
+- Let help-me-olaf guide the user through:
   - Refined search
   - Skill browsing
   - New prompt creation
@@ -108,14 +113,14 @@ You MUST handle these scenarios:
 - Warn user that condensed framework is missing
 - Proceed to Step 2 (local search)
 **No Skills Found**:
-- Proceed to Step 3 (olaf-help-me)
+- Proceed to Step 3 (help-me-olaf)
 **Multiple High-Confidence Matches**:
 - Present ranked list of matches with confidence scores
 - Ask user to select one or refine request
 **Skill File Not Found**:
 - Report error with path
 - Suggest alternatives if available
-- Invoke olaf-help-me for guidance
+- Invoke help-me-olaf for guidance
 
 ## Output Format
 
@@ -137,7 +142,8 @@ Executing with [Protocol] protocol...
 Your request: "[user request]"
 Searched: Condensed framework + Local filesystem
 
-Invoking olaf-help-me for guidance...
+Invoking help-me-olaf for guidance...
+
 ```
 
 **When multiple matches found**:
@@ -173,7 +179,7 @@ Action: Execute accessibility review with Act protocol
 User: "faire la chambre"
 No condensed match found
 No local match found
-Action: Invoke olaf-help-me skill to guide user
+Action: Invoke help-me-olaf skill to guide user
 ```
 
 ## Validation Checklist
@@ -182,7 +188,7 @@ Before executing, verify:
 - [ ] User request captured and understood
 - [ ] Condensed framework searched first
 - [ ] Local filesystem searched if needed
-- [ ] olaf-help-me invoked if no match
+- [ ] help-me-olaf invoked if no match
 - [ ] Matched skill file exists and is readable
 - [ ] Execution protocol correctly identified
 - [ ] User informed of matched skill before execution

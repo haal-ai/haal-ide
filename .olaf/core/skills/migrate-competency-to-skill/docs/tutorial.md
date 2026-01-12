@@ -335,4 +335,4 @@ After migration, test integration:
 
 The migrate-competency-to-skill automates the complex process of extracting competency features and transforming them into standalone, schema-compliant skills. By following this tutorial and using the provided validation checkpoints, you can successfully migrate features while maintaining functionality and ensuring architectural compliance.
 
-For additional help, use the `olaf-help-me` skill with questions about migration processes or schema compliance.
+For additional help, use the `help-me-olaf` skill with questions about migration processes or schema compliance.

@@ -35,7 +35,7 @@ Use the first matching mapping with its file and protocol.
   [{"git commit", "commit changes", "commit files"}, "[id:global_skills_dir]skills\git-add-commit/prompts/git-add-commit.md", "Propose-Confirm-Act"]
   [{"import unchanged", "import as-is", "preserve prompt", "import prompt unchanged", "add prompt unchanged"}, "[id:global_skills_dir]skills\import-prompt-unchanged/prompts/import-prompt-unchanged.md", "Propose-Confirm-Act"]
   [{"list skill", "show skills", "list olaf commands", "skill list"}, "[id:global_skills_dir]skills\list-skills/prompts/list-skills.md", "Act"]
-  [{"olaf help", "olaf i need you", "olaf help me"}, "[id:global_skills_dir]skills\olaf-help-me/prompts/olaf-help-me.md", "Act"]
+  [{"olaf help", "olaf i need you", "olaf help me"}, "[id:global_skills_dir]skills\help-me-olaf/prompts/help-me-olaf.md", "Act"]
   [{"select competency collection", "select-competency-collection skill"}, "[id:global_skills_dir]skills\select-competency-collection/prompts/select-competency-collection.md", "Act"]
   [{"store conversation record", "store-conversation-record skill"}, "[id:global_skills_dir]skills\store-conversation-record/prompts/store-conversation-record.md", "Act"]
   [{"switch context", "context switch", "change project", "change context", "switch task"}, "[id:global_skills_dir]skills\switch-context/prompts/switch-context.md", "Propose-Act"]

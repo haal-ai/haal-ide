@@ -373,7 +373,7 @@ Then describe to assistant which one matches your need
 
 - `list-skills` - Browse all available skills
 - `use-skill` - Execute specific skills directly
-- `olaf-help-me` - General OLAF assistance
+- `help-me-olaf` - General OLAF assistance
 - `tell-me` - Learn about OLAF features
 
 ## Summary

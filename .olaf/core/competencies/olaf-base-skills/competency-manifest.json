@@ -47,7 +47,7 @@
       "git-add-commit",
       "import-prompt-unchanged",
       "list-skills",
-      "olaf-help-me",
+      "help-me-olaf",
       "select-competency-collection",
       "store-conversation-record",
       "switch-context",
@@ -108,8 +108,8 @@
         "manifest": "skills/list-skills/skill-manifest.json"
       },
       {
-        "id": "olaf-help-me",
-        "manifest": "skills/olaf-help-me/skill-manifest.json"
+        "id": "help-me-olaf",
+        "manifest": "skills/help-me-olaf/skill-manifest.json"
       },
       {
         "id": "select-competency-collection",

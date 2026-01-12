@@ -143,7 +143,7 @@ Progressive skill suggestions:
 **Complements**:
 - `list-skills` - Discover all available skills
 - `use-skill` - Execute specific skills
-- `olaf-help-me` - General OLAF assistance
+- `help-me-olaf` - General OLAF assistance
 
 ## Success Criteria
 

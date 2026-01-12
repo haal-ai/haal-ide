@@ -186,4 +186,4 @@ For complex topics, use iterative approach:
 
 The lean-and-search skill provides structured methodology for efficient learning and knowledge acquisition. Focus on specific objectives, validate understanding through application, and maintain high-quality documentation for future reference.
 
-For additional help, use the `olaf-help-me` skill with questions about lean-and-search usage.
+For additional help, use the `help-me-olaf` skill with questions about lean-and-search usage.

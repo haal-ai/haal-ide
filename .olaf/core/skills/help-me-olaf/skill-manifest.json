@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "id": "olaf-help-me",
+    "id": "help-me-olaf",
     "name": "OLAF Help Me",
     "shortDescription": "Discover available skills and prompts",
     "description": "This skill provides interactive help and guidance for using OLAF, helping users discover available skills, understand protocols, and navigate the framework effectively.",
@@ -38,8 +38,8 @@
   "bom": {
     "prompts": [
       {
-        "name": "olaf-help-me",
-        "path": "/prompts/olaf-help-me.md",
+        "name": "help-me-olaf",
+        "path": "/prompts/help-me-olaf.md",
         "description": "Interactive help workflow"
       }
     ],
