@@ -449,6 +449,27 @@ def ensure_git_available() -> None:
         raise RuntimeError("git is required but could not be executed (git --version failed).") from ex
 
 
+def ensure_git_repo(local_root: Path, *, init_if_missing: bool) -> None:
+    if (local_root / ".git").exists():
+        return
+    if not init_if_missing:
+        raise RuntimeError(
+            f"Local path is not a git repository (missing .git): {local_root}\n"
+            "Either run 'git init' (or clone a repo) first, or re-run with --init-git."
+        )
+
+    local_root.mkdir(parents=True, exist_ok=True)
+    run(["git", "init"], cwd=local_root, quiet=True)
+
+
+def _normalize_windows_drive_letter(path_str: str) -> str:
+    # Some tooling treats workspace paths as case-sensitive on Windows.
+    # Normalize drive letter to lowercase to avoid C: vs c: mismatches.
+    if len(path_str) >= 2 and path_str[1] == ":" and path_str[0].isalpha():
+        return path_str[0].lower() + path_str[1:]
+    return path_str
+
+
 def rmtree_if_exists(path: Path) -> None:
     if not path.exists():
         return
@@ -635,7 +656,7 @@ def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) ->
 
 
 def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
-    target_pattern = f"{target_dir.as_posix()}/**"
+    target_pattern = f"{_normalize_windows_drive_letter(target_dir.as_posix())}/**"
 
     readonly = settings.get("files.readonlyInclude")
     if readonly is None:
@@ -671,7 +692,7 @@ def write_code_workspace(repo_root: Path, target_dir: Path, *, window_title: str
     workspace = {
         "folders": [
             {"path": "."},
-            {"path": str(target_dir)},
+            {"path": _normalize_windows_drive_letter(str(target_dir))},
         ],
         "settings": {
             "window.title": window_title,
@@ -728,7 +749,7 @@ def ensure_workspace_has_target(workspace_path: Path, target_dir: Path, *, windo
     if not isinstance(settings, dict):
         raise RuntimeError(f"Workspace 'settings' must be an object: {workspace_path}")
 
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     already = False
     for f in folders:
         if isinstance(f, dict) and f.get("path") == target_str:
@@ -827,7 +848,7 @@ def _is_text_file(path: Path) -> bool:
 
 def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None = None) -> int:
     replaced = 0
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     replacements = {
         "~/.olaf": target_str,
         "~/.olaf/": target_str + os.sep,
@@ -1068,6 +1089,12 @@ def main() -> int:
     parser.add_argument("--repo", default=None, help="GitHub repo in owner/repo form (defaults from olaf-config.json if present)")
     parser.add_argument("--branch", default=None, help="Git branch name (defaults from olaf-config.json if present)")
     parser.add_argument(
+        "--init-git",
+        "--git-init",
+        action="store_true",
+        help="If --local is not a git repo, run 'git init' in that folder",
+    )
+    parser.add_argument(
         "--clean-global",
         action="store_true",
         help="Delete the global target folder (default: ~/.olaf) before reinstalling",
@@ -1101,6 +1128,8 @@ def main() -> int:
         launch_root = Path.cwd()
         local_root = Path(os.path.expanduser(args.local)).resolve() if args.local else launch_root
         window_title = f"{local_root.name} (olaf)"
+
+        ensure_git_repo(local_root, init_if_missing=bool(args.init_git))
 
         cfg_repo, cfg_branch = load_install_seed_from_local_config(local_root)
         repo = args.repo if isinstance(args.repo, str) and args.repo.strip() else cfg_repo
