@@ -14,6 +14,7 @@ Get current timestamp in `YYYYMMDD-HHmm` format
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **changelog_type**: enum[Functional,Technical] - Type of changelog to update (REQUIRED)
+- **entry_type**: string - Entry type label used at the start of the changelog line (REQUIRED)
 - **entry_description**: string - Concise description of the change (REQUIRED)
 - **additional_context**: string - Detailed information for the linked detail file (REQUIRED)
 - **subject_name**: string - Brief subject name for the detail file (kebab-case) (OPTIONAL - auto-generated if not provided)
@@ -27,6 +28,9 @@ You MUST follow the established interaction protocol strictly:
 ### 1. Validation Phase
 You WILL verify all requirements:
 - Confirm changelog_type is either "Functional" or "Technical"
+- Validate entry_type matches the target changelog conventions:
+  - If Functional: Feature|Documentation|Enhancement|Setup
+  - If Technical: Refactor|Architecture|Infrastructure|Fix|Cleanup|Breaking|Setup
 - Validate entry_description is concise and clear
 - Check additional_context provides sufficient detail
 - Auto-generate subject_name from entry_description if not provided
@@ -36,7 +40,11 @@ You WILL execute these operations:
 
 **Template Loading**:
 - Load appropriate template: `templates/[changelog_type-lowercase]-changelog-template.md`
-- Parse template for entry format and detail file structure
+- Parse template for detail file structure only
+
+**Changelog Line Format (REGISTER INSERTION)**:
+- The inserted line in `[id:product_dir]changelog-[changelog_type-lowercase].md` MUST follow this exact format:
+  - `- <entry_type>: <entry_description> [Details]([changelog_type-lowercase]/[subject_name].md)`
 
 **File Operations**:
 - Read current changelog: `[id:product_dir]changelog-[changelog_type-lowercase].md`
@@ -46,7 +54,7 @@ You WILL execute these operations:
 - Populate detail file using template structure with additional_context
 
 **Core Logic**: Execute following template requirements
-- Apply appropriate entry type from template
+- Do NOT infer the changelog line format from templates
 - Generate clickable markdown link format: `[Details]([subfolder]/[subject_name].md)`
 - Maintain proper date section hierarchy (YYYY-MM format, then YYYY-MM-DD subsections)
 - Preserve existing formatting and structure
