@@ -384,6 +384,16 @@ def load_install_seed_from_local_config(local_root: Path) -> tuple[str | None, s
     return repo_out, branch_out
 
 
+def _seed_source_label(*, args_repo: str | None, args_branch: str | None, cfg_repo: str | None, cfg_branch: str | None) -> str:
+    if isinstance(args_repo, str) and args_repo.strip():
+        return "CLI (--repo/--branch)"
+    if isinstance(args_branch, str) and args_branch.strip():
+        return "CLI (--repo/--branch)"
+    if (cfg_repo and cfg_repo.strip()) or (cfg_branch and cfg_branch.strip()):
+        return "olaf-config.json"
+    return "built-in defaults"
+
+
 def ensure_git_available() -> None:
     try:
         subprocess.run(["git", "--version"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -818,6 +828,42 @@ def ensure_local_olaf_skeleton(repo_root: Path) -> Path:
     return local_olaf
 
 
+def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
+    local_olaf = ensure_local_olaf_skeleton(repo_root)
+    comp_dir = local_olaf / "core" / "competencies" / "team-competencies"
+    manifest_path = comp_dir / "competency-manifest.json"
+    if manifest_path.exists():
+        return manifest_path
+
+    comp_dir.mkdir(parents=True, exist_ok=True)
+
+    # Minimal manifest so team-competencies can be treated as a local kernel competency,
+    # even before a team defines any skills.
+    manifest = {
+        "metadata": {
+            "id": "team-competencies",
+            "name": "Team Competencies",
+            "shortDescription": "Team-maintained local competency",
+            "description": "Local competency package for team/project skills.",
+            "version": "1.0.0",
+            "objectives": ["Provide a local place to register team skills"],
+            "tags": ["team", "local"],
+            "author": "OLAF",
+            "status": "experimental",
+            "exposure": "internal",
+            "created": datetime.now().strftime("%Y-%m-%d"),
+            "updated": datetime.now().strftime("%Y-%m-%d"),
+        },
+        "bom": {
+            "skills": [],
+            "entry_points": [],
+        },
+    }
+
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest_path
+
+
 def copy_team_competencies_manifest(clone_root: Path, repo_root: Path) -> None:
     src_competencies = clone_root / ".olaf" / "core" / "competencies"
     if not src_competencies.exists():
@@ -981,6 +1027,18 @@ def main() -> int:
         if not branch:
             branch = "main"
 
+        print("\n============================================================")
+        print("  OLAF Installer")
+        print("============================================================")
+        print(f"Seed source: {_seed_source_label(args_repo=args.repo, args_branch=args.branch, cfg_repo=cfg_repo, cfg_branch=cfg_branch)}")
+        if cfg_repo or cfg_branch:
+            print(f"olaf-config.json: repo={cfg_repo or '(unset)'} branch={cfg_branch or '(unset)'}")
+        if isinstance(args.repo, str) and args.repo.strip():
+            print(f"CLI override: repo={args.repo.strip()}")
+        if isinstance(args.branch, str) and args.branch.strip():
+            print(f"CLI override: branch={args.branch.strip()}")
+        print(f"Effective seed: {repo}@{branch}\n")
+
         # fixed temp clone directory
         temp_base = Path(tempfile.gettempdir())
         clone_dir = temp_base / "haal_olaf_clone"
@@ -996,7 +1054,10 @@ def main() -> int:
 
         secondary = load_registry_from_clone(clone_dir)
         if secondary:
-            print(f"Global install: found {len(secondary)} secondary repo(s) in olaf-registry.json")
+            print(f"Registry: found {len(secondary)} secondary repo(s) in olaf-registry.json")
+            for srepo, sbranch in secondary:
+                print(f"- secondary: {srepo}@{sbranch}")
+            print("")
         for idx, (srepo, sbranch) in enumerate(secondary, start=1):
             sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
             print(f"Global install: merging secondary [{idx}/{len(secondary)}] {srepo}@{sbranch}")
@@ -1005,6 +1066,8 @@ def main() -> int:
 
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
+
+        print("Global install: restoring user competency my-competencies")
 
         restore_my_competencies(target_dir, preserve_root)
 
@@ -1020,6 +1083,15 @@ def main() -> int:
 
         # Prefer local competency-collections (user may have modified it). If missing, seed it from target.
         local_collections_file = ensure_local_competency_collections(local_root, target_dir)
+
+        # Ensure local kernel competency 'team-competencies' exists.
+        # Prefer copying the skeleton from the seed clone; fallback to generating a minimal manifest.
+        try:
+            copy_team_competencies_manifest(clone_dir, local_root)
+        except Exception:
+            pass
+        _ = ensure_local_team_competencies_manifest(local_root)
+
         collection_id = _pick_collection_id_from_file(local_collections_file)
         if not collection_id:
             collection_id = _pick_collection_id_from_file(target_dir / "core" / "reference" / "competency-collections.json")

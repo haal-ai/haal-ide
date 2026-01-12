@@ -19,7 +19,6 @@
   },
   "bom": {
     "skills": [
-      "check-prompt-compliance",
       "condense-olaf-framework",
       "convert-prompt-to-skill",
       "create-competency-package",
@@ -29,7 +28,6 @@
       "select-competency-collection"
     ],
     "entry_points": [
-      { "id": "check-prompt-compliance", "manifest": "skills/check-prompt-compliance/skill-manifest.json" },
       { "id": "condense-olaf-framework", "manifest": "skills/condense-olaf-framework/skill-manifest.json" },
       { "id": "convert-prompt-to-skill", "manifest": "skills/convert-prompt-to-skill/skill-manifest.json" },
       { "id": "create-competency-package", "manifest": "skills/create-competency-package/skill-manifest.json" },

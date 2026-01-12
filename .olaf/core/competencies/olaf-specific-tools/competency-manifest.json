@@ -38,9 +38,7 @@
       "detect-schema-drift",
       "generate-validation-report",
       "merge-competency-pack-to-main",
-      "validate-all-competency-packs",
-      "validate-olaf-artifacts",
-      "verify-competency-compliance"
+      "validate-olaf-artifacts"
     ],
     "entry_points": [
       {
@@ -56,16 +54,8 @@
         "manifest": "skills/merge-competency-pack-to-main/skill-manifest.json"
       },
       {
-        "id": "validate-all-competency-packs",
-        "manifest": "skills/validate-all-competency-packs/skill-manifest.json"
-      },
-      {
         "id": "validate-olaf-artifacts",
         "manifest": "skills/validate-olaf-artifacts/skill-manifest.json"
-      },
-      {
-        "id": "verify-competency-compliance",
-        "manifest": "skills/verify-competency-compliance/skill-manifest.json"
       }
     ]
   }
