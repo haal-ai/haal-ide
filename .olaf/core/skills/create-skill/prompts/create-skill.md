@@ -4,8 +4,7 @@ description: Generate structured skills following established template and princ
 tags: [skill, generation, engineering, template, prompt-engineer]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 
-~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -34,10 +33,10 @@ You MUST follow the established interaction protocol strictly:
 You WILL verify all requirements:
 - Confirm user request is clear and actionable
 - Validate skill name follows kebab-case convention (max 4 words)
-- Check both global (`~/.olaf/core/skills/`) and local (`./.olaf/core/skills/`) for existing skills with similar functionality
+- Check both global (`[id:global_skills_dir]`) and local (`[id:local_skills_dir]`) for existing skills with similar functionality
 - Validate skill type selection (orchestrator/workflow/prompt)
 - Validate skill_location choice (global/local) and explain difference
-- Validate target competency: check if exists in both global (`~/.olaf/core/competencies/`) and local (`./.olaf/core/competencies/`) directories, or validate new competency name
+- Validate target competency: check if exists in both global (`[id:global_olaf_dir]core/competencies/`) and local (`[id:core_olaf_dir]core/competencies/`) directories, or validate new competency name
 - Check access to required template and principles files from skill templates
 
 ### 1.b Skill Location Discovery Phase
@@ -46,14 +45,14 @@ You WILL determine where to create the skill:
 **Skill Location Discovery:**
 - Ask user: "Where should this skill be created?"
 - Present options:
-  1. **Global** (`~/.olaf/core/skills/`) - Available across all your projects
-  2. **Local** (`./.olaf/core/skills/`) - Specific to this project only
+  1. **Global** (`[id:global_skills_dir]`) - Available across all your projects
+  2. **Local** (`[id:local_skills_dir]`) - Specific to this project only
 - Explain difference: "Global skills are shared across all projects, local skills are project-specific"
 - Default to "global" if user doesn't specify
 
 **Validation:**
-- If global: Ensure `~/.olaf/core/skills/` directory exists
-- If local: Ensure `./.olaf/core/skills/` directory exists in project
+- If global: Ensure `[id:global_skills_dir]` directory exists
+- If local: Ensure `[id:local_skills_dir]` directory exists in project
 - Check for existing skill with same name in chosen location
 
 ### 1.c Component Discovery Phase

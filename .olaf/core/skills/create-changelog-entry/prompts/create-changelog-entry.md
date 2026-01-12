@@ -10,6 +10,8 @@ tags: [changelog, documentation, versioning, maintenance]
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
+CRITICAL: Skill-local resource resolution: any reference to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to this skill root directory (the parent folder of `prompts/`).
+
 ## Time Retrieval
 Get current timestamp in `YYYYMMDD-HHmm` format
 

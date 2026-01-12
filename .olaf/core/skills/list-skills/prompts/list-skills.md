@@ -10,13 +10,15 @@ Refer to [id:competency_index] which is wrapped in the <olaf-query-competency-in
 
 Instructions:
 - Read the full <olaf-interaction-protocols>.
-- Present a concise list of all available competencies from the current index with:
-  - Title
-  - Prompt path
-  - Protocol
+- Present a concise list of all available competencies from the current index.
+- Output MUST be a numbered list.
+- Each line MUST follow this exact format:
+  - `N. <Skill Name> - <Protocol>`
+- Do NOT include prompt paths, descriptions, tags, or any additional fields in the list output.
 - If the user did not specify a particular task, ask 1-2 clarifying questions to narrow choices.
 - When the user selects an item, execute the corresponding competency file.
 
 Example format:
-1. Analyze project onboarding — prompt: analyze-project-onboarding.md — Protocol: Propose-Act2. Prepare conversation handover — prompt: prepare-conversation-handover.md — Protocol: Propose-Confirm-Act
-3. Store conversation record — prompt: store-conversation-record.md — Protocol: Act
+1. Analyze Project Onboarding - Propose-Act
+2. Prepare Conversation Handover - Propose-Confirm-Act
+3. Store Conversation Record - Act

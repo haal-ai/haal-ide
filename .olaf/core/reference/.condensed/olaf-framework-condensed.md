@@ -117,6 +117,12 @@ This document contains the mandatory, binding rules that  MUST be followed at al
 - **Language**: All communication and documentation MUST use US English
 - **Encoding**: All text files MUST use UTF-8 encoding
 
+## 2.1 Skill-Local Resource Path Resolution
+
+- **Skill root**: For any skill prompt located at `.../<skill-name>/prompts/<prompt>.md`, the skill root is `.../<skill-name>/`.
+- **Relative resources**: Any reference in a skill prompt to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to the skill root (NOT relative to the repo root).
+- **Search scope**: When a referenced resource cannot be found, search within the skill root first before searching elsewhere.
+
 ## 3. Communication Standards
 
 - **Be direct**: State actions without filler words
