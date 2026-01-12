@@ -1,6 +1,6 @@
 ---
 name: help-me-olaf
-description: Intelligent help router that discovers available skills and prompts, or captures new needs for prompt creation
+description: Intelligent help router that discovers available skills and prompts, or captures new needs for skill creation
 tags: [help, discovery, skill-search, prompt-routing, assistance, olaf]
 ---
 
@@ -32,12 +32,12 @@ You MUST follow the established interaction protocol strictly:
 - You WILL use Act for discovery and search operations (non-destructive analysis)
 - You WILL use Act for presenting matching skills
 - You WILL use Propose-Act before executing any skill (requires user confirmation)
-- You WILL use Propose-Confirm-Act if offering to create a new prompt
+- You WILL use Propose-Confirm-Act if offering to create a new skill
 
 ## Purpose
 This prompt acts as an intelligent help discovery system that:
 1. Understands user needs through conversational inquiry2. Searches for matching skills in available frameworks
-3. Routes to appropriate skills or offers prompt creation
+3. Routes to appropriate skills or offers skill creation
 
 ## Process
 
@@ -136,29 +136,29 @@ You WILL:
 
 Your need: "[user's request summary]"
 
-I can help you create a new prompt for this using the create-prompt skill!
+I can help you create a new skill for this using the create-skill skill!
 
 Would you like to:
-1. Create a new prompt for this (using create-prompt)
+1. Create a new skill for this (using create-skill)
 2. Refine your search (describe differently)
 3. Browse all available skills
 ```
 
-### Phase 4: Prompt Creation Offer
+### Phase 4: Skill Creation Offer
 
-If no competency is found, you WILL offer prompt creation:
+If no competency is found, you WILL offer skill creation:
 
 You WILL:
 - Summarize the user's captured need
-- Explain what a new prompt would do
-- Offer to use **create-prompt** skill to create it
-- If user agrees: Execute create-prompt workflow
-**Captured Information** that you will have ready for create-prompt:
+- Explain what a new skill would do
+- Offer to use **create-skill** skill to create it
+- If user agrees: Execute create-skill workflow
+**Captured Information** that you will have ready for create-skill:
 - `user_request`: The user's articulated need
-- Suggested `prompt_name`: Based on their request
+- Suggested `skill_name`: Based on their request
 - Suggested `target_competency`: Based on context
 
-### Phase 5: Information Capture (if creating new prompt)
+### Phase 5: Information Capture (if creating new skill)
 
 You WILL capture:
 - **What** they want to accomplish (task description)
@@ -167,7 +167,7 @@ You WILL capture:
 - **Success criteria** (how they'll know it works)
 - **Constraints** (limitations or requirements)
 
-You WILL format this as a clear need statement for the create-prompt skill.
+You WILL format this as a clear need statement for the create-skill skill.
 
 ## User Interaction Flow
 
@@ -177,8 +177,8 @@ Agent: Ask clarifying questions → Understand need
 Agent: Search 1 (condensed) → Match? YES → Execute
 Agent: Search 2 (collections) → Match? YES → Execute
 Agent: Search 3 (filesystem) → Match? YES → Execute
-Agent: Capture need → Offer create-prompt → User agrees?
-Agent: Execute create-prompt with captured information
+Agent: Capture need → Offer create-skill → User agrees?
+Agent: Execute create-skill with captured information
 ```
 
 ## Domain-Specific Rules
@@ -188,8 +188,8 @@ You MUST follow these constraints:
 - **Rule 2**: Show confidence scores to help user evaluate relevance
 - **Rule 3**: Offer to search differently if user is unsatisfied
 - **Rule 4**: Never assume - always ask about context and goals
-- **Rule 5**: Preserve all captured information for prompt creation
-- **Rule 6**: Present create-prompt offer clearly as next step after unsuccessful search
+- **Rule 5**: Preserve all captured information for skill creation
+- **Rule 6**: Present create-skill offer clearly as next step after unsuccessful search
 - **Rule 7**: Execute only if user explicitly confirms skill match
 - **Rule 8**: Handle search errors gracefully (missing files, read errors, etc.)
 
@@ -227,9 +227,9 @@ You MUST follow these constraints:
 - ALWAYS preserve captured user information through entire session
 - NEVER assume competency match - require user confirmation
 - ALWAYS handle missing/inaccessible files gracefully with fallback search
-- NEVER terminate help without offering create-prompt if no competency found
+- NEVER terminate help without offering create-skill if no competency found
 - ALWAYS show search process for transparency to user
-- NEVER proceed to create-prompt without full need capture
+- NEVER proceed to create-skill without full need capture
 - ALWAYS present top matches ranked by confidence score
 
 ## Error Handling
@@ -237,7 +237,7 @@ You MUST follow these constraints:
 You WILL handle gracefully:
 - **File not found**: "Framework file not accessible, searching alternatives..."
 - **Invalid JSON**: "Collection metadata not readable, searching filesystem..."
-- **No matches found**: Present to user, offer capture → create-prompt
+- **No matches found**: Present to user, offer capture → create-skill
 - **Ambiguous request**: Ask clarifying questions
 - **User confusion**: Explain search process, offer manual browsing
 
@@ -246,8 +246,8 @@ You WILL handle gracefully:
 You WILL consider the task complete when:
 - [ ] User's need is clearly understood and documented
 - [ ] Skill search completed in all 3 phases
-- [ ] User either executed a skill OR agreed to create-prompt
-- [ ] If creating: All required parameters captured for create-prompt
+- [ ] User either executed a skill OR agreed to create-skill
+- [ ] If creating: All required parameters captured for create-skill
 - [ ] User knows what happens next (execution or creation workflow)
 
 ## Output Format
@@ -276,13 +276,14 @@ If skill is found:
 
 If no skill found:
 - Capture need completely
-- Prepare for create-prompt workflow
-- User approves → Trigger create-prompt with all captured info
+- Prepare for create-skill workflow
+- User approves → Trigger create-skill with all captured info
 
 ## Quick Reference: Skill Patterns
 
 Common topics and their skill patterns:
 - "create/generate/write prompt" → create-prompt (Propose-Confirm-Act)
+- "create/generate/new skill" → create-skill (Propose-Confirm-Act)
 - "review/analyze code" → review-code (Act)
 - "test/augment tests" → augment-code-unit-test (Propose-Act)
 - "workflow/automate" → generate-workflow (Act)
