@@ -161,6 +161,63 @@ def ensure_local_competency_collections(local_root: Path, target_dir: Path) -> P
     return local_file
 
 
+def sync_global_active_collection_from_seed(*, clone_dir: Path, target_dir: Path) -> None:
+    """Ensure global competency-collections active_collection follows the seed clone (seed wins)."""
+
+    seed_file = clone_dir / ".olaf" / "core" / "reference" / "competency-collections.json"
+    target_file = target_dir / "core" / "reference" / "competency-collections.json"
+
+    if not seed_file.exists() or not seed_file.is_file():
+        return
+    if not target_file.exists() or not target_file.is_file():
+        return
+
+    try:
+        seed_data = json.load(open(seed_file, "r", encoding="utf-8"))
+        target_data = json.load(open(target_file, "r", encoding="utf-8"))
+    except Exception:
+        return
+
+    if not isinstance(seed_data, dict) or not isinstance(target_data, dict):
+        return
+
+    seed_meta = seed_data.get("metadata")
+    if not isinstance(seed_meta, dict):
+        return
+
+    seed_active = seed_meta.get("active_collection")
+    if not isinstance(seed_active, str) or not seed_active.strip():
+        return
+    seed_active = seed_active.strip()
+
+    # Only apply if the seed's active collection exists in the target's collection list.
+    target_collections = target_data.get("collections")
+    if not isinstance(target_collections, list):
+        return
+    target_ids: set[str] = set()
+    for c in target_collections:
+        if isinstance(c, dict):
+            cid = c.get("id")
+            if isinstance(cid, str) and cid:
+                target_ids.add(cid)
+    if seed_active not in target_ids:
+        return
+
+    target_meta = target_data.get("metadata")
+    if not isinstance(target_meta, dict):
+        target_meta = {}
+        target_data["metadata"] = target_meta
+
+    if target_meta.get("active_collection") == seed_active:
+        return
+
+    target_meta["active_collection"] = seed_active
+    target_meta["lastUpdated"] = datetime.now().isoformat()
+
+    with open(target_file, "w", encoding="utf-8") as f:
+        json.dump(target_data, f, indent=2)
+
+
 def _load_competency_locations(collections_file: Path) -> dict[str, str]:
     try:
         data = json.load(open(collections_file, "r", encoding="utf-8"))
@@ -1427,6 +1484,19 @@ def main() -> int:
         install_minimal_tools(target_dir, clone_dir)
 
         ensure_global_olaf_folder_protection(target_dir)
+
+        # Seed wins for global active collection selection.
+        sync_global_active_collection_from_seed(clone_dir=clone_dir, target_dir=target_dir)
+
+        # Regenerate global index under ~/.olaf based on global collection selection.
+        # This is separate from the repo-local index under <repo>/.olaf.
+        global_collection_id = _pick_collection_id_from_file(
+            target_dir / "core" / "reference" / "competency-collections.json"
+        )
+        if not global_collection_id:
+            global_collection_id = "core"
+        global_index_path = generate_query_competency_index(target_dir, collection_id=global_collection_id)
+        print(f"Global install: competency index generated -> {global_index_path}")
 
         # Rewrite any hardcoded references to ~/.olaf inside the installed target
         rewritten = rewrite_olaf_paths(target_dir, target_dir)

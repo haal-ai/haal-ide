@@ -33,10 +33,6 @@ class CollectionSelector:
     # Menu constants
     MIN_MENU_CHOICE = 1
     MAX_ALIASES_DISPLAY = 3
-
-    LEGACY_SKILL_ID_MAP = {
-        "olaf-help-me": "help-me-olaf",
-    }
     
     def __init__(self, execution_mode=2, *, local_root: str | None = None):
         self.script_dir = Path(__file__).parent
@@ -81,19 +77,6 @@ class CollectionSelector:
         # Output index to local project's reference directory
         self.index_output = self.local_core_dir / "reference" / self.INDEX_FILENAME
         self.execution_mode = execution_mode  # Configurable auto_execution_mode
-
-    def _canonical_skill_id(self, skill_id: str | None) -> str | None:
-        if not isinstance(skill_id, str):
-            return None
-        sid = skill_id.strip()
-        if not sid:
-            return None
-        return self.LEGACY_SKILL_ID_MAP.get(sid, sid)
-
-    def _prefer_new_path(self, prev_path: str, new_path: str) -> str:
-        if "help-me-olaf" in new_path and "help-me-olaf" not in prev_path:
-            return new_path
-        return prev_path
         
     def _handle_error(self, message: str, exit_code: int = 1):
         """Consistent error handling with exit"""
@@ -465,7 +448,7 @@ class CollectionSelector:
             
             # Process BOM entry_points: each references a skill manifest
             for ep in entry_points:
-                skill_id = self._canonical_skill_id(ep.get('id'))
+                skill_id = ep.get('id')
                 skill_manifest_path = ep.get('manifest', '')
                 skill_location = ep.get('location', 'global')  # Default to global
                 
@@ -534,8 +517,7 @@ class CollectionSelector:
                     duplicates_removed += 1
                     prev_path, prev_protocol, prev_aliases = entries[skill_id]
                     prev_aliases.update(aliases)
-                    chosen_path = self._prefer_new_path(prev_path, full_path)
-                    entries[skill_id] = (chosen_path, prev_protocol, prev_aliases)
+                    entries[skill_id] = (prev_path, prev_protocol, prev_aliases)
                 else:
                     entries[skill_id] = (full_path, protocol, set(aliases))
 
@@ -754,7 +736,7 @@ end-of-competency-index
                 # Legacy fallback (root-level entry_points)
                 entry_points = manifest.get('entry_points', [])
             for ep in entry_points:
-                skill_id = self._canonical_skill_id(ep.get('id'))
+                skill_id = ep.get('id')
                 skill_manifest_rel = ep.get('manifest')
                 if not skill_id or not skill_manifest_rel:
                     continue
