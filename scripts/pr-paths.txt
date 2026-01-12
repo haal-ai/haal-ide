@@ -65,4 +65,4 @@ docs/install/
 scripts/
 
 _olaf-registry.json
-olaf-config.json
+_olaf-config.json

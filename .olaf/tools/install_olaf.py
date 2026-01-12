@@ -401,7 +401,7 @@ def _normalize_registry_repo(value: str) -> str:
 
 
 def load_install_seed_from_local_config(local_root: Path) -> tuple[str | None, str | None]:
-    """Load install seed from local repo olaf-config.json.
+    """Load install seed from local repo _olaf-config.json (preferred) or olaf-config.json.
 
     Expected format:
       {
@@ -410,7 +410,9 @@ def load_install_seed_from_local_config(local_root: Path) -> tuple[str | None, s
       }
     """
 
-    config_path = local_root / "olaf-config.json"
+    config_path = local_root / "_olaf-config.json"
+    if not config_path.exists() or not config_path.is_file():
+        config_path = local_root / "olaf-config.json"
     if not config_path.exists() or not config_path.is_file():
         return None, None
 
@@ -434,7 +436,7 @@ def _seed_source_label(*, args_repo: str | None, args_branch: str | None, cfg_re
     if isinstance(args_branch, str) and args_branch.strip():
         return "CLI (--repo/--branch)"
     if (cfg_repo and cfg_repo.strip()) or (cfg_branch and cfg_branch.strip()):
-        return "olaf-config.json"
+        return "local config (_olaf-config.json/olaf-config.json)"
     return "built-in defaults"
 
 

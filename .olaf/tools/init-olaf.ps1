@@ -25,7 +25,10 @@ function Get-RepoRoot {
 function Get-ConfigDefaults {
   param([string]$RepoRoot)
 
-  $configPath = Join-Path $RepoRoot 'olaf-config.json'
+  $configPath = Join-Path $RepoRoot '_olaf-config.json'
+  if (-not (Test-Path -LiteralPath $configPath)) {
+    $configPath = Join-Path $RepoRoot 'olaf-config.json'
+  }
   if (-not (Test-Path -LiteralPath $configPath)) {
     return @{}
   }

@@ -74,7 +74,7 @@ context.timestamp = "20251120-143022"
 
 ### Backup a configuration file
 ```
-context.file_to_backup = ".olaf/olaf-config.json"
+context.file_to_backup = ".olaf/_olaf-config.json"
 context.backup_dir = ".olaf/backups/configs"
 context.backup_suffix = "pre-update"
 context.timestamp = "20251120-143022"
