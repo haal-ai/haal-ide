@@ -8,7 +8,9 @@ tags: [documentation, decision-making, governance]
 
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -30,9 +32,9 @@ Get current timestamp using time tools, fallback to shell command if needed
 1. **Record Creation**:
    - Generate unique ID (DR-YYYYMMDD-NN)
    - Create file in `[id:decision_records_dir]`
-   - Populate using `[id:decision-record-template]`
+   - Populate using `templates/project-manager/decision-record-template.md`
 2. **Documentation Updates**:
-   - Add entry to `[id:decision-records-register]`
+   - Add entry to `[id:decision_records_dir]decision-records-register.md`
    - Update relevant indexes
    - Create changelog entry
 3. **Validation**:
@@ -45,7 +47,7 @@ Get current timestamp using time tools, fallback to shell command if needed
 Use `templates/project-manager/decision-record-template.md` to structure the decision record:
 - Follow the template's sections for consistency
 - Create file: `[id:decision_records_dir]YYYYMMDD-title-as-kebab-case.md`
-- Register entry in `[id:decision-records-register]`
+- Register entry in `[id:decision_records_dir]decision-records-register.md`
 - Changelog entry in `[id:changelog_register]`
 
 ## Output to USER
@@ -59,6 +61,7 @@ Use `templates/project-manager/decision-record-template.md` to structure the dec
    - Follow-up actions
 
 ## Domain-Specific Rules
+- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
 - Rule 1: Follow existing naming conventions
 - Rule 2: Maintain cross-references
 - Rule 3: Preserve decision history

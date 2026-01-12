@@ -13,7 +13,7 @@
 
 1. **Session Setup First**: You MUST acknowledge this condensed framework is loaded and self-sufficient at the beginning of a new session.
 2. **CRITICAL: MANDATORY SKILL DISCOVERY WORKFLOW**: For ALL user requests containing "olaf", you MUST follow this exact sequence:
-   - **Step 1**: Always query [id:competency_index] for skill matches FIRST
+   - **Step 1**: Always query [id:competency_index] for skill matches FIRST (this file is wrapped in the <olaf-query-competency-index> tag)
    - **Step 2**: Check user request against all skill patterns in mappings
    - **Step 3**: Execute matched skill using file and protocol from first matching mapping
    - **Step 4**: NEVER go directly to skill files without index lookup
@@ -45,11 +45,10 @@
 # This is a context-dependent reference to the user's project being analyzed/developed (not OLAF itself)
 # Used by developer and workflow prompts to reference the codebase under analysis
 
-### Core solution [id:core_olaf_dir] = `/.olaf/`
-# Example usage:
-# [id:core_olaf_dir]README.md → refers to C:\Users\ppaccaud\.olaf/README.md
+### Core solution [id:core_olaf_dir] = `.olaf/`
+# Repo-local OLAF folder (workspace-scoped)
 
-### Global OLAF [id:global_olaf_dir] = `C:\Users\ppaccaud\.olaf/`
+### Global OLAF [id:global_olaf_dir] = `~/.olaf/`
 
 ### Additional Directories
 - **Docs Directory** [id:docs_dir] = `[id:core_olaf_dir]docs/`
@@ -75,6 +74,7 @@
 - **Condensed Framework Directory** [id:condensed_dir] = `[id:reference_dir].condensed/`
 - **Condensed Framework** [id:condensed_framework] = `[id:condensed_dir]olaf-framework-condensed.md`
 - **Competency Index** [id:competency_index] = `[id:reference_dir]query-competency-index.md`
+# CRITICAL: [id:competency_index] MUST always resolve to the repo-local .olaf/ tree via [id:core_olaf_dir]. Never load this index from [id:global_olaf_dir].
 - **Core Principles** [id:core_principles] = `[id:reference_dir]core-principles.md`
 - **Team Delegation** [id:team_delegation] = `[id:reference_dir]team-delegation.md`
 - **Memory Map** [id:memory_map] = `[id:reference_dir]memory-map.md`
@@ -85,8 +85,10 @@
   - **Context Current** [id:context_current] = `[id:context_dir]context-current.md`
 - **Knowledge Base** [id:kb_dir] = `[id:data_dir]kb/`
 - **Peoples** [id:peoples_dir] = `[id:data_dir]peoples/`
+- **People Register** [id:people_register] = `[id:peoples_dir]people-register.md`
 - **Projects** [id:projects_dir] = `[id:data_dir]projects/`
   - **Jobs Register** [id:jobs_register] = `[id:projects_dir]jobs-register.md` 
+  - **Changelog Register** [id:changelog_register] = `[id:projects_dir]changelog-register.md`
 - **Product** [id:product_dir] = `[id:data_dir]product/`
   - **Functional Directory** [id:functional_dir] = `[id:product_dir]functional/`
   - **Technical Directory** [id:technical_dir] = `[id:product_dir]technical/`
@@ -114,6 +116,12 @@ This document contains the mandatory, binding rules that  MUST be followed at al
 - **Timestamp Format**: All timestamps in filenames or content MUST use the `YYYYMMDD-HHmm` format and the CEDT timezone
 - **Language**: All communication and documentation MUST use US English
 - **Encoding**: All text files MUST use UTF-8 encoding
+
+## 2.1 Skill-Local Resource Path Resolution
+
+- **Skill root**: For any skill prompt located at `.../<skill-name>/prompts/<prompt>.md`, the skill root is `.../<skill-name>/`.
+- **Relative resources**: Any reference in a skill prompt to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to the skill root (NOT relative to the repo root).
+- **Search scope**: When a referenced resource cannot be found, search within the skill root first before searching elsewhere.
 
 ## 3. Communication Standards
 

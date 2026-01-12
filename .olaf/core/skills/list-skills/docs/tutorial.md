@@ -29,7 +29,7 @@ Available OLAF Competencies:
    Protocol: Propose-Act
    
 3. OLAF Help Me
-   Path: olaf-help-me.md
+   Path: help-me-olaf.md
    Protocol: Act
    
 4. Report My Daily
@@ -268,7 +268,7 @@ You can mentally organize competencies by:
 
 ## Related Skills
 
-- `olaf-help-me`: Guided assistance in choosing the right competency
+- `help-me-olaf`: Guided assistance in choosing the right competency
 - `use-skill`: Execute a specific skill by name
 - `query-competency-index`: Low-level access to the index file
 

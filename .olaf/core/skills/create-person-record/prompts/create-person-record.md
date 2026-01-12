@@ -8,9 +8,12 @@ tags: [documentation, people, team]
 
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
 
 ## Input Parameters
 
@@ -34,9 +37,9 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
    - Create file in `[id:peoples_dir]`
    - Populate using `templates/project-manager/people-template.md`
 2. **Documentation Updates**:
-   - Add entry to `[id:people-register]`
+   - Add entry to `[id:people_register]` (MANDATORY)
    - Update team directory
-   - Create changelog entry
+   - Create changelog entry in `[id:changelog_register]` (MANDATORY)
 3. **Validation**:
    - Verify all required fields
    - Check for existing records
@@ -47,8 +50,20 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 Use `templates/project-manager/people-template.md` to structure the person record:
 - Follow the template's sections for consistency
 - Create file: `[id:peoples_dir][role]-[name]-[date].md`
-- Register entry in `[id:people-register]`
+- Register entry in `[id:people_register]`
 - Changelog entry in `[id:changelog_register]`
+
+## Success Criteria (MUST ALL BE TRUE)
+- [ ] Person record file created in `[id:peoples_dir]`
+- [ ] Entry added to `[id:people_register]`
+- [ ] Changelog entry added to `[id:changelog_register]`
+
+## People Register Update (EXACT FORMAT)
+Update the **Participant Table** in `[id:people_register]` by appending a new row using this exact column order:
+`| Name | Role | Primary Skills | Secondary Skills | Contact Information | When to Contact | Availability |`
+
+New row template (replace placeholders; keep the `|` separators and `<br>` for multiple contact methods):
+`| <full_name> | <role> | <primary_skills> | <secondary_skills> | Email: <email><br><other contact methods> | <when_to_contact> | <working_hours> |`
 
 ## Output to USER
 1. **Confirmation**:

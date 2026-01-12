@@ -11,11 +11,13 @@
 .olaf/core/reference/competency-collections.json
 .olaf/core/reference/core-principles.md
 .olaf/core/reference/memory-map.md
+.olaf/core/reference/prune-list.json
 .olaf/core/reference/query-competency-index.md
 .olaf/core/reference/team-delegation.md
 .olaf/core/reference/.condensed/olaf-framework-condensed.md
 
 .olaf/core/competencies/olaf-base-skills/
+.olaf/core/competencies/team-competencies/
 
 .olaf/core/skills/add-product-changelog-entry/
 .olaf/core/skills/carry-on-session/
@@ -30,7 +32,7 @@
 .olaf/core/skills/git-add-commit/
 .olaf/core/skills/import-prompt-unchanged/
 .olaf/core/skills/list-skills/
-.olaf/core/skills/olaf-help-me/
+.olaf/core/skills/help-me-olaf/
 .olaf/core/skills/select-competency-collection/
 .olaf/core/skills/store-conversation-record/
 .olaf/core/skills/switch-context/

@@ -36,7 +36,7 @@ Projects involve multiple people with different roles, expertise, and availabili
 
 ### Context Requirements
 - Access to peoples directory (`[id:peoples_dir]`)
-- Access to people register (`[id:people-register]`)
+- Access to people register (`[id:people_register]`)
 - Access to person record template
 - Privacy and data protection guidelines
 

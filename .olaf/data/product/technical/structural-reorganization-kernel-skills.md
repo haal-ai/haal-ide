@@ -16,7 +16,7 @@ NEW: .olaf/core/
 ### 2. Kernel Skills Terminology Update ✅ COMPLETED
 - **use-competency** → **use-skill**: Intelligent skill discovery and execution router (MIGRATED)
 - **list-competencies** → **list-skills**: Display available skills and protocols (MIGRATED)
-- **olaf-help-me**: Updated to use skills-based architecture (`[id:skills_dir]` instead of `[id:competencies_dir]`) (UPDATED)
+- **help-me-olaf**: Updated to use skills-based architecture (`[id:skills_dir]` instead of `[id:competencies_dir]`) (UPDATED)
 
 **Rationale**: Aligns naming with the new skills-based architecture being adopted framework-wide.
 

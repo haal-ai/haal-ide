@@ -4,13 +4,17 @@ description: Add entries to functional or technical product changelogs with link
 tags: [changelog, product, documentation, functional, technical]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **changelog_type**: enum[Functional,Technical] - Type of changelog to update (REQUIRED)
+- **entry_type**: string - Entry type label used at the start of the changelog line (REQUIRED)
 - **entry_description**: string - Concise description of the change (REQUIRED)
 - **additional_context**: string - Detailed information for the linked detail file (REQUIRED)
 - **subject_name**: string - Brief subject name for the detail file (kebab-case) (OPTIONAL - auto-generated if not provided)
@@ -24,6 +28,9 @@ You MUST follow the established interaction protocol strictly:
 ### 1. Validation Phase
 You WILL verify all requirements:
 - Confirm changelog_type is either "Functional" or "Technical"
+- Validate entry_type matches the target changelog conventions:
+  - If Functional: Feature|Documentation|Enhancement|Setup
+  - If Technical: Refactor|Architecture|Infrastructure|Fix|Cleanup|Breaking|Setup
 - Validate entry_description is concise and clear
 - Check additional_context provides sufficient detail
 - Auto-generate subject_name from entry_description if not provided
@@ -33,7 +40,11 @@ You WILL execute these operations:
 
 **Template Loading**:
 - Load appropriate template: `templates/[changelog_type-lowercase]-changelog-template.md`
-- Parse template for entry format and detail file structure
+- Parse template for detail file structure only
+
+**Changelog Line Format (REGISTER INSERTION)**:
+- The inserted line in `[id:product_dir]changelog-[changelog_type-lowercase].md` MUST follow this exact format:
+  - `- <entry_type>: <entry_description> [Details]([changelog_type-lowercase]/[subject_name].md)`
 
 **File Operations**:
 - Read current changelog: `[id:product_dir]changelog-[changelog_type-lowercase].md`
@@ -43,7 +54,7 @@ You WILL execute these operations:
 - Populate detail file using template structure with additional_context
 
 **Core Logic**: Execute following template requirements
-- Apply appropriate entry type from template
+- Do NOT infer the changelog line format from templates
 - Generate clickable markdown link format: `[Details]([subfolder]/[subject_name].md)`
 - Maintain proper date section hierarchy (YYYY-MM format, then YYYY-MM-DD subsections)
 - Preserve existing formatting and structure
@@ -84,6 +95,7 @@ You WILL clearly define:
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
+- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
 - Rule 1: Always add new entries to the top of their date section (reverse chronological order)
 - Rule 2: Create missing date sections following format: `## YYYY-MM` then `### YYYY-MM-DD`
 - Rule 3: Use kebab-case for all detail file names (lowercase, hyphens only)

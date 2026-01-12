@@ -10,9 +10,7 @@ protocol: Act
 You MUST check for these markers in context: `<olaf-work-instructions>`, `<olaf-framework-validation>`
 
 If NOT present, you MUST IMMEDIATELY read:
-```
-[id:ack_dir]reference/.condensed/olaf-framework-condensed.md
-```
+[id:condensed_framework]
 
 DO NOT proceed without loading the complete framework (110 lines). The memory map contains ALL path references you need.
 

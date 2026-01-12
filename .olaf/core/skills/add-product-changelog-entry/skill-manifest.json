@@ -41,7 +41,20 @@
         "description": "Main add-product-changelog-entry prompt with enhanced reference detection"
       }
     ],
-    "templates": [],
+    "templates": [
+      {
+        "name": "functional-changelog-template",
+        "path": "/templates/functional-changelog-template.md",
+        "type": "markdown",
+        "description": "Entry and detail-file template for functional product changelog updates"
+      },
+      {
+        "name": "technical-changelog-template",
+        "path": "/templates/technical-changelog-template.md",
+        "type": "markdown",
+        "description": "Entry and detail-file template for technical product changelog updates"
+      }
+    ],
     "tools": [],
     "docs": []
   }

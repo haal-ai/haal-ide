@@ -161,6 +161,63 @@ def ensure_local_competency_collections(local_root: Path, target_dir: Path) -> P
     return local_file
 
 
+def sync_global_active_collection_from_seed(*, clone_dir: Path, target_dir: Path) -> None:
+    """Ensure global competency-collections active_collection follows the seed clone (seed wins)."""
+
+    seed_file = clone_dir / ".olaf" / "core" / "reference" / "competency-collections.json"
+    target_file = target_dir / "core" / "reference" / "competency-collections.json"
+
+    if not seed_file.exists() or not seed_file.is_file():
+        return
+    if not target_file.exists() or not target_file.is_file():
+        return
+
+    try:
+        seed_data = json.load(open(seed_file, "r", encoding="utf-8"))
+        target_data = json.load(open(target_file, "r", encoding="utf-8"))
+    except Exception:
+        return
+
+    if not isinstance(seed_data, dict) or not isinstance(target_data, dict):
+        return
+
+    seed_meta = seed_data.get("metadata")
+    if not isinstance(seed_meta, dict):
+        return
+
+    seed_active = seed_meta.get("active_collection")
+    if not isinstance(seed_active, str) or not seed_active.strip():
+        return
+    seed_active = seed_active.strip()
+
+    # Only apply if the seed's active collection exists in the target's collection list.
+    target_collections = target_data.get("collections")
+    if not isinstance(target_collections, list):
+        return
+    target_ids: set[str] = set()
+    for c in target_collections:
+        if isinstance(c, dict):
+            cid = c.get("id")
+            if isinstance(cid, str) and cid:
+                target_ids.add(cid)
+    if seed_active not in target_ids:
+        return
+
+    target_meta = target_data.get("metadata")
+    if not isinstance(target_meta, dict):
+        target_meta = {}
+        target_data["metadata"] = target_meta
+
+    if target_meta.get("active_collection") == seed_active:
+        return
+
+    target_meta["active_collection"] = seed_active
+    target_meta["lastUpdated"] = datetime.now().isoformat()
+
+    with open(target_file, "w", encoding="utf-8") as f:
+        json.dump(target_data, f, indent=2)
+
+
 def _load_competency_locations(collections_file: Path) -> dict[str, str]:
     try:
         data = json.load(open(collections_file, "r", encoding="utf-8"))
@@ -185,6 +242,209 @@ def _registry_path_in_clone(clone_dir: Path) -> Path:
         return preferred
     # Backward compatibility
     return clone_dir / "olaf-registry.json"
+
+
+def _load_prune_list_from_file(path: Path) -> tuple[set[str], set[str]]:
+    """Load prune list from a JSON file.
+
+    Expected format:
+      {
+        "skills": ["skill-id-1", "skill-id-2"],
+        "competencies": ["comp-id-1", "comp-id-2"]
+      }
+
+    Returns (skills_to_prune, competencies_to_prune). Never raises.
+    """
+
+    if not path.exists() or not path.is_file():
+        return set(), set()
+    try:
+        data = json.load(open(path, "r", encoding="utf-8"))
+    except Exception:
+        return set(), set()
+
+    skills: set[str] = set()
+    comps: set[str] = set()
+
+    raw_skills = data.get("skills") if isinstance(data, dict) else None
+    if isinstance(raw_skills, list):
+        for s in raw_skills:
+            if isinstance(s, str) and s.strip():
+                skills.add(s.strip())
+
+    raw_comps = data.get("competencies") if isinstance(data, dict) else None
+    if isinstance(raw_comps, list):
+        for c in raw_comps:
+            if isinstance(c, str) and c.strip():
+                comps.add(c.strip())
+
+    return skills, comps
+
+
+def _find_prune_list_file(*, clone_dir: Path, local_root: Path, explicit: str | None = None) -> Path | None:
+    """Find the prune list file.
+
+    Search order:
+    1) Explicit CLI path (relative to local_root if not absolute)
+    2) Seed clone: .olaf/core/reference/olaf-prune-list.json
+    3) Seed clone: .olaf/core/reference/prune-list.json
+    4) Local repo: .olaf/core/reference/olaf-prune-list.json
+    5) Local repo: .olaf/core/reference/prune-list.json
+    """
+
+    candidates: list[Path] = []
+
+    if isinstance(explicit, str) and explicit.strip():
+        p = Path(explicit.strip())
+        if not p.is_absolute():
+            p = local_root / p
+        candidates.append(p)
+
+    candidates.extend(
+        [
+            clone_dir / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+            clone_dir / ".olaf" / "core" / "reference" / "prune-list.json",
+            local_root / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+            local_root / ".olaf" / "core" / "reference" / "prune-list.json",
+        ]
+    )
+
+    for c in candidates:
+        if c.exists() and c.is_file():
+            return c
+    return None
+
+
+def _find_prune_list_files_in_clone(clone_dir: Path) -> list[Path]:
+    candidates = [
+        clone_dir / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+        clone_dir / ".olaf" / "core" / "reference" / "prune-list.json",
+    ]
+    return [p for p in candidates if p.exists() and p.is_file()]
+
+
+def _collect_prune_lists(
+    *,
+    clone_dir: Path,
+    secondary_clone_dirs: list[Path],
+    local_root: Path,
+    prune_file: str | None,
+) -> tuple[set[str], set[str], list[Path]]:
+    """Collect and merge prune lists from seed + secondaries (+ optional explicit/local).
+
+    Merge strategy: union across all discovered prune list files.
+    """
+
+    sources: list[Path] = []
+
+    # 1) Explicit
+    if isinstance(prune_file, str) and prune_file.strip():
+        p = Path(prune_file.strip())
+        if not p.is_absolute():
+            p = local_root / p
+        if p.exists() and p.is_file():
+            sources.append(p)
+
+    # 2) Seed clone
+    sources.extend(_find_prune_list_files_in_clone(clone_dir))
+
+    # 3) Secondary clones
+    for sec in secondary_clone_dirs:
+        sources.extend(_find_prune_list_files_in_clone(sec))
+
+    # 4) Local repo
+    local_candidates = [
+        local_root / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+        local_root / ".olaf" / "core" / "reference" / "prune-list.json",
+    ]
+    sources.extend([p for p in local_candidates if p.exists() and p.is_file()])
+
+    # Unique but preserve order
+    unique_sources: list[Path] = []
+    seen: set[str] = set()
+    for s in sources:
+        key = str(s).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        unique_sources.append(s)
+
+    skills: set[str] = set()
+    comps: set[str] = set()
+    for src in unique_sources:
+        s, c = _load_prune_list_from_file(src)
+        skills |= s
+        comps |= c
+
+    return skills, comps, unique_sources
+
+
+def apply_prune_list(
+    *,
+    target_dir: Path,
+    clone_dir: Path,
+    secondary_clone_dirs: list[Path],
+    local_root: Path,
+    enabled: bool,
+    prune_file: str | None = None,
+) -> None:
+    """Delete explicitly listed skills/competencies from the installed global target.
+
+    This is intentionally explicit (opt-in) and never deletes anything outside:
+      - <target_dir>/core/skills/<id>
+      - <target_dir>/core/competencies/<id>
+    """
+
+    if not enabled:
+        print("Prune: disabled (--no-prune); skipping")
+        return
+
+    skills, comps, sources = _collect_prune_lists(
+        clone_dir=clone_dir,
+        secondary_clone_dirs=secondary_clone_dirs,
+        local_root=local_root,
+        prune_file=prune_file,
+    )
+
+    if not sources:
+        print("Prune: enabled but no prune list files found (seed/secondaries/local); skipping")
+        return
+
+    print("Prune: sources:")
+    for p in sources:
+        print(f"- {p}")
+
+    if not skills and not comps:
+        print("Prune: merged list is empty; nothing to do")
+        return
+
+    if skills:
+        print("Prune: skills to remove:")
+        for s in sorted(skills):
+            print(f"- {s}")
+    if comps:
+        print("Prune: competencies to remove:")
+        for c in sorted(comps):
+            print(f"- {c}")
+
+    skills_dir = target_dir / "core" / "skills"
+    comps_dir = target_dir / "core" / "competencies"
+
+    for sid in sorted(skills):
+        victim = skills_dir / sid
+        if victim.exists() and victim.is_dir():
+            print(f"Prune: removing skill {sid}")
+            rmtree_if_exists(victim)
+        else:
+            print(f"Prune: skill not found (skip) {sid}")
+
+    for cid in sorted(comps):
+        victim = comps_dir / cid
+        if victim.exists() and victim.is_dir():
+            print(f"Prune: removing competency {cid}")
+            rmtree_if_exists(victim)
+        else:
+            print(f"Prune: competency not found (skip) {cid}")
 
 
 def load_registry_with_diagnostics(clone_dir: Path) -> tuple[list[tuple[str, str]], str]:
@@ -449,6 +709,27 @@ def ensure_git_available() -> None:
         raise RuntimeError("git is required but could not be executed (git --version failed).") from ex
 
 
+def ensure_git_repo(local_root: Path, *, init_if_missing: bool) -> None:
+    if (local_root / ".git").exists():
+        return
+    if not init_if_missing:
+        raise RuntimeError(
+            f"Local path is not a git repository (missing .git): {local_root}\n"
+            "Either run 'git init' (or clone a repo) first, or re-run with --init-git."
+        )
+
+    local_root.mkdir(parents=True, exist_ok=True)
+    run(["git", "init"], cwd=local_root, quiet=True)
+
+
+def _normalize_windows_drive_letter(path_str: str) -> str:
+    # Some tooling treats workspace paths as case-sensitive on Windows.
+    # Normalize drive letter to lowercase to avoid C: vs c: mismatches.
+    if len(path_str) >= 2 and path_str[1] == ":" and path_str[0].isalpha():
+        return path_str[0].lower() + path_str[1:]
+    return path_str
+
+
 def rmtree_if_exists(path: Path) -> None:
     if not path.exists():
         return
@@ -635,7 +916,7 @@ def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) ->
 
 
 def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
-    target_pattern = f"{target_dir.as_posix()}/**"
+    target_pattern = f"{_normalize_windows_drive_letter(target_dir.as_posix())}/**"
 
     readonly = settings.get("files.readonlyInclude")
     if readonly is None:
@@ -651,13 +932,6 @@ def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> Non
     if isinstance(files_exclude, dict):
         files_exclude[target_pattern] = True
 
-    search_exclude = settings.get("search.exclude")
-    if search_exclude is None:
-        search_exclude = {}
-        settings["search.exclude"] = search_exclude
-    if isinstance(search_exclude, dict):
-        search_exclude[target_pattern] = True
-
     watcher_exclude = settings.get("files.watcherExclude")
     if watcher_exclude is None:
         watcher_exclude = {}
@@ -671,7 +945,7 @@ def write_code_workspace(repo_root: Path, target_dir: Path, *, window_title: str
     workspace = {
         "folders": [
             {"path": "."},
-            {"path": str(target_dir)},
+            {"path": _normalize_windows_drive_letter(str(target_dir))},
         ],
         "settings": {
             "window.title": window_title,
@@ -728,7 +1002,7 @@ def ensure_workspace_has_target(workspace_path: Path, target_dir: Path, *, windo
     if not isinstance(settings, dict):
         raise RuntimeError(f"Workspace 'settings' must be an object: {workspace_path}")
 
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     already = False
     for f in folders:
         if isinstance(f, dict) and f.get("path") == target_str:
@@ -792,13 +1066,6 @@ def ensure_global_olaf_folder_protection(target_dir: Path) -> None:
     if isinstance(files_exclude, dict):
         _merge_dict_bool_settings(files_exclude, desired_exclude)
 
-    search_exclude = existing.get("search.exclude")
-    if search_exclude is None:
-        search_exclude = {}
-        existing["search.exclude"] = search_exclude
-    if isinstance(search_exclude, dict):
-        _merge_dict_bool_settings(search_exclude, desired_exclude)
-
     watcher_exclude = existing.get("files.watcherExclude")
     if watcher_exclude is None:
         watcher_exclude = {}
@@ -827,7 +1094,7 @@ def _is_text_file(path: Path) -> bool:
 
 def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None = None) -> int:
     replaced = 0
-    target_str = str(target_dir)
+    target_str = _normalize_windows_drive_letter(str(target_dir))
     replacements = {
         "~/.olaf": target_str,
         "~/.olaf/": target_str + os.sep,
@@ -927,6 +1194,12 @@ def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
 
 
 def copy_team_competencies_manifest(clone_root: Path, repo_root: Path) -> None:
+    # Preserve an existing local team competency.
+    # This competency represents the team's local state; only seed it if missing.
+    local_existing = repo_root / ".olaf" / "core" / "competencies" / "team-competencies"
+    if local_existing.exists():
+        return
+
     src_competencies = clone_root / ".olaf" / "core" / "competencies"
     if not src_competencies.exists():
         raise RuntimeError(f"Missing expected competencies folder in clone: {src_competencies}")
@@ -1062,6 +1335,37 @@ def main() -> int:
     parser.add_argument("--repo", default=None, help="GitHub repo in owner/repo form (defaults from olaf-config.json if present)")
     parser.add_argument("--branch", default=None, help="Git branch name (defaults from olaf-config.json if present)")
     parser.add_argument(
+        "--init-git",
+        "--git-init",
+        action="store_true",
+        help="If --local is not a git repo, run 'git init' in that folder",
+    )
+    parser.add_argument(
+        "--clean-global",
+        action="store_true",
+        help="Delete the global target folder (default: ~/.olaf) before reinstalling",
+    )
+    parser.add_argument(
+        "--clean-local",
+        action="store_true",
+        help="Delete the local .olaf folder under --local before reinstalling",
+    )
+    parser.add_argument(
+        "--no-preserve-my-competencies",
+        action="store_true",
+        help="When doing --clean-global, do not preserve ~/.olaf/core/competencies/my-competencies",
+    )
+    parser.add_argument(
+        "--no-prune",
+        action="store_true",
+        help="Disable automatic pruning even if prune list files are present.",
+    )
+    parser.add_argument(
+        "--prune-file",
+        default=None,
+        help="Path to prune list JSON file. If relative, treated as relative to --local repo root.",
+    )
+    parser.add_argument(
         "--target",
         default=str(Path.home() / ".olaf"),
         help="Target folder for installed .olaf (default: ~/.olaf)",
@@ -1080,6 +1384,8 @@ def main() -> int:
         launch_root = Path.cwd()
         local_root = Path(os.path.expanduser(args.local)).resolve() if args.local else launch_root
         window_title = f"{local_root.name} (olaf)"
+
+        ensure_git_repo(local_root, init_if_missing=bool(args.init_git))
 
         cfg_repo, cfg_branch = load_install_seed_from_local_config(local_root)
         repo = args.repo if isinstance(args.repo, str) and args.repo.strip() else cfg_repo
@@ -1105,14 +1411,28 @@ def main() -> int:
         temp_base = Path(tempfile.gettempdir())
         clone_dir = temp_base / "haal_olaf_clone"
 
-        print(f"Installing OLAF (global) -> {Path(os.path.expanduser(args.target)).resolve()}")
+        target_dir = Path(os.path.expanduser(args.target)).resolve()
+        if args.clean_global:
+            if args.no_preserve_my_competencies:
+                rmtree_if_exists(target_dir)
+            else:
+                preserve_root, _ = preserve_my_competencies(target_dir)
+                rmtree_if_exists(target_dir)
+                target_dir.mkdir(parents=True, exist_ok=True)
+                restore_my_competencies(target_dir, preserve_root)
+
+        local_olaf_dir = local_root / ".olaf"
+        if args.clean_local:
+            rmtree_if_exists(local_olaf_dir)
+
+        print(f"Installing OLAF (global) -> {target_dir}")
         clone_repo_to(repo=repo, branch=branch, dst=clone_dir)
 
         # install .olaf to target (cumulative)
-        target_dir = Path(os.path.expanduser(args.target)).resolve()
-
         print("Global install: updating ~/.olaf (cumulative registry install)")
-        preserve_root, _ = preserve_my_competencies(target_dir)
+        preserve_root = None
+        if not args.clean_global and not args.no_preserve_my_competencies:
+            preserve_root, _ = preserve_my_competencies(target_dir)
 
         secondary, registry_msg = load_registry_with_diagnostics(clone_dir)
         if secondary:
@@ -1140,15 +1460,43 @@ def main() -> int:
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
 
-        print("Global install: restoring user competency my-competencies")
+        if preserve_root is not None:
+            print("Global install: restoring user competency my-competencies")
+            restore_my_competencies(target_dir, preserve_root)
 
-        restore_my_competencies(target_dir, preserve_root)
+        secondary_clone_dirs: list[Path] = []
+        for idx in range(1, len(secondary_to_apply) + 1):
+            sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
+            if sec_clone.exists():
+                secondary_clone_dirs.append(sec_clone)
+
+        apply_prune_list(
+            target_dir=target_dir,
+            clone_dir=clone_dir,
+            secondary_clone_dirs=secondary_clone_dirs,
+            local_root=local_root,
+            enabled=not bool(args.no_prune),
+            prune_file=args.prune_file,
+        )
 
         sanitize_global_competency_collections(target_dir)
 
         install_minimal_tools(target_dir, clone_dir)
 
         ensure_global_olaf_folder_protection(target_dir)
+
+        # Seed wins for global active collection selection.
+        sync_global_active_collection_from_seed(clone_dir=clone_dir, target_dir=target_dir)
+
+        # Regenerate global index under ~/.olaf based on global collection selection.
+        # This is separate from the repo-local index under <repo>/.olaf.
+        global_collection_id = _pick_collection_id_from_file(
+            target_dir / "core" / "reference" / "competency-collections.json"
+        )
+        if not global_collection_id:
+            global_collection_id = "core"
+        global_index_path = generate_query_competency_index(target_dir, collection_id=global_collection_id)
+        print(f"Global install: competency index generated -> {global_index_path}")
 
         # Rewrite any hardcoded references to ~/.olaf inside the installed target
         rewritten = rewrite_olaf_paths(target_dir, target_dir)
@@ -1188,6 +1536,8 @@ def main() -> int:
         # copy only competencies marked as local in competency-collections.json
         locations = _load_competency_locations(local_collections_file)
         local_competency_ids = {k for k, v in locations.items() if k != "default" and v == "local"}
+        # team-competencies is handled separately and should never be overwritten.
+        local_competency_ids.discard("team-competencies")
         copy_local_competencies_from_clone(clone_dir, local_root, local_competency_ids)
 
         # copy installed target /data into local repo .olaf/data without overwriting anything
