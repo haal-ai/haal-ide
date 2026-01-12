@@ -16,6 +16,7 @@
 .olaf/core/reference/.condensed/olaf-framework-condensed.md
 
 .olaf/core/competencies/olaf-base-skills/
+.olaf/core/competencies/team-competencies/
 
 .olaf/core/skills/add-product-changelog-entry/
 .olaf/core/skills/carry-on-session/
