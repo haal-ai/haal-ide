@@ -37,7 +37,9 @@
       "detect-test-directives",
       "review-diff",
       "create-practice-from-evidence",
-      "code-in-go"
+      "code-in-go",
+      "code-in-rust",
+      "scaffold-quarkus-microservice"
     ],
     "entry_points": [
       { "id": "review-code", "manifest": "skills/review-code/skill-manifest.json" },
@@ -55,7 +57,9 @@
       { "id": "detect-test-directives", "manifest": "skills/detect-test-directives/skill-manifest.json" },
       { "id": "review-diff", "manifest": "skills/review-diff/skill-manifest.json" },
       { "id": "create-practice-from-evidence", "manifest": "skills/create-practice-from-evidence/skill-manifest.json" },
-      { "id": "code-in-go", "manifest": "skills/code-in-go/skill-manifest.json" }
+      { "id": "code-in-go", "manifest": "skills/code-in-go/skill-manifest.json" },
+      { "id": "code-in-rust", "manifest": "skills/code-in-rust/skill-manifest.json" },
+      { "id": "scaffold-quarkus-microservice", "manifest": "skills/scaffold-quarkus-microservice/skill-manifest.json" }
     ]
   }
 }
