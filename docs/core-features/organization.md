@@ -72,18 +72,18 @@ OLAF decouples templates, tools, and knowledge from prompt logic for cleaner des
 - **Knowledge Base**: Supporting materials, checklists, and reference documentation
 
 **Benefits:**
-- ✅ **Reusability**: Templates/tools shared across similar skills
-- ✅ **Maintainability**: Update templates independently of prompt logic
-- ✅ **Consistency**: Standardized output formats
-- ✅ **Flexibility**: Scripts offer more customization than rigid MCP tools
-- ✅ **Rapid Iteration**: Test prompts quickly with generated scripts
+- **Reusability**: Templates/tools shared across similar skills
+- **Maintainability**: Update templates independently of prompt logic
+- **Consistency**: Standardized output formats
+- **Flexibility**: Scripts offer more customization than rigid MCP tools
+- **Rapid Iteration**: Test prompts quickly with generated scripts
 
 **Available Skills** (90+ total):
 - **Code Quality**: `review-code`, `improve-cyclomatic-complexity`, `fix-code-smells`
 - **Documentation**: `generate-tech-spec-from-code`, `bootstrap-functional-spec-from-code`
 - **Testing**: `augment-code-unit-test`, `detect-test-directives`
 - **Project Management**: `create-job`, `review-progress`, `create-changelog-entry`
-- **Research**: `olaf-help-me`, `should-i-use-ai`
+- **Research**: `help-me-olaf`, `should-i-use-ai`
 - **Framework**: `create-skill`, `create-prompt`, `import-prompt-unchanged`
 
 ### Competencies (`core/competencies/`)
