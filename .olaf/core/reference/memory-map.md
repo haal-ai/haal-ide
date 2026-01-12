@@ -44,6 +44,7 @@ changes: "Updated memory map to match current .olaf structure: corrected data pa
 - **Condensed Framework Directory** [id:condensed_dir] = `[id:reference_dir].condensed/`
 - **Condensed Framework** [id:condensed_framework] = `[id:condensed_dir]olaf-framework-condensed.md`
 - **Competency Index** [id:competency_index] = `[id:reference_dir]query-competency-index.md`
+# CRITICAL: [id:competency_index] MUST always resolve to the repo-local .olaf/ tree via [id:core_olaf_dir]. Never load this index from [id:global_olaf_dir].
 - **Core Principles** [id:core_principles] = `[id:reference_dir]core-principles.md`
 - **Team Delegation** [id:team_delegation] = `[id:reference_dir]team-delegation.md`
 - **Memory Map** [id:memory_map] = `[id:reference_dir]memory-map.md`
