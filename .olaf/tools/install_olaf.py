@@ -187,6 +187,209 @@ def _registry_path_in_clone(clone_dir: Path) -> Path:
     return clone_dir / "olaf-registry.json"
 
 
+def _load_prune_list_from_file(path: Path) -> tuple[set[str], set[str]]:
+    """Load prune list from a JSON file.
+
+    Expected format:
+      {
+        "skills": ["skill-id-1", "skill-id-2"],
+        "competencies": ["comp-id-1", "comp-id-2"]
+      }
+
+    Returns (skills_to_prune, competencies_to_prune). Never raises.
+    """
+
+    if not path.exists() or not path.is_file():
+        return set(), set()
+    try:
+        data = json.load(open(path, "r", encoding="utf-8"))
+    except Exception:
+        return set(), set()
+
+    skills: set[str] = set()
+    comps: set[str] = set()
+
+    raw_skills = data.get("skills") if isinstance(data, dict) else None
+    if isinstance(raw_skills, list):
+        for s in raw_skills:
+            if isinstance(s, str) and s.strip():
+                skills.add(s.strip())
+
+    raw_comps = data.get("competencies") if isinstance(data, dict) else None
+    if isinstance(raw_comps, list):
+        for c in raw_comps:
+            if isinstance(c, str) and c.strip():
+                comps.add(c.strip())
+
+    return skills, comps
+
+
+def _find_prune_list_file(*, clone_dir: Path, local_root: Path, explicit: str | None = None) -> Path | None:
+    """Find the prune list file.
+
+    Search order:
+    1) Explicit CLI path (relative to local_root if not absolute)
+    2) Seed clone: .olaf/core/reference/olaf-prune-list.json
+    3) Seed clone: .olaf/core/reference/prune-list.json
+    4) Local repo: .olaf/core/reference/olaf-prune-list.json
+    5) Local repo: .olaf/core/reference/prune-list.json
+    """
+
+    candidates: list[Path] = []
+
+    if isinstance(explicit, str) and explicit.strip():
+        p = Path(explicit.strip())
+        if not p.is_absolute():
+            p = local_root / p
+        candidates.append(p)
+
+    candidates.extend(
+        [
+            clone_dir / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+            clone_dir / ".olaf" / "core" / "reference" / "prune-list.json",
+            local_root / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+            local_root / ".olaf" / "core" / "reference" / "prune-list.json",
+        ]
+    )
+
+    for c in candidates:
+        if c.exists() and c.is_file():
+            return c
+    return None
+
+
+def _find_prune_list_files_in_clone(clone_dir: Path) -> list[Path]:
+    candidates = [
+        clone_dir / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+        clone_dir / ".olaf" / "core" / "reference" / "prune-list.json",
+    ]
+    return [p for p in candidates if p.exists() and p.is_file()]
+
+
+def _collect_prune_lists(
+    *,
+    clone_dir: Path,
+    secondary_clone_dirs: list[Path],
+    local_root: Path,
+    prune_file: str | None,
+) -> tuple[set[str], set[str], list[Path]]:
+    """Collect and merge prune lists from seed + secondaries (+ optional explicit/local).
+
+    Merge strategy: union across all discovered prune list files.
+    """
+
+    sources: list[Path] = []
+
+    # 1) Explicit
+    if isinstance(prune_file, str) and prune_file.strip():
+        p = Path(prune_file.strip())
+        if not p.is_absolute():
+            p = local_root / p
+        if p.exists() and p.is_file():
+            sources.append(p)
+
+    # 2) Seed clone
+    sources.extend(_find_prune_list_files_in_clone(clone_dir))
+
+    # 3) Secondary clones
+    for sec in secondary_clone_dirs:
+        sources.extend(_find_prune_list_files_in_clone(sec))
+
+    # 4) Local repo
+    local_candidates = [
+        local_root / ".olaf" / "core" / "reference" / "olaf-prune-list.json",
+        local_root / ".olaf" / "core" / "reference" / "prune-list.json",
+    ]
+    sources.extend([p for p in local_candidates if p.exists() and p.is_file()])
+
+    # Unique but preserve order
+    unique_sources: list[Path] = []
+    seen: set[str] = set()
+    for s in sources:
+        key = str(s).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        unique_sources.append(s)
+
+    skills: set[str] = set()
+    comps: set[str] = set()
+    for src in unique_sources:
+        s, c = _load_prune_list_from_file(src)
+        skills |= s
+        comps |= c
+
+    return skills, comps, unique_sources
+
+
+def apply_prune_list(
+    *,
+    target_dir: Path,
+    clone_dir: Path,
+    secondary_clone_dirs: list[Path],
+    local_root: Path,
+    enabled: bool,
+    prune_file: str | None = None,
+) -> None:
+    """Delete explicitly listed skills/competencies from the installed global target.
+
+    This is intentionally explicit (opt-in) and never deletes anything outside:
+      - <target_dir>/core/skills/<id>
+      - <target_dir>/core/competencies/<id>
+    """
+
+    if not enabled:
+        print("Prune: disabled (--no-prune); skipping")
+        return
+
+    skills, comps, sources = _collect_prune_lists(
+        clone_dir=clone_dir,
+        secondary_clone_dirs=secondary_clone_dirs,
+        local_root=local_root,
+        prune_file=prune_file,
+    )
+
+    if not sources:
+        print("Prune: enabled but no prune list files found (seed/secondaries/local); skipping")
+        return
+
+    print("Prune: sources:")
+    for p in sources:
+        print(f"- {p}")
+
+    if not skills and not comps:
+        print("Prune: merged list is empty; nothing to do")
+        return
+
+    if skills:
+        print("Prune: skills to remove:")
+        for s in sorted(skills):
+            print(f"- {s}")
+    if comps:
+        print("Prune: competencies to remove:")
+        for c in sorted(comps):
+            print(f"- {c}")
+
+    skills_dir = target_dir / "core" / "skills"
+    comps_dir = target_dir / "core" / "competencies"
+
+    for sid in sorted(skills):
+        victim = skills_dir / sid
+        if victim.exists() and victim.is_dir():
+            print(f"Prune: removing skill {sid}")
+            rmtree_if_exists(victim)
+        else:
+            print(f"Prune: skill not found (skip) {sid}")
+
+    for cid in sorted(comps):
+        victim = comps_dir / cid
+        if victim.exists() and victim.is_dir():
+            print(f"Prune: removing competency {cid}")
+            rmtree_if_exists(victim)
+        else:
+            print(f"Prune: competency not found (skip) {cid}")
+
+
 def load_registry_with_diagnostics(clone_dir: Path) -> tuple[list[tuple[str, str]], str]:
     """Load registry from seed clone only.
 
@@ -1096,6 +1299,16 @@ def main() -> int:
         help="When doing --clean-global, do not preserve ~/.olaf/core/competencies/my-competencies",
     )
     parser.add_argument(
+        "--no-prune",
+        action="store_true",
+        help="Disable automatic pruning even if prune list files are present.",
+    )
+    parser.add_argument(
+        "--prune-file",
+        default=None,
+        help="Path to prune list JSON file. If relative, treated as relative to --local repo root.",
+    )
+    parser.add_argument(
         "--target",
         default=str(Path.home() / ".olaf"),
         help="Target folder for installed .olaf (default: ~/.olaf)",
@@ -1193,6 +1406,21 @@ def main() -> int:
         if preserve_root is not None:
             print("Global install: restoring user competency my-competencies")
             restore_my_competencies(target_dir, preserve_root)
+
+        secondary_clone_dirs: list[Path] = []
+        for idx in range(1, len(secondary_to_apply) + 1):
+            sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
+            if sec_clone.exists():
+                secondary_clone_dirs.append(sec_clone)
+
+        apply_prune_list(
+            target_dir=target_dir,
+            clone_dir=clone_dir,
+            secondary_clone_dirs=secondary_clone_dirs,
+            local_root=local_root,
+            enabled=not bool(args.no_prune),
+            prune_file=args.prune_file,
+        )
 
         sanitize_global_competency_collections(target_dir)
 
