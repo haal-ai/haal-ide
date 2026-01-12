@@ -1,8 +1,12 @@
 [CmdletBinding()]
 param(
   # Text file containing repo-relative paths (one per line)
-  [Parameter(Mandatory = $true)]
+  [Parameter(Mandatory = $false)]
   [string]$PathsFile,
+
+  # Predefined flow which selects a default paths file when -PathsFile is not provided
+  [ValidateSet('develop-to-integration', 'integration-to-main')]
+  [string]$Flow = 'develop-to-integration',
 
   # Source ref to copy paths from (usually develop)
   [Alias('From', 'FromRef')]
@@ -213,7 +217,16 @@ Require-Command git
 $repoRoot = Get-RepoRoot
 Assert-CleanWorkingTree -RepoRoot $repoRoot
 
-$pathsFileFull = if ([System.IO.Path]::IsPathRooted($PathsFile)) { $PathsFile } else { Join-Path $repoRoot $PathsFile }
+$effectivePathsFile = $PathsFile
+if ([string]::IsNullOrWhiteSpace($effectivePathsFile)) {
+  if ($Flow -eq 'integration-to-main') {
+    $effectivePathsFile = 'scripts/pr-paths-integration-to-main.txt'
+  } else {
+    $effectivePathsFile = 'scripts/pr-paths-develop-to-integration.txt'
+  }
+}
+
+$pathsFileFull = if ([System.IO.Path]::IsPathRooted($effectivePathsFile)) { $effectivePathsFile } else { Join-Path $repoRoot $effectivePathsFile }
 $paths = Get-PathList -File $pathsFileFull
 
 if (-not $BranchName) {
