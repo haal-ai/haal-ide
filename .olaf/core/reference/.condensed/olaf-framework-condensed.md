@@ -85,8 +85,10 @@
   - **Context Current** [id:context_current] = `[id:context_dir]context-current.md`
 - **Knowledge Base** [id:kb_dir] = `[id:data_dir]kb/`
 - **Peoples** [id:peoples_dir] = `[id:data_dir]peoples/`
+- **People Register** [id:people_register] = `[id:peoples_dir]people-register.md`
 - **Projects** [id:projects_dir] = `[id:data_dir]projects/`
   - **Jobs Register** [id:jobs_register] = `[id:projects_dir]jobs-register.md` 
+  - **Changelog Register** [id:changelog_register] = `[id:projects_dir]changelog-register.md`
 - **Product** [id:product_dir] = `[id:data_dir]product/`
   - **Functional Directory** [id:functional_dir] = `[id:product_dir]functional/`
   - **Technical Directory** [id:technical_dir] = `[id:product_dir]technical/`
