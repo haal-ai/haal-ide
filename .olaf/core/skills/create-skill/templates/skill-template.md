@@ -6,10 +6,10 @@ tags: [tag1, tag2, tag3, tag4]
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-CRITICAL: Skill-local resource resolution: any reference to `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...` MUST be resolved relative to this skill root directory (the parent folder of `prompts/`).
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
 
 ## Time Retrieval
-Get current timestamp in `YYYYMMDD-HHmm` format
+Get current timestamp using time tools, fallback to shell command if needed
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:

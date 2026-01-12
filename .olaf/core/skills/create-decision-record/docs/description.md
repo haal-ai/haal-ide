@@ -33,7 +33,7 @@ Project teams need to maintain a clear record of why decisions were made, what a
 
 ### Context Requirements
 - Access to decision records directory (`[id:decision_records_dir]`)
-- Access to decision records register (`[id:decision-records-register]`)
+- Access to decision records register (`[id:decision_records_dir]decision-records-register.md`)
 - Access to changelog register for tracking the creation
 - Decision record template available at competency templates folder
 
