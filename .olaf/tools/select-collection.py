@@ -743,7 +743,7 @@ end-of-competency-index
                 
                 # Check if skill exists in global directory first
                 global_skills_dir = Path.home() / ".olaf" / "core" / "skills"
-                local_skills_dir = self.core_dir / "skills"
+                local_skills_dir = self.local_core_dir / "skills"
                 
                 # Build the full manifest path for both locations
                 global_manifest_path = global_skills_dir / skill_id / "skill-manifest.json"
