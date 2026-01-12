@@ -8,9 +8,10 @@ tags: [changelog, documentation, versioning, maintenance]
 
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+## Time Retrieval
+Get current timestamp in `YYYYMMDD-HHmm` format
 
 ## Input Parameters
 
@@ -54,6 +55,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
    - How to verify the entry
 
 ## Domain-Specific Rules
+- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
 - Rule 1: Always add new entries to the top of their day section
 - Rule 2: Maintain reverse chronological order for all entries
 - Rule 3: Use consistent timestamp format (YYYYMMDD HH:MM)

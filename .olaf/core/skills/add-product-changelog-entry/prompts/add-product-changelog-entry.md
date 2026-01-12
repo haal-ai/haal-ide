@@ -4,9 +4,10 @@ description: Add entries to functional or technical product changelogs with link
 tags: [changelog, product, documentation, functional, technical]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+## Time Retrieval
+Get current timestamp in `YYYYMMDD-HHmm` format
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -84,6 +85,7 @@ You WILL clearly define:
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
+- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
 - Rule 1: Always add new entries to the top of their date section (reverse chronological order)
 - Rule 2: Create missing date sections following format: `## YYYY-MM` then `### YYYY-MM-DD`
 - Rule 3: Use kebab-case for all detail file names (lowercase, hyphens only)
