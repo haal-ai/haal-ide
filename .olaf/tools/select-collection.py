@@ -714,9 +714,6 @@ end-of-competency-index
 
     def update_condensed_framework(self, index_content: str, collection_name: str):
         """Update condensed framework - skip competency patterns generation as requested"""
-        print(f"✅ Condensed framework update skipped (as configured)")
-        print(f"   Competency patterns section will not be modified")
-        print(f"   Collection: {collection_name}")
         return True
     
     def sync_olaf_commands(self, selected_competencies: List[str]):
@@ -800,36 +797,31 @@ end-of-competency-index
         stats = {
             'created': 0,
             'deleted': 0,
-            'kept': 0
         }
         
-        for target_dir, extension in [(github_prompts_dir, '.prompt.md'), (windsurf_workflows_dir, '.md')]:
-            if not target_dir.exists():
-                print(f"⚠️  Directory not found: {target_dir}")
-                continue
-            
+        target_dirs = [(github_prompts_dir, '.prompt.md'), (windsurf_workflows_dir, '.md')]
+        for target_dir, extension in target_dirs:
             dir_stats = self._sync_directory_commands(target_dir, competency_names, competency_map, extension)
             stats['created'] += dir_stats['created']
             stats['deleted'] += dir_stats['deleted']
-            stats['kept'] += dir_stats['kept']
+            if dir_stats['created'] or dir_stats['deleted']:
+                print(f"   {target_dir.name}: created={dir_stats['created']} deleted={dir_stats['deleted']}")
         
-        print(f"✅ Command sync complete!")
-        print(f"   Created: {stats['created']}")
-        print(f"   Deleted: {stats['deleted']}")
-        print(f"   Kept: {stats['kept']}")
+        print("✅ Command sync complete")
+        print(f"   Total: created={stats['created']} deleted={stats['deleted']}")
+        print("   Available as Windsurf workflows + GitHub Copilot prompts")
+        print("   Note: AWS Kiro does not support / commands")
+        print("   Example: /olaf-list-skills")
     
     def _sync_directory_commands(self, target_dir: Path, competency_names: set, competency_map: dict, extension: str) -> Dict[str, int]:
         """Sync commands in a specific directory by deleting all and recreating"""
-        stats = {'created': 0, 'deleted': 0, 'kept': 0}
+        stats = {'created': 0, 'deleted': 0}
         
         # Delete ALL existing olaf-* files first
         existing_files = list(target_dir.glob(f"olaf-*{extension}"))
         for file in existing_files:
             file.unlink()
             stats['deleted'] += 1
-        
-        if stats['deleted'] > 0:
-            print(f"   🗑️  Deleted {stats['deleted']} existing files")
         
         # Recreate files for all competencies in selection
         for comp_name in competency_names:
@@ -866,11 +858,10 @@ end-of-competency-index
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
-        print(f"   ✨ Created: {file_path.name}")
+        # Intentionally no per-file logging (too verbose)
 
     def generate_git_exclude(self):
         """Generate .git/info/exclude file to keep OLAF workflows out of git while visible to Windsurf"""
-        print("ℹ️  Skipping .git/info/exclude generation (handled by installer)")
         return True
 
     def run(self, collection_name: str = None, custom: bool = False, list_only: bool = False, output_path: str = None, reinit: bool = False):
@@ -964,7 +955,7 @@ end-of-competency-index
         self.save_active_collection(selected_id)
         self.update_condensed_framework(index_content, selected_id)
         self.sync_olaf_commands(selected_competencies)
-        self.generate_git_exclude()
+        # .git/info/exclude is handled by install_olaf.py
     
     def _handle_reinit(self, collections: Dict):
         """Handle reinit mode - regenerate /olaf-* commands from active collection"""
@@ -990,8 +981,7 @@ end-of-competency-index
         # Regenerate /olaf-* commands
         self.sync_olaf_commands(collection['competencies'])
         
-        # Generate git exclude file
-        self.generate_git_exclude()
+        # .git/info/exclude is handled by install_olaf.py
         
         print("\n✨ Reinitialization complete! /olaf-* commands regenerated.\n")
 

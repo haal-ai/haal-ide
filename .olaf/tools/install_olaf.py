@@ -178,6 +178,50 @@ def _load_competency_locations(collections_file: Path) -> dict[str, str]:
     return out
 
 
+def _registry_path_in_clone(clone_dir: Path) -> Path:
+    # Prefer commit-friendly name (doesn't match olaf-* ignore patterns)
+    preferred = clone_dir / "_olaf-registry.json"
+    if preferred.exists() and preferred.is_file():
+        return preferred
+    # Backward compatibility
+    return clone_dir / "olaf-registry.json"
+
+
+def load_registry_with_diagnostics(clone_dir: Path) -> tuple[list[tuple[str, str]], str]:
+    """Load registry from seed clone only.
+
+    Returns (entries, status_message).
+    This function must never raise: a malformed registry should not fail install.
+    """
+
+    registry_path = _registry_path_in_clone(clone_dir)
+    if not registry_path.exists() or not registry_path.is_file():
+        return [], f"no registry file in seed clone ({registry_path})"
+
+    try:
+        data = json.load(open(registry_path, "r", encoding="utf-8"))
+    except Exception:
+        return [], f"registry file present but not valid JSON ({registry_path})"
+
+    items = data.get("secondary-repos")
+    if not isinstance(items, list):
+        return [], f"registry file present but missing 'secondary-repos' list ({registry_path})"
+
+    out: list[tuple[str, str]] = []
+    for it in items:
+        if not isinstance(it, str):
+            continue
+        try:
+            out.append(parse_repo_branch(it))
+        except ValueError:
+            continue
+
+    if not out:
+        return [], f"registry file present but contains 0 valid secondary entries ({registry_path})"
+
+    return out, f"seed registry ({registry_path})"
+
+
 def copy_local_competencies_from_clone(clone_root: Path, local_root: Path, local_competency_ids: set[str]) -> None:
     if not local_competency_ids:
         return
@@ -576,6 +620,18 @@ def copy_olaf_prefixed_files(src_root: Path, dst_root: Path) -> int:
     return copied
 
 
+def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) -> None:
+    # Copy olaf-* files into local project folders
+    for tool_dir in [".github", ".kiro", ".windsurf"]:
+        src_dir = clone_root / tool_dir
+        dst_dir = local_root / tool_dir
+        copied = copy_olaf_prefixed_files(src_dir, dst_dir)
+        _ = copied
+
+        # Rewrite any hardcoded references to ~/.olaf inside the synced olaf-* files
+        _ = rewrite_olaf_paths(dst_dir, Path.home() / ".olaf", name_prefix="olaf-")
+
+
 def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
     target_pattern = f"{target_dir.as_posix()}/**"
 
@@ -832,8 +888,16 @@ def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
     local_olaf = ensure_local_olaf_skeleton(repo_root)
     comp_dir = local_olaf / "core" / "competencies" / "team-competencies"
     manifest_path = comp_dir / "competency-manifest.json"
+
+    # If the file exists but is empty/invalid, treat it as missing and regenerate.
     if manifest_path.exists():
-        return manifest_path
+        try:
+            raw = manifest_path.read_text(encoding="utf-8", errors="ignore")
+            if raw.strip():
+                _ = json.loads(raw)
+                return manifest_path
+        except Exception:
+            pass
 
     comp_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1052,17 +1116,28 @@ def main() -> int:
         print("Global install: updating ~/.olaf (cumulative registry install)")
         preserve_root, _ = preserve_my_competencies(target_dir)
 
-        secondary = load_registry_from_clone(clone_dir)
+        secondary, registry_msg = load_registry_with_diagnostics(clone_dir)
         if secondary:
-            print(f"Registry: found {len(secondary)} secondary repo(s) in olaf-registry.json")
+            print(f"Registry: found {len(secondary)} secondary repo(s) from {registry_msg}")
+            print("Registry: applying secondary installs bottom-to-top (last entry first)")
             for srepo, sbranch in secondary:
                 print(f"- secondary: {srepo}@{sbranch}")
             print("")
-        for idx, (srepo, sbranch) in enumerate(secondary, start=1):
+        else:
+            print(f"Registry: no secondary repos ({registry_msg})")
+
+        # Apply secondaries from bottom to top, then seed last (seed wins).
+        secondary_to_apply = list(reversed(secondary))
+        for idx, (srepo, sbranch) in enumerate(secondary_to_apply, start=1):
             sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
-            print(f"Global install: merging secondary [{idx}/{len(secondary)}] {srepo}@{sbranch}")
+            print(f"Global install: merging secondary [{idx}/{len(secondary_to_apply)}] {srepo}@{sbranch}")
             clone_repo_to(repo=srepo, branch=sbranch, dst=sec_clone)
-            merge_install_from_clone(clone_dir=sec_clone, target_dir=target_dir)
+            try:
+                merge_install_from_clone(clone_dir=sec_clone, target_dir=target_dir)
+            except Exception as ex:
+                print(f"⚠️  Secondary skipped (not an OLAF repo/branch?): {srepo}@{sbranch}")
+                print(f"   Reason: {ex}")
+                continue
 
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
@@ -1101,16 +1176,13 @@ def main() -> int:
 
         print(f"Local install: syncing helper files into {local_root}")
 
-        # Copy olaf-* files into local project folders
-        for tool_dir in [".github", ".kiro", ".windsurf"]:
-            src_dir = clone_dir / tool_dir
-            dst_dir = local_root / tool_dir
-            copied = copy_olaf_prefixed_files(src_dir, dst_dir)
-            _ = copied
+        # Apply helper files cumulatively from secondary clones, then seed clone last.
+        for idx, (srepo, sbranch) in enumerate(secondary_to_apply, start=1):
+            sec_clone = temp_base / f"haal_olaf_clone_secondary_{idx}"
+            if sec_clone.exists():
+                sync_local_helper_files_from_clone(clone_root=sec_clone, local_root=local_root)
 
-            # Rewrite any hardcoded references to ~/.olaf inside the synced olaf-* files
-            rewritten = rewrite_olaf_paths(dst_dir, target_dir, name_prefix="olaf-")
-            _ = rewritten
+        sync_local_helper_files_from_clone(clone_root=clone_dir, local_root=local_root)
 
         # ensure local .olaf skeleton exists (only created if missing)
         ensure_local_olaf_skeleton(local_root)

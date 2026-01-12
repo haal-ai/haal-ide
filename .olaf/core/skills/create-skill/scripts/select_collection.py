@@ -12,6 +12,7 @@
 import json
 import argparse
 import sys
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Any
@@ -997,25 +998,17 @@ end-of-competency-index
 
 
 def main():
-    parser = argparse.ArgumentParser(description='OLAF Competency Collection Selector')
-    parser.add_argument('--collection', '-c', help='Select a specific collection by name')
-    parser.add_argument('--custom', action='store_true', help='Create custom selection')
-    parser.add_argument('--list', '-l', action='store_true', help='List all collections')
-    parser.add_argument('--output', '-o', help='Output file path for generated index')
-    parser.add_argument('--reinit', '-r', action='store_true', help='Reinitialize: regenerate /olaf-* commands from active collection')
-    parser.add_argument('--execution-mode', '-e', type=int, default=2, choices=[0, 1, 2, 3], help='Auto execution mode for Windsurf workflows (0=manual, 1=safe, 2=normal, 3=turbo)')
-    parser.add_argument('--local-root', help='Project root that contains the local .olaf folder')
-    
-    args = parser.parse_args()
-    
-    selector = CollectionSelector(execution_mode=args.execution_mode, local_root=args.local_root)
-    selector.run(
-        collection_name=args.collection,
-        custom=args.custom,
-        list_only=args.list,
-        output_path=args.output,
-        reinit=args.reinit
-    )
+    # Source of truth is .olaf/tools/select-collection.py
+    # Delegate to it so both entry points behave identically.
+    here = Path(__file__).resolve()
+    olaf_root = here.parents[4]  # .../.olaf
+    tools_script = olaf_root / "tools" / "select-collection.py"
+
+    if not tools_script.exists():
+        raise SystemExit(f"❌ Missing tools selector: {tools_script}")
+
+    cmd = [sys.executable, str(tools_script), *sys.argv[1:]]
+    raise SystemExit(subprocess.call(cmd))
 
 
 if __name__ == '__main__':
