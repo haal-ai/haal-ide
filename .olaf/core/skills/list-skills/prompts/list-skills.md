@@ -4,9 +4,9 @@ description: Present a concise list of all available skills from the current ind
 tags: [skill, list, index, query]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-Refer to <olaf-query-competency-index> for the list of skills.
+Refer to [id:competency_index] which is wrapped in the <olaf-query-competency-index> tag for the list of skills.
 
 Instructions:
 - Read the full <olaf-interaction-protocols>.
