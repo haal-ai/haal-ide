@@ -672,13 +672,6 @@ def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> Non
     if isinstance(files_exclude, dict):
         files_exclude[target_pattern] = True
 
-    search_exclude = settings.get("search.exclude")
-    if search_exclude is None:
-        search_exclude = {}
-        settings["search.exclude"] = search_exclude
-    if isinstance(search_exclude, dict):
-        search_exclude[target_pattern] = True
-
     watcher_exclude = settings.get("files.watcherExclude")
     if watcher_exclude is None:
         watcher_exclude = {}
@@ -812,13 +805,6 @@ def ensure_global_olaf_folder_protection(target_dir: Path) -> None:
         existing["files.exclude"] = files_exclude
     if isinstance(files_exclude, dict):
         _merge_dict_bool_settings(files_exclude, desired_exclude)
-
-    search_exclude = existing.get("search.exclude")
-    if search_exclude is None:
-        search_exclude = {}
-        existing["search.exclude"] = search_exclude
-    if isinstance(search_exclude, dict):
-        _merge_dict_bool_settings(search_exclude, desired_exclude)
 
     watcher_exclude = existing.get("files.watcherExclude")
     if watcher_exclude is None:
