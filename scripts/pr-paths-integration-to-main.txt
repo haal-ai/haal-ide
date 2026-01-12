@@ -34,7 +34,7 @@
 .olaf/core/skills/git-add-commit/
 .olaf/core/skills/import-prompt-unchanged/
 .olaf/core/skills/list-skills/
-.olaf/core/skills/olaf-help-me/
+.olaf/core/skills/help-me-olaf/
 .olaf/core/skills/select-competency-collection/
 .olaf/core/skills/store-conversation-record/
 .olaf/core/skills/switch-context/
