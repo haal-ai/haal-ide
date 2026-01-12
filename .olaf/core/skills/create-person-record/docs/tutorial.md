@@ -52,7 +52,7 @@ Acknowledges request and begins gathering person information using Propose-Act p
 **What AI Does:**
 - Adds entry to people register
 - Updates team directory index
-- Creates changelog entry documenting person record creation
+
 
 ### Step 5: Validation
 **What AI Does:**
@@ -69,7 +69,6 @@ Acknowledges request and begins gathering person information using Propose-Act p
 ✅ **Person record file created** with correct naming
 ✅ **All required fields populated**
 ✅ **People register updated** with new entry
-✅ **Changelog entry created**
 ✅ **Email format validated**
 ✅ **Privacy guidelines followed**
 ✅ **Template structure preserved**

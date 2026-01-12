@@ -36,7 +36,8 @@
       "assess-code-quality-principles",
       "review-diff",
       "create-practice-from-evidence",
-      "find-expert-contact"
+      "find-expert-contact",
+      "code-in-go"
     ],
     "entry_points": [
       { "id": "review-code", "manifest": "skills/review-code/skill-manifest.json" },
@@ -47,7 +48,8 @@
       { "id": "assess-code-quality-principles", "manifest": "skills/assess-code-quality-principles/skill-manifest.json" },
       { "id": "review-diff", "manifest": "skills/review-diff/skill-manifest.json" },
       { "id": "create-practice-from-evidence", "manifest": "skills/create-practice-from-evidence/skill-manifest.json" },
-      { "id": "find-expert-contact", "manifest": "skills/find-expert-contact/skill-manifest.json" }
+      { "id": "find-expert-contact", "manifest": "skills/find-expert-contact/skill-manifest.json" },
+      { "id": "code-in-go", "manifest": "skills/code-in-go/skill-manifest.json" }
     ]
   }
 }

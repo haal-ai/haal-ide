@@ -45,7 +45,7 @@ Projects involve multiple people with different roles, expertise, and availabili
 **Deliverables**:
 - New person record file with format: `[role]-[name]-[date].md`
 - Updated people register with new entry
-- Changelog entry documenting the record creation
+
 
 **Format**: Markdown file following the people template structure with all contact information, expertise, responsibilities, and working preferences clearly documented.
 

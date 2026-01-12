@@ -71,7 +71,7 @@
     "scripts": [
       {
         "name": "select_collection",
-        "path": "/scripts/olaf-structure-management/select_collection.py",
+        "path": "/../../tools/select-collection.py",
         "type": "python",
         "description": "Collection selection and reindexing utility"
       }

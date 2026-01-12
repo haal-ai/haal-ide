@@ -39,7 +39,7 @@ Get current timestamp using time tools, fallback to shell command if needed
 2. **Documentation Updates**:
    - Add entry to `[id:people_register]` (MANDATORY)
    - Update team directory
-   - Create changelog entry in `[id:changelog_register]` (MANDATORY)
+   - Create changelog entry in `[id:changelog_register]` ONLY IF the USER explicitly requests it
 3. **Validation**:
    - Verify all required fields
    - Check for existing records
@@ -51,12 +51,12 @@ Use `templates/project-manager/people-template.md` to structure the person recor
 - Follow the template's sections for consistency
 - Create file: `[id:peoples_dir][role]-[name]-[date].md`
 - Register entry in `[id:people_register]`
-- Changelog entry in `[id:changelog_register]`
+- Changelog entry in `[id:changelog_register]` ONLY IF the USER explicitly requests it
 
 ## Success Criteria (MUST ALL BE TRUE)
 - [ ] Person record file created in `[id:peoples_dir]`
 - [ ] Entry added to `[id:people_register]`
-- [ ] Changelog entry added to `[id:changelog_register]`
+
 
 ## People Register Update (EXACT FORMAT)
 Update the **Participant Table** in `[id:people_register]` by appending a new row using this exact column order:

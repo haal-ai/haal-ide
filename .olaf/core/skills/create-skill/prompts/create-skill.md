@@ -16,8 +16,7 @@ You MUST request these parameters if not provided by the user:
 - **user_request**: string - The user's requirement or task description for the skill (REQUIRED)
 - **skill_name**: string - Desired name for the skill (max 4 words, kebab-case) (REQUIRED)
 - **skill_type**: string - Type of skill: "orchestrator", "workflow", "prompt" (REQUIRED)
-- **skill_location**: string - Where to create skill: "global" (user-wide) or "local" (project-specific) (REQUIRED - default: "global")
-- **target_competency**: string - Existing competency name or "new:[competency-name]" to create new (REQUIRED - default: "my-competencies")
+- **target_competency**: string - Existing competency name or "new:[competency-name]" to create new (REQUIRED - default: "team-competencies")
 - **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
 - **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
 - **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
@@ -40,7 +39,6 @@ You WILL verify all requirements:
 - Validate skill name follows kebab-case convention (max 4 words)
 - Check both global (`[id:global_skills_dir]`) and local (`[id:local_skills_dir]`) for existing skills with similar functionality
 - Validate skill type selection (orchestrator/workflow/prompt)
-- Validate skill_location choice (global/local) and explain difference
 - Validate target competency: check if exists in both global (`[id:global_olaf_dir]core/competencies/`) and local (`[id:core_olaf_dir]core/competencies/`) directories, or validate new competency name
 - Check access to required template and principles files from skill templates
 
@@ -48,17 +46,12 @@ You WILL verify all requirements:
 You WILL determine where to create the skill:
 
 **Skill Location Discovery:**
-- Ask user: "Where should this skill be created?"
-- Present options:
-  1. **Global** (`[id:global_skills_dir]`) - Available across all your projects
-  2. **Local** (`[id:local_skills_dir]`) - Specific to this project only
-- Explain difference: "Global skills are shared across all projects, local skills are project-specific"
-- Default to "global" if user doesn't specify
+- You MUST create skills locally (project-specific) under `./.olaf/core/skills/`
+- You MUST NOT propose creating skills under `~/.olaf/core/skills/` because the agent may not have write access to the user home directory
 
 **Validation:**
-- If global: Ensure `[id:global_skills_dir]` directory exists
-- If local: Ensure `[id:local_skills_dir]` directory exists in project
-- Check for existing skill with same name in chosen location
+- Ensure `[id:local_skills_dir]` directory exists in project
+- Check for existing skill with same name in local skills
 
 ### 1.c Component Discovery Phase
 You WILL determine what optional components the user needs:
@@ -130,13 +123,11 @@ You MUST read and apply: `[id:skills_dir]create-skill/templates/prompting-princi
 You WILL scaffold the complete skill structure:
 
 **Determine Skills Directory:**
-- If skill_location = "global": Use `~/.olaf/core/skills/`
-- If skill_location = "local": Use `./.olaf/core/skills/`
+- Use `./.olaf/core/skills/`
 - Set base_path accordingly for all subsequent operations
 
 **Determine Competency Directory:**
-- If skill_location = "global": Use `~/.olaf/core/competencies/`
-- If skill_location = "local": Use `./.olaf/core/competencies/`
+- Use `./.olaf/core/competencies/`
 - Set competency_path accordingly for all competency operations
 
 **Create Skill Directory Structure:**
@@ -328,7 +319,7 @@ Present to user:
 Next step: Regenerate competency index to make your skill discoverable?
 
 The query-competency-index.md is auto-generated and needs regeneration.
-This will run: python .olaf/core/scripts/olaf-structure-management/select_collection.py --collection [collection]
+This will run: python [id:global_olaf_dir]tools/select-collection.py --collection [collection] --local-root [project_root]
 
 Ready to regenerate? (yes/no)
 ```
@@ -345,7 +336,7 @@ Now we need to regenerate the index from all manifests.
 
 **Reindexing Execution:**
 If user agrees:
-- Run: `python [id:core_olaf_dir]scripts/olaf-structure-management/select_collection.py --collection [user_collection]`
+- Run: `python [id:global_olaf_dir]tools/select-collection.py --collection [user_collection] --local-root [project_root]`
 - User's active collection will be used (script handles defaults if not specified)
 - Wait for script completion
 - Validate that pattern markers are still intact in condensed framework
@@ -369,8 +360,7 @@ You WILL generate outputs following this structure:
 - Primary deliverable: Complete skill with all files and proper structure
 - Validation checklist: Compliance verification against schema and principles
 - Skill location specification: 
-  - If global: `~/.olaf/core/skills/[skill_name]/`
-  - If local: `./.olaf/core/skills/[skill_name]/`
+  - `./.olaf/core/skills/[skill_name]/`
 
 ## User Communication
 
@@ -388,15 +378,13 @@ You WILL generate outputs following this structure:
 - Generated skill presented for review via Propose-Confirm-Act
 - Validation checklist results showing schema compliance
 - Save location confirmation: 
-  - If global: `~/.olaf/core/skills/[skill_name]/`
-  - If local: `./.olaf/core/skills/[skill_name]/`
+  - `./.olaf/core/skills/[skill_name]/`
 
 ### Next Steps
 You WILL clearly define:
 - Skill ready for use (pending user approval)
 - Skill location: 
-  - If global: `~/.olaf/core/skills/[skill_name]/`
-  - If local: `./.olaf/core/skills/[skill_name]/`
+  - `./.olaf/core/skills/[skill_name]/`
 - Confirmation that skill meets all quality standards
 - Instructions for invoking the new skill
 
@@ -409,8 +397,8 @@ You MUST follow these constraints:
 - Rule 4: Generated skill MUST include comprehensive error handling
 - Rule 5: Skill name MUST be kebab-case, max 4 words
 - Rule 6: Generated skill MUST include measurable success criteria
-- Rule 7: Skill directory MUST be created in user-specified location (global: `~/.olaf/core/skills/` or local: `./.olaf/core/skills/`)
-- Rule 8: Competency directory MUST match skill location (global: `~/.olaf/core/competencies/` or local: `./.olaf/core/competencies/`)
+- Rule 7: Skill directory MUST be created locally in this repo at `./.olaf/core/skills/`
+- Rule 8: Competency directory MUST be local in this repo at `./.olaf/core/competencies/`
 - Rule 9: All BOM paths MUST be relative to skill root and start with `/`
 - Rule 10: **CRITICAL**: Main prompt MUST reference external files, NOT embed template content
 - Rule 11: **TEMPLATE SEPARATION**: Templates must be separate files in `/templates/`, not embedded in prompt
