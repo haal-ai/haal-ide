@@ -45,11 +45,10 @@
 # This is a context-dependent reference to the user's project being analyzed/developed (not OLAF itself)
 # Used by developer and workflow prompts to reference the codebase under analysis
 
-### Core solution [id:core_olaf_dir] = `/.olaf/`
-# Example usage:
-# [id:core_olaf_dir]README.md → refers to C:\Users\ppaccaud\.olaf/README.md
+### Core solution [id:core_olaf_dir] = `.olaf/`
+# Repo-local OLAF folder (workspace-scoped)
 
-### Global OLAF [id:global_olaf_dir] = `C:\Users\ppaccaud\.olaf/`
+### Global OLAF [id:global_olaf_dir] = `~/.olaf/`
 
 ### Additional Directories
 - **Docs Directory** [id:docs_dir] = `[id:core_olaf_dir]docs/`

@@ -13,9 +13,10 @@ changes: "Updated memory map to match current .olaf structure: corrected data pa
 # This is a context-dependent reference to the user's project being analyzed/developed (not OLAF itself)
 # Used by developer and workflow prompts to reference the codebase under analysis
 
-### Core solution [id:core_olaf_dir] = `/.olaf/`
+### Core solution [id:core_olaf_dir] = `.olaf/`
+# Repo-local OLAF folder (workspace-scoped)
 # Example usage:
-# [id:core_olaf_dir]README.md → refers to ~/.olaf/README.md
+# [id:core_olaf_dir]core/reference/query-competency-index.md → refers to .olaf/core/reference/query-competency-index.md
 
 ### Global OLAF [id:global_olaf_dir] = `~/.olaf/`
 
