@@ -927,6 +927,12 @@ def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
 
 
 def copy_team_competencies_manifest(clone_root: Path, repo_root: Path) -> None:
+    # Preserve an existing local team competency.
+    # This competency represents the team's local state; only seed it if missing.
+    local_existing = repo_root / ".olaf" / "core" / "competencies" / "team-competencies"
+    if local_existing.exists():
+        return
+
     src_competencies = clone_root / ".olaf" / "core" / "competencies"
     if not src_competencies.exists():
         raise RuntimeError(f"Missing expected competencies folder in clone: {src_competencies}")
@@ -1062,6 +1068,21 @@ def main() -> int:
     parser.add_argument("--repo", default=None, help="GitHub repo in owner/repo form (defaults from olaf-config.json if present)")
     parser.add_argument("--branch", default=None, help="Git branch name (defaults from olaf-config.json if present)")
     parser.add_argument(
+        "--clean-global",
+        action="store_true",
+        help="Delete the global target folder (default: ~/.olaf) before reinstalling",
+    )
+    parser.add_argument(
+        "--clean-local",
+        action="store_true",
+        help="Delete the local .olaf folder under --local before reinstalling",
+    )
+    parser.add_argument(
+        "--no-preserve-my-competencies",
+        action="store_true",
+        help="When doing --clean-global, do not preserve ~/.olaf/core/competencies/my-competencies",
+    )
+    parser.add_argument(
         "--target",
         default=str(Path.home() / ".olaf"),
         help="Target folder for installed .olaf (default: ~/.olaf)",
@@ -1105,14 +1126,28 @@ def main() -> int:
         temp_base = Path(tempfile.gettempdir())
         clone_dir = temp_base / "haal_olaf_clone"
 
-        print(f"Installing OLAF (global) -> {Path(os.path.expanduser(args.target)).resolve()}")
+        target_dir = Path(os.path.expanduser(args.target)).resolve()
+        if args.clean_global:
+            if args.no_preserve_my_competencies:
+                rmtree_if_exists(target_dir)
+            else:
+                preserve_root, _ = preserve_my_competencies(target_dir)
+                rmtree_if_exists(target_dir)
+                target_dir.mkdir(parents=True, exist_ok=True)
+                restore_my_competencies(target_dir, preserve_root)
+
+        local_olaf_dir = local_root / ".olaf"
+        if args.clean_local:
+            rmtree_if_exists(local_olaf_dir)
+
+        print(f"Installing OLAF (global) -> {target_dir}")
         clone_repo_to(repo=repo, branch=branch, dst=clone_dir)
 
         # install .olaf to target (cumulative)
-        target_dir = Path(os.path.expanduser(args.target)).resolve()
-
         print("Global install: updating ~/.olaf (cumulative registry install)")
-        preserve_root, _ = preserve_my_competencies(target_dir)
+        preserve_root = None
+        if not args.clean_global and not args.no_preserve_my_competencies:
+            preserve_root, _ = preserve_my_competencies(target_dir)
 
         secondary, registry_msg = load_registry_with_diagnostics(clone_dir)
         if secondary:
@@ -1140,9 +1175,9 @@ def main() -> int:
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
 
-        print("Global install: restoring user competency my-competencies")
-
-        restore_my_competencies(target_dir, preserve_root)
+        if preserve_root is not None:
+            print("Global install: restoring user competency my-competencies")
+            restore_my_competencies(target_dir, preserve_root)
 
         sanitize_global_competency_collections(target_dir)
 
@@ -1188,6 +1223,8 @@ def main() -> int:
         # copy only competencies marked as local in competency-collections.json
         locations = _load_competency_locations(local_collections_file)
         local_competency_ids = {k for k, v in locations.items() if k != "default" and v == "local"}
+        # team-competencies is handled separately and should never be overwritten.
+        local_competency_ids.discard("team-competencies")
         copy_local_competencies_from_clone(clone_dir, local_root, local_competency_ids)
 
         # copy installed target /data into local repo .olaf/data without overwriting anything

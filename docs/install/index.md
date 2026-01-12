@@ -2,6 +2,8 @@
 
 This page provides copy/paste commands to install OLAF into your repository.
 
+For a full guide (simple to advanced), see: [OLAF Install Guide](olaf-install.md)
+
 ## Windows (PowerShell)
 
 Run from your repo root:
