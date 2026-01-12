@@ -3,7 +3,7 @@
 
 
 
-This `.olaf/docs/` directory contains:
+This `docs/` directory contains:
 
 - **[Core Features](core-features/)** - Essential OLAF capabilities and features
 - **[Specific Features](specific-features/)** - Advanced features and specialized use cases

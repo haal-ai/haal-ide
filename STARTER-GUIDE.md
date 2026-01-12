@@ -25,7 +25,7 @@ Each section includes:
 ---
 ### How HAAL Structures Skills
 
-For a comprehensive understanding of how HAAL components work together from prompts to enterprise registries, see our dedicated [HAAL End-to-End Structure](.olaf/docs/starter-guide-examples/olaf-end-to-end-structure.md) guide.
+For a comprehensive understanding of how HAAL components work together from prompts to enterprise registries, see our dedicated [HAAL End-to-End Structure](docs/starter-guide-examples/olaf-end-to-end-structure.md) guide.
 
 In brief: HAAL organizes capabilities as **skills** → **competencies** → **collections** → **registries**, with each layer supporting reuse and enterprise governance.
 
@@ -340,7 +340,7 @@ Once comfortable with basics:
 
 - **Competency Index**: Check `core/reference/query-competency-index.md` for all available capabilities
 - **Core Principles**: Review `core/reference/core-principles.md` for framework guidelines
-- **Examples**: Explore `.olaf/docs/starter-guide-examples/` for real usage examples
+- **Examples**: Explore `docs/starter-guide-examples/` for real usage examples
 
 ---
 
