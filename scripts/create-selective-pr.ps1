@@ -257,7 +257,7 @@ try {
   Invoke-Git -Args (@('restore', "--source=$resolvedSourceRef", '--') + $paths) -WorkingDirectory $worktreeDir
 
   # Stage only those paths
-  Invoke-Git -Args (@('add', '--') + $paths) -WorkingDirectory $worktreeDir
+  Invoke-Git -Args (@('add', '-f', '--') + $paths) -WorkingDirectory $worktreeDir
 
   $status = if ($DryRun) { '' } else { (& git -C $worktreeDir status -sb | Out-String) }
   if (-not $DryRun) {
