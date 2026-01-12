@@ -1,0 +1,7 @@
+{
+  "secondary-repos": [
+    "haal-ai/haal-ide@integration",
+    "haal-ai/haal-ide@main"
+  ],
+  "use-oss": false
+}
