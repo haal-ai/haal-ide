@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "id": "olaf-base-skills",
+    "name": "OLAF Base Skills Competency Package",
+    "shortDescription": "Kernel skills required for foundational OLAF workflows",
+    "description": "Collection of priority-one OLAF skills that form the kernel capability set for core framework operations, governance, and reporting workflows.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide a single competency that assembles all kernel (P1) skills",
+      "Enable consistent distribution of OLAF base capabilities across environments",
+      "Support onboarding scenarios where foundational skills must be installed together"
+    ],
+    "tags": [
+      "kernel",
+      "p1",
+      "base",
+      "olaf-core"
+    ],
+    "author": "OLAF Framework",
+    "status": "proven",
+    "exposure": "kernel",
+    "created": "2025-11-17",
+    "updated": "2025-11-18",
+    "maintenance": {
+      "team": "core",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "GitHub Copilot"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "None beyond existing OLAF runtime",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "add-product-changelog-entry",
+      "carry-on-session",
+      "carry-over-session",
+      "challenge-me",
+      "convert-prompt-to-skill",
+      "create-decision-record",
+      "create-job",
+      "create-person-record",
+      "create-skill",
+      "generate-step-by-step-tutorial",
+      "git-add-commit",
+      "import-prompt-unchanged",
+      "list-skills",
+      "olaf-help-me",
+      "select-competency-collection",
+      "store-conversation-record",
+      "switch-context",
+      "tell-me",
+      "use-skill"
+    ],
+    "entry_points": [
+      {
+        "id": "add-product-changelog-entry",
+        "manifest": "skills/add-product-changelog-entry/skill-manifest.json"
+      },
+      {
+        "id": "carry-on-session",
+        "manifest": "skills/carry-on-session/skill-manifest.json"
+      },
+      {
+        "id": "carry-over-session",
+        "manifest": "skills/carry-over-session/skill-manifest.json"
+      },
+      {
+        "id": "challenge-me",
+        "manifest": "skills/challenge-me/skill-manifest.json"
+      },
+      {
+        "id": "convert-prompt-to-skill",
+        "manifest": "skills/convert-prompt-to-skill/skill-manifest.json"
+      },
+      {
+        "id": "create-decision-record",
+        "manifest": "skills/create-decision-record/skill-manifest.json"
+      },
+      {
+        "id": "create-job",
+        "manifest": "skills/create-job/skill-manifest.json"
+      },
+      {
+        "id": "create-person-record",
+        "manifest": "skills/create-person-record/skill-manifest.json"
+      },
+      {
+        "id": "create-skill",
+        "manifest": "skills/create-skill/skill-manifest.json"
+      },
+      {
+        "id": "generate-step-by-step-tutorial",
+        "manifest": "skills/generate-step-by-step-tutorial/skill-manifest.json"
+      },
+      {
+        "id": "git-add-commit",
+        "manifest": "skills/git-add-commit/skill-manifest.json"
+      },
+      {
+        "id": "import-prompt-unchanged",
+        "manifest": "skills/import-prompt-unchanged/skill-manifest.json"
+      },
+      {
+        "id": "list-skills",
+        "manifest": "skills/list-skills/skill-manifest.json"
+      },
+      {
+        "id": "olaf-help-me",
+        "manifest": "skills/olaf-help-me/skill-manifest.json"
+      },
+      {
+        "id": "select-competency-collection",
+        "manifest": "skills/select-competency-collection/skill-manifest.json"
+      },
+      {
+        "id": "store-conversation-record",
+        "manifest": "skills/store-conversation-record/skill-manifest.json"
+      },
+      {
+        "id": "switch-context",
+        "manifest": "skills/switch-context/skill-manifest.json"
+      },
+      {
+        "id": "tell-me",
+        "manifest": "skills/tell-me/skill-manifest.json"
+      },
+      {
+        "id": "use-skill",
+        "manifest": "skills/use-skill/skill-manifest.json"
+      }
+    ]
+  }
+}
