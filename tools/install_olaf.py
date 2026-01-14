@@ -926,10 +926,24 @@ def merge_install_from_clone(
     clone_dir: Path,
     target_dir: Path,
 ) -> None:
+    # Global install: copy everything to target (default: ~/.olaf)
+    core_items = ["skills", "competencies", "tools", "scripts", "reference", "schemas", "data"]
+
+    for item in core_items:
+        src_item = clone_dir / item
+        if src_item.exists() and src_item.is_dir():
+            dst_item = target_dir / item
+            merge_dir_excluding_top_level(src_item, dst_item, exclude_names=set())
+
+    # Also copy .olaf/data and .olaf/work if they exist
     src_olaf = clone_dir / ".olaf"
-    if not src_olaf.exists():
-        raise RuntimeError(f"Clone does not contain .olaf folder: {src_olaf}")
-    merge_dir_excluding_top_level(src_olaf, target_dir, exclude_names={"docs", "tools"})
+    if src_olaf.exists():
+        # Only copy data and work from .olaf directory
+        for olaf_item in ["data", "work"]:
+            src_olaf_item = src_olaf / olaf_item
+            if src_olaf_item.exists():
+                dst_olaf_item = target_dir / olaf_item
+                merge_dir_excluding_top_level(src_olaf_item, dst_olaf_item, exclude_names=set())
 
 
 def copy_olaf_prefixed_files(src_root: Path, dst_root: Path) -> int:
@@ -952,16 +966,46 @@ def copy_olaf_prefixed_files(src_root: Path, dst_root: Path) -> int:
     return copied
 
 
-def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) -> None:
-    # Copy olaf-* files into local project folders
-    for tool_dir in [".github", ".kiro", ".windsurf"]:
-        src_dir = clone_root / tool_dir
-        dst_dir = local_root / tool_dir
-        copied = copy_olaf_prefixed_files(src_dir, dst_dir)
-        _ = copied
+def copy_work_from_target_no_overwrite(target_dir: Path, repo_root: Path) -> int:
+    local_olaf = ensure_local_olaf_skeleton(repo_root)
+    src_work = target_dir / "work"
+    if not src_work.exists() or not src_work.is_dir():
+        return 0
 
-        # Rewrite any hardcoded references to ~/.olaf inside the synced olaf-* files
-        _ = rewrite_olaf_paths(dst_dir, Path.home() / ".olaf", name_prefix="olaf-")
+    dst_work = local_olaf / "work"
+    # Only seed .olaf/work if it doesn't already exist.
+    if dst_work.exists():
+        return 0
+
+    copied = 0
+    for p in src_work.rglob("*"):
+        if p.is_file():
+            copied += 1
+
+    merge_dir_excluding_top_level(src_work, dst_work, exclude_names=set())
+    return copied
+
+
+def sync_local_helper_files_from_clone(*, clone_root: Path, local_root: Path) -> None:
+    # Copy non-generated olaf-* helper files into local project folders.
+    # Generated artifacts:
+    # - .github/prompts/olaf-*.prompt.md
+    # - .windsurf/workflows/olaf-*.md
+    # are produced by select-collection.py and should not be overwritten here.
+    src_github_instructions = clone_root / ".github" / "instructions"
+    dst_github_instructions = local_root / ".github" / "instructions"
+    _ = copy_olaf_prefixed_files(src_github_instructions, dst_github_instructions)
+    _ = rewrite_olaf_paths(dst_github_instructions, Path.home() / ".olaf", name_prefix="olaf-")
+
+    src_windsurf_rules = clone_root / ".windsurf" / "rules"
+    dst_windsurf_rules = local_root / ".windsurf" / "rules"
+    _ = copy_olaf_prefixed_files(src_windsurf_rules, dst_windsurf_rules)
+    _ = rewrite_olaf_paths(dst_windsurf_rules, Path.home() / ".olaf", name_prefix="olaf-")
+
+    src_kiro = clone_root / ".kiro"
+    dst_kiro = local_root / ".kiro"
+    _ = copy_olaf_prefixed_files(src_kiro, dst_kiro)
+    _ = rewrite_olaf_paths(dst_kiro, Path.home() / ".olaf", name_prefix="olaf-")
 
 
 def _ensure_workspace_readonly_settings(settings: dict, target_dir: Path) -> None:
@@ -1187,15 +1231,10 @@ def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None 
 def ensure_local_olaf_skeleton(repo_root: Path) -> Path:
     local_olaf = repo_root / ".olaf"
 
-    # create minimal skeleton only if missing
-    (repo_root / "competencies").mkdir(parents=True, exist_ok=True)
-    (repo_root / "reference").mkdir(parents=True, exist_ok=True)
-    (repo_root / "schemas").mkdir(parents=True, exist_ok=True)
-    (repo_root / "scripts").mkdir(parents=True, exist_ok=True)
-    (repo_root / "skills").mkdir(parents=True, exist_ok=True)
-    (local_olaf / "data").mkdir(parents=True, exist_ok=True)
-    (local_olaf / "work" / "staging").mkdir(parents=True, exist_ok=True)
-    return repo_root
+    # Create minimal local skeleton only if missing.
+    # Local installs should avoid creating unrelated top-level folders.
+    local_olaf.mkdir(parents=True, exist_ok=True)
+    return local_olaf
 
 
 def ensure_local_team_competencies_manifest(repo_root: Path) -> Path:
@@ -1361,6 +1400,10 @@ def copy_data_from_target_no_overwrite(target_dir: Path, repo_root: Path) -> int
         return 0
 
     dst_data = local_olaf / "data"
+    # Only seed .olaf/data if it doesn't already exist.
+    if dst_data.exists():
+        return 0
+    dst_data.mkdir(parents=True, exist_ok=True)
     copied = 0
 
     for p in src_data.rglob("*"):
@@ -1369,9 +1412,6 @@ def copy_data_from_target_no_overwrite(target_dir: Path, repo_root: Path) -> int
 
         rel = p.relative_to(src_data)
         dest = dst_data / rel
-        if dest.exists():
-            continue
-
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p, dest)
         copied += 1
@@ -1581,17 +1621,18 @@ def main() -> int:
 
         sync_local_helper_files_from_clone(clone_root=clone_dir, local_root=local_root)
 
-        # ensure local .olaf skeleton exists (only created if missing)
-        ensure_local_olaf_skeleton(local_root)
+        # Ensure local .olaf skeleton exists (only created if missing)
+        local_olaf = ensure_local_olaf_skeleton(local_root)
 
-        # copy only competencies marked as local in competency-collections.json
-        locations = _load_competency_locations(local_collections_file)
-        local_competency_ids = {k for k, v in locations.items() if k != "default" and v == "local"}
-        # team-competencies is handled separately and should never be overwritten.
-        local_competency_ids.discard("team-competencies")
-        copy_local_competencies_from_clone(clone_dir, local_root, local_competency_ids)
+        # Seed .olaf/work only if missing (from latest global install)
+        _ = copy_work_from_target_no_overwrite(target_dir, local_root)
+        local_work = local_olaf / "work"
+        if not local_work.exists():
+            (local_work / "staging").mkdir(parents=True, exist_ok=True)
+        else:
+            (local_work / "staging").mkdir(parents=True, exist_ok=True)
 
-        # copy installed target /data into local repo .olaf/data without overwriting anything
+        # Seed local .olaf/data only if it doesn't already exist
         copied_data = copy_data_from_target_no_overwrite(target_dir, local_root)
         print(f"Local install: updated -> {local_root / '.olaf'} (added {copied_data} files)")
 
