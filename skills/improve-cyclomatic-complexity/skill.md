@@ -4,17 +4,16 @@ description: Systematically reduce cyclomatic complexity of code sections while 
 license: Apache-2.0
 metadata:
   olaf_tags: [refactoring, complexity, code-quality, testing]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 You MUST also load and apply the **Universal Coding Standards**:
-- Read `[id:practices_dir]standards/universal-coding-standards.md`.
+- Read `.olaf/data/practices/standards/universal-coding-standards.md`.
 - Treat the **Evolution/Refactoring Mode** as default:
   - Do not change public interfaces/signatures or external behavior unless the
     user explicitly approves API changes.
@@ -37,7 +36,7 @@ You MUST also load and apply the **Universal Coding Standards**:
 
 If the user does not provide input, make your best to find the answers by analyzing the code base. then once you have the information, you ask for sign-off to the USER.
 
-ALl reports or notes you wish to create or that are requested by the USER must be saved in [id:staging_dir]code-evolution/
+ALl reports or notes you wish to create or that are requested by the USER must be saved in .olaf/work/staging/code-evolution/
 
 ## Process
 1. **Assess Current Complexity**:

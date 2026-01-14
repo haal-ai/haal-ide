@@ -4,9 +4,13 @@ description: Generate daily work report by analyzing git activity, files, PRs, c
 license: Apache-2.0
 metadata:
   olaf_tags: [daily, report, git, activity, summary]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 # Daily Report Generation Skill
 
@@ -42,9 +46,9 @@ You WILL use Propose-Act protocol for daily report generation due to personal da
 ### 1. Validation Phase
 You WILL verify all requirements:
 - Confirm report period and calculate date range
-- Create [id:daily_dir] directory if it doesn't exist
+- Create .olaf/data/product/daily/ directory if it doesn't exist
 - Verify git repository access and user identity
-- Check access to [id:carryo_dir] and [id:jobs_dir] directories
+- Check access to .olaf/work/carry-over/ and .olaf/data/projects/jobs/ directories
 - Validate write permissions for report output
 
 ### 2. Execution Phase
@@ -78,7 +82,7 @@ You WILL attempt to identify GitHub PR Reviews (if possible):
 **Carry-Over Analysis**:
 - [carryo_analysis] -
 You WILL analyze carry-over files:
-- Read all files in [id:carryo_dir] directory
+- Read all files in .olaf/work/carry-over/ directory
 - Extract relevant items for the specified date range
 - Identify ongoing tasks and their status
 - Note any blockers or assistance needs mentioned
@@ -87,8 +91,8 @@ You WILL analyze carry-over files:
 **Jobs Directory Analysis**:
 - [jobs_analysis] -
 You WILL analyze jobs directory:
-- Read [id:jobs_dir] if exists
-- Scan [id:jobs_dir] directory for recent activity
+- Read .olaf/data/projects/jobs/ if exists
+- Scan .olaf/data/projects/jobs/ directory for recent activity
 - Identify job-related work within the date range
 - Extract job status and progress information
 - [/jobs_analysis] -
@@ -96,7 +100,7 @@ You WILL analyze jobs directory:
 **Changelog Analysis**:
 - [changelog_analysis] -
 You WILL analyze changelog entries:
-- Read [id:changelog_registry_dir]
+- Read .olaf/data/projects/changelog-register.md
 - Filter entries for the specified date range
 - Categorize changes by type and impact
 - Identify user contributions and participation
@@ -139,7 +143,7 @@ You WILL validate results:
 ## Output Format
 You WILL generate outputs following this structure:
 
-Primary deliverable: Daily report saved as [id:daily_dir]/daily-[YYYYMMDD-HHmm].md
+Primary deliverable: Daily report saved as .olaf/data/product/daily//daily-[YYYYMMDD-HHmm].md
 
 Report structure:
 ```
@@ -165,7 +169,7 @@ Timestamp format: YYYYMMDD-HHmm in filename
 ## User Communication
 
 ### Progress Updates
-Confirmation when [id:daily_dir] directory is created/verified
+Confirmation when .olaf/data/product/daily/ directory is created/verified
 Status of each analysis phase (git, files, carry-over, jobs, changelog)
 Progress of report synthesis and categorization
 User feedback incorporation status during refinement
@@ -177,7 +181,7 @@ You WILL consider the task complete when:
 - [ ] All data sources analyzed (git, files, carry-over, jobs, changelog)
 - [ ] Initial report synthesized in four-category structure
 - [ ] User refinement cycle completed to satisfaction
-- [ ] Final report saved with timestamped filename in [id:daily_dir]
+- [ ] Final report saved with timestamped filename in .olaf/data/product/daily/
 - [ ] All data sources processed without privacy violations
 
 ### Error Handling
@@ -194,12 +198,12 @@ You WILL handle these scenarios:
 2. MANDATORY: Maintain user privacy and data security throughout analysis3. MANDATORY: Use timestamped filename format for all daily reports
 4. MANDATORY: Organize report into exactly four specified categories5. NEVER include sensitive information like passwords or personal data
 6. NEVER bypass user refinement cycle - always allow modifications7. ALWAYS handle git command failures gracefully without stopping process
-8. ALWAYS maintain [id:daily_dir] directory structure for organization9. ALWAYS keep reports concise and actionable for daily standup meetings
+8. ALWAYS maintain .olaf/data/product/daily/ directory structure for organization9. ALWAYS keep reports concise and actionable for daily standup meetings
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
 - Rule 1: ALWAYS maintain user privacy and data security during analysis
-- Rule 2: MUST create [id:daily_dir] directory structure if it doesn't exist
+- Rule 2: MUST create .olaf/data/product/daily/ directory structure if it doesn't exist
 - Rule 3: ALWAYS use timestamped filename format: daily-[YYYYMMDD-HHmm].md
 - Rule 4: MUST organize report into exactly four categories as specified
 - Rule 5: NEVER include sensitive information like passwords or personal data
@@ -215,12 +219,12 @@ You WILL consider the task complete when:
 [ ] Initial report synthesized in four-category structure
 [ ] User refinement cycle completed to satisfaction
 [ ] Final report saved with correct timestamped filename
-[ ] [id:daily_dir] directory structure maintained
+[ ] .olaf/data/product/daily/ directory structure maintained
 [ ] All data sources processed without privacy violations
 
 ## Required Actions1. Validate report period and calculate date range for analysis
 2. Execute comprehensive analysis of all specified data sources3. Synthesize staging into four-category structured report
-4. Facilitate iterative refinement with user feedback5. Save final report with timestamped filename in [id:daily_dir]
+4. Facilitate iterative refinement with user feedback5. Save final report with timestamped filename in .olaf/data/product/daily/
 6. Provide comprehensive summary and next steps
 
 ## Next Steps
@@ -233,7 +237,7 @@ You WILL clearly define:
 ## Completion Summary
 - Summary of data sources analyzed and staging count
 - Report categories populated with item count
-- Final report location: [id:daily_dir]/daily-[YYYYMMDD-HHmm].md
+- Final report location: .olaf/data/product/daily//daily-[YYYYMMDD-HHmm].md
 - User modifications applied during refinement process
 - Total refinement cycles completed
 

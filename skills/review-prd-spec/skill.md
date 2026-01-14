@@ -4,9 +4,13 @@ description: Review evolution requests/PRDs for completeness, query user with im
 license: Apache-2.0
 metadata:
   olaf_tags: [prd, review, specification, evolution-request]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/reference/.condensed/olaf-framework-condensed.md
 
 ## Input Parameters
 
@@ -89,7 +93,7 @@ You WILL verify all requirements:
 - Add proper section numbering and cross-references
 - Include timestamp and version information
 - Generate table of contents and appendices
-- Save final document to: `[id:staging_dir]prd-reviews/[project_name]-prd-[YYYYMMDD-HHmm].md`
+- Save final document to: `.olaf/work/staging/prd-reviews/[project_name]-prd-[YYYYMMDD-HHmm].md`
 
 <!-- </document_formatting> -->
 
@@ -120,7 +124,7 @@ You WILL generate outputs following this structure:
 ### Completion Summary
 - Total number of gaps identified and addressed
 - Quality score improvement (before/after analysis)
-- Final document location: `[id:staging_dir]prd-reviews/[project_name]-prd-[timestamp].md`
+- Final document location: `.olaf/work/staging/prd-reviews/[project_name]-prd-[timestamp].md`
 - Template compliance verification results
 
 ### Next Steps
@@ -159,7 +163,7 @@ You WILL consider the task complete when:
 2. Execute comprehensive content analysis and gap identification
 3. Engage user with targeted improvement questions
 4. Format document according to template standards
-5. Save formatted document to `[id:staging_dir]prd-reviews/[project_name]-prd-[timestamp].md`
+5. Save formatted document to `.olaf/work/staging/prd-reviews/[project_name]-prd-[timestamp].md`
 6. Validate final output quality and completeness
 
 ## Error Handling

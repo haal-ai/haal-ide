@@ -77,7 +77,7 @@ conditions: []
 
 - **Tasks Added**: [tasks_registered]
 - **Common Task Usages Updated**: [common_tasks_usage_updated]
-- **Registry**: `.olaf/core/skills/common/kb/task-registry.json`
+- **Registry**: `skills/common/kb/task-registry.json`
 
 ---
 

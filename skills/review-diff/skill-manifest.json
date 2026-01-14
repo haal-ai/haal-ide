@@ -31,7 +31,7 @@
     "version": "2.0.0",
     "author": "windsurf ai + p-square",
     "created": "2025-11-15",
-    "updated": "2025-11-20",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "xdlc prompt-engineers",
       "primary_maintainer": "p-square",
@@ -49,19 +49,19 @@
     "templates": [
       {
         "name": "review-report-format",
-        "path": "/templates/review-report-format.md",
+        "path": "templates/review-report-format.md",
         "type": "markdown",
         "description": "Structured format for code review reports with severity levels"
       },
       {
         "name": "severity-guidelines",
-        "path": "/templates/severity-guidelines.md",
+        "path": "templates/severity-guidelines.md",
         "type": "markdown",
         "description": "Guidelines for categorizing review findings by severity"
       },
       {
         "name": "actionable-actions-format",
-        "path": "/templates/actionable-actions-format.md",
+        "path": "templates/actionable-actions-format.md",
         "type": "markdown",
         "description": "Template for generating actionable fix commands for review findings"
       }
@@ -76,25 +76,25 @@
     "references": [
       {
         "name": "python-review-standards",
-        "path": "[id:practices_dir]guidances/review/code-reviews/review-guidelines-python.md",
+        "path": ".olaf/data/practices/guidances/review/code-reviews/review-guidelines-python.md",
         "type": "external",
         "description": "Python-specific code review standards and practices (shared)"
       },
       {
         "name": "cplusplus-review-standards",
-        "path": "[id:practices_dir]guidances/review/code-reviews/review-guidelines-cplusplus.md",
+        "path": ".olaf/data/practices/guidances/review/code-reviews/review-guidelines-cplusplus.md",
         "type": "external",
         "description": "C++ specific code review standards and practices (shared)"
       },
       {
         "name": "java-review-standards",
-        "path": "[id:practices_dir]guidances/review/code-reviews/review-guidelines-java.md",
+        "path": ".olaf/data/practices/guidances/review/code-reviews/review-guidelines-java.md",
         "type": "external",
         "description": "Java-specific code review standards and practices (shared)"
       },
       {
         "name": "go-review-standards",
-        "path": "[id:practices_dir]guidances/review/code-reviews/review-guidelines-go.md",
+        "path": ".olaf/data/practices/guidances/review/code-reviews/review-guidelines-go.md",
         "type": "external",
         "description": "Go-specific code review standards and practices (shared)"
       }

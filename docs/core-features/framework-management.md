@@ -12,7 +12,7 @@ OLAF uses structured framework management to enable AI agents to load, validate,
 
 The condensed framework (`olaf-framework-condensed.md`) is a self-contained, minimal file that includes all essential OLAF components in one place.
 
-**Location:** `.olaf/core/reference/.condensed/olaf-framework-condensed.md`
+**Location:** `reference/.condensed/olaf-framework-condensed.md`
 
 ### Purpose
 
@@ -43,7 +43,7 @@ The condensed framework embeds:
 
 **How It's Loaded:**
 ```markdown
-1. Agent reads .olaf/core/reference/.condensed/olaf-framework-condensed.md
+1. Agent reads reference/.condensed/olaf-framework-condensed.md
 2. Validates line count (119 lines expected)
 3. If incomplete, reloads with endLine=-1
 4. Framework components become active in agent context
@@ -220,7 +220,7 @@ Expert domain guidance:
 
 **Initialization:**
 ```markdown
-1. Load: Read .olaf/core/reference/.condensed/olaf-framework-condensed.md
+1. Load: Read reference/.condensed/olaf-framework-condensed.md
 2. Validate: Check 119 lines loaded
 3. Parse: Extract XML sections
 4. Apply: Use protocols, principles, memory map in all operations
@@ -253,17 +253,17 @@ Expert domain guidance:
 
 Some operations need detailed documentation beyond condensed framework:
 
-**Full Memory Map** (`.olaf/core/reference/memory-map.md`):
+**Full Memory Map** (`reference/memory-map.md`):
 - Complete ID definitions with descriptions
 - Hierarchical structure with examples
 - Use when creating new skills that need all path references
 
-**Full Core Principles** (`.olaf/core/reference/core-principles.md`):
+**Full Core Principles** (`reference/core-principles.md`):
 - Detailed explanations of each principle
 - Examples and rationale
 - Use when onboarding or training
 
-**Competency Index** (`.olaf/core/reference/query-competency-index.md`):
+**Competency Index** (`reference/query-competency-index.md`):
 - Complete catalog of all competencies
 - Trigger phrases and descriptions
 - Use for competency discovery

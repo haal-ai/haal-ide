@@ -10,6 +10,10 @@ description: Interactive skill launcher - lists skills, analyzes requirements, g
 tags: [straf, skill, execution, interactive, launcher]
 protocol: Propose-Act
 aliases: [run skill with straf, execute skill, launch skill]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # STRAF Skill Runner - Interactive Skill Launcher
@@ -20,7 +24,7 @@ Present available OLAF skills, analyze the selected skill's parameter requiremen
 ## Process Flow
 
 ### Step 1: Present Skill List
-List available skills from `~/.olaf/core/skills/` directory for user to choose from.
+List available skills from `~/skills/` directory for user to choose from.
 
 Example:
 ```
@@ -74,8 +78,8 @@ Proceed? (y/n)
 If user confirms, execute:
 
 ```bash
-python ~/.olaf/core/skills/straf-skill-runner/utils/run_skill.py \
-  --prompt ~/.olaf/core/skills/search-and-learn/prompts/search-and-learn.md \
+python ~/skills/straf-skill-runner/utils/run_skill.py \
+  --prompt ~/skills/search-and-learn/prompts/search-and-learn.md \
   --context "learning_objective=Docker security"
 ```
 

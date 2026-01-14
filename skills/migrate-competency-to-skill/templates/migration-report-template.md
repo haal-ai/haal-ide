@@ -102,8 +102,8 @@ Changes Applied:
 ```
 
 ### Path Reference Updates
-- **From**: `[id:competencies_dir]{competency_name}/templates/{template_name}`
-- **To**: `[id:skills_dir]{target_skill_name}/templates/{template_name}`
+- **From**: `competencies/{competency_name}/templates/{template_name}`
+- **To**: `templates/{template_name}`
 
 ---
 
@@ -269,7 +269,7 @@ git checkout -b temp-{target_skill_name}-migration  # Create temp branch
 git show {source_branch}:{source_file_path} > {temp_file}
 
 # Migration and commit
-git add [id:skills_dir]{target_skill_name}/
+git add skills/{target_skill_name}/
 git commit -m "feat: migrate {feature_name} from {competency_name}"
 
 # Merge back and cleanup

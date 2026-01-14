@@ -4,9 +4,13 @@ description: Assist developers coding in Rust by enforcing team practices, SOLID
 license: Apache-2.0
 metadata:
   olaf_tags: [rust, coding, developer, practices]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -29,11 +33,11 @@ You MUST follow the established interaction protocol strictly:
 You MUST load and internalize ALL practice files before any coding assistance:
 
 **Required Practices (MUST load all):**
-- Read and apply: `[id:practices_dir]standards/universal-coding-standards.md`
+- Read and apply: `.olaf/data/practices/standards/universal-coding-standards.md`
   - Covers: SRP, Dependency Injection, function size, complexity, naming, error handling
-- Read and apply: `[id:practices_dir]guidances/coding/rust-coding-guidance.md`
+- Read and apply: `.olaf/data/practices/guidances/coding/rust-coding-guidance.md`
   - Covers: Rust idioms, error handling, naming, project structure, testing, concurrency
-- Read and apply: `[id:practices_dir]guidances/git/git-workflow-guidance.md`
+- Read and apply: `.olaf/data/practices/guidances/git/git-workflow-guidance.md`
   - Covers: Worktree setup, small commits, commit frequency, branch strategy
 
 You WILL confirm practices are loaded before proceeding.

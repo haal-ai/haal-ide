@@ -20,17 +20,17 @@ dependencies: ["session_identifier", "subject_3_words", "timestamp", "trajectory
 - `cycle_counter`: Total cycles completed
 
 **Required Files**: 
-- Template: `.olaf/core/skills/challenge-me/templates/think-tank-think-template.md`
-- Template: `.olaf/core/skills/challenge-me/templates/think-tank-path-template.md`
-- Template: `.olaf/core/skills/challenge-me/templates/think-tank-sources-template.md`
-- Template: `.olaf/core/skills/challenge-me/templates/think-tank-reco-template.md`
+- Template: `templates/think-tank-think-template.md`
+- Template: `templates/think-tank-path-template.md`
+- Template: `templates/think-tank-sources-template.md`
+- Template: `templates/think-tank-reco-template.md`
 
 **Required Tools**: File system write access
 
 ## Task Instructions
 
 ### 1. Create Output Directory
-Create folder: `[id:staging_dir]think-tank/<subject_3_words>-<timestamp>/`
+Create folder: `.olaf/work/staging/think-tank/<subject_3_words>-<timestamp>/`
 
 ### 2. Generate think.md
 Load template: `think-tank-think-template.md`

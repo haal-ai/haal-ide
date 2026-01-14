@@ -236,7 +236,7 @@ All OLAF components use consistent path patterns:
 
 ### Absolute Paths from Repository Root
 ```
-.olaf/core/skills/<skill-name>/
+skills/<skill-name>/
 .olaf/data/projects/jobs-register.md
 .olaf/work/staging/research/
 ```

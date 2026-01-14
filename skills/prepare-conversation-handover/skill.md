@@ -4,9 +4,13 @@ description: Create a clear and concise handover document to ensure smooth trans
 license: Apache-2.0
 metadata:
   olaf_tags: [handover, documentation, workflow, collaboration]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/reference/.condensed/olaf-framework-condensed.md
 
 ## Input Parameters
 
@@ -35,7 +39,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 
 ## Output/Result Format
 
-Use template: `[id:skills_dir]prepare-conversation-handover/templates/handover-template.md`
+Use template: `templates/handover-template.md`
 
 The handover document should include:
 - Session metadata (author, timestamp, project)
@@ -48,7 +52,7 @@ The handover document should include:
 ## Output to USER
 1. **Handover Document**:
    - Complete markdown file
-   - Saved to `[id:handover]`
+   - Saved to `.olaf/data/handover-conversation*.md`
    - Ready for sharing or continuation
 2. **Confirmation**:
    - Summary of created handover

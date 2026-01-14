@@ -4,14 +4,13 @@ description: Create a new job file in the jobs directory following the job templ
 license: Apache-2.0
 metadata:
   olaf_tags: [job, creation, template, project-management]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -27,7 +26,7 @@ Get current timestamp using time tools, fallback to shell command if needed
 ## Process
 1. **Read Template and Register**: 
    - Read file: `templates/project-manager/job-template.md`
-   - Read file: `[id:jobs]` (jobs register at `[id:projects_dir]jobs-register.md`)
+   - Read file: `.olaf/data/projects/jobs-register.md` (jobs register at `.olaf/data/projects/jobs-register.md`)
    - Extract current serial number from register
 2. **Generate Job ID**:
    - Increment serial number from job register
@@ -44,10 +43,10 @@ Get current timestamp using time tools, fallback to shell command if needed
    - Set creation date and status
    - Generate proper job metadata
 4. **Create Job File**:
-   - Write file: `[id:jobs_dir]JOB-{serial}.md`
+   - Write file: `.olaf/data/projects/jobs/JOB-{serial}.md`
    - Ensure proper markdown formatting and template compliance
 5. **Update Job Register**:
-   - Add new job entry to register at `[id:jobs]`
+   - Add new job entry to register at `.olaf/data/projects/jobs-register.md`
    - Update serial number counter
    - Save updated register file
 
@@ -57,27 +56,27 @@ Follow template structure: `templates/project-manager/job-template.md`
 
 ## Output to USER
 - Confirmation of job creation with ID: `JOB-{serial}`
-- File location: `[id:jobs_dir]JOB-{serial}.md`
+- File location: `.olaf/data/projects/jobs/JOB-{serial}.md`
 - Updated job register with new entry
 - Job details summary for verification
 - Next phase: Begin work on the created job using available OLAF skills or competencies
 
 ## Domain-Specific Rules
-- Rule 1: Always increment serial number in job register at `[id:jobs]`
+- Rule 1: Always increment serial number in job register at `.olaf/data/projects/jobs-register.md`
 - Rule 2: Job ID must follow JOB-{serial} format exactly
 - Rule 3: All required template sections must be populated
 - Rule 4: Job register must be updated atomically with job creation
 - Rule 5: Assignee defaults to @AssigneeName if not specified
 
 ## Required Actions
-1. Read job template and current register from `[id:jobs]`
+1. Read job template and current register from `.olaf/data/projects/jobs-register.md`
 2. Generate next available job ID
 3. Populate template with provided parameters
-4. Create new job file in `[id:jobs_dir]`
-5. Update job register at `[id:jobs]` with new entry
+4. Create new job file in `.olaf/data/projects/jobs/`
+5. Update job register at `.olaf/data/projects/jobs-register.md` with new entry
 
 ⚠️ **Critical Notes**
-- Never create duplicate job IDs - always check register at `[id:jobs]` first
+- Never create duplicate job IDs - always check register at `.olaf/data/projects/jobs-register.md` first
 - Job register and job file creation must succeed together
 - Template structure must be preserved exactly
 - All metadata fields are required for proper tracking

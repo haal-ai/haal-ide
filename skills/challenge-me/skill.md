@@ -7,12 +7,7 @@ metadata:
   olaf_protocol: Act
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -136,10 +131,10 @@ You WILL generate outputs following this structure:
 - **Evolution Tracking**: Note how ideas changed from previous cycle
 
 **Final Deliverables** (if save_deliverables=true):
-- **think.md**: Complete ideation trajectory and thinking evolution → `[id:staging_dir]challenge-me/[session-identifier]/think.md`
-- **path.md**: Development path and implementation roadmap → `[id:staging_dir]challenge-me/[session-identifier]/path.md`
-- **sources.md**: Comprehensive source citations and references → `[id:staging_dir]challenge-me/[session-identifier]/sources.md`
-- **reco.md**: Final recommendations and action items → `[id:staging_dir]challenge-me/[session-identifier]/reco.md`
+- **think.md**: Complete ideation trajectory and thinking evolution → `.olaf/work/staging/challenge-me/[session-identifier]/think.md`
+- **path.md**: Development path and implementation roadmap → `.olaf/work/staging/challenge-me/[session-identifier]/path.md`
+- **sources.md**: Comprehensive source citations and references → `.olaf/work/staging/challenge-me/[session-identifier]/sources.md`
+- **reco.md**: Final recommendations and action items → `.olaf/work/staging/challenge-me/[session-identifier]/reco.md`
 
 ## Domain-Specific Rules
 You MUST follow these constraints:

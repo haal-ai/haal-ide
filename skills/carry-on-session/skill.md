@@ -4,14 +4,13 @@ description: Load the latest carry-over note and propose the immediate next acti
 license: Apache-2.0
 metadata:
   olaf_tags: [session, carry-on, continuation, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Carry On Session
 
@@ -23,7 +22,7 @@ Load the latest carry-over note and propose the immediate next action. Wait for 
 - Do NOT modify files until the user approves.
 
 ## Instructions
-1. Find latest carry-over file in `[id:carryover_dir]` matching `carry-over-YYYYMMDD-HHmm.txt` (most recent by timestamp).
+1. Find latest carry-over file in `.olaf/work/carry-over/` matching `carry-over-YYYYMMDD-HHmm.txt` (most recent by timestamp).
 2. Parse sections:
    - `## NEXT PROMPT` (required)
    - `## FILES NEEDED` (optional)

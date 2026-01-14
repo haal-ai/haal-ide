@@ -10,7 +10,7 @@
       "description": "Retrieves current timestamp and environment details (OS, shell) by executing get-env.py script and reading olaf-env.txt",
       "category": "environment",
       "tags": ["timestamp", "environment", "initialization"],
-      "current_location": ".olaf/core/skills/common/tasks/retrieve-timestamp.md",
+      "current_location": "skills/common/tasks/retrieve-timestamp.md",
       "used_in_skills": [
         "review-github-pr",
         "convert-skill-to-chain",
@@ -22,7 +22,7 @@
         "tools": [
           {
             "name": "get-env.py",
-            "location": ".olaf/core/skills/review-github-pr/tools/get-env.py",
+            "location": "skills/review-github-pr/tools/get-env.py",
             "description": "Python script to capture environment information"
           }
         ],
@@ -49,7 +49,7 @@
       "description": "Creates a timestamped backup copy of any file to preserve original before modifications",
       "category": "filesystem",
       "tags": ["backup", "file-operations", "safety", "preservation"],
-      "current_location": ".olaf/core/skills/common/tasks/backup-file.md",
+      "current_location": "skills/common/tasks/backup-file.md",
       "used_in_skills": [
         "convert-skill-to-chain"
       ],
@@ -80,7 +80,7 @@
       "description": "Gathers and validates user-provided parameters for git add and commit operations including message mode, staging control, and safety settings",
       "category": "git",
       "tags": ["git", "parameters", "user-input", "configuration"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/collect-parameters.md",
+      "current_location": "skills/git-add-commit/tasks/collect-parameters.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -105,7 +105,7 @@
       "description": "Executes git status --porcelain and parses output into categorized file lists (staged, unstaged, untracked)",
       "category": "git",
       "tags": ["git", "status", "parsing", "analysis"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/analyze-git-status.md",
+      "current_location": "skills/git-add-commit/tasks/analyze-git-status.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -129,7 +129,7 @@
       "description": "Applies skill_name, pattern, or specific file filters to git file lists based on user criteria",
       "category": "git",
       "tags": ["git", "filtering", "file-selection"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/filter-files.md",
+      "current_location": "skills/git-add-commit/tasks/filter-files.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -155,7 +155,7 @@
       "description": "Identifies git staging scenario (A/B/C/D) based on file states and determines appropriate action",
       "category": "git",
       "tags": ["git", "staging", "decision", "branching"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/determine-staging-scenario.md",
+      "current_location": "skills/git-add-commit/tasks/determine-staging-scenario.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -181,7 +181,7 @@
       "description": "Creates context-aware commit messages from file changes, supporting multiple template styles (conventional, descriptive, minimal)",
       "category": "git",
       "tags": ["git", "commit", "message-generation", "conventions"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/generate-commit-message.md",
+      "current_location": "skills/git-add-commit/tasks/generate-commit-message.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -203,7 +203,7 @@
       "description": "Validates files for large sizes (>10MB) and sensitive data patterns (API keys, passwords, tokens) before commit",
       "category": "git",
       "tags": ["git", "safety", "validation", "security"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/perform-safety-checks.md",
+      "current_location": "skills/git-add-commit/tasks/perform-safety-checks.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -227,7 +227,7 @@
       "description": "Executes git add and git commit commands with error handling and result parsing",
       "category": "git",
       "tags": ["git", "commit", "execution", "automation"],
-      "current_location": ".olaf/core/skills/git-add-commit/tasks/execute-git-operations.md",
+      "current_location": "skills/git-add-commit/tasks/execute-git-operations.md",
       "used_in_skills": ["git-add-commit"],
       "dependencies": {
         "tools": [],
@@ -253,7 +253,7 @@
       "description": "Allows user to select a specific PR by number or defaults to current branch's PR",
       "category": "github",
       "tags": ["github", "pull-request", "user-interaction"],
-      "current_location": ".olaf/core/skills/review-github-pr/tasks/select-pr.md",
+      "current_location": "skills/review-github-pr/tasks/select-pr.md",
       "used_in_skills": [
         "review-github-pr"
       ],
@@ -280,7 +280,7 @@
       "description": "Retrieves PR metadata and diff from GitHub API and saves to staging files",
       "category": "github",
       "tags": ["github", "pull-request", "api", "extraction"],
-      "current_location": ".olaf/core/skills/review-github-pr/tasks/extract-pr-data.md",
+      "current_location": "skills/review-github-pr/tasks/extract-pr-data.md",
       "used_in_skills": [
         "review-github-pr"
       ],
@@ -312,7 +312,7 @@
       "description": "Reads and parses PR metadata file to prepare for analysis",
       "category": "analysis",
       "tags": ["metadata", "parsing", "analysis-prep"],
-      "current_location": ".olaf/core/skills/review-github-pr/tasks/analyze-metadata.md",
+      "current_location": "skills/review-github-pr/tasks/analyze-metadata.md",
       "used_in_skills": [
         "review-github-pr"
       ],
@@ -342,7 +342,7 @@
       "description": "Removes temporary staging files created during task execution",
       "category": "cleanup",
       "tags": ["cleanup", "filesystem", "housekeeping"],
-      "current_location": ".olaf/core/skills/review-github-pr/tasks/cleanup-extraction-files.md",
+      "current_location": "skills/review-github-pr/tasks/cleanup-extraction-files.md",
       "used_in_skills": [
         "review-github-pr"
       ],
@@ -368,7 +368,7 @@
       "description": "Requests and validates required input parameters from user for search and learn workflow",
       "category": "user-interaction",
       "tags": ["user-input", "validation", "learning"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/collect-user-parameters.md",
+      "current_location": "skills/search-and-learn/tasks/collect-user-parameters.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -396,7 +396,7 @@
       "description": "Verifies all requirements, tool access, and validates scope before execution",
       "category": "validation",
       "tags": ["validation", "prerequisites", "verification"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/validate-prerequisites.md",
+      "current_location": "skills/search-and-learn/tasks/validate-prerequisites.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -425,7 +425,7 @@
       "description": "Clarifies learning objectives, breaks down complex topics, establishes success criteria and scope boundaries",
       "category": "learning",
       "tags": ["learning", "goal-setting", "planning"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/define-learning-goals.md",
+      "current_location": "skills/search-and-learn/tasks/define-learning-goals.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -455,7 +455,7 @@
       "description": "Formulates precise search queries and identifies authoritative information sources",
       "category": "research",
       "tags": ["research", "search", "strategy", "planning"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/develop-search-strategy.md",
+      "current_location": "skills/search-and-learn/tasks/develop-search-strategy.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -485,7 +485,7 @@
       "description": "Performs systematic searches across sources, documents findings with mandatory URLs, tracks quality",
       "category": "research",
       "tags": ["research", "search", "documentation", "url-collection"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/execute-systematic-search.md",
+      "current_location": "skills/search-and-learn/tasks/execute-systematic-search.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -515,7 +515,7 @@
       "description": "Assesses source credibility, synthesizes information from multiple sources, creates concept connections",
       "category": "analysis",
       "tags": ["analysis", "synthesis", "credibility", "knowledge-building"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/evaluate-synthesize-information.md",
+      "current_location": "skills/search-and-learn/tasks/evaluate-synthesize-information.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -546,7 +546,7 @@
       "description": "Creates practical applications, tests understanding through exercises, validates against success criteria",
       "category": "learning",
       "tags": ["learning", "application", "validation", "testing"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/apply-test-learning.md",
+      "current_location": "skills/search-and-learn/tasks/apply-test-learning.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -578,7 +578,7 @@
       "description": "Creates structured learning report with summary, sources, applications, and next steps",
       "category": "reporting",
       "tags": ["reporting", "documentation", "learning", "output"],
-      "current_location": ".olaf/core/skills/search-and-learn/tasks/generate-learning-report.md",
+      "current_location": "skills/search-and-learn/tasks/generate-learning-report.md",
       "used_in_skills": [
         "search-and-learn"
       ],
@@ -587,7 +587,7 @@
         "templates": [
           {
             "name": "learning-report-template.md",
-            "location": ".olaf/core/skills/search-and-learn/templates/learning-report-template.md",
+            "location": "templates/learning-report-template.md",
             "description": "Template for learning report structure"
           }
         ],
@@ -619,7 +619,7 @@
       "description": "Validates input parameters for code review (diff_content, review_scope, target_path, save_report, include_actions) and checks git repository availability",
       "category": "validation",
       "tags": ["validation", "parameters", "git", "code-review"],
-      "current_location": ".olaf/core/skills/review-diff/tasks/validate-review-parameters.md",
+      "current_location": "skills/review-diff/tasks/validate-review-parameters.md",
       "used_in_skills": [
         "review-diff"
       ],
@@ -648,7 +648,7 @@
       "description": "Executes git diff command based on review scope or uses pre-provided diff content, extracts changed file list",
       "category": "github",
       "tags": ["git", "diff", "code-review", "extraction"],
-      "current_location": ".olaf/core/skills/review-diff/tasks/collect-git-diff.md",
+      "current_location": "skills/review-diff/tasks/collect-git-diff.md",
       "used_in_skills": [
         "review-diff"
       ],
@@ -685,7 +685,7 @@
       "description": "Analyzes file extensions from diff and categorizes files by programming language (Python, C++, Java, Go, JavaScript), filters exclusions",
       "category": "analysis",
       "tags": ["language-detection", "file-analysis", "categorization"],
-      "current_location": ".olaf/core/skills/review-diff/tasks/detect-file-languages.md",
+      "current_location": "skills/review-diff/tasks/detect-file-languages.md",
       "used_in_skills": [
         "review-diff"
       ],
@@ -712,7 +712,7 @@
       "description": "Applies language-specific code review standards using router helper, performs security scan and quality assessment, categorizes findings by severity",
       "category": "analysis",
       "tags": ["code-review", "security", "quality", "router", "language-specific"],
-      "current_location": ".olaf/core/skills/review-diff/tasks/analyze-diff-with-router.md",
+      "current_location": "skills/review-diff/tasks/analyze-diff-with-router.md",
       "used_in_skills": [
         "review-diff"
       ],
@@ -720,10 +720,10 @@
         "tools": [],
         "templates": [
           "helpers/review-diff-router.md",
-          "[id:practices_dir]code-reviews/review-standard-python.md",
-          "[id:practices_dir]code-reviews/review-standard-cplusplus.md",
-          "[id:practices_dir]code-reviews/review-standard-java.md",
-          "[id:practices_dir]code-reviews/review-standard-go.md"
+          ".olaf/data/practices/code-reviews/review-standard-python.md",
+          ".olaf/data/practices/code-reviews/review-standard-cplusplus.md",
+          ".olaf/data/practices/code-reviews/review-standard-java.md",
+          ".olaf/data/practices/code-reviews/review-standard-go.md"
         ],
         "state_variables": [
           "context.diff_text",
@@ -749,7 +749,7 @@
       "description": "Creates comprehensive code review report with language detection, security assessment, quality findings, and actionable commands; supports file save or screen display",
       "category": "reporting",
       "tags": ["reporting", "code-review", "documentation", "output"],
-      "current_location": ".olaf/core/skills/review-diff/tasks/generate-review-report.md",
+      "current_location": "skills/review-diff/tasks/generate-review-report.md",
       "used_in_skills": [
         "review-diff"
       ],
@@ -771,8 +771,8 @@
           "context.report_summary"
         ],
         "files_created": [
-          "[id:staging_dir]diff-reviews/review-report-[timestamp].md",
-          "[id:staging_dir]diff-reviews/actions-[timestamp].md"
+          ".olaf/work/staging/diff-reviews/review-report-[timestamp].md",
+          ".olaf/work/staging/diff-reviews/actions-[timestamp].md"
         ]
       },
       "reusability_score": 5,

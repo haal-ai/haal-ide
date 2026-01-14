@@ -23,11 +23,11 @@ conditions: []
 1. **Build Command Based on Selection Mode**:
    - For specific PR (METADATA ONLY - optimized): 
      ```bash
-     python .olaf/core/skills/review-github-pr/tools/gh-pr-analyzer.py --pr [pr_number] --timestamp [timestamp] --metadata-only
+     python skills/review-github-pr/tools/gh-pr-analyzer.py --pr [pr_number] --timestamp [timestamp] --metadata-only
      ```
    - For latest open (METADATA ONLY - optimized):
      ```bash
-     python .olaf/core/skills/review-github-pr/tools/gh-pr-analyzer.py --latest-open --timestamp [timestamp] --metadata-only
+     python skills/review-github-pr/tools/gh-pr-analyzer.py --latest-open --timestamp [timestamp] --metadata-only
      ```
 
 2. **Execute Script and Wait for Completion**:

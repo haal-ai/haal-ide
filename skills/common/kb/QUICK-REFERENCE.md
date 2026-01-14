@@ -4,23 +4,23 @@
 
 ```bash
 # List all tasks
-python .olaf/core/skills/common/tools/search-tasks.py list
+python skills/common/tools/search-tasks.py list
 
 # Search by category
-python .olaf/core/skills/common/tools/search-tasks.py category github
-python .olaf/core/skills/common/tools/search-tasks.py category environment
+python skills/common/tools/search-tasks.py category github
+python skills/common/tools/search-tasks.py category environment
 
 # Search by tag
-python .olaf/core/skills/common/tools/search-tasks.py tag timestamp
-python .olaf/core/skills/common/tools/search-tasks.py tag api
+python skills/common/tools/search-tasks.py tag timestamp
+python skills/common/tools/search-tasks.py tag api
 
 # Search by keyword
-python .olaf/core/skills/common/tools/search-tasks.py keyword "pull request"
-python .olaf/core/skills/common/tools/search-tasks.py keyword cleanup
+python skills/common/tools/search-tasks.py keyword "pull request"
+python skills/common/tools/search-tasks.py keyword cleanup
 
 # Find highly reusable tasks (score >= 8)
-python .olaf/core/skills/common/tools/search-tasks.py reusable
-python .olaf/core/skills/common/tools/search-tasks.py reusable 10
+python skills/common/tools/search-tasks.py reusable
+python skills/common/tools/search-tasks.py reusable 10
 ```
 
 ## PowerShell Aliases (Optional Setup)
@@ -31,7 +31,7 @@ Add to your PowerShell profile for convenience:
 # Add to $PROFILE
 function Search-OlafTasks {
     param([string]$Type, [string]$Query)
-    python .olaf/core/skills/common/tools/search-tasks.py $Type $Query
+    python skills/common/tools/search-tasks.py $Type $Query
 }
 
 Set-Alias -Name olaf-tasks -Value Search-OlafTasks
@@ -74,7 +74,7 @@ jq '[.tasks[].category] | group_by(.) | map({category: .[0], count: length})' ta
   "description": "Detailed description of what this task does",
   "category": "environment|github|analysis|cleanup|user-interaction",
   "tags": ["tag1", "tag2"],
-  "current_location": ".olaf/core/skills/[skill-name]/tasks/your-task.md",
+  "current_location": "skills/[skill-name]/tasks/your-task.md",
   "used_in_skills": ["skill-name"],
   "dependencies": {
     "tools": [],
@@ -93,7 +93,7 @@ jq '[.tasks[].category] | group_by(.) | map({category: .[0], count: length})' ta
 ## Task Discovery Workflow
 
 1. **Before creating a task**: Search for similar functionality
-2. **Check common tasks**: Look in `.olaf/core/skills/common/tasks/`
+2. **Check common tasks**: Look in `skills/common/tasks/`
 3. **Search registry**: Use search tools above
 4. **Reuse if found**: Reference existing task in your skill
 5. **Create if needed**: Add new task and register it

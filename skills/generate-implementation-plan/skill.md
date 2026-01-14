@@ -4,12 +4,7 @@ description: Transform design document into executable implementation task plan 
 license: Apache-2.0
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Generate Implementation Plan - Master Coordinator
 
@@ -26,7 +21,7 @@ Transform layered system design into detailed, executable implementation plan fo
 
 **Optional**:
 - `skill_name`: Name for the skill being implemented (default: extracted from design)
-- `skill_path`: Target path for skill (default: `.olaf/core/skills/${skill_name}`)
+- `skill_path`: Target path for skill (default: `skills/${skill_name}`)
 - `include_bootstrap`: Include bootstrap execution command (default: true)
 - `include_traceability`: Include requirement traceability matrix (default: true)
 

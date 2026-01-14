@@ -161,7 +161,7 @@ cat data/projects/jobs-register.md | grep "Serial"
 The AI should automatically handle this, but manual verification may be needed.
 
 **If job register not found:**
-- Verify path in memory-map.md: `[id:jobs]`
+- Verify path in memory-map.md: `.olaf/data/projects/jobs-register.md`
 - Create register file if missing
 - Initialize with serial number: 0
 

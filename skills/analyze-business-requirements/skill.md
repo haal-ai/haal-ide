@@ -4,14 +4,13 @@ description: Guide the process of reviewing a business requirements document to 
 license: Apache-2.0
 metadata:
   olaf_tags: [business, requirements, analysis, review, documentation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -52,10 +51,10 @@ You WILL execute these operations as needed:
 
 **File Operations** (when required):
 - Read/Write file: `[requirements_document]` - Parse document structure and content
-- Read/Write file: `[id:practices_dir]guidances/requirements/expressing-business-needs-to-developers.md` - Apply analysis frameworks
-- Read/Write file: `[id:practices_dir]guidances/requirements/reviewing-business-requirements-for-dev-and-test.md` - Reference quality criteria
-- Read/Write file: `[id:skills_dir]analyze-business-requirements/templates/requirements-analysis-report-template.md` - Structure output format
-- Write file: `[id:staging_dir]business-requirements-analysis-YYYYMMDD-NNN.md` - Save analysis report
+- Read/Write file: `.olaf/data/practices/guidances/requirements/expressing-business-needs-to-developers.md` - Apply analysis frameworks
+- Read/Write file: `.olaf/data/practices/guidances/requirements/reviewing-business-requirements-for-dev-and-test.md` - Reference quality criteria
+- Read/Write file: `templates/requirements-analysis-report-template.md` - Structure output format
+- Write file: `.olaf/work/staging/business-requirements-analysis-YYYYMMDD-NNN.md` - Save analysis report
 
 **Core Logic**: Execute following protocol requirements
 - Apply appropriate interaction protocol
@@ -76,7 +75,7 @@ You WILL validate results:
 
 ## Output Format
 You WILL generate outputs following this structure:
-- Primary deliverable: Follow template `[id:skills_dir]analyze-business-requirements/templates/requirements-analysis-report-template.md`
+- Primary deliverable: Follow template `templates/requirements-analysis-report-template.md`
 - Supporting files: Analysis report saved to staging directory
 - Documentation: Markdown format with proper categorization
 

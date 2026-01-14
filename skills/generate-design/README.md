@@ -61,7 +61,7 @@ Task 4: Generate Design Document
 ```bash
 # Called from ESDI Phase 3
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/generate-design/prompts/generate-design.md" \
+  --prompt "skills/generate-design/prompts/generate-design.md" \
   --context "specification_file=./specification.md,output_file=./design.md" \
   --tool-mode standard \
   --aws-profile bedrock

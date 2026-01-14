@@ -4,14 +4,13 @@ description: Add entries to functional or technical product changelogs with link
 license: Apache-2.0
 metadata:
   olaf_tags: [changelog, product, documentation, functional, technical]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -45,14 +44,14 @@ You WILL execute these operations:
 - Parse template for detail file structure only
 
 **Changelog Line Format (REGISTER INSERTION)**:
-- The inserted line in `[id:product_dir]changelog-[changelog_type-lowercase].md` MUST follow this exact format:
+- The inserted line in `.olaf/data/product/changelog-[changelog_type-lowercase].md` MUST follow this exact format:
   - `- <entry_type>: <entry_description> [Details]([changelog_type-lowercase]/[subject_name].md)`
 
 **File Operations**:
-- Read current changelog: `[id:product_dir]changelog-[changelog_type-lowercase].md`
+- Read current changelog: `.olaf/data/product/changelog-[changelog_type-lowercase].md`
 - Determine if date section exists, create if needed
 - Insert new entry at top of current date's entries
-- Create detail file: `[id:product_dir][changelog_type-lowercase]/[subject_name].md`
+- Create detail file: `.olaf/data/product/[changelog_type-lowercase]/[subject_name].md`
 - Populate detail file using template structure with additional_context
 
 **Core Logic**: Execute following template requirements
@@ -97,7 +96,7 @@ You WILL clearly define:
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
-- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
+- Rule 0: NEVER create, modify, or delete any file under `~/.olaf/` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `.olaf/`).
 - Rule 1: Always add new entries to the top of their date section (reverse chronological order)
 - Rule 2: Create missing date sections following format: `## YYYY-MM` then `### YYYY-MM-DD`
 - Rule 3: Use kebab-case for all detail file names (lowercase, hyphens only)

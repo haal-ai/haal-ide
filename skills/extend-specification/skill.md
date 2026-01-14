@@ -4,14 +4,13 @@ description: Review and extend a functional specification document to ensure it'
 license: Apache-2.0
 metadata:
   olaf_tags: [documentation, specification, requirements, analysis, frontend]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -39,7 +38,7 @@ Get current timestamp using time tools, fallback to shell command if needed
    - Ensure technical completeness
 
 ## Output/Result Format
-- Markdown document in [id:staging_dir] with:
+- Markdown document in .olaf/work/staging/ with:
   - Section-by-section review
   - Identified gaps and issues
   - Proposed enhancements

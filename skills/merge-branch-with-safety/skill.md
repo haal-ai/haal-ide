@@ -4,9 +4,13 @@ description: Perform safe branch merge with dry-run validation, automatic taggin
 license: Apache-2.0
 metadata:
   olaf_tags: [git, merge, safety, tags, dry-run, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -178,7 +182,7 @@ Before creating the test branch, you WILL run the `git-differ` helper to classif
 
 ```powershell
 
-python .olaf/core/scripts/git-differ/main.py `
+python scripts/git-differ/main.py `
   --target {target_branch} `
   --source {source_branch} `
   --repo . `
@@ -284,7 +288,7 @@ Present detailed proposal to user with dry-run results:
     - {risky_example_3}
 
 You WILL use this structural impact analysis to influence the recommendation:
-- If `risky_changes_count` is high, especially under critical paths (e.g. `.olaf/core/skills/`, `.olaf/core/competencies/`), you SHOULD recommend selective adoption (cherry-picks/manual porting of specific files) instead of a full merge.
+- If `risky_changes_count` is high, especially under critical paths (e.g. `skills/`, `competencies/`), you SHOULD recommend selective adoption (cherry-picks/manual porting of specific files) instead of a full merge.
 - If `risky_changes_count` is low and mainly in non-critical areas, a full merge MAY be acceptable after user confirmation.
 
 ## Proposed Tag Strategy

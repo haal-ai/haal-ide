@@ -149,7 +149,7 @@ Show me only the competencies with "Act" protocol
 
 The list comes from the OLAF competency index, which includes:
 
-- **Skills** from `[id:skills_dir]`
+- **Skills** from `skills/`
 - **Legacy competencies** from `core/competencies/`
 - **Metadata** including status, exposure, and protocol
 

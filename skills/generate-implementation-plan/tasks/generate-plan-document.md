@@ -33,7 +33,7 @@ Assemble all outputs from previous tasks into the final IMPLEMENTATION-TASK-PLAN
 
 ### Step 1: Load Template
 
-Use template from `/templates/implementation-plan-template.md`
+Use template from `templates/implementation-plan-template.md`
 
 ### Step 2: Populate Header
 

@@ -4,9 +4,13 @@ description: Comprehensive evaluation of prompt effectiveness, business value, a
 license: Apache-2.0
 metadata:
   olaf_tags: [validation, effectiveness, value-assessment, quality-assurance]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 

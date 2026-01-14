@@ -6,12 +6,7 @@ metadata:
   olaf_protocol: "\"Propose-Confirm-Act\""
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Generate JSDoc Documentation
 
@@ -121,7 +116,7 @@ Target Quality: commit-d02da43 JSDoc standards
 
 ```python
 # Path to spawn wrapper
-wrapper_path = workspace_root + "/.olaf/core/skills/generate-jsdoc/tools/spawn-jsdoc-generator.py"
+wrapper_path = workspace_root + "/skills/generate-jsdoc/tools/spawn-jsdoc-generator.py"
 
 # Build command
 # Note: The wrapper will handle --no-branch flag based on create_branch parameter
@@ -182,7 +177,7 @@ Estimated time:
   - Large codebase (500+ files): ~30-60 minutes
 
 📊 Check status anytime:
-   python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+   python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 
 📝 Monitor progress:
    Get-Content {log_file} -Tail 20
@@ -203,7 +198,7 @@ Process tracking is automatically enabled. Each spawned process:
 
 **Check process status:**
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 **Process registry format:**

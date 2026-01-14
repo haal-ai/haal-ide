@@ -38,25 +38,25 @@ Analyze the git diff output and categorize each changed file by its extension:
 ### Step 2: Apply Appropriate Language-Specific Instructions PER FILE
 
 **For Python Files (.py)**
-- **MUST USE:** `[id:practices_dir]guidances/review/code-reviews/review-guidelines-python.md`
+- **MUST USE:** `.olaf/data/practices/guidances/review/code-reviews/review-guidelines-python.md`
 - **Apply to:** Every `.py` file in the changes, regardless of how many other file types are present
 - **Focus:** Type hints, PEP compliance, memory management, security, testing
 - **Example:** If changes include `install.py`, `test_install.py`, and 5 markdown files, still apply Python review to both .py files
 
 **For C++ Files (.cpp, .hpp, .h, .cc, .c, .ipp)**
-- **MUST USE:** `[id:practices_dir]guidances/review/code-reviews/review-guidelines-cplusplus.md`
+- **MUST USE:** `.olaf/data/practices/guidances/review/code-reviews/review-guidelines-cplusplus.md`
 - **Apply to:** Every C++ file in the changes, regardless of how many other file types are present
 - **Focus:** Memory safety, modern C++ standards, performance, thread safety
 - **Example:** If changes include `parser.cpp`, `utils.h`, and 10 Python files, still apply C++ review to both C++ files
 
 **For Java Files (.java)**
-- **MUST USE:** `[id:practices_dir]guidances/review/code-reviews/review-guidelines-java.md`
+- **MUST USE:** `.olaf/data/practices/guidances/review/code-reviews/review-guidelines-java.md`
 - **Apply to:** Every `.java` file in the changes, regardless of how many other file types are present
 - **Focus:** Modern Java features, Spring framework patterns, exception handling, JVM performance
 - **Example:** If changes include `UserService.java`, `PaymentController.java`, and other files, apply Java review to both .java files
 
 **For Go Files (.go)**
-- **MUST USE:** `[id:practices_dir]guidances/review/code-reviews/review-guidelines-go.md`
+- **MUST USE:** `.olaf/data/practices/guidances/review/code-reviews/review-guidelines-go.md`
 - **Apply to:** Every `.go` file in the changes, regardless of how many other file types are present
 - **Focus:** Go idioms, error handling, concurrency patterns, goroutine management
 - **Example:** If changes include `main.go`, `handler.go`, and other files, apply Go review to both .go files

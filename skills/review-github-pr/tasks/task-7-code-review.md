@@ -32,7 +32,7 @@ conditions: ["code_files_found"]
    - Analyzer reads file list and fetches diff only for those files
    
    ```bash
-   python .olaf/core/skills/review-github-pr/tools/gh-pr-analyzer.py \
+   python skills/review-github-pr/tools/gh-pr-analyzer.py \
      --pr [pr_number] \
      --timestamp [timestamp] \
      --files-from .olaf/work/staging/pr-reviews/pr-[number]-code-files-[timestamp].txt

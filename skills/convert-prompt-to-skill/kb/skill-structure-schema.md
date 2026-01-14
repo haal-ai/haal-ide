@@ -64,7 +64,7 @@ skill-name/
 
 ### Component File Naming Conventions
 
-**Templates** (`/templates/`):
+**Templates** (`templates/`):
 - Use descriptive kebab-case: `output-format.md`, `validation-checklist.json`
 - Extension matches content type: `.md`, `.json`, `.yaml`, `.txt`
 - Referenced in main prompt as: `Use template: /templates/output-format.md`
@@ -103,7 +103,7 @@ All paths in `skill-manifest.json` BOM section:
       {"path": "/prompts/skill-name.md"}  // ✅ Correct
     ],
     "templates": [
-      {"path": "/templates/output.md"}     // ✅ Correct
+      {"path": "templates/output.md"}     // ✅ Correct
     ],
     "tools": [
       {"path": "/tools/analyzer.py"}       // ✅ Correct
@@ -134,7 +134,7 @@ When creating a new skill, generate files in this order:
 3. **Create main prompt** - `/prompts/skill-name.md` using template
 4. **Generate documentation** - `/docs/description.md` and `/docs/tutorial.md`
 5. **Create component files** - Based on user requests:
-   - Templates in `/templates/`
+   - Templates in `templates/`
    - Tools in `/tools/`
    - Helpers in `/helpers/`
    - KB articles in `/kb/`

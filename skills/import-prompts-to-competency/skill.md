@@ -4,9 +4,13 @@ description: Analyze external prompts collection and generate mapping recommenda
 license: Apache-2.0
 metadata:
   olaf_tags: [import, analysis, mapping, batch, prompts, collection]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Framework Validation
 
@@ -33,9 +37,9 @@ You MUST request these parameters if not provided by the user:
 **Download Location:**
 
 You WILL create and use this directory structure:
-- Create: `[id:staging_dir]prompt-conversions/[source-repo-name]/`
+- Create: `.olaf/work/staging/prompt-conversions/[source-repo-name]/`
 - Never save prompts to workspace root
-- Example: `[id:staging_dir]prompt-conversions/docupilot-prompts/`
+- Example: `.olaf/work/staging/prompt-conversions/docupilot-prompts/`
 
 **Download Instructions for User:**
 
@@ -47,11 +51,11 @@ You WILL create and use this directory structure:
 
 # Create download directory in staging folder
 
-New-Item -ItemType Directory -Force -Path "[id:staging_dir]prompt-conversions\[repo-name]" | Out-Null
+New-Item -ItemType Directory -Force -Path ".olaf/work/staging/prompt-conversions\[repo-name]" | Out-Null
 
 # Navigate to download directory
 
-cd [id:staging_dir]prompt-conversions\[repo-name]
+cd .olaf/work/staging/prompt-conversions\[repo-name]
 
 # Download using GitHub CLI (gh cli required)
 
@@ -75,9 +79,9 @@ cd ..\..\..\..
 
 ```powershell
 
-New-Item -ItemType Directory -Force -Path "[id:staging_dir]prompt-conversions\docupilot-prompts" | Out-Null
+New-Item -ItemType Directory -Force -Path ".olaf/work/staging/prompt-conversions\docupilot-prompts" | Out-Null
 
-cd [id:staging_dir]prompt-conversions\docupilot-prompts
+cd .olaf/work/staging/prompt-conversions\docupilot-prompts
 
 $files = @('process_documentation.md', 'summary_section.md', 'limitations_section.md', 'preconditions_section.md', 'postconditions_section.md', 'input_section.md', 'output_section.md', 'diagram_workflow_section.md', 'description_section.md', 'data_description_section.md', 'warnings_errors_section.md', 'examples_section.md', 'associated_configurations_section.md', 'security_settings_section.md', 'other_processes_triggered_section.md')
 
@@ -93,11 +97,11 @@ cd ..\..\..\..
 
 # Create download directory in staging folder
 
-mkdir -p [id:staging_dir]prompt-conversions/[repo-name]
+mkdir -p .olaf/work/staging/prompt-conversions/[repo-name]
 
 # Navigate to download directory
 
-cd [id:staging_dir]prompt-conversions/[repo-name]
+cd .olaf/work/staging/prompt-conversions/[repo-name]
 
 # Download using GitHub CLI (gh cli required)
 
@@ -121,9 +125,9 @@ cd ../../../..
 
 ```bash
 
-mkdir -p [id:staging_dir]prompt-conversions/docupilot-prompts
+mkdir -p .olaf/work/staging/prompt-conversions/docupilot-prompts
 
-cd [id:staging_dir]prompt-conversions/docupilot-prompts
+cd .olaf/work/staging/prompt-conversions/docupilot-prompts
 
 files=("process_documentation.md" "summary_section.md" "limitations_section.md" "preconditions_section.md" "postconditions_section.md" "input_section.md" "output_section.md" "diagram_workflow_section.md" "description_section.md" "data_description_section.md" "warnings_errors_section.md" "examples_section.md" "associated_configurations_section.md" "security_settings_section.md" "other_processes_triggered_section.md")
 
@@ -145,9 +149,9 @@ cd ../../../..
 
 # Clone entire repository to staging folder
 
-git clone https://github.com/[owner]/[repo].git [id:staging_dir]prompt-conversions/[repo-name]
+git clone https://github.com/[owner]/[repo].git .olaf/work/staging/prompt-conversions/[repo-name]
 
-# Prompts will be at: [id:staging_dir]prompt-conversions/[repo-name]/[prompts-path]
+# Prompts will be at: .olaf/work/staging/prompt-conversions/[repo-name]/[prompts-path]
 
 ```
 
@@ -176,7 +180,7 @@ You MUST follow the established interaction protocol strictly:
 
 You WILL verify all requirements:
 - Confirm source path exists and is accessible
-- Verify current OLAF competency structure at `[id:competencies_dir]`
+- Verify current OLAF competency structure at `competencies/`
 - Check access to competency-collections.json
 - Get current timestamp for carry-over naming
 
@@ -238,7 +242,7 @@ Total Prompts Found: [N]
 **Load Existing OLAF Competencies:**
 
 You WILL execute:
-- List all directories in `[id:competencies_dir]`
+- List all directories in `competencies/`
 - For each competency, read README.md or competency-manifest.json
 - Extract competency purpose, domain, and existing prompts
 - Create competency catalog for mapping

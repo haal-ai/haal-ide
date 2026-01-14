@@ -6,12 +6,7 @@ metadata:
   olaf_protocol: "\"Act\""
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Generate External Documentation
 
@@ -105,7 +100,7 @@ Documentation Files to Generate:
 
 ```python
 # Path to spawn wrapper
-wrapper_path = workspace_root + "/.olaf/core/skills/generate-external-docs/tools/spawn-doc-generator.py"
+wrapper_path = workspace_root + "/skills/generate-external-docs/tools/spawn-doc-generator.py"
 
 # Build command
 command = f'python "{wrapper_path}" --root "{root_folder}" --output "{output_folder}" --workspace "{workspace_root}"'
@@ -145,7 +140,7 @@ You can continue working. The process will:
 Estimated time: 5-15 minutes (depending on codebase size)
 
 📊 Check status anytime:
-   python .olaf/core/skills/generate-external-docs/tools/check-doc-processes.py
+   python skills/generate-external-docs/tools/check-doc-processes.py
 
 📝 Monitor progress:
    Get-Content {output_folder}/generation.log -Tail 20
@@ -162,7 +157,7 @@ Process tracking is automatically enabled. Each spawned process:
 
 **Check process status:**
 ```bash
-python .olaf/core/skills/generate-external-docs/tools/check-doc-processes.py
+python skills/generate-external-docs/tools/check-doc-processes.py
 ```
 
 **Process registry format:**
@@ -240,7 +235,7 @@ User: "olaf generate external docs"
 
 ### Example 2: Generate docs for specific subfolder
 ```
-User: "olaf generate external docs for .olaf/core/scripts"
+User: "olaf generate external docs for scripts"
 
 → root_folder: {workspace_root}\.olaf\core\scripts
 → output_folder: {workspace_root}\.olaf\data\product\documentations\<repo-name>\core-scripts

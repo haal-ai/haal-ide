@@ -31,7 +31,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "developer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -49,7 +49,7 @@
     "templates": [
       {
         "name": "function-complexity-analysis-template",
-        "path": "/templates/function-complexity-analysis-template.md",
+        "path": "templates/function-complexity-analysis-template.md",
         "description": "Standardized template for formatting function complexity analysis reports"
       }
     ],

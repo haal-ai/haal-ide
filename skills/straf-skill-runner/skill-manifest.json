@@ -31,7 +31,7 @@
       "straf runner"
     ],
     "created": "2025-11-24",
-    "updated": "2025-11-24",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "straf",
       "primary_maintainer": "OLAF Framework Core Team"
@@ -53,7 +53,7 @@
     "templates": [
       {
         "name": "execution-report-template",
-        "path": "/templates/execution-report-template.md",
+        "path": "templates/execution-report-template.md",
         "description": "Template for skill execution reports"
       }
     ]

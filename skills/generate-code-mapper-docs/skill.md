@@ -4,16 +4,11 @@ description: Workflow skill that guides the user to run OLAF code-mapper foundat
 license: Apache-2.0
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Generate Code-Mapper Documentation
 
-You WILL act as a workflow skill that generates structured technical documentation for a codebase using OLAF code-mapper outputs. You MUST keep the Python scripts and tooling in the existing `.olaf/core/scripts/code-mapper` area and reference them, not duplicate them.
+You WILL act as a workflow skill that generates structured technical documentation for a codebase using OLAF code-mapper outputs. You MUST keep the Python scripts and tooling in the existing `scripts/code-mapper` area and reference them, not duplicate them.
 
 ## Goal
 
@@ -21,7 +16,7 @@ You WILL help the user:
 - Run code-mapper foundation analysis on a target repository.
 - Inspect the structural and index outputs produced by code-mapper.
 - Perform contextual reads for key entry points.
-- Produce a consistent technical documentation file set following `/templates/project-documentation-structure.md`.
+- Produce a consistent technical documentation file set following `templates/project-documentation-structure.md`.
 
 ## Workflow
 
@@ -29,7 +24,7 @@ You WILL help the user:
 
 You MUST ask the user for:
 - `project_path`: absolute path or **workspace-root–relative** path to the repository under analysis (for example: `your-repos/desktoptransactions/JFXATCServices`).
-- `code_mapper_path`: path to the OLAF code-mapper scripts **relative to the workspace root**. The default is `.olaf/core/scripts/code-mapper`.
+- `code_mapper_path`: path to the OLAF code-mapper scripts **relative to the workspace root**. The default is `scripts/code-mapper`.
 - Optional: target output location if different from the default `.olaf/work/staging/code-mapper/<repo-name>/` **under the workspace root**.
 
 You MUST validate that:
@@ -105,10 +100,10 @@ You MUST keep all script execution instructions external; you NEVER duplicate or
 
 ### 5. Generate Documentation
 
-You WILL generate structured technical documentation for the repository using the `/templates/project-documentation-structure.md` template.
+You WILL generate structured technical documentation for the repository using the `templates/project-documentation-structure.md` template.
 
 You MUST:
-- Follow the sections and headings from `/templates/project-documentation-structure.md`.
+- Follow the sections and headings from `templates/project-documentation-structure.md`.
 - Populate each section using:
   - structural-files summary (tools/applications and their build files),
   - project-structure overview,
@@ -125,7 +120,7 @@ You MUST include at minimum:
 
 You WILL explicitly reference the template:
 
-> Use the output format defined in `/templates/project-documentation-structure.md`.
+> Use the output format defined in `templates/project-documentation-structure.md`.
 
 ### 6. Error Handling and Edge Cases
 
@@ -150,7 +145,7 @@ You MUST handle these situations explicitly:
 ### 7. Success Criteria
 
 You WILL consider the documentation generation successful when:
-- A complete document following `/templates/project-documentation-structure.md` has been produced.
+- A complete document following `templates/project-documentation-structure.md` has been produced.
 - Each identified tool/application has a documented entry point (or a clear note if ambiguous).
 - The technology stack is described with languages and key frameworks.
 - Architecture and infrastructure sections are populated with the best available information from code-mapper outputs.
@@ -158,7 +153,7 @@ You WILL consider the documentation generation successful when:
 ### 8. Output Expectations
 
 You WILL output **in the assistant response**:
-- A single markdown document that follows the `/templates/project-documentation-structure.md` structure.
+- A single markdown document that follows the `templates/project-documentation-structure.md` structure.
 - Optional short summary of assumptions or limitations (for example: “CI/CD configuration inferred from GitHub Actions workflows only”).
 
 You WILL THEN:

@@ -2,9 +2,13 @@
 name: review-diff
 description: Comprehensive code review for git diffs using language-specific standards
 tags: [code-review, git, diff, quality, standards, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -57,8 +61,8 @@ You WILL execute these operations:
 
 ### 3. Report Generation Phase
 You WILL generate structured output:
-- Follow template: `/templates/review-report-format.md`
-- Apply severity guidelines: `/templates/severity-guidelines.md`
+- Follow template: `templates/review-report-format.md`
+- Apply severity guidelines: `templates/severity-guidelines.md`
 - Include mandatory file and line number references
 - Organize findings by HIGH/MEDIUM/LOW severity
 

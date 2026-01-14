@@ -27,7 +27,7 @@
       "code-mapper api consistency"
     ],
     "created": "2025-12-09",
-    "updated": "2025-12-09",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "code-mapper",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -35,7 +35,7 @@
     },
     "technical_requirements": {
       "recommended_llm": "Same class of models validated for core OLAF skills",
-      "tool_dependency": "Python runtime capable of executing .olaf/core/scripts/code-mapper/run.py and related utilities.",
+      "tool_dependency": "Python runtime capable of executing scripts/code-mapper/run.py and related utilities.",
       "platform_limitations": "Assumes access to the target repository filesystem and ability to run Python scripts."
     }
   },
@@ -50,7 +50,7 @@
     "templates": [
       {
         "name": "api-consistency-analysis-structure",
-        "path": "/templates/api-consistency-analysis-structure.md",
+        "path": "templates/api-consistency-analysis-structure.md",
         "type": "markdown"
       }
     ],

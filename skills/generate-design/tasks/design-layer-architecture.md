@@ -16,7 +16,7 @@ conditions: []
 - `context.data_flow_type`: Data flow characteristic
 
 **Required Files**:
-- `.olaf/core/skills/generate-design/kb/design-patterns-guidance.md`
+- `skills/generate-design/kb/design-patterns-guidance.md`
 
 ## Task Instructions
 

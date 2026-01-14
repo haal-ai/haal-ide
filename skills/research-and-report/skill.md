@@ -4,9 +4,13 @@ description: Structured research with comprehensive reporting and current inform
 license: Apache-2.0
 metadata:
   olaf_tags: [research, reporting, web-search, analysis, documentation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -17,7 +21,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 ### Phase 1: Validation
 1. **Topic Analysis**: Break down research request into specific domains and questions
 2. **Source Planning**: Identify appropriate web sources and search strategies
-3. **Template Selection**: Choose appropriate report template from `/templates/`
+3. **Template Selection**: Choose appropriate report template from `templates/`
 
 ### Phase 2: Execution
 1. **Web Research**: Conduct thorough web searches, collecting URLs for all sources
@@ -52,8 +56,8 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 - **timeline**: string - Optional research and writing timeline
 
 ## Output Format
-1. **Research Plan**: Structured outline using `/templates/research-plan-template.md`
-2. **Comprehensive Report**: Final report using `/templates/research-report-template.md`
+1. **Research Plan**: Structured outline using `templates/research-plan-template.md`
+2. **Comprehensive Report**: Final report using `templates/research-report-template.md`
 3. **Source Documentation**: Complete URL list with accessibility verification
 4. **Executive Summary**: Key findings and recommendations
 
@@ -99,7 +103,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
     - **Web Research**: Current vendor sites, industry reports, community forums
     - **Search Strategy**: Specific queries planned for current information validation
     - **Academic/Internal**: Training data, documentation, internal knowledge
-- Save research plan to: `[id:staging_dir]/research-plan-YYYYMMDD-HHmm.md`
+- Save research plan to: `.olaf/work/staging//research-plan-YYYYMMDD-HHmm.md`
 - Present plan to user for approval
 
 ### Execution Phase
@@ -114,13 +118,13 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
   - **Note information freshness**: Include search dates for web-sourced information
   - Draft chapter with appropriate formatting (headings, lists, tables)
   - Present completed chapter to user for review
-  - Add approved chapter content to: `[id:staging_dir]/research-report-YYYYMMDD-HHmm.md`
+  - Add approved chapter content to: `.olaf/work/staging//research-report-YYYYMMDD-HHmm.md`
 
 ### Finalization Phase
 - Compile all approved chapters into single cohesive report
 - Add title page and generate table of contents
 - Ensure consistent formatting throughout document
-- Save final report to: `[id:staging_dir]/research-report-YYYYMMDD-HHmm.md`
+- Save final report to: `.olaf/work/staging//research-report-YYYYMMDD-HHmm.md`
 - Notify user of completion with file path
 
 ## File Outputs
@@ -128,11 +132,11 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 Research deliverables following timestamp conventions and templates:
 
 - **Research Plan**: `research-plan-YYYYMMDD-HHmm.md`
-  - Use template: `[id:skills_dir]research-andreport/templates/research-plan-template.md`
+  - Use template: `templates/research-plan-template.md`
   - Includes scope statement, key research questions, chapter structure, potential sources
 
 - **Research Report**: `research-report-YYYYMMDD-HHmm.md` (updated per chapter, finalized with TOC)
-  - Use template: `[id:skills_dir]research-andreport/templates/research-report-template.md`
+  - Use template: `templates/research-report-template.md`
   - Complete compiled report with title page, table of contents, and all approved chapters
 
 ## Output to USER

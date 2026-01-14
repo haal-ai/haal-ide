@@ -165,7 +165,7 @@ This tutorial demonstrates how to evaluate external prompts for potential adopti
 5. **Next steps provided**:
    ```
    Recommended action:
-   1. Open .olaf/core/skills/review-code/prompts/review-code.md
+   1. Open skills/review-code/prompts/review-code.md
    2. Add "Best practice adherence" to objectives
    3. Update output format to use numbered checklist
    

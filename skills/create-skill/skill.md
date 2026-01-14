@@ -4,14 +4,13 @@ description: Generate structured skills following established template and princ
 license: Apache-2.0
 metadata:
   olaf_tags: [skill, generation, engineering, template, prompt-engineer]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -39,29 +38,20 @@ You MUST follow the established interaction protocol strictly:
 You WILL verify all requirements:
 - Confirm user request is clear and actionable
 - Validate skill name follows kebab-case convention (max 4 words)
-- Check both global (`[id:global_skills_dir]`) and local (`[id:local_skills_dir]`) for existing skills with similar functionality
+- Check both global (`~/.olaf/core/skills/`) and local (`skills/`) for existing skills with similar functionality
 - Validate skill type selection (orchestrator/workflow/prompt)
-- Validate target competency: check if exists in both global (`[id:global_olaf_dir]core/competencies/`) and local (`[id:core_olaf_dir]core/competencies/`) directories, or validate new competency name
+- Validate target competency: check if exists in both global (`~/.olaf/core/competencies/`) and local (`.olaf/core/competencies/`) directories, or validate new competency name
 - Check access to required template and principles files from skill templates
 
 ### 1.b Skill Location Discovery Phase
 You WILL determine where to create the skill:
 
 **Skill Location Discovery:**
-- You MUST create skills locally (project-specific) under `./.olaf/core/skills/`
-- You MUST NOT propose creating skills under `~/.olaf/core/skills/` because the agent may not have write access to the user home directory
+- You MUST create skills locally (project-specific) under `./skills/`
+- You MUST NOT propose creating skills under `~/skills/` because the agent may not have write access to the user home directory
 
 **Validation:**
-- Ensure `[id:local_skills_dir]` directory exists in project
-- Check for existing skill with same name in local skills
-
-### 1.c Component Discovery Phase
-You WILL determine what optional components the user needs:
-
-**Template Discovery:**
-- Ask user: "Will your skill need external template files (separate from embedded templates in the prompt)?"
-- If YES: "What templates will you need? (e.g., 'output-format.md', 'validation-checklist.md')"
-- Explain: "External templates are referenced as `/templates/name.md` and kept separate from prompt content"
+- Ensure `templates/name.md` and kept separate from prompt content"
 
 **Tool Discovery:**
 - Ask user: "Will your skill need tool/script files?"
@@ -82,28 +72,28 @@ You WILL determine what optional components the user needs:
 
 **Critical Knowledge Loading:**
 <!-- <structure_schema> -->
-You MUST read canonical structure reference: `[id:skills_dir]create-skill/kb/skill-structure-schema.md`
+You MUST read canonical structure reference: `skills/create-skill/kb/skill-structure-schema.md`
 <!-- </structure_schema> -->
 
 <!-- <file_safety_rules> -->
-You MUST read file modification rules: `[id:skills_dir]create-skill/kb/file-modification-rules.md`
+You MUST read file modification rules: `skills/create-skill/kb/file-modification-rules.md`
 <!-- </file_safety_rules> -->
 
 <!-- <skill_schema> -->
-You MUST read and validate against: `[id:core_olaf_dir]schemas/olaf-skill-manifest.schema.json`
+You MUST read and validate against: `.olaf/schemas/olaf-skill-manifest.schema.json`
 <!-- </skill_schema> -->
 
 <!-- <competency_schema> -->
-You MUST read and validate against: `[id:core_olaf_dir]schemas/olaf-competency-manifest.schema.json`
+You MUST read and validate against: `.olaf/schemas/olaf-competency-manifest.schema.json`
 <!-- </competency_schema> -->
 
 **Template and Principles Loading:**
 <!-- <template_analysis> -->
-You MUST read and analyze: `[id:skills_dir]create-skill/templates/skill-template.md` 
+You MUST read and analyze: `templates/skill-template.md` 
 <!-- </template_analysis> -->
 
 <!-- <principles_analysis> -->
-You MUST read and apply: `[id:skills_dir]create-skill/templates/prompting-principles.md`
+You MUST read and apply: `templates/prompting-principles.md`
 <!-- </principles_analysis> -->
 
 **Core Logic**: You WILL execute following protocol requirements
@@ -113,23 +103,23 @@ You MUST read and apply: `[id:skills_dir]create-skill/templates/prompting-princi
   - Main prompt file following prompt template structure with EXTERNAL references only
   - Documentation structure (description.md, tutorial.md)
   - Optional component files based on user requirements
-  - Proper folder organization under `[id:skills_dir][skill-name]/`
+  - Proper folder organization under `skills/[skill-name]/`
 - You MUST use imperative language throughout ("You WILL", "You MUST")
 - You WILL include XML markup for complex sections
 - You MUST ensure generated skill includes comprehensive error handling
 - You WILL validate generated skill includes all required template sections
 - **CRITICAL**: Generated prompts must reference external files, NOT embed template content
-- **TEMPLATE SEPARATION**: If user needs templates, create separate files and reference them as `/templates/name.md`
+- **TEMPLATE SEPARATION**: If user needs templates, create separate files and reference them as `templates/name.md`
 
 ### 2.b Skill Structure Generation Phase
 You WILL scaffold the complete skill structure:
 
 **Determine Skills Directory:**
-- Use `./.olaf/core/skills/`
+- Use `./skills/`
 - Set base_path accordingly for all subsequent operations
 
 **Determine Competency Directory:**
-- Use `./.olaf/core/competencies/`
+- Use `./competencies/`
 - Set competency_path accordingly for all competency operations
 
 **Create Skill Directory Structure:**
@@ -176,7 +166,7 @@ For each kb article in kb_list:
 - Add KB reference in main prompt as: `Refer to: /kb/[kb_name].md`
 
 **Skill Manifest Generation:**
-**CRITICAL**: Generate manifest following `[id:core_olaf_dir]schemas/olaf-skill-manifest.schema.json`
+**CRITICAL**: Generate manifest following `.olaf/schemas/olaf-skill-manifest.schema.json`
 - Validate all required fields per schema
 - Ensure field types and patterns match schema
 - Include all user-requested BOM sections
@@ -217,7 +207,7 @@ For each kb article in kb_list:
     "templates": [  // Only include if needs_templates=true
       {
         "name": "[template_name]",
-        "path": "/templates/[template_name].md",
+        "path": "templates/[template_name].md",
         "type": "markdown|json|yaml|text",
         "description": "[template description]"
       }
@@ -279,7 +269,7 @@ You WILL assign the skill to the specified competency:
 - ❌ NEVER directly edit query-competency-index.md (auto-generated)
 
 **Competency Manifest Update:**
-**CRITICAL**: Update manifest following `[id:core_olaf_dir]schemas/olaf-competency-manifest.schema.json`
+**CRITICAL**: Update manifest following `.olaf/schemas/olaf-competency-manifest.schema.json`
 - Add skill entry to competency's skills array per schema
 - Include required fields: id, path, description, patterns, protocol
 - Include skill metadata (name, description, tags, patterns, protocol)
@@ -321,7 +311,7 @@ Present to user:
 Next step: Regenerate competency index to make your skill discoverable?
 
 The query-competency-index.md is auto-generated and needs regeneration.
-This will run: python [id:global_olaf_dir]tools/select-collection.py --collection [collection] --local-root [project_root]
+This will run: python ~/.olaf/tools/select-collection.py --collection [collection] --local-root [project_root]
 
 Ready to regenerate? (yes/no)
 ```
@@ -338,7 +328,7 @@ Now we need to regenerate the index from all manifests.
 
 **Reindexing Execution:**
 If user agrees:
-- Run: `python [id:global_olaf_dir]tools/select-collection.py --collection [user_collection] --local-root [project_root]`
+- Run: `python ~/.olaf/tools/select-collection.py --collection [user_collection] --local-root [project_root]`
 - User's active collection will be used (script handles defaults if not specified)
 - Wait for script completion
 - Validate that pattern markers are still intact in condensed framework
@@ -346,8 +336,8 @@ If user agrees:
 
 ### 6. Validation Phase
 You WILL validate the generated skill meets all requirements:
-- **SCHEMA VALIDATION**: Validate skill manifest against `[id:core_olaf_dir]schemas/olaf-skill-manifest.schema.json`
-- **SCHEMA VALIDATION**: If competency updated, validate against `[id:core_olaf_dir]schemas/olaf-competency-manifest.schema.json`
+- **SCHEMA VALIDATION**: Validate skill manifest against `.olaf/schemas/olaf-skill-manifest.schema.json`
+- **SCHEMA VALIDATION**: If competency updated, validate against `.olaf/schemas/olaf-competency-manifest.schema.json`
 - Conforms to skill manifest schema completely (all required fields, correct types, valid patterns)
 - Follows proper skills directory structure from `/kb/skill-structure-schema.md`
 - Uses imperative language consistently throughout main prompt
@@ -362,7 +352,7 @@ You WILL generate outputs following this structure:
 - Primary deliverable: Complete skill with all files and proper structure
 - Validation checklist: Compliance verification against schema and principles
 - Skill location specification: 
-  - `./.olaf/core/skills/[skill_name]/`
+  - `./skills/[skill_name]/`
 
 ## User Communication
 
@@ -380,30 +370,30 @@ You WILL generate outputs following this structure:
 - Generated skill presented for review via Propose-Confirm-Act
 - Validation checklist results showing schema compliance
 - Save location confirmation: 
-  - `./.olaf/core/skills/[skill_name]/`
+  - `./skills/[skill_name]/`
 
 ### Next Steps
 You WILL clearly define:
 - Skill ready for use (pending user approval)
 - Skill location: 
-  - `./.olaf/core/skills/[skill_name]/`
+  - `./skills/[skill_name]/`
 - Confirmation that skill meets all quality standards
 - Instructions for invoking the new skill
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
 - Rule 1: Generated skill MUST follow skills architecture from `/kb/skill-structure-schema.md`
-- Rule 2: **SCHEMA COMPLIANCE**: Skill manifest MUST validate against `[id:core_olaf_dir]schemas/olaf-skill-manifest.schema.json`
-- Rule 2b: **SCHEMA COMPLIANCE**: Competency manifest updates MUST validate against `[id:core_olaf_dir]schemas/olaf-competency-manifest.schema.json`
+- Rule 2: **SCHEMA COMPLIANCE**: Skill manifest MUST validate against `.olaf/schemas/olaf-skill-manifest.schema.json`
+- Rule 2b: **SCHEMA COMPLIANCE**: Competency manifest updates MUST validate against `.olaf/schemas/olaf-competency-manifest.schema.json`
 - Rule 3: Generated prompt MUST use imperative language consistently
 - Rule 4: Generated skill MUST include comprehensive error handling
 - Rule 5: Skill name MUST be kebab-case, max 4 words
 - Rule 6: Generated skill MUST include measurable success criteria
-- Rule 7: Skill directory MUST be created locally in this repo at `./.olaf/core/skills/`
-- Rule 8: Competency directory MUST be local in this repo at `./.olaf/core/competencies/`
+- Rule 7: Skill directory MUST be created locally in this repo at `./skills/`
+- Rule 8: Competency directory MUST be local in this repo at `./competencies/`
 - Rule 9: All BOM paths MUST be relative to skill root and start with `/`
 - Rule 10: **CRITICAL**: Main prompt MUST reference external files, NOT embed template content
-- Rule 11: **TEMPLATE SEPARATION**: Templates must be separate files in `/templates/`, not embedded in prompt
+- Rule 11: **TEMPLATE SEPARATION**: Templates must be separate files in `templates/`, not embedded in prompt
 - Rule 12: Component files MUST only be created if user explicitly requests them
 - Rule 13: All generated external references MUST have corresponding files created
 - Rule 14: **FILE SAFETY**: Follow modification rules from `/kb/file-modification-rules.md` - NEVER edit auto-generated files

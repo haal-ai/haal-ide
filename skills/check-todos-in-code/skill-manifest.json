@@ -32,7 +32,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "developer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -50,7 +50,7 @@
     "templates": [
       {
         "name": "todo-resolution-template",
-        "path": "/templates/todo-resolution-template.md",
+        "path": "templates/todo-resolution-template.md",
         "description": "Standardized template for formatting TODO resolution reports with user decision tracking"
       }
     ],

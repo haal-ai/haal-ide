@@ -5,7 +5,7 @@ This tutorial shows how to use the **Generate Code-Mapper Documentation** skill 
 ## 1. Prerequisites
 
 - A local clone of the target repository.
-- OLAF code-mapper scripts available (by default under `.olaf/core/scripts/code-mapper`).
+- OLAF code-mapper scripts available (by default under `scripts/code-mapper`).
 - Python environment capable of running `run.py`.
 
 ## 2. Run Foundation Analysis

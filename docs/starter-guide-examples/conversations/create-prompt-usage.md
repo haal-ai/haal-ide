@@ -61,7 +61,7 @@
 **USER said:** "yes"
 
 **AI did:**
-1. Executed command: `python .olaf/core/scripts/select_collection.py --collection all`
+1. Executed command: `python scripts/select_collection.py --collection all`
 2. Verified new skill appears in query-competency-index.md
 
 **AI said:** "Skill Creation Complete! The create-prompt-description skill is now discoverable and ready for execution."

@@ -31,7 +31,7 @@ prompt using proven templates.
 Usage: olaf create prompt
 
 Expected Outcome: 
-- Complete prompt in .olaf/core/skills/[your-prompt-name]/
+- Complete prompt in skills/[your-prompt-name]/
 - Validation against best practices
 - Ready-to-use code review capability
 

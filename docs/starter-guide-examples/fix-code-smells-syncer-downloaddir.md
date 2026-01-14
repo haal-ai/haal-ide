@@ -5,7 +5,7 @@ This example shows how to use the `fix-code-smells` skill in **Evolution/Refacto
 
 ## Context
 
-- **Codebase**: `.olaf/core/scripts/olaf`
+- **Codebase**: `scripts/olaf`
 - **File**: `internal/syncer/syncer.go`
 - **Function**: `DownloadDir`
 - **Goal**: Check for maintainability issues and potential refactors *without*

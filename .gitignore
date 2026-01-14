@@ -139,7 +139,7 @@ post-compile-fixes-cross-platform.js
 !.olaf/work/**/*.gitkeep
 
 # OLAF user-specific folders
-.olaf/core/competencies/my-prompts/
+competencies/my-prompts/
 .olaf/your-repos/
 .olaf/your-data/
 

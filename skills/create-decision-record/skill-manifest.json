@@ -26,7 +26,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "project-manager",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -44,7 +44,7 @@
     "templates": [
       {
         "name": "decision-record-template",
-        "path": "/templates/project-manager/decision-record-template.md",
+        "path": "templates/project-manager/decision-record-template.md",
         "description": "Template for decision-record-template"
       }
     ],

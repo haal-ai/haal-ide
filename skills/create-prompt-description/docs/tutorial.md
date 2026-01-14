@@ -3,7 +3,7 @@
 This tutorial walks you through using the `create-prompt-description` skill to generate documentation for your prompts.
 
 ## Prerequisites
-- An existing prompt in `.olaf/core/skills/` that needs documentation
+- An existing prompt in `skills/` that needs documentation
 - Basic familiarity with OLAF framework prompts
 
 ## Step-by-Step Guide
@@ -75,7 +75,7 @@ After reviewing, you have three options:
 ```
 Ready to save this documentation? (yes/no/edit)
 > yes
-✅ Documentation saved to .olaf/core/skills/review-code-quality/docs/description.md
+✅ Documentation saved to skills/review-code-quality/docs/description.md
 ```
 
 **Option B: Request Edits**
@@ -107,7 +107,7 @@ After saving, verify the file was created:
 
 **Location:**
 ```
-.olaf/core/skills/[your-prompt-name]/docs/description.md
+skills/[your-prompt-name]/docs/description.md
 ```
 
 **Check the file:**
@@ -141,7 +141,7 @@ If `description.md` already exists, the skill will warn you:
 
 ```
 ⚠️  description.md already exists at:
-.olaf/core/skills/review-code-quality/docs/description.md
+skills/review-code-quality/docs/description.md
 
 Do you want to overwrite it? (yes/no)
 > yes
@@ -189,7 +189,7 @@ olaf document prompt
 **Solution:**
 ```
 # List all prompts needing documentation
-ls .olaf/core/skills/*/docs/
+ls skills/*/docs/
 
 # Document each one
 olaf document prompt
@@ -222,7 +222,7 @@ Use this skill for all prompts to maintain consistent documentation structure ac
 
 ### Issue: "Prompt not found"
 **Cause:** Prompt name doesn't match any existing prompt  
-**Solution:** Check available prompts in `.olaf/core/skills/` or let the skill list them
+**Solution:** Check available prompts in `skills/` or let the skill list them
 
 ### Issue: "Cannot read prompt file"
 **Cause:** Prompt structure is incomplete or corrupted  

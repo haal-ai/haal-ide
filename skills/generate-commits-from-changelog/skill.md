@@ -4,16 +4,20 @@ description: Generate meaningful Git commits from changelog entries and reposito
 license: Apache-2.0
 metadata:
   olaf_tags: [git, commits, changelog, version-control, documentation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 
 
-~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Input Parameters
 
 **IMPORTANT**: When you don't have entries provided, ask the USER to provide them.
-- **changelog_path**: string - (Optional) Path to the changelog file (default: `[id:changelog_register]`)
+- **changelog_path**: string - (Optional) Path to the changelog file (default: `.olaf/data/projects/changelog-register.md`)
 - **repository_root**: string - (Optional) Path to the Git repository root (default: current directory)
 - **commit_strategy**: enum[auto,interactive] - (Optional) How to handle commit creation (default: interactive)
 - **sign_commits**: boolean - (Optional) Whether to sign commits (default: false)

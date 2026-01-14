@@ -36,7 +36,7 @@
       "challenge and refine"
     ],
     "created": "2025-11-19",
-    "updated": "2025-11-21",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "OLAF Core Team",
       "primary_maintainer": "OLAF Framework",
@@ -91,22 +91,22 @@
     "templates": [
       {
         "name": "think-tank-think-template",
-        "path": "/templates/think-tank-think-template.md",
+        "path": "templates/think-tank-think-template.md",
         "type": "markdown"
       },
       {
         "name": "think-tank-path-template",
-        "path": "/templates/think-tank-path-template.md",
+        "path": "templates/think-tank-path-template.md",
         "type": "markdown"
       },
       {
         "name": "think-tank-sources-template",
-        "path": "/templates/think-tank-sources-template.md",
+        "path": "templates/think-tank-sources-template.md",
         "type": "markdown"
       },
       {
         "name": "think-tank-reco-template",
-        "path": "/templates/think-tank-reco-template.md",
+        "path": "templates/think-tank-reco-template.md",
         "type": "markdown"
       }
     ],

@@ -67,9 +67,9 @@ conditions: []
 
 ### Backup a skill prompt
 ```
-context.file_to_backup = ".olaf/core/skills/review-code/prompts/review-code.md"
+context.file_to_backup = "skills/review-code/prompts/review-code.md"
 context.timestamp = "20251120-143022"
-→ Creates: .olaf/core/skills/review-code/prompts/backups/review-code-backup-20251120-143022.md
+→ Creates: skills/review-code/prompts/backups/review-code-backup-20251120-143022.md
 ```
 
 ### Backup a configuration file

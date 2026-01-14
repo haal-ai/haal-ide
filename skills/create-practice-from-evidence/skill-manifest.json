@@ -51,7 +51,7 @@
     "templates": [
       {
         "name": "practice-template",
-        "path": "/templates/practice-template.md"
+        "path": "templates/practice-template.md"
       }
     ]
   }

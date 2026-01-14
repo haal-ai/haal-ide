@@ -26,7 +26,7 @@ Projects need a centralized, chronological record of all changes, features, fixe
 - **links**: References to related resources such as job IDs, commit hashes, pull request numbers, or issue numbers (format: `job-123, PR#45, abc1234`)
 
 ### Context Requirements
-- Access to changelog register file (`[id:changelog_register]`)
+- Access to changelog register file (`.olaf/data/projects/changelog-register.md`)
 - Access to changelog template for format reference
 - System time access via terminal commands for accurate timestamping
 

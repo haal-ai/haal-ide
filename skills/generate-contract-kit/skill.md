@@ -4,14 +4,13 @@ description: Collect OpenAPI, specifications, SDK, and tests into a consumer-rea
 license: Apache-2.0
 metadata:
   olaf_tags: [api, openapi, contract, kit, examples, sdk, bruno, testing]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -87,7 +86,7 @@ You MUST snapshot/copy artifacts into the bundle as follows:
 
 When snapshotting folders, you MUST avoid copying build artifacts and dependencies (for example: `node_modules/`, `target/`, `dist/`, `.git/`).
 
-You WILL generate `README.md` using template: `/templates/contract-kit-output-format.md`.
+You WILL generate `README.md` using template: `templates/contract-kit-output-format.md`.
 
 You MUST include:
 

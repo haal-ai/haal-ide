@@ -6,7 +6,7 @@ metadata:
   olaf_tags: "[\"git-workflow\", \"competency-pack\", \"merge\", \"pr-creation\", \"olaf-internal\"]"
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 # Merge Competency Pack to Main
 
@@ -46,16 +46,16 @@ git checkout -b feat/add-{competency-name}-pack
 ### STEP 3: Cherry-Pick Competency Pack
 ```bash
 # Get the competency pack folder from feature branch
-git checkout feature/olaf-feature-system -- [id:competencies_dir]{competency-name}
+git checkout feature/olaf-feature-system -- competencies/{competency-name}
 ```
 
 Verify the pack was copied:
 ```bash
-ls [id:competencies_dir]{competency-name}
+ls competencies/{competency-name}
 ```
 
 ### STEP 4: Update Competency Collections
-Edit `[id:reference_dir]competency-collections.json`:
+Edit `reference/competency-collections.json`:
 1. Read current collections2. Add the competency ID to the specified collection(s)
 3. Ensure alphabetical ordering within each collection4. Validate JSON syntax
 
@@ -82,15 +82,15 @@ python .\core\competencies\prompt-engineer\scripts\select_collection.py --collec
 ```
 
 This will:
-- Update `[id:reference_dir]query-competency-index.md`
+- Update `reference/query-competency-index.md`
 - Sync `/olaf-*` command files to `.github/prompts/` and `.windsurf/workflows/`
 
 ### STEP 6: Validate Changes
 Check what was modified:
 ```bash
 git status
-git diff [id:reference_dir]competency-collections.json
-git diff [id:reference_dir]query-competency-index.md
+git diff reference/competency-collections.json
+git diff reference/query-competency-index.md
 ```
 
 Verify:
@@ -102,9 +102,9 @@ Verify:
 ### STEP 7: Commit and Push
 ```bash
 # Stage all changes
-git add [id:competencies_dir]{competency-name}
-git add [id:reference_dir]competency-collections.json
-git add [id:reference_dir]query-competency-index.md
+git add competencies/{competency-name}
+git add reference/competency-collections.json
+git add reference/query-competency-index.md
 git add .github/prompts/
 git add .windsurf/workflows/
 
@@ -138,9 +138,9 @@ Provide a summary report:
 **Collections Updated**: {collection-list}
 
 ### Files Modified:
-- ✅ [id:competencies_dir]{competency-name}/ (copied)
-- ✅ [id:reference_dir]competency-collections.json
-- ✅ [id:reference_dir]query-competency-index.md
+- ✅ competencies/{competency-name}/ (copied)
+- ✅ reference/competency-collections.json
+- ✅ reference/query-competency-index.md
 - ✅ .github/prompts/ ({n} files synced)
 - ✅ .windsurf/workflows/ ({n} files synced)
 
@@ -158,12 +158,12 @@ Provide a summary report:
 ### Competency Pack Not Found
 If the pack doesn't exist on feature branch:
 ```bash
-git ls-tree -r --name-only feature/olaf-feature-system | grep "[id:competencies_dir]{name}"
+git ls-tree -r --name-only feature/olaf-feature-system | grep "competencies/{name}"
 ```
 
 List available packs:
 ```bash
-git ls-tree -d --name-only feature/olaf-feature-system:[id:competencies_dir]
+git ls-tree -d --name-only feature/olaf-feature-system:competencies/
 ```
 
 ### Merge Conflicts

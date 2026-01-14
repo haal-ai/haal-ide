@@ -7,12 +7,7 @@ metadata:
   olaf_protocol: Act
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Analyze Contributor Risk
 
@@ -44,7 +39,7 @@ You WILL verify all requirements:
 
 **Tool Invocation**:
 ```bash
-python .olaf/core/skills/analyze-contributor-risk/tools/contributor_analyzer.py \
+python skills/analyze-contributor-risk/tools/contributor_analyzer.py \
   "{repository_path}" -m {analysis_period_months} -o "{output_location}/contributor-risk-analysis.md" -v
 ```
 

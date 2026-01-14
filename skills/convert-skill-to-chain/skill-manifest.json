@@ -29,7 +29,7 @@
       "master chain pattern"
     ],
     "created": "2025-11-24",
-    "updated": "2025-11-24"
+    "updated": "2026-01-14"
   },
   "bom": {
     "prompts": [
@@ -121,19 +121,19 @@
       "tools": [
         {
           "name": "search-tasks.py",
-          "location": ".olaf/core/skills/common/tools/search-tasks.py",
+          "location": "skills/common/tools/search-tasks.py",
           "description": "Search and discover reusable tasks in registry"
         },
         {
           "name": "get-env.py",
-          "location": ".olaf/core/skills/review-github-pr/tools/get-env.py",
+          "location": "skills/review-github-pr/tools/get-env.py",
           "description": "Capture environment information"
         }
       ],
       "knowledge_bases": [
         {
           "name": "task-registry.json",
-          "location": ".olaf/core/skills/common/kb/task-registry.json",
+          "location": "skills/common/kb/task-registry.json",
           "description": "Central registry of reusable tasks"
         }
       ]

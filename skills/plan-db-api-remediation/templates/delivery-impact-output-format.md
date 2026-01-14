@@ -52,7 +52,7 @@ For each item:
 - Can drop/postpone candidates (reduce scope, reduce risk)
 
 ## 5) Questions for the SME/PO (delivery + impact decisions)
-Use the template: `/templates/questions-table-format.md`.
+Use the template: `templates/questions-table-format.md`.
 
 ### 5.1 What happens next (after answers are provided)
 - If scope can be reduced: update requirements/OpenAPI accordingly, then re-run.

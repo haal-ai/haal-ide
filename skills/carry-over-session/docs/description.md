@@ -37,7 +37,7 @@ CARRY-OVER - 2025-11-14 14:30
 ## Key Files
 - **Carry-Over Directory**: `.olaf/carry-over/`
 - **File Pattern**: `carry-over-YYYYMMDD-HHmm.txt`
-- **Skill Prompt**: `[id:skills_dir]carry-over-session/carry-over-session.md`
+- **Skill Prompt**: `skills/carry-over-session/carry-over-session.md`
 - **Companion Skill**: `carry-on-session.md` (to resume)
 
 ## Commands

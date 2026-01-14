@@ -4,14 +4,13 @@ description: Design-time skill to condense OLAF framework reference files into o
 license: Apache-2.0
 metadata:
   olaf_tags: [framework, optimization, compression, olaf, design-time]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Framework Validation
 You MUST apply the <olaf-work-instructions> framework.
@@ -25,9 +24,9 @@ You MUST strictly apply <olaf-framework-validation>.
 ### 1. Validation Phase
 You WILL verify all requirements:
 - Confirm access to source reference files:
-  - `[id:reference_dir]team-delegation.md`
-  - `[id:reference_dir]memory-map.md`
-  - `[id:reference_dir]core-principles.md`
+  - `reference/team-delegation.md`
+  - `reference/memory-map.md`
+  - `reference/core-principles.md`
 - Verify NO files in `.condensed/` subdirectory are processed
 - Check write access to output location
 
@@ -73,7 +72,7 @@ You WILL validate the condensed framework:
 ## Output Format
 You WILL generate outputs following this structure:
 - Primary deliverable: Condensed framework file with all XML tags
-- File location: `[id:condensed_framework]`
+- File location: `reference/.condensed/olaf-framework-condensed.md`
 - Validation report: Compression statistics and content verification
 
 ## Domain-Specific Rules

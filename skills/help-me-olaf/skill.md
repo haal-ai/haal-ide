@@ -4,14 +4,13 @@ description: Intelligent help router that discovers available skills and prompts
 license: Apache-2.0
 metadata:
   olaf_tags: [help, discovery, skill-search, prompt-routing, assistance, olaf]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Help Me - Intelligent Assistance Router
 
@@ -80,7 +79,7 @@ You WILL:
 
 #### **Search 2: All Available Collections**
 If Search 1 fails, you WILL:
-- Read `[id:competency_collections]`
+- Read `reference/competency-collections.json`
 - Extract all collection names and their included skills
 - For each collection, read its `competency-manifest.json`
 - Search all entry_point aliases across all manifests
@@ -89,7 +88,7 @@ If Search 1 fails, you WILL:
 
 #### **Search 3: Local Filesystem Search**
 If Search 2 fails, you WILL:
-- Search `[id:skills_dir]*/prompts/*.md` for all skill files
+- Search `skills/*/prompts/*.md` for all skill files
 - Extract frontmatter: name, description, tags, aliases
 - Search all text for user keywords
 - Build confidence scores based on matches in: name (100%), description (75%), tags (50%), content (25%)
@@ -207,15 +206,15 @@ You MUST follow these constraints:
 
 ### Collections Search
 ```
-1. Read [id:competency_collections]
-2. For each collection_id in JSON3. Read [id:competencies_dir][collection_id]/competency-manifest.json
+1. Read reference/competency-collections.json
+2. For each collection_id in JSON3. Read competencies/[collection_id]/competency-manifest.json
 4. Extract all entry_points[].aliases5. Match against user keywords (same scoring as above)
 6. Return matches sorted by score
 ```
 
 ### Filesystem Search
 ```
-1. Glob: [id:skills_dir]*/prompts/*.md2. For each file found:
+1. Glob: skills/*/prompts/*.md2. For each file found:
    - Extract YAML frontmatter (name, description, tags)
    - Parse first 500 chars of content
    - Score matches in each field with weights3. Return top 10 matches sorted by score

@@ -4,14 +4,13 @@ description: Search, analyze, and provide solutions for TODO comments with user 
 license: Apache-2.0
 metadata:
   olaf_tags: [todo, code-analysis, technical-debt, cleanup]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -161,7 +160,7 @@ Save detailed resolution document? This includes:
 
 ✅ Implementation checklist and effort estimates
 
-Document will be saved as: [id:staging_dir]remaining-todos/todo-resolution-{repo_name}-{timestamp}.md
+Document will be saved as: .olaf/work/staging/remaining-todos/todo-resolution-{repo_name}-{timestamp}.md
 
 Proceed with saving? (Recommended: YES)
 
@@ -193,21 +192,21 @@ You WILL consider the task complete when:
 2. Execute comprehensive TODO search with hierarchical organization
 3. Analyze each TODO for validity and generate specific solutions
 4. Populate template with structured staging and user decision tracking
-5. Create directory structure `[id:staging_dir]remaining-todos/` if it doesn't exist
+5. Create directory structure `.olaf/work/staging/remaining-todos/` if it doesn't exist
 6. Propose document saving and execute if approved by user in the correct staging directory
 
 ## Output File Management
 
 You MUST save all TODO resolution documents in the correct location:
-- **Base Directory**: `[id:staging_dir]remaining-todos/`
+- **Base Directory**: `.olaf/work/staging/remaining-todos/`
 - **File Name Pattern**: `todo-resolution-{repository_name}-{YYYYMMDD-HHmm}.md`
-- **Full Path Example**: `[id:staging_dir]remaining-todos/todo-resolution-cytric-signpdf-20251022-1049.md`
+- **Full Path Example**: `.olaf/work/staging/remaining-todos/todo-resolution-cytric-signpdf-20251022-1049.md`
 
 **Directory Creation Instructions**:
-1. Check if `[id:staging_dir]remaining-todos/` exists
+1. Check if `.olaf/work/staging/remaining-todos/` exists
 2. If not, create the directory structure using appropriate commands:
-   - Windows: `New-Item -ItemType Directory -Path "[id:staging_dir]remaining-todos" -Force`
-   - Unix/Linux/macOS: `mkdir -p [id:staging_dir]remaining-todos`
+   - Windows: `New-Item -ItemType Directory -Path ".olaf/work/staging/remaining-todos" -Force`
+   - Unix/Linux/macOS: `mkdir -p .olaf/work/staging/remaining-todos`
 3. Save the document in this directory only
 
 **CRITICAL**: Never save TODO resolution documents in the workspace root or any other location.

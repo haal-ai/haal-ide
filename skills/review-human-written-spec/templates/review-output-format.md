@@ -69,7 +69,7 @@ previous_review_path: <path-to-previous-ai-review>
 - Security assumptions:
 
 ## 7) Questions for the Subject Matter Expert (SME)
-Use the template: `/templates/questions-table-format.md`.
+Use the template: `templates/questions-table-format.md`.
 
 ### 7.1 How to provide answers (for the SME)
 - Answer **each question ID** (Q-001, Q-002, …).

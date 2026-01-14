@@ -208,6 +208,10 @@ All HAAL prompts follow this standardized structure:
 name: prompt-name
 description: Brief description of what the prompt does
 tags: [relevant, tags, for, categorization]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 ## Framework Validation
@@ -236,7 +240,7 @@ tags: [relevant, tags, for, categorization]
 
 After using the "create prompt" competency, you can find your new prompt in:
 ```
-.olaf/core/skills/<your-new-skill>/
+skills/<your-new-skill>/
 ```
 
 Your prompt becomes a standalone skill that can be attached to a competency or used independently. By default, new prompts are organized into a competency called "my-prompts" for easy management.

@@ -11,14 +11,14 @@ dependencies: ["detect-file-languages", "collect-git-diff"]
   - diff_file_list: array of changed file paths
   - files_by_language: object mapping language -> file list
 - Required Files:
-  - [id:practices_dir]practices/good-bad/*.md (if present)
+  - .olaf/data/practices/practices/good-bad/*.md (if present)
 - Required Tools:
   - file_search, read_file
 
 ## Task Instructions
 1. Enumerate changed files from `diff_file_list`.
 2. Determine languages in scope using `files_by_language`.
-3. Search `[id:practices_dir]practices/good-bad/` for practice docs.
+3. Search `.olaf/data/practices/practices/good-bad/` for practice docs.
 4. Filter practices by:
    - Matching `language` (if present in YAML preamble or title)
    - Heuristics on filename/id tokens that match file path segments

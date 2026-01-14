@@ -14,9 +14,9 @@
 **AI Assistant said:** "I'll help you with information about PyTorch. Let me first load the OLAF framework and then execute the tell-me skill."
 
 **AI Assistant did:**
-1. Loaded OLAF framework from `.olaf/core/reference/.condensed/olaf-framework-condensed.md` (lines 1-1000)
+1. Loaded OLAF framework from `reference/.condensed/olaf-framework-condensed.md` (lines 1-1000)
 2. Loaded context from `.olaf/data/context/context-current.md` (lines 1-1000)
-3. Read the tell-me skill prompt from `.olaf/core/skills/tell-me/prompts/tell-me.md` (complete file)
+3. Read the tell-me skill prompt from `skills/tell-me/prompts/tell-me.md` (complete file)
 4. Listed available repository documentation in `.olaf/data/product/context/`
 5. Read web resources index from `.olaf/data/kb/web-resources-kb-index.md` (373 lines)
 6. Detected "pytorch" keyword in user question
@@ -43,9 +43,9 @@ A complete overview of PyTorch including:
 - 🌐 Deep Learning with PyTorch Tutorial: https://docs.pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html
 
 **Files accessed:**
-- `.olaf/core/reference/.condensed/olaf-framework-condensed.md`
+- `reference/.condensed/olaf-framework-condensed.md`
 - `.olaf/data/context/context-current.md`
-- `.olaf/core/skills/tell-me/prompts/tell-me.md`
+- `skills/tell-me/prompts/tell-me.md`
 - `.olaf/data/kb/web-resources-kb-index.md`
 
 ## Demonstration: Tell Me Skill - BMS Query
@@ -98,9 +98,9 @@ A complete overview of BMS including:
 **AI Assistant said:** "I'll load the OLAF framework and execute the store-conversation-record skill."
 
 **AI Assistant did:**
-1. Loaded OLAF framework from `.olaf/core/reference/.condensed/olaf-framework-condensed.md`
+1. Loaded OLAF framework from `reference/.condensed/olaf-framework-condensed.md`
 2. Loaded context from `.olaf/data/context/context-current.md`
-3. Read store-conversation-record skill from `.olaf/core/skills/store-conversation-record/prompts/store-conversation-record.md` (70 lines)
+3. Read store-conversation-record skill from `skills/store-conversation-record/prompts/store-conversation-record.md` (70 lines)
 4. Asked user for required parameters:
    - AI model used
    - Conversation scope
@@ -112,7 +112,7 @@ A complete overview of BMS including:
 1. Got current timestamp: 20251125-1530
 2. Listed staging directory: `.olaf/work/staging/`
 3. Found conversation-records subdirectory exists
-4. Located conversation record template: `.olaf/core/skills/store-conversation-record/templates/project-manager/conversation-record-template.md`
+4. Located conversation record template: `skills/store-conversation-record/templates/project-manager/conversation-record-template.md`
 5. Read template structure (51 lines)
 6. Created this comprehensive conversation record
 

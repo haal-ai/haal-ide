@@ -22,7 +22,7 @@ The OLAF bootstrap process (in `.github/copilot-instructions.md`) automatically 
 ## Key Files
 - **Context Templates**: `docs/data/context/context-*.md` (e.g., context-default.md)
 - **Active Context**: `docs/data/context/context-current.md` (loaded at bootstrap)
-- **Skill Prompt**: `[id:skills_dir]switch-context/prompts/switch-context.md`
+- **Skill Prompt**: `skills/switch-context/prompts/switch-context.md`
 
 ## Commands
 - `context switch` - List contexts and switch

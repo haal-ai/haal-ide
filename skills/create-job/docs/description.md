@@ -31,8 +31,8 @@ Projects need a formal system for tracking work items beyond simple task lists. 
 
 ### Context Requirements
 - Access to job template for structure
-- Access to jobs register (`[id:jobs]`) for ID generation and tracking
-- Access to jobs directory (`[id:jobs_dir]`) for storing job files
+- Access to jobs register (`.olaf/data/projects/jobs-register.md`) for ID generation and tracking
+- Access to jobs directory (`.olaf/data/projects/jobs/`) for storing job files
 - Current serial number from jobs register for unique ID generation
 
 ## Output

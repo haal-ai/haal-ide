@@ -2,6 +2,10 @@
 name: learn-from-code
 description: Generate newcomer documentation by analyzing code and configuration files with consistent functional and technical sections
 tags: [documentation, code-analysis, newcomer-guide, onboarding]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 ## Framework Validation
@@ -75,7 +79,7 @@ You WILL validate the generated documentation:
 ## Output Format
 You WILL generate outputs following this structure:
 - Primary deliverable: Complete newcomer documentation following template `[id:templates_dir]/developer/newcomer-documentation-template.md`
-- File location: `[id:ads_dir]staging/[output_filename]`
+- File location: `.olaf/work/staging/staging/[output_filename]`
 - Timestamp format: YYYYMMDD-HHmm in filename if using default naming
 
 ## User Communication
@@ -95,7 +99,7 @@ You WILL generate outputs following this structure:
 ### Next Steps
 You WILL clearly define:
 - Documentation ready for newcomer use
-- File location: `[id:ads_dir]staging/[output_filename]`
+- File location: `.olaf/work/staging/staging/[output_filename]`
 - Recommendation to review and customize for specific team needs
 - Suggestion to update documentation as code evolves
 

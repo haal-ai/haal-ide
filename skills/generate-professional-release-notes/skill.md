@@ -4,11 +4,15 @@ description: Generate professional release notes by analyzing git commit history
 license: Apache-2.0
 metadata:
   olaf_tags: [project-management, release-notes, git, documentation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 
 
-~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Input Parameters
 

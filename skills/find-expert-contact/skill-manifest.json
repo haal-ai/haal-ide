@@ -29,7 +29,7 @@
       "locate expert"
     ],
     "created": "2025-11-14",
-    "updated": "2025-11-14",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "admin",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -52,7 +52,7 @@
     "templates": [
       {
         "name": "contact-recommendation-template",
-        "path": "/templates/contact-recommendation-template.md",
+        "path": "templates/contact-recommendation-template.md",
         "type": "markdown"
       }
     ],

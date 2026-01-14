@@ -79,7 +79,7 @@ Then specify: `test_skill_name: "my-custom-test"`
 ### Common Issues
 
 **Template Access Errors**
-- Verify `~/.olaf/core/skills/create-skill/templates/` exists
+- Verify `~/templates/` exists
 - Check file permissions on template files
 - Confirm templates contain expected content
 

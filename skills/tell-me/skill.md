@@ -7,19 +7,14 @@ metadata:
   olaf_protocol: Act
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Tell Me - Knowledge Retrieval
 
 ## Purpose
 
 Lightweight **search-first** knowledge retrieval that:
-1. **Searches existing artifacts** in [id:context_dir] and [id:practices_dir]
+1. **Searches existing artifacts** in .olaf/data/context/ and .olaf/data/practices/
 2. **Returns answers from found docs** - fast, no analysis needed
 3. **Suggests running analysis** if no artifacts exist (onboard-me, analyze-contributor-risk, etc.)
 
@@ -78,30 +73,30 @@ Then **exit** and wait for user to ask a specific question.
 **CRITICAL: Search in this EXACT order - stop at first match:**
 
 ```
-Priority 1: [id:context_dir]*/*/QUICKSTART-*.md           # ALL repo QUICKSTART guides
-Priority 2: [id:kb_dir]                                          # General knowledge base (BMS, OTF, etc.)
-Priority 3: [id:practices_dir]                                   # Team practices and standards
+Priority 1: .olaf/data/context/*/*/QUICKSTART-*.md           # ALL repo QUICKSTART guides
+Priority 2: .olaf/data/kb/                                          # General knowledge base (BMS, OTF, etc.)
+Priority 3: .olaf/data/practices/                                   # Team practices and standards
 Priority 4: README.md, CONTRIBUTING.md                              # Root documentation
 Priority 5: WEB FETCH (if technology detected)                      # Official docs from web-resources-kb-index.md
 ```
 
 **Search Strategy**:
 1. Extract keywords from question (case-insensitive)
-2. **FIRST: List available repos** - Explore the [id:context_dir] directory structure to see all available repository documentation
+2. **FIRST: List available repos** - Explore the .olaf/data/context/ directory structure to see all available repository documentation
 3. **Persona detection**: Determine which QUICKSTART guide to prioritize based on question type:
    - Build/run/setup → QUICKSTART-*-DEVELOPER.md or QUICKSTART-OVERVIEW.md
    - Architecture/design → QUICKSTART-ARCHITECT.md
    - Testing → QUICKSTART-QA-ENGINEER.md
    - Business/features → QUICKSTART-BUSINESS-ANALYST.md
    - Documentation → QUICKSTART-DOCS-CONTRIBUTOR.md
-4. **Search ALL repos in context/**: Search for keywords across all documentation files in the [id:context_dir] directory (case-insensitive)
+4. **Search ALL repos in context/**: Search for keywords across all documentation files in the .olaf/data/context/ directory (case-insensitive)
 5. **Fallback search**: If keyword search fails, look for files matching patterns with keywords in their names
 6. If found → Return answer and STOP
 7. If not found → Search Priority 2 (KB)
 8. Continue until match found or all locations searched
 9. **If still not found** → Proceed to Web Fetch (Step 1.5)
 
-**IMPORTANT**: Don't assume repo name - search across ALL repos in [id:context_dir] directory
+**IMPORTANT**: Don't assume repo name - search across ALL repos in .olaf/data/context/ directory
 
 ### 1.5. Web Fetch Strategy (NEW)
 
@@ -113,7 +108,7 @@ Priority 5: WEB FETCH (if technology detected)                      # Official d
 **Web Fetch Process**:
 
 1. **Load Web Resources Index**:
-   - Read `[id:kb_dir]web-resources-kb-index.md`
+   - Read `.olaf/data/kb/web-resources-kb-index.md`
    - Extract technology entries with URLs and keywords
 
 2. **Technology Detection**:

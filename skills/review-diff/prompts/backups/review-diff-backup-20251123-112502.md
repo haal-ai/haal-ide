@@ -5,7 +5,7 @@ tags: [code-review, git, diff, quality, standards, workflow]
 protocol: Act
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Diff Review Process
 **EXECUTION PROTOCOL**: Act - Execute directly without user confirmation for standard reviews
@@ -48,10 +48,10 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 
 1. **Language-Specific Analysis**:
    - Apply language-specific standards from central practices:
-     - Python files: `[id:practices_dir]code-reviews/review-standard-python.md`
-     - C++ files: `[id:practices_dir]code-reviews/review-standard-cplusplus.md`
-     - Java files: `[id:practices_dir]code-reviews/review-standard-java.md`
-     - Go files: `[id:practices_dir]code-reviews/review-standard-go.md`
+     - Python files: `.olaf/data/practices/code-reviews/review-standard-python.md`
+     - C++ files: `.olaf/data/practices/code-reviews/review-standard-cplusplus.md`
+     - Java files: `.olaf/data/practices/code-reviews/review-standard-java.md`
+     - Go files: `.olaf/data/practices/code-reviews/review-standard-go.md`
    - Exclude regression test files (.play, .gsv, /regression/ directories)
    - Scan for security vulnerabilities (hardcoded secrets, credentials)
 
@@ -64,7 +64,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 **Choose Output Method**:
 
 **Option A - Save to Staging Directory** (when save_report=true):
-- **Directory**: `[id:staging_dir]diff-reviews/`
+- **Directory**: `.olaf/work/staging/diff-reviews/`
 - **File**: `review-report-[timestamp].md`
 - **Actions File**: `actions-[timestamp].md` (if include_actions=true)
 

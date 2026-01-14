@@ -32,7 +32,7 @@
     ],
     "author": "OLAF Framework",
     "created": "2025-12-15",
-    "updated": "2025-12-15"
+    "updated": "2026-01-14"
   },
   "bom": {
     "prompts": [
@@ -45,7 +45,7 @@
     "templates": [
       {
         "name": "consumer-impact-tasklist-template",
-        "path": "/templates/consumer-impact-tasklist-template.md",
+        "path": "templates/consumer-impact-tasklist-template.md",
         "type": "markdown"
       }
     ],

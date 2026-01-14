@@ -3,6 +3,10 @@ task_id: "apply-test-learning"
 task_name: "Apply and Test Learning"
 dependencies: ["context.synthesized_knowledge"]
 conditions: []
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Apply and Test Learning

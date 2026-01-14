@@ -26,7 +26,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "project-manager",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -44,13 +44,13 @@
     "templates": [
       {
         "name": "functional-changelog-template",
-        "path": "/templates/functional-changelog-template.md",
+        "path": "templates/functional-changelog-template.md",
         "type": "markdown",
         "description": "Entry and detail-file template for functional product changelog updates"
       },
       {
         "name": "technical-changelog-template",
-        "path": "/templates/technical-changelog-template.md",
+        "path": "templates/technical-changelog-template.md",
         "type": "markdown",
         "description": "Entry and detail-file template for technical product changelog updates"
       }

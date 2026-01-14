@@ -4,14 +4,13 @@ description: Generate description.md documentation for existing prompts
 license: Apache-2.0
 metadata:
   olaf_tags: [documentation, prompt, description, generate]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -28,9 +27,9 @@ You MUST follow the established interaction protocol strictly:
 ### 1. Validation Phase
 You WILL verify all requirements:
 <!-- <prompt_identification> -->
-- If `prompt_name` not provided, list available prompts in `[id:skills_dir]` and ask user to select
-- Validate prompt exists at `[id:skills_dir][prompt_name]/`
-- Confirm main prompt file exists at `[id:skills_dir][prompt_name]/prompts/[prompt_name].md`
+- If `prompt_name` not provided, list available prompts in `skills/` and ask user to select
+- Validate prompt exists at `skills/[prompt_name]/`
+- Confirm main prompt file exists at `skills/[prompt_name]/prompts/[prompt_name].md`
 - Check if `/docs/` directory exists; create if missing
 - Verify `/docs/description.md` doesn't already exist (warn user if it does, ask for confirmation to overwrite)
 <!-- </prompt_identification> -->
@@ -40,7 +39,7 @@ You WILL verify all requirements:
 **Prompt Analysis:**
 <!-- <read_prompt> -->
 You MUST read and analyze the target prompt file:
-- Read: `[id:skills_dir][prompt_name]/prompts/[prompt_name].md`
+- Read: `skills/[prompt_name]/prompts/[prompt_name].md`
 - Extract prompt metadata (name, description, tags from frontmatter)
 - Identify input parameters and their types
 - Determine user interaction protocol
@@ -54,7 +53,7 @@ You MUST read and analyze the target prompt file:
 **Manifest Analysis:**
 <!-- <read_manifest> -->
 You SHOULD read skill manifest if available:
-- Read: `[id:skills_dir][prompt_name]/skill-manifest.json`
+- Read: `skills/[prompt_name]/skill-manifest.json`
 - Extract additional metadata (objectives, aliases, version)
 - Identify BOM components (templates, tools, helpers, kb)
 - Note skill dependencies if any
@@ -82,7 +81,7 @@ You WILL present the generated documentation:
 <!-- <propose_content> -->
 - Display generated description.md content for user review
 - Highlight key sections: Overview, Parameters, Usage
-- Indicate save location: `[id:skills_dir][prompt_name]/docs/description.md`
+- Indicate save location: `skills/[prompt_name]/docs/description.md`
 - Ask user: "Ready to save this documentation?" (yes/no/edit)
 <!-- </propose_content> -->
 
@@ -97,15 +96,15 @@ You WILL await final user approval:
 ### 5. Save Phase
 You WILL save the documentation:
 <!-- <save_documentation> -->
-- Ensure directory exists: `[id:skills_dir][prompt_name]/docs/`
-- Save file: `[id:skills_dir][prompt_name]/docs/description.md`
+- Ensure directory exists: `skills/[prompt_name]/docs/`
+- Save file: `skills/[prompt_name]/docs/description.md`
 - Confirm successful save
 <!-- </save_documentation> -->
 
 ## Output Format
 You WILL generate outputs following this structure:
 - Primary deliverable: `description.md` file in markdown format
-- File location: `[id:skills_dir][prompt_name]/docs/description.md`
+- File location: `skills/[prompt_name]/docs/description.md`
 - Format: Well-structured markdown with clear headings and sections
 - Style: Professional, concise, user-focused documentation
 
@@ -119,14 +118,14 @@ You WILL generate outputs following this structure:
 
 ### Completion Summary
 - Documentation generated and presented for review
-- Save location confirmed: `[id:skills_dir][prompt_name]/docs/description.md`
+- Save location confirmed: `skills/[prompt_name]/docs/description.md`
 - File successfully saved (after confirmation)
 - Next steps: Documentation is ready for use
 
 ### Next Steps
 You WILL clearly define:
 - Documentation saved successfully
-- Location: `[id:skills_dir][prompt_name]/docs/description.md`
+- Location: `skills/[prompt_name]/docs/description.md`
 - User can now view/edit the description as needed
 - Consider creating tutorial.md for step-by-step usage guide
 
@@ -149,7 +148,7 @@ You WILL consider the task complete when:
 - [ ] description.md generated with all required sections
 - [ ] Content presented to user for review
 - [ ] User provided final confirmation
-- [ ] File saved to correct location: `[id:skills_dir][prompt_name]/docs/description.md`
+- [ ] File saved to correct location: `skills/[prompt_name]/docs/description.md`
 - [ ] User notified of successful save
 - [ ] Next steps communicated
 
@@ -162,7 +161,7 @@ You WILL consider the task complete when:
 
 ## Error Handling
 You WILL handle these scenarios:
-- **Prompt Not Found**: List available prompts in `[id:skills_dir]` and ask user to select
+- **Prompt Not Found**: List available prompts in `skills/` and ask user to select
 - **Missing Prompt Name**: List available prompts and ask user which one to document
 - **Prompt File Missing**: Alert user that prompt structure is incomplete, cannot generate documentation
 - **description.md Already Exists**: Warn user and ask for confirmation to overwrite

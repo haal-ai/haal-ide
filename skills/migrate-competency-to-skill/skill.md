@@ -4,9 +4,13 @@ description: Extract and migrate specific competency features from another branc
 license: Apache-2.0
 metadata:
   olaf_tags: [migration, competency, skill, git, transformation, architecture]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -92,7 +96,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 
 ### NEVER SKIP CONFLICT CHECK
 - **ERROR**: "Skill already exists but not detected"
-- **PREVENTION**: ALWAYS check `[id:skills_dir]{target_skill_name}/` exists BEFORE any work
+- **PREVENTION**: ALWAYS check `skills/{target_skill_name}/` exists BEFORE any work
 - **ENFORCEMENT**: If skill exists, STOP and ask USER for explicit decision
 
 ### NEVER WORK ON MAIN BRANCH
@@ -116,7 +120,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 ### Step 1: Validate Source Branch and Competency
 
 **1. MANDATORY: Check skill name conflicts FIRST**:
-   - **CRITICAL**: Check if target skill already exists: `[id:skills_dir]{target_skill_name}/`
+   - **CRITICAL**: Check if target skill already exists: `skills/{target_skill_name}/`
    - **IF SKILL EXISTS**: STOP immediately and present options to USER:
      - **STOP**: Cancel migration process (recommended)
      - **OVERRIDE**: Replace existing skill (DESTRUCTIVE - require explicit USER confirmation)
@@ -154,15 +158,15 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 **ONLY PROCEED AFTER COMPLETING STEPS 1 & 2**
 
 1. **Create skill directory structure**:
-   - Create: `[id:skills_dir]{target_skill_name}/`
+   - Create: `skills/{target_skill_name}/`
    - Create subdirectories: `prompts/`, `templates/`, `tools/`, `docs/`
 
 2. **Adapt main prompt file**:
-   - **FIRST**: Read the skill template structure from `/templates/skill-template.md` in this skill directory
+   - **FIRST**: Read the skill template structure from `templates/skill-template.md` in this skill directory
    - Transform competency prompt to skill format following the skill-template structure
    - Update metadata and frontmatter to match skill template format
    - Convert file references to use skills directory structure
-   - **CRITICAL OUTPUT DIRECTORY UPDATE**: Change any output directory references to use `[id:staging_dir]` instead of `findings_dir`, `output_dir`, or similar directories
+   - **CRITICAL OUTPUT DIRECTORY UPDATE**: Change any output directory references to use `.olaf/work/staging/` instead of `findings_dir`, `output_dir`, or similar directories
    - Maintain all original functionality and validation rules
    - Ensure all sections from skill-template are present: Input Parameters, User Interaction Protocol, Process (3 phases), Output Format, User Communication, Domain-Specific Rules, Success Criteria, Error Handling
 
@@ -178,18 +182,18 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
    - Preserve file permissions for executable tools
 
 5. **Create documentation**:
-   - Generate comprehensive description.md and tutorial.md using the template: `/templates/step-by-step-tutorial-template.md`
+   - Generate comprehensive description.md and tutorial.md using the template: `templates/step-by-step-tutorial-template.md`
    - Follow step-by-step tutorial template structure for consistent tutorial documentation
    - Include examples and practical usage scenarios
 
 
 ### Step 4: Generate Skill Manifest
 1. **Create compliant skill manifest**:
-   - Follow schema: `[id:schemas_dir]olaf-skill-manifest.schema.json`
+   - Follow schema: `schemas/olaf-skill-manifest.schema.json`
    - Include all required metadata fields
    - Generate proper aliases from original competency avoiding conflicts:
      - If skill was renamed, create unique aliases that don't conflict with existing skills
-     - Check existing skills' aliases in `[id:reference_dir]query-competency-index.md`
+     - Check existing skills' aliases in `reference/query-competency-index.md`
      - Generate alternative phrasings and synonyms for the renamed skill
      - Ensure aliases reflect the new skill name while maintaining discoverability
    - Document all components in BOM (Bill of Materials)
@@ -231,7 +235,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 ⚠️ **CRITICAL**: You MUST follow the complete git workflow for safe migration completion.
 
 **3. MANDATORY: Complete git workflow with temporary branch**:
-   - Add new skill to git: `git add [id:skills_dir]{target_skill_name}/`
+   - Add new skill to git: `git add skills/{target_skill_name}/`
    - Commit with descriptive message including migration source
    - **CRITICAL**: Switch back to original branch: `git checkout {original_branch}`
    - **MANDATORY**: Merge temporary branch: `git merge temp-{target_skill_name}-migration`
@@ -304,7 +308,7 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 - **Rule 2**: Maintain all original functionality when transforming to skill format
 - **Rule 3**: Generate schema-compliant skill manifest with all required fields
 - **Rule 4**: Update all file references to use skills directory structure including tools
-- **Rule 5**: **CRITICAL OUTPUT STANDARDIZATION** - Always change output directory references to `[id:staging_dir]` instead of `findings_dir`, `output_dir`, or other output folders
+- **Rule 5**: **CRITICAL OUTPUT STANDARDIZATION** - Always change output directory references to `.olaf/work/staging/` instead of `findings_dir`, `output_dir`, or other output folders
 - **Rule 6**: Preserve tool file permissions and functionality during migration
 - **Rule 7**: Create comprehensive documentation and tutorial
 - **Rule 8**: Validate manifest against schema before completion
@@ -409,13 +413,13 @@ The migration process MUST follow this exact git workflow to ensure proper branc
    # [Perform all migration steps]
    
    # Stage new skill
-   git add [id:skills_dir]{target_skill_name}/
+   git add skills/{target_skill_name}/
    
    # Commit migration on temporary branch
    git commit -m "feat: migrate {feature_name} from {competency_name} competency
    
    - Source: {source_branch}:{competency_path}
-   - Target: [id:skills_dir]{target_skill_name}/
+   - Target: skills/{target_skill_name}/
    - Schema compliance: validated against olaf-skill-manifest.schema.json
    - Migration date: $(date -u +%Y-%m-%d)"
    ```
@@ -462,7 +466,7 @@ The migration process MUST follow this exact git workflow to ensure proper branc
    fi
    
    # Verify skill structure exists
-   ls -la [id:skills_dir]{target_skill_name}/
+   ls -la skills/{target_skill_name}/
    ```
 
 ### Critical Safety Checks

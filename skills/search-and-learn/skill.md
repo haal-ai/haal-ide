@@ -171,6 +171,10 @@ Each task prompt MUST include:
 task_id: "task-name"
 task_name: "[descriptive name]"
 dependencies: ["context-variable-Y"]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Task: [Name]

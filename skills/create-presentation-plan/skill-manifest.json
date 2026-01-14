@@ -36,7 +36,7 @@
       "structure presentation"
     ],
     "created": "2025-11-19",
-    "updated": "2025-11-19",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "technical-writer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -59,7 +59,7 @@
     "templates": [
       {
         "name": "presentation-plan-template",
-        "path": "/templates/presentation-plan-template.md",
+        "path": "templates/presentation-plan-template.md",
         "type": "markdown"
       }
     ],

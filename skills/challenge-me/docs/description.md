@@ -2,7 +2,7 @@
 
 **Version**: 2.0 (Enhanced Multi-Source Research)
 **Last Updated**: 2025-11-19
-**Skill Path**: `.olaf/core/skills/challenge-me/prompts/challenge-me.md`
+**Skill Path**: `skills/challenge-me/prompts/challenge-me.md`
 
 ## Overview
 

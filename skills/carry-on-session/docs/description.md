@@ -27,7 +27,7 @@ Carry-On loads the latest carry-over note file and proposes resuming work from w
 ## Key Files
 - **Carry-Over Directory**: `.olaf/carry-over/`
 - **File Pattern**: `carry-over-YYYYMMDD-HHmm.txt` (finds most recent)
-- **Skill Prompt**: `[id:skills_dir]carry-on-session/prompts/carry-on-session.md`
+- **Skill Prompt**: `skills/carry-on-session/prompts/carry-on-session.md`
 - **Companion Skill**: `carry-over-session.md` (creates the note)
 
 ## Commands

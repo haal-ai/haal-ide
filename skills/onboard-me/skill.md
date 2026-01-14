@@ -2,13 +2,21 @@
 name: onboard-me
 description: Generate persona-focused 30-min productivity guides from repository analysis
 license: Apache-2.0
+metadata:
+  olaf_tags: [onboarding, productivity, quickstart, repository, analysis, persona, guide]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
+
+<olaf>
 
 # Onboard-Me: Adaptive Repository Onboarding
 
 ## Workflow
 
-1. Run: `python .olaf/core/skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me`
+1. Run: `python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me`
    - This script is **discovery-only**. It MUST NOT generate any guides by itself.
    - **If you can execute terminal commands, you MUST run this command yourself instead of asking the user to run it manually.**
 2. Read: `.olaf/work/onboard-me/repository-analysis.json`
@@ -242,7 +250,7 @@ Store analysis JSON in `.olaf/work/onboard-me/repository-analysis.json`
 
 ## Execution Checklist
 
-- [ ] Run analysis tool: `python .olaf/core/skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me` (for **facts discovery only**; **execute it yourself when tools/terminal are available, do NOT delegate this to the user**)
+- [ ] Run analysis tool: `python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me` (for **facts discovery only**; **execute it yourself when tools/terminal are available, do NOT delegate this to the user**)
 - [ ] Read `.olaf/work/onboard-me/repository-analysis.json` and **treat it as your primary input**
 - [ ] Detect 3-6 personas using the rules in this prompt
 - [ ] Generate one guide per persona in `.olaf/data/product/context/<repo-name>/` by **creating new Markdown files**

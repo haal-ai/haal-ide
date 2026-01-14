@@ -26,7 +26,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "developer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -44,12 +44,12 @@
     "templates": [
       {
         "name": "code-review-action-plan-template",
-        "path": "/templates/code-review-action-plan-template.md",
+        "path": "templates/code-review-action-plan-template.md",
         "description": "Template for code-review-action-plan-template"
       },
       {
         "name": "code-review-template",
-        "path": "/templates/developer/code-review-template.md",
+        "path": "templates/developer/code-review-template.md",
         "description": "Template for code-review-template"
       }
     ],

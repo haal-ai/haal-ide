@@ -14,7 +14,7 @@ conditions: []
 **Required Files**: 
 - `.olaf/work/staging/temporary/task-search-results.json` (created by search-tasks.py)
 **Required Tools**: 
-- `search-tasks.py` script at `.olaf/core/skills/common/tools/search-tasks.py`
+- `search-tasks.py` script at `skills/common/tools/search-tasks.py`
 
 ## Task Instructions
 
@@ -32,12 +32,12 @@ conditions: []
 2. **Search Task Registry by Category**:
    ```bash
    # Search for highly reusable tasks
-   python .olaf/core/skills/common/tools/search-tasks.py reusable 8
+   python skills/common/tools/search-tasks.py reusable 8
    
    # Search specific categories based on skill needs
-   python .olaf/core/skills/common/tools/search-tasks.py category environment
-   python .olaf/core/skills/common/tools/search-tasks.py category github
-   python .olaf/core/skills/common/tools/search-tasks.py category cleanup
+   python skills/common/tools/search-tasks.py category environment
+   python skills/common/tools/search-tasks.py category github
+   python skills/common/tools/search-tasks.py category cleanup
    ```
    
    **Note**: Script outputs to terminal AND saves results to:
@@ -73,7 +73,7 @@ conditions: []
   [
     {
       "id": "retrieve-timestamp",
-      "location": ".olaf/core/skills/common/tasks/retrieve-timestamp.md",
+      "location": "skills/common/tasks/retrieve-timestamp.md",
       "match_reason": "Skill needs environment info"
     }
   ]

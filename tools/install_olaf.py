@@ -72,6 +72,15 @@ def install_minimal_tools(target_dir: Path, clone_dir: Path) -> None:
         if src_select.exists() and src_select.is_file():
             shutil.copy2(src_select, tools_dir / "select-collection.py")
 
+    # Install header-for-olaf.md if available
+    local_header = Path(__file__).with_name("header-for-olaf.md")
+    if local_header.exists() and local_header.is_file():
+        shutil.copy2(local_header, tools_dir / "header-for-olaf.md")
+    else:
+        src_header = clone_dir / "tools" / "header-for-olaf.md"
+        if src_header.exists() and src_header.is_file():
+            shutil.copy2(src_header, tools_dir / "header-for-olaf.md")
+
 
 def ensure_global_my_competencies(target_dir: Path) -> Path:
     comp_dir = target_dir / "competencies" / "my-competencies"
@@ -872,6 +881,46 @@ def clone_repo_to(
     run(["git", "clone", "--depth", "1", "--branch", branch, url, str(dst)], quiet=True)
 
 
+def replace_olaf_tags_in_skills(target_dir: Path) -> None:
+    """Replace <olaf> tags in skill.md files with header content."""
+    header_file = target_dir / "tools" / "header-for-olaf.md"
+    if not header_file.exists():
+        # Header file not available, skip replacement
+        return
+    
+    try:
+        header_content = header_file.read_text(encoding='utf-8').strip()
+    except Exception:
+        return
+    
+    skills_dir = target_dir / "skills"
+    if not skills_dir.exists():
+        return
+    
+    replaced_count = 0
+    for skill_file in skills_dir.rglob("skill.md"):
+        if not skill_file.is_file():
+            continue
+        
+        try:
+            content = skill_file.read_text(encoding='utf-8')
+            original_content = content
+            
+            # Replace <olaf> tag with header content
+            content = content.replace('<olaf>', header_content)
+            content = content.replace('<olaf>\n', header_content + '\n')
+            content = content.replace('<olaf>\n\n', header_content + '\n\n')
+            
+            if content != original_content:
+                skill_file.write_text(content, encoding='utf-8')
+                replaced_count += 1
+        except Exception:
+            continue
+    
+    if replaced_count > 0:
+        print(f"Install: replaced <olaf> tags in {replaced_count} skill files")
+
+
 def merge_install_from_clone(
     *,
     clone_dir: Path,
@@ -1459,6 +1508,9 @@ def main() -> int:
 
         print(f"Global install: merging seed {repo}@{branch}")
         merge_install_from_clone(clone_dir=clone_dir, target_dir=target_dir)
+        
+        # Replace <olaf> tags in skill files with header content
+        replace_olaf_tags_in_skills(target_dir)
 
         if preserve_root is not None:
             print("Global install: restoring user competency my-competencies")

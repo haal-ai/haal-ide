@@ -17,7 +17,7 @@ conditions: []
 - `context.output_file`: Path to save design document
 
 **Required Files**:
-- `.olaf/core/skills/generate-design/templates/design-document-template.md`
+- `templates/design-document-template.md`
 
 ## Task Instructions
 

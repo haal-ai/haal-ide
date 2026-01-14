@@ -4,14 +4,13 @@ description: Create a new person record following the standard template and upda
 license: Apache-2.0
 metadata:
   olaf_tags: [documentation, people, team]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -32,12 +31,12 @@ Get current timestamp using time tools, fallback to shell command if needed
 ## Process
 1. **Record Creation**:
    - Generate filename: `[role]-[name]-[date].md`
-   - Create file in `[id:peoples_dir]`
+   - Create file in `.olaf/data/peoples/`
    - Populate using `templates/project-manager/people-template.md`
 2. **Documentation Updates**:
-   - Add entry to `[id:people_register]` (MANDATORY)
+   - Add entry to `.olaf/data/peoples/people-register.md` (MANDATORY)
    - Update team directory
-   - Create changelog entry in `[id:changelog_register]` ONLY IF the USER explicitly requests it
+   - Create changelog entry in `.olaf/data/projects/changelog-register.md` ONLY IF the USER explicitly requests it
 3. **Validation**:
    - Verify all required fields
    - Check for existing records
@@ -47,17 +46,17 @@ Get current timestamp using time tools, fallback to shell command if needed
 
 Use `templates/project-manager/people-template.md` to structure the person record:
 - Follow the template's sections for consistency
-- Create file: `[id:peoples_dir][role]-[name]-[date].md`
-- Register entry in `[id:people_register]`
-- Changelog entry in `[id:changelog_register]` ONLY IF the USER explicitly requests it
+- Create file: `.olaf/data/peoples/[role]-[name]-[date].md`
+- Register entry in `.olaf/data/peoples/people-register.md`
+- Changelog entry in `.olaf/data/projects/changelog-register.md` ONLY IF the USER explicitly requests it
 
 ## Success Criteria (MUST ALL BE TRUE)
-- [ ] Person record file created in `[id:peoples_dir]`
-- [ ] Entry added to `[id:people_register]`
+- [ ] Person record file created in `.olaf/data/peoples/`
+- [ ] Entry added to `.olaf/data/peoples/people-register.md`
 
 
 ## People Register Update (EXACT FORMAT)
-Update the **Participant Table** in `[id:people_register]` by appending a new row using this exact column order:
+Update the **Participant Table** in `.olaf/data/peoples/people-register.md` by appending a new row using this exact column order:
 `| Name | Role | Primary Skills | Secondary Skills | Contact Information | When to Contact | Availability |`
 
 New row template (replace placeholders; keep the `|` separators and `<br>` for multiple contact methods):

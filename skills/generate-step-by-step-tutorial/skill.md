@@ -4,14 +4,13 @@ description: Generate step-by-step tutorial documents from conversations or work
 license: Apache-2.0
 metadata:
   olaf_tags: [tutorial, documentation, step-by-step, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -73,7 +72,7 @@ You WILL validate results:
 
 You WILL generate outputs following this structure:
 - Primary deliverable: Complete tutorial following template `templates/technical-writer/step-by-step-tutorial-template.md`
-- File location: `[id:staging_dir]pptx-folder/[workflow-name]-tutorial-YYYYMMDD-HHmm.md`
+- File location: `.olaf/work/staging/pptx-folder/[workflow-name]-tutorial-YYYYMMDD-HHmm.md`
 - Content adapted to target language with proper terminology
 
 ## User Communication

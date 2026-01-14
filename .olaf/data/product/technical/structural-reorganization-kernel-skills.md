@@ -8,7 +8,7 @@ Major architectural reorganization to improve clarity and consistency in the OLA
 ### 1. Directory Structure Reorganization
 ```
 OLD: .olaf/olaf-core/
-NEW: .olaf/core/
+NEW: competencies
 ```
 
 **Rationale**: Eliminates redundant "olaf-" prefix in the path structure, improving readability and reducing cognitive load.
@@ -25,7 +25,7 @@ NEW: .olaf/core/
 ### Installer Compatibility
 The structural changes break existing installer functionality that relies on hardcoded paths:
 - Old paths: `.olaf/olaf-core/skills/`, `.olaf/olaf-core/competencies/`
-- New paths: `.olaf/core/skills/`, `.olaf/core/competencies/`
+- New paths: `skills/`, `competencies/`
 
 ### Required Installer Updates
 1. Update path resolution logic to use new `.olaf/core/` structure
@@ -36,10 +36,10 @@ The structural changes break existing installer functionality that relies on har
 ## Migration Impact
 
 ### Framework Files Updated
-- `.olaf/core/competencies/common/competency-manifest.json`: Updated skill references
-- `.olaf/core/reference/query-competency-index.md`: Updated aliases and paths
-- `.olaf/core/reference/memory-map.md`: Updated directory structure mapping
-- `.olaf/core/reference/.condensed/olaf-framework-condensed.md`: Updated with skills terminology
+- `competencies/common/competency-manifest.json`: Updated skill references
+- `reference/query-competency-index.md`: Updated aliases and paths
+- `reference/memory-map.md`: Updated directory structure mapping
+- `reference/.condensed/olaf-framework-condensed.md`: Updated with skills terminology
 
 ### User Impact
 - Existing users will need to reinstall or update their OLAF installation

@@ -35,7 +35,7 @@
       "convert plan to blog"
     ],
     "created": "2025-11-19",
-    "updated": "2025-11-19",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "technical-writer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -58,12 +58,12 @@
     "templates": [
       {
         "name": "blog-post-brochure-template",
-        "path": "/templates/blog-post-brochure-template.md",
+        "path": "templates/blog-post-brochure-template.md",
         "type": "markdown"
       },
       {
         "name": "blog-post-conversational-template",
-        "path": "/templates/blog-post-conversational-template.md",
+        "path": "templates/blog-post-conversational-template.md",
         "type": "markdown"
       }
     ],

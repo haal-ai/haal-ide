@@ -120,23 +120,23 @@ You WILL generate a comprehensive report using the template:
 
 **For file-analysis**:
 ```bash
-python .olaf/core/skills/measure-ai-impact/tools/ai_impact_analyzer.py \
+python skills/measure-ai-impact/tools/ai_impact_analyzer.py \
   snapshot --name baseline --months 6
-python .olaf/core/skills/measure-ai-impact/tools/ai_impact_analyzer.py \
+python skills/measure-ai-impact/tools/ai_impact_analyzer.py \
   compare baseline {latest}
 ```
 
 **For quarterly-trends**:
 ```bash
-python .olaf/core/skills/measure-ai-impact/tools/git_productivity_analyzer.py \
+python skills/measure-ai-impact/tools/git_productivity_analyzer.py \
   snapshots --since {since_date}
-python .olaf/core/skills/measure-ai-impact/tools/git_productivity_analyzer.py \
+python skills/measure-ai-impact/tools/git_productivity_analyzer.py \
   compare {quarter1} {quarter2}
 ```
 
 **For snapshot**:
 ```bash
-python .olaf/core/skills/measure-ai-impact/tools/ai_impact_analyzer.py \
+python skills/measure-ai-impact/tools/ai_impact_analyzer.py \
   snapshot --name {snapshot_name} [--no-halstead]
 ```
 

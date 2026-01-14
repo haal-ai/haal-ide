@@ -15,7 +15,7 @@ You MUST have the artifacts from Phases 1-4:
 ## Process
 
 ### A) Build the review document
-You MUST structure the final markdown using template: `/templates/review-output-format.md`.
+You MUST structure the final markdown using template: `templates/review-output-format.md`.
 
 ### B) Propose output path (Propose step)
 You MUST:
@@ -37,7 +37,7 @@ If `review_mode=followup` AND strict gating passed:
 - Propose a business decisions output path:
   - `{decisions_output_dir}/{timestamp}-{output_basename}-business-decisions.md`
 - You MUST structure the decisions document using template:
-  - `/templates/business-decisions-output-format.md`
+  - `templates/business-decisions-output-format.md`
 - The decisions document MUST:
   - List each question ID with the SME answer (or TBD with owner/date)
   - Translate answers into clear, testable business rules suitable for OpenAPI derivation
@@ -59,7 +59,7 @@ Only after the approval phrase is provided:
   - `{spec_output_dir}/{timestamp}-{output_basename}-functional-spec-detailed.md`
   - `{spec_output_dir}/{timestamp}-{output_basename}-openapi.yaml`
 - You MUST structure the detailed functional spec using template:
-  - `/templates/functional-spec-detailed-output-format.md`
+  - `templates/functional-spec-detailed-output-format.md`
 - Show a short preview of each artifact.
 - Ask for confirmation before writing the specification files.
 - Only if user says yes, write the specification files.

@@ -74,7 +74,7 @@ If user doesn't specify a task, ask:
 ## Integration
 
 This skill helps users discover and use:
-- All skills in `[id:skills_dir]`
+- All skills in `skills/`
 - All competencies referenced in the index
 - Protocol information for proper usage
 - Direct access to competency execution
@@ -82,7 +82,7 @@ This skill helps users discover and use:
 ## Reference Files
 
 - Reads from: `core/reference/query-competency-index.md` (or similar index file)
-- Lists items from: `[id:skills_dir]` and legacy `core/competencies/`
+- Lists items from: `skills/` and legacy `core/competencies/`
 
 ## Technical Requirements
 

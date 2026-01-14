@@ -306,8 +306,8 @@ Add to your CI/CD or scheduled tasks:
 ```bash
 # End-of-quarter automation (PowerShell)
 $quarter = "2025-Q1"
-python .olaf/core/skills/onboard/tools/commons/project-onboarding/git_productivity_analyzer.py snapshots --since 2024-01-01
-python .olaf/core/skills/onboard/tools/commons/project-onboarding/ai_impact_analyzer.py snapshot --name $quarter
+python skills/onboard/tools/commons/project-onboarding/git_productivity_analyzer.py snapshots --since 2024-01-01
+python skills/onboard/tools/commons/project-onboarding/ai_impact_analyzer.py snapshot --name $quarter
 ```
 
 ---

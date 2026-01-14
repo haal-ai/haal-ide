@@ -4,12 +4,16 @@ description: View git repository changes (new, modified, tracked, untracked file
 license: Apache-2.0
 metadata:
   olaf_tags: [git, version-control, commit-management, repository-analysis, change-grouping, workflow-automation, interactive, github-integration]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval
-Use the common helper: `[id:skills_dir]time-retrieval/prompts/time-retrieval.md`.
+Use the common helper: `skills/time-retrieval/prompts/time-retrieval.md`.
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -175,7 +179,7 @@ You MUST read each file and extract:
 2. **Markdown links**:
    ```markdown
    See [documentation](../docs/guide.md)
-   [id:skills_dir]create-prompt/kb/prompt-structure-schema.md
+   skills/create-prompt/kb/prompt-structure-schema.md
    ```
 
 3. **JSON paths** (manifests, configs):
@@ -216,14 +220,14 @@ Show users WHY files are grouped:
 📦 Cluster: "create-prompt" (4 files)
 
 Modified:
-  M .olaf/core/skills/create-prompt/prompts/create-prompt.md
-  M .olaf/core/skills/create-prompt/skill-manifest.json
+  M skills/create-prompt/prompts/create-prompt.md
+  M skills/create-prompt/skill-manifest.json
 
 New files (referenced by create-prompt.md):
-  ?? .olaf/core/skills/create-prompt/kb/prompt-structure-schema.md
-     ↳ Referenced at line 34: [id:skills_dir]create-prompt/kb/...
-  ?? .olaf/core/skills/create-prompt/kb/file-modification-rules.md
-     ↳ Referenced at line 37: [id:skills_dir]create-prompt/kb/...
+  ?? skills/create-prompt/kb/prompt-structure-schema.md
+     ↳ Referenced at line 34: skills/create-prompt/kb/...
+  ?? skills/create-prompt/kb/file-modification-rules.md
+     ↳ Referenced at line 37: skills/create-prompt/kb/...
 ```
 
 **GitHub Issues Analysis** (if enabled):

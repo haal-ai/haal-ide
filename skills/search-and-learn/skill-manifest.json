@@ -58,7 +58,7 @@
     "templates": [
       {
         "name": "learning-report-template",
-        "path": "/templates/learning-report-template.md",
+        "path": "templates/learning-report-template.md",
         "type": "report",
         "description": "Template for documenting systematic learning discoveries"
       }

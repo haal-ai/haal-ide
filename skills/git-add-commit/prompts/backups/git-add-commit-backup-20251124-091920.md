@@ -3,11 +3,15 @@ name: git-add-commit
 description: Enhanced P1 skill migrated from git-assistant competency pack with comprehensive reference detection
 tags: [developer-workflow, git-operations, version-control, commit-automation, staging-analysis]
 aliases: [git add commit, git-add-commit skill]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Git Add and Commit - Git Assistant Competency
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Purpose
 
@@ -56,7 +60,7 @@ git status --porcelain
 Parse the output to identify staged files, unstaged files, and untracked files.
 
 **If skill_name is provided:**
-1. Determine skill location pattern: `.olaf/core/skills/{skill_name}/`
+1. Determine skill location pattern: `skills/{skill_name}/`
 2. Filter changed files to only those matching the skill directory
 3. Include all files under that skill's directory structure
 

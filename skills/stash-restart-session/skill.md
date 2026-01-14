@@ -4,9 +4,13 @@ description: Scan olaf-stashes directory for preserved work sessions and enable 
 license: Apache-2.0
 metadata:
   olaf_tags: [stash, restart, session, restoration, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval
 Use this common helper only when saving a file or creating a folder that embeds a timestamp in its name: `skills/time-retrieval/prompts/time-retrieval.md`. Do not prompt for time when merely reading or loading files.

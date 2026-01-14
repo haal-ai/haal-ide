@@ -29,7 +29,7 @@ JSON Schema for validation and IDE support when editing registry (located in `~/
 1. **Search the registry** for similar functionality:
    ```bash
    # Using the search tool
-   python .olaf/core/skills/common/tools/search-tasks.py category github
+   python skills/common/tools/search-tasks.py category github
    
    # Or with jq directly
    jq '.tasks[] | select(.category=="github")' task-registry.json
@@ -46,7 +46,7 @@ JSON Schema for validation and IDE support when editing registry (located in `~/
 
 ### When Creating a New Skill
 
-1. **Review common tasks** in `.olaf/core/skills/common/tasks/`
+1. **Review common tasks** in `skills/common/tasks/`
 2. **Check registry** for tasks matching your needs
 3. **Reuse existing tasks** instead of duplicating
 4. **Update registry** if you create skill-specific tasks that could be generalized
@@ -62,13 +62,13 @@ Add entry to `tasks` array with:
   "description": "What this task does in detail",
   "category": "environment|github|analysis|cleanup|user-interaction",
   "tags": ["relevant", "searchable", "tags"],
-  "current_location": ".olaf/core/skills/[skill-name]/tasks/[task-file].md",
+  "current_location": "skills/[skill-name]/tasks/[task-file].md",
   "used_in_skills": ["skill-name-1"],
   "dependencies": {
     "tools": [
       {
         "name": "script.py",
-        "location": ".olaf/core/skills/[skill]/tools/script.py",
+        "location": "skills/[skill]/tools/script.py",
         "description": "What it does"
       }
     ],

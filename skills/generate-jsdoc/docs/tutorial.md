@@ -81,7 +81,7 @@ The process runs independently at LOW priority to minimize impact.
 
 **Check current status:**
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 **Monitor real-time progress:**
@@ -200,7 +200,7 @@ git commit -m "Initial commit before JSDoc"
 
 **Check status:**
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 **Check log file:**

@@ -99,4 +99,4 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
   --aws-profile bedrock
 ```
 
-**Result**: Fully implemented repo-scanner skill in `.olaf/core/skills/repo-scanner/`
+**Result**: Fully implemented repo-scanner skill in `skills/repo-scanner/`

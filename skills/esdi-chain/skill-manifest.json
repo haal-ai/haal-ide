@@ -12,14 +12,23 @@
       "Generate task breakdown with executable implementation plan",
       "Manage session tracking and artifact generation"
     ],
-    "tags": ["meta-skill", "workflow", "development-lifecycle", "esdi", "chain"],
+    "tags": [
+      "meta-skill",
+      "workflow",
+      "development-lifecycle",
+      "esdi",
+      "chain"
+    ],
     "author": "OLAF Framework Core Team",
     "status": "experimental",
     "exposure": "export",
     "protocol": "Propose-Confirm-Act",
-    "aliases": ["esdi", "exploration specification design implementation"],
+    "aliases": [
+      "esdi",
+      "exploration specification design implementation"
+    ],
     "created": "2025-11-24",
-    "updated": "2025-11-24",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "esdi",
       "primary_maintainer": "OLAF Framework Core Team"
@@ -36,7 +45,7 @@
     "templates": [
       {
         "name": "esdi-status",
-        "path": "/templates/esdi-status-template.md",
+        "path": "templates/esdi-status-template.md",
         "description": "Session tracking template for ESDI phases"
       }
     ],

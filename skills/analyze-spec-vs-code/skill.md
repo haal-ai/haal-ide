@@ -4,14 +4,13 @@ description: Propose–Act protocol to compare an EARS specification against the
 license: Apache-2.0
 metadata:
   olaf_tags: [business-analyst, requirements, EARS, gap-analysis, impact-analysis, remediation-plan, propose-act]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -47,19 +46,19 @@ Template: `templates/spec-gap-analysis-template.md`
 - Perform static scan on `[code_roots]` to locate places implementing flags/behaviors/logging/exit codes.
 - Populate a Traceability Matrix (req → status: Implemented / Missing / Diverged) with evidence (file:line) and short notes.
 - Capture “Open Questions” where ambiguity prevents classification.
-- **Save as**: `[id:staging_dir]spec-analysis/phase1-gap-analysis-<timestamp>.md`
+- **Save as**: `.olaf/work/staging/spec-analysis/phase1-gap-analysis-<timestamp>.md`
 
 ## Phase 1B — Process & Workflow Alignment
 Template: `templates/spec-process-workflow-template.md`
 - Map the end-to-end execution flow with file:line evidence (flags → anchoring → registry → selection → plan → TMP → swap → refresh/update).
 - Identify process UX issues (help/version, confirmation gates, precedence visibility, dry-run ordering, retries/backoff, lock handling).
-- **Save as**: `[id:staging_dir]spec-analysis/phase1b-process-workflow-<timestamp>.md`
+- **Save as**: `.olaf/work/staging/spec-analysis/phase1b-process-workflow-<timestamp>.md`
 
 ## Phase 1C — Data Model Alignment
 Template: `templates/spec-data-model-template.md`
 - Enumerate struct/JSON shapes and their locations; map to spec expectations (config schema, registry presence, provenance, schema versioning).
 - Recommend schema/artifact changes (e.g., traceability JSON, source fields).
-- **Save as**: `[id:staging_dir]spec-analysis/phase1c-data-model-<timestamp>.md`
+- **Save as**: `.olaf/work/staging/spec-analysis/phase1c-data-model-<timestamp>.md`
 
 ## Phase 2 — Impact Analysis
 Template: `templates/spec-impact-analysis-template.md`
@@ -69,14 +68,14 @@ Template: `templates/spec-impact-analysis-template.md`
   - Affected modules/APIs/CLI flags, data/config/schema
   - Effort estimation and sequencing/rollback
   - Test impacts (affected/new ATs/VCs)
-- **Save as**: `[id:staging_dir]spec-analysis/phase2-impact-analysis-<timestamp>.md`
+- **Save as**: `.olaf/work/staging/spec-analysis/phase2-impact-analysis-<timestamp>.md`
 
 ## Phase 3 — Remediation Plan
 Template: `templates/spec-remediation-plan-template.md`
 - Propose a sequenced Work Breakdown by capability/domain to close gaps and resolve divergences.
 - Define acceptance criteria per workstream and risk management.
 - Identify communication cadence and Definition of Done (spec refresh if needed).
-- **Save as**: `[id:staging_dir]spec-analysis/phase3-remediation-plan-<timestamp>.md`
+- **Save as**: `.olaf/work/staging/spec-analysis/phase3-remediation-plan-<timestamp>.md`
 
 ### 3. Validation Phase
 You WILL validate results:
@@ -87,16 +86,16 @@ You WILL validate results:
 ## Output Format
 You WILL generate outputs following this structure:
 - **Primary deliverable**: Multi-phase analysis reports following respective templates
-- **Output location**: Save all reports in `[id:staging_dir]spec-analysis/` subfolder
+- **Output location**: Save all reports in `.olaf/work/staging/spec-analysis/` subfolder
 - **Supporting files**: Static scan results and code evidence files
 - **Documentation**: Comprehensive gap analysis and remediation plan
 
 **File Naming Convention**:
-- Phase 1: `[id:staging_dir]spec-analysis/phase1-gap-analysis-<timestamp>.md`
-- Phase 1B: `[id:staging_dir]spec-analysis/phase1b-process-workflow-<timestamp>.md`
-- Phase 1C: `[id:staging_dir]spec-analysis/phase1c-data-model-<timestamp>.md`
-- Phase 2: `[id:staging_dir]spec-analysis/phase2-impact-analysis-<timestamp>.md`
-- Phase 3: `[id:staging_dir]spec-analysis/phase3-remediation-plan-<timestamp>.md`
+- Phase 1: `.olaf/work/staging/spec-analysis/phase1-gap-analysis-<timestamp>.md`
+- Phase 1B: `.olaf/work/staging/spec-analysis/phase1b-process-workflow-<timestamp>.md`
+- Phase 1C: `.olaf/work/staging/spec-analysis/phase1c-data-model-<timestamp>.md`
+- Phase 2: `.olaf/work/staging/spec-analysis/phase2-impact-analysis-<timestamp>.md`
+- Phase 3: `.olaf/work/staging/spec-analysis/phase3-remediation-plan-<timestamp>.md`
 
 ## User Communication
 You WILL provide these updates to the user:
@@ -108,7 +107,7 @@ You WILL provide these updates to the user:
 
 ### Completion Summary
 - Summary of all phases executed
-- Files created with locations in `[id:staging_dir]spec-analysis/` subfolder
+- Files created with locations in `.olaf/work/staging/spec-analysis/` subfolder
 - Concise status summary: counts of Implemented / Missing / Diverged
 - Top risks identified and ETA for remediation plan
 
@@ -126,7 +125,7 @@ You WILL consider the task complete when:
 - [ ] Traceability matrix populated with evidence
 - [ ] All outputs generated in specified template format
 - [ ] User communication completed with status summary
-- [ ] Save locations confirmed in `[id:staging_dir]spec-analysis/` subfolder
+- [ ] Save locations confirmed in `.olaf/work/staging/spec-analysis/` subfolder
 
 ## Required Actions
 1. Validate all required input parameters and EARS spec accessibility
@@ -134,7 +133,7 @@ You WILL consider the task complete when:
 3. Execute Phase 2 (Impact Analysis) for Missing and Diverged items
 4. Execute Phase 3 (Remediation Plan) with sequenced work breakdown
 5. Provide comprehensive user communication with status summary
-6. Confirm all files saved in `[id:staging_dir]spec-analysis/` subfolder
+6. Confirm all files saved in `.olaf/work/staging/spec-analysis/` subfolder
 
 ## Error Handling
 You WILL handle these scenarios:

@@ -17,7 +17,7 @@ conditions: []
 ### Execute Environment Info Script and Read Data
 1. **Run environment info script**:
    ```bash
-   python .olaf/core/skills/review-github-pr/tools/get-env.py
+   python skills/review-github-pr/tools/get-env.py
    ```
 
 2. **Find environment file in staging directory**:

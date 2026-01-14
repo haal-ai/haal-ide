@@ -8,9 +8,13 @@ license: Apache-2.0
 name: run-redocumentation
 description: Enhanced Run Redocumentation skill migrated from project-manager competency
 tags: [project-management, documentation-automation, source-analysis, systematic-workflow, progress-tracking]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -27,7 +31,7 @@ Execute systematic redocumentation of any multi-repository or complex applicatio
 ## Process Flow
 
 ### Step 1: Review Current Progress
-- **Locate Progress Tracker:** Find the progress tracking file in `[id:staging_dir]{project-name}/artifacts/` directory
+- **Locate Progress Tracker:** Find the progress tracking file in `.olaf/work/staging/{project-name}/artifacts/` directory
   - Naming pattern: `redocument-{project-name}-progress.md` or similar systematic naming
 - **Load Orchestrator Plan:** Identify and load the corresponding orchestrator plan file
   - Naming pattern: `redocument-{project-name}-orchestrator.md` or similar systematic naming
@@ -104,10 +108,10 @@ Execute systematic redocumentation of any multi-repository or complex applicatio
 - Provide clear status for user continuation
 
 ## Input Requirements
-- **Orchestrator Plan:** `[id:staging_dir]{project-name}/artifacts/redocument-{project-name}-orchestrator.md`
-- **Progress Tracker:** `[id:staging_dir]{project-name}/artifacts/redocument-{project-name}-progress.md` 
+- **Orchestrator Plan:** `.olaf/work/staging/{project-name}/artifacts/redocument-{project-name}-orchestrator.md`
+- **Progress Tracker:** `.olaf/work/staging/{project-name}/artifacts/redocument-{project-name}-progress.md` 
 - **Target Application:** `your-repos/{project-name}/` (all repositories/source code)
-- **Project Context:** Any existing analysis artifacts in `[id:staging_dir]{project-name}/`
+- **Project Context:** Any existing analysis artifacts in `.olaf/work/staging/{project-name}/`
 
 ## Output Artifacts
 - Updated progress tracking file
@@ -149,20 +153,20 @@ Before using this competency for a new project, ensure:
 1. **Orchestrator Plan Exists:** Create `redocument-{project-name}-orchestrator.md` with systematic steps
 2. **Progress Tracker Exists:** Create `redocument-{project-name}-progress.md` with step tracking
 3. **Source Code Available:** Target repositories accessible in `your-repos/{project-name}/`
-4. **staging Directory:** Create `[id:staging_dir]{project-name}/` for artifacts
+4. **staging Directory:** Create `.olaf/work/staging/{project-name}/` for artifacts
 
 ### Example Project Configurations
 
 #### Example 1: Web Application Redocumentation
 - **Project Name:** `ecommerce-platform`
-- **Orchestrator:** `[id:staging_dir]ecommerce-platform/artifacts/redocument-ecommerce-platform-orchestrator.md`
-- **Progress:** `[id:staging_dir]ecommerce-platform/artifacts/redocument-ecommerce-platform-progress.md`
+- **Orchestrator:** `.olaf/work/staging/ecommerce-platform/artifacts/redocument-ecommerce-platform-orchestrator.md`
+- **Progress:** `.olaf/work/staging/ecommerce-platform/artifacts/redocument-ecommerce-platform-progress.md`
 - **Source:** `your-repos/ecommerce-platform/`
 
 #### Example 2: Microservices Architecture Documentation
 - **Project Name:** `payment-gateway`
-- **Orchestrator:** `[id:staging_dir]payment-gateway/artifacts/redocument-payment-gateway-orchestrator.md`
-- **Progress:** `[id:staging_dir]payment-gateway/artifacts/redocument-payment-gateway-progress.md`
+- **Orchestrator:** `.olaf/work/staging/payment-gateway/artifacts/redocument-payment-gateway-orchestrator.md`
+- **Progress:** `.olaf/work/staging/payment-gateway/artifacts/redocument-payment-gateway-progress.md`
 - **Source:** `your-repos/payment-gateway/`
 
 ### Reusability Features

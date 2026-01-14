@@ -4,7 +4,7 @@
 
 The Memory Map is OLAF's navigation system for AI agents. It provides a hierarchical structure of important files and directories using **ID pointers** that enable consistent, maintainable references across all prompts and skills.
 
-**Location:** `.olaf/core/reference/memory-map.md`
+**Location:** `reference/memory-map.md`
 
 ---
 
@@ -18,20 +18,20 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 
 **Example:**
 ```markdown
-[id:core_olaf_dir] = `.olaf/`
-[id:skills_dir] = `[id:core_olaf_dir]core/skills/`
+.olaf/ = `.olaf/`
+skills/ = `.olaf/core/skills/`
 ```
 
 ### How Prompts Use Pointers
 
 **Instead of hardcoded paths:**
 ```markdown
-❌ Read the file at .olaf/core/skills/review-code/skill.prompt.md
+❌ Read the file at skills/review-code/skill.prompt.md
 ```
 
 **Use ID pointers:**
 ```markdown
-✅ Read the file at [id:skills_dir]review-code/skill.prompt.md
+✅ Read the file at skills/review-code/skill.prompt.md
 ```
 
 ---
@@ -46,10 +46,10 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 **Example:**
 ```markdown
 # Memory-map change
-[id:skills_dir] = `.olaf/framework/skills/`  # Structure reorganized
+skills/ = `.olaf/framework/skills/`  # Structure reorganized
 
 # No prompt changes needed!
-# All references to [id:skills_dir] automatically work
+# All references to skills/ automatically work
 ```
 
 ### 2. **Readability and Intent**
@@ -60,7 +60,7 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 **Example:**
 ```markdown
 ❌ Read .olaf/data/projects/changelog-register.md
-✅ Read [id:changelog_register]
+✅ Read .olaf/data/projects/changelog-register.md
 
 # Second version clearly indicates WHAT, not WHERE
 ```
@@ -73,7 +73,7 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 **Example:**
 ```markdown
 # All prompts use same reference
-[id:jobs_register] = [id:projects_dir]jobs-register.md
+.olaf/data/projects/jobs-register.md = .olaf/data/projects/jobs-register.md
 
 # No variations like:
 # - .olaf/data/projects/jobs-register.md
@@ -88,10 +88,10 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 
 **Example:**
 ```markdown
-[id:core_olaf_dir] = `.olaf/`
-[id:data_dir] = `[id:core_olaf_dir]data/`
-[id:projects_dir] = `[id:data_dir]projects/`
-[id:jobs_register] = `[id:projects_dir]jobs-register.md`
+.olaf/ = `.olaf/`
+.olaf/data/ = `.olaf/data/`
+.olaf/data/projects/ = `.olaf/data/projects/`
+.olaf/data/projects/jobs-register.md = `.olaf/data/projects/jobs-register.md`
 
 # Clear parent-child relationships
 ```
@@ -103,12 +103,12 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 
 **Example:**
 ```markdown
-[id:core_dir] = Root of target repository (user's project)
-[id:core_olaf_dir] = `.olaf/` (OLAF framework)
+ = Root of target repository (user's project)
+.olaf/ = `.olaf/` (OLAF framework)
 
 # Prompts can reference both:
-# - User code: [id:core_dir]src/main.py
-# - OLAF data: [id:jobs_register]
+# - User code: src/main.py
+# - OLAF data: .olaf/data/projects/jobs-register.md
 ```
 
 ### 6. **Environment Flexibility**
@@ -119,11 +119,11 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 **Example:**
 ```markdown
 # Memory-map handles OS-specific contexts
-[id:context_current] = [id:context_dir]context-windows-powershell.md
+.olaf/data/context/context-current.md = .olaf/data/context/context-windows-powershell.md
 # or
-[id:context_current] = [id:context_dir]context-linux-bash.md
+.olaf/data/context/context-current.md = .olaf/data/context/context-linux-bash.md
 
-# Prompts just use [id:context_current]
+# Prompts just use .olaf/data/context/context-current.md
 ```
 
 ### 7. **Validation and Error Detection**
@@ -134,7 +134,7 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 **Example:**
 ```markdown
 ❌ [id:sklls_dir]  # Typo - can be detected
-✅ [id:skills_dir]  # Valid ID
+✅ skills/  # Valid ID
 
 # Tools can validate all ID references
 ```
@@ -147,33 +147,33 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 
 **Root References:**
 ```markdown
-[id:core_dir] = Target repository root (user's project)
-[id:core_olaf_dir] = `.olaf/` (OLAF framework)
+ = Target repository root (user's project)
+.olaf/ = `.olaf/` (OLAF framework)
 ```
 
 **Framework Components:**
 ```markdown
-[id:ack_dir] = `[id:core_olaf_dir]core/`
-[id:skills_dir] = `[id:ack_dir]skills/`
-[id:competencies_dir] = `[id:ack_dir]competencies/`
-[id:reference_dir] = `[id:ack_dir]reference/`
-[id:schemas_dir] = `[id:ack_dir]schemas/`
+[id:ack_dir] = `.olaf/core/`
+skills/ = `[id:ack_dir]skills/`
+competencies/ = `[id:ack_dir]competencies/`
+reference/ = `[id:ack_dir]reference/`
+schemas/ = `[id:ack_dir]schemas/`
 ```
 
 **Data Environment:**
 ```markdown
-[id:data_dir] = `[id:core_olaf_dir]data/`
-[id:context_dir] = `[id:data_dir]context/`
-[id:projects_dir] = `[id:data_dir]projects/`
-[id:practices_dir] = `[id:data_dir]practices/`
+.olaf/data/ = `.olaf/data/`
+.olaf/data/context/ = `.olaf/data/context/`
+.olaf/data/projects/ = `.olaf/data/projects/`
+.olaf/data/practices/ = `.olaf/data/practices/`
 ```
 
 **Key Files:**
 ```markdown
-[id:competency_index] = `[id:reference_dir]query-competency-index.md`
-[id:core_principles] = `[id:reference_dir]core-principles.md`
-[id:jobs_register] = `[id:projects_dir]jobs-register.md`
-[id:changelog_register] = `[id:projects_dir]changelog-register.md`
+reference/query-competency-index.md = `reference/query-competency-index.md`
+reference/core-principles.md = `reference/core-principles.md`
+.olaf/data/projects/jobs-register.md = `.olaf/data/projects/jobs-register.md`
+.olaf/data/projects/changelog-register.md = `.olaf/data/projects/changelog-register.md`
 ```
 
 ---
@@ -183,25 +183,25 @@ ID pointers are symbolic references that map to actual file paths. Instead of ha
 ### Example 1: Reading Framework Files
 ```markdown
 ## Instructions
-1. Load core principles from [id:core_principles]
-2. Review competency index at [id:competency_index]
-3. Check available skills in [id:skills_dir]
+1. Load core principles from reference/core-principles.md
+2. Review competency index at reference/query-competency-index.md
+3. Check available skills in skills/
 ```
 
 ### Example 2: Writing Output Files
 ```markdown
 ## Output
-- Save job definition to [id:jobs_register]
-- Create changelog entry in [id:changelog_register]
+- Save job definition to .olaf/data/projects/jobs-register.md
+- Create changelog entry in .olaf/data/projects/changelog-register.md
 - Store conversation record in [id:conversation_records_dir]
 ```
 
 ### Example 3: Multi-Context References
 ```markdown
 ## Process
-1. Analyze code in [id:core_dir]src/
-2. Load coding standards from [id:practices_dir]standards/
-3. Generate report to [id:technical_dir]code-review-YYYYMMDD.md
+1. Analyze code in src/
+2. Load coding standards from .olaf/data/practices/standards/
+3. Generate report to .olaf/data/product/technical/code-review-YYYYMMDD.md
 ```
 
 ---
@@ -227,7 +227,7 @@ The memory-map is loaded automatically when OLAF framework is initialized:
 ### Fallback Strategy
 
 If ID resolution fails, agents can:
-1. Reference memory-map directly at `[id:memory_map]`
+1. Reference memory-map directly at `reference/memory-map.md`
 2. Use embedded agent indexing/search capabilities
 3. Request explicit path from user
 
@@ -237,13 +237,13 @@ If ID resolution fails, agents can:
 
 ### 1. Always Use IDs for OLAF Paths
 ```markdown
-✅ Read from [id:skills_dir]
-❌ Read from .olaf/core/skills/
+✅ Read from skills/
+❌ Read from skills/
 ```
 
 ### 2. Use Descriptive IDs
 ```markdown
-✅ [id:changelog_register]
+✅ .olaf/data/projects/changelog-register.md
 ❌ [id:cr]
 ```
 
@@ -251,8 +251,8 @@ If ID resolution fails, agents can:
 ```markdown
 ## File References
 This prompt uses the following memory-map IDs:
-- [id:jobs_register] - Job tracking file
-- [id:practices_dir] - Best practices directory
+- .olaf/data/projects/jobs-register.md - Job tracking file
+- .olaf/data/practices/ - Best practices directory
 ```
 
 ### 4. Validate IDs Exist
@@ -260,8 +260,8 @@ Before using a new ID, verify it exists in memory-map or add it.
 
 ### 5. Prefer Higher-Level IDs
 ```markdown
-✅ [id:jobs_register]  # Direct file reference
-❌ [id:projects_dir]jobs-register.md  # Manual path construction
+✅ .olaf/data/projects/jobs-register.md  # Direct file reference
+❌ .olaf/data/projects/jobs-register.md  # Manual path construction
 ```
 
 ---

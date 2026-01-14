@@ -20,7 +20,7 @@ conditions: []
 - `context.actionable_takeaways`: Next steps and takeaways
 - `context.knowledge_gaps`: Identified gaps
 **Required Files**: 
-- Template: `.olaf/core/skills/search-and-learn/templates/learning-report-template.md` (if exists)
+- Template: `templates/learning-report-template.md` (if exists)
 **Required Tools**: File writing capabilities
 
 ## Task Instructions

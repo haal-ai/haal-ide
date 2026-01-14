@@ -4,19 +4,18 @@ description: Generate PowerPoint presentations from existing presentation plans 
 license: Apache-2.0
 metadata:
   olaf_tags: [presentation, powerpoint, automation, technical-writer, content-creation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **plan_file_path**: string - Path to existing presentation plan (.md file) (REQUIRED)
-- **output_directory**: string - Target directory for PowerPoint file (OPTIONAL, default: `[id:staging_dir]pptx-folder/`)
+- **output_directory**: string - Target directory for PowerPoint file (OPTIONAL, default: `.olaf/work/staging/pptx-folder/`)
 - **confirmation**: boolean - User approval to proceed with generation (REQUIRED)
 
 ## User Interaction Protocol
@@ -57,9 +56,9 @@ You WILL execute these operations as needed:
 
 **PowerPoint Generation**:
 - Execute script: `/tools/generate_dynamic_pptx.py` for PowerPoint automation
-- Execute command: `python /tools/generate_dynamic_pptx.py [plan-file-path] [id:staging_dir]pptx-folder/`
+- Execute command: `python /tools/generate_dynamic_pptx.py [plan-file-path] .olaf/work/staging/pptx-folder/`
 - Monitor generation process for any errors or issues
-- Ensure the output PowerPoint file is saved in `[id:staging_dir]pptx-folder/`
+- Ensure the output PowerPoint file is saved in `.olaf/work/staging/pptx-folder/`
 
 ### 3. Validation Phase
 You WILL confirm successful completion:
@@ -112,7 +111,7 @@ Define error scenarios and responses:
 - Python environment (3.10+ recommended)
 - python-pptx library (will be checked and installed if needed)
 - Access to `/tools/generate_dynamic_pptx.py` automation tool
-- Write access to `[id:staging_dir]pptx-folder/`
+- Write access to `.olaf/work/staging/pptx-folder/`
 
 ### File Formats
 - **Input**: Markdown presentation plan (.md)
@@ -120,7 +119,7 @@ Define error scenarios and responses:
 - **Naming**: Timestamped format YYYYMMDD-HHmm
 
 ### Output Location
-Generated PowerPoint file: `[id:staging_dir]pptx-folder/[name]-YYYYMMDD-HHmm.pptx`
+Generated PowerPoint file: `.olaf/work/staging/pptx-folder/[name]-YYYYMMDD-HHmm.pptx`
 
 ## Notes
 This skill specializes in automated PowerPoint generation from structured presentation plans using Python automation tools. It maintains compatibility with existing presentation planning workflows and ensures professional output formatting.

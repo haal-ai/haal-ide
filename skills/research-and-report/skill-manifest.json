@@ -13,7 +13,7 @@
     ],
     "tags": [
       "research",
-      "reporting", 
+      "reporting",
       "web-search",
       "analysis",
       "documentation",
@@ -26,16 +26,16 @@
     "protocol": "Propose-Act",
     "aliases": [
       "research and report",
-      "research report", 
+      "research report",
       "structured research",
       "research with reporting",
       "investigate and report"
     ],
     "created": "2025-11-19",
-    "updated": "2025-11-19",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "researcher",
-      "primary_maintainer": "OLAF Framework Core Team", 
+      "primary_maintainer": "OLAF Framework Core Team",
       "created_by": "competency-to-skills-migration"
     },
     "technical_requirements": {
@@ -54,13 +54,13 @@
     ],
     "templates": [
       {
-        "name": "research-plan-template", 
-        "path": "/templates/research-plan-template.md",
+        "name": "research-plan-template",
+        "path": "templates/research-plan-template.md",
         "type": "markdown"
       },
       {
         "name": "research-report-template",
-        "path": "/templates/research-report-template.md", 
+        "path": "templates/research-report-template.md",
         "type": "markdown"
       }
     ]

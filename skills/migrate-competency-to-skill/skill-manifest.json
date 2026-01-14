@@ -33,7 +33,7 @@
     ],
     "author": "windsurf ai + p-square",
     "created": "2025-11-19",
-    "updated": "2025-11-19",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "olaf-core",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -56,12 +56,12 @@
     "templates": [
       {
         "name": "migration-report-template",
-        "path": "/templates/migration-report-template.md",
+        "path": "templates/migration-report-template.md",
         "type": "markdown"
       },
       {
         "name": "step-by-step-tutorial-template",
-        "path": "/templates/step-by-step-tutorial-template.md",
+        "path": "templates/step-by-step-tutorial-template.md",
         "type": "markdown"
       }
     ],

@@ -4,9 +4,13 @@ description: Enhanced Validate Olaf Artifacts skill migrated from olaf-specific-
 license: Apache-2.0
 metadata:
   olaf_tags: [quality-assurance, compliance-checking, artifact-validation, framework-standards, consistency-verification]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 # Validate OLAF Artifacts
 
@@ -56,7 +60,7 @@ Check all file references in:
 
 ## Execution Steps
 1. **Scan Repository Structure**
-   - Identify all competency packs in [id:competencies_dir]
+   - Identify all competency packs in competencies/
    - Locate all manifest files
    - Map documentation structure
 2. **Validate Manifests**

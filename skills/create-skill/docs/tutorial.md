@@ -55,7 +55,7 @@ Example: "prompt"
 ### Step 5: Review Generated Skill Structure
 The skill generates a complete directory structure:
 ```
-.olaf/[id:skills_dir]analyze-code-quality/
+.olaf/skills/analyze-code-quality/
 ├── prompts/
 │   └── analyze-code-quality.md
 ├── templates/
@@ -113,7 +113,7 @@ Use the Propose-Confirm-Act protocol:
 ### Step 9: Verify Skill Creation
 After approval, verify the skill was created successfully:
 ```
-Check: [id:skills_dir]analyze-code-quality/ exists with all files
+Check: skills/analyze-code-quality/ exists with all files
 ```
 
 **Expected Result**: Complete skill package available for use.
@@ -129,7 +129,7 @@ olaf analyze code quality
 ## Expected Outcomes
 
 ### Successful Completion
-- Complete skill directory structure under `[id:skills_dir][skill-name]/`
+- Complete skill directory structure under `skills/[skill-name]/`
 - Valid skill manifest conforming to schema
 - Functional main skill prompt following OLAF standards
 - Complete documentation package

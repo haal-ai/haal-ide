@@ -266,7 +266,7 @@ Try:
 ## Files Structure
 
 ```
-~/.olaf/core/skills/tell-me/
+~/skills/tell-me/
 ├── skill-manifest.json          # Skill metadata and task chain definition
 ├── prompts/
 │   └── tell-me.md              # Master coordinator prompt

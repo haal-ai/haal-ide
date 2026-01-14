@@ -4,9 +4,13 @@ description: Conduct a comprehensive work review to assess progress, identify ac
 license: Apache-2.0
 metadata:
   olaf_tags: [review, progress, planning, assessment]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/reference/.condensed/olaf-framework-condensed.md
 
 ## Input Parameters
 
@@ -52,7 +56,7 @@ You WILL verify all requirements:
 - Check: File modification patterns using `git log --name-status`
 
 #### OLAF-specific Data Analysis (if requested):
-- Read: Contents of `[id:staging_dir]` for completed work
+- Read: Contents of `.olaf/work/staging/` for completed work
 - Scan: Conversation records from recent period
 - Review: Completed skill executions and outputs
 - Analyze: Decision records and progress files
@@ -73,7 +77,7 @@ You WILL verify all requirements:
 - Populate all template sections with actual data
 - Include specific examples and metrics
 - Add timestamp and review period information
-- Save to: `[id:staging_dir]progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
+- Save to: `.olaf/work/staging/progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
 
 ### 3. Validation Phase
 
@@ -89,7 +93,7 @@ You WILL generate outputs following this structure:
 - **Progress Analysis Report**: Data-driven assessment with specific metrics and examples
 - **Structured Progress Report**: Complete document following `templates/progress-review-template.md`
 - **Actionable Recommendations**: Specific next steps based on findings
-- **Saved Report**: File saved to `[id:staging_dir]progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
+- **Saved Report**: File saved to `.olaf/work/staging/progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
 
 ### Report Generation
 
@@ -104,13 +108,13 @@ You WILL populate all template placeholders with actual data collected from spec
 - Summary of data collection results (commits, files analyzed, etc.)
 - Status updates during analysis phase
 - Timestamp identifier used: [YYYYMMDD-HHmm format]
-- Confirmation when report is saved to `[id:staging_dir]progress-reviews/`
+- Confirmation when report is saved to `.olaf/work/staging/progress-reviews/`
 
 ### Completion Summary
 - Total data points analyzed from each source
 - Key findings and trend analysis
 - Priority recommendations based on data
-- Saved report location: `[id:staging_dir]progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
+- Saved report location: `.olaf/work/staging/progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
 
 ### Next Steps
 
@@ -146,7 +150,7 @@ You WILL clearly define:
 2. Execute data collection from user-specified sources (git, files, workspace, OLAF data)
 3. Analyze collected data for trends, achievements, and blockers
 4. Generate comprehensive progress report using template structure
-5. Save formatted report to `[id:staging_dir]progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
+5. Save formatted report to `.olaf/work/staging/progress-reviews/progress-review-[YYYYMMDD-HHmm].md`
 6. Provide actionable recommendations based on analysis
 
 ## Error Handling

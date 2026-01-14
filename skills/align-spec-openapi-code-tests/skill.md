@@ -4,14 +4,13 @@ description: Detect drift and align functional spec, OpenAPI, implementation cod
 license: Apache-2.0
 metadata:
   olaf_tags: [api, openapi, drift, alignment, testing, bruno, quarkus, workflow]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -39,7 +38,7 @@ You MUST follow **Propose-Confirm-Act** because this workflow writes files into 
 - If alignment would require DB schema changes, you MUST stop and ask the user to handle DB changes separately.
 
 ## Use Templates and Knowledge Base
-- You MUST use the template at `/templates/drift-alignment-report-template.md`.
+- You MUST use the template at `templates/drift-alignment-report-template.md`.
 - If you need technology-specific guidance, consult the local KB under `.olaf/data/kb/` before fetching anything external.
 
 ## Process
@@ -85,7 +84,7 @@ You MUST ask the user to approve the plan before writing any files.
 ### 3) Execution Phase (Only after approval)
 
 #### 3.1 Generate drift report
-You WILL produce `{output_dir}/{timestamp}-{demand_folder}-drift-report.md` using `/templates/drift-alignment-report-template.md`.
+You WILL produce `{output_dir}/{timestamp}-{demand_folder}-drift-report.md` using `templates/drift-alignment-report-template.md`.
 You MUST include:
 - The `RECOMMENDATION: ...` line near the top
 - Evidence links (file paths; add line references when available)

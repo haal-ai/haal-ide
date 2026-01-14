@@ -36,13 +36,13 @@ Analyze the git diff output and categorize each changed file by its extension:
 ### Step 2: Apply Appropriate Language-Specific Instructions PER FILE
 
 **For Python Files (.py)**
-- **MUST USE:** `[id:practices_dir]code-reviews/review-commit-python.md`
+- **MUST USE:** `.olaf/data/practices/code-reviews/review-commit-python.md`
 - **Apply to:** Every `.py` file in the changes, regardless of how many other file types are present
 - **Focus:** Type hints, PEP compliance, memory management, security, testing
 - **Example:** If changes include `install.py`, `test_install.py`, and 5 markdown files, still apply Python review to both .py files
 
 **For C++ Files (.cpp, .hpp, .h, .cc, .c, .ipp)**
-- **MUST USE:** `[id:practices_dir]code-reviews/review-commit-cplusplus.md`
+- **MUST USE:** `.olaf/data/practices/code-reviews/review-commit-cplusplus.md`
 - **Apply to:** Every C++ file in the changes, regardless of how many other file types are present
 - **Focus:** Memory safety, modern C++ standards, performance, thread safety
 - **Example:** If changes include `parser.cpp`, `utils.h`, and 10 Python files, still apply C++ review to both C++ files

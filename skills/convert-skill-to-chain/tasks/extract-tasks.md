@@ -22,7 +22,7 @@ conditions: []
 
 1. **Create Tasks Directory** (if needed):
    ```
-   .olaf/core/skills/[skill-name]/tasks/
+   skills/[skill-name]/tasks/
    ```
 
 2. **For Each New Task** (skip common tasks):
@@ -34,7 +34,7 @@ conditions: []
 
    **b) Create Task File**:
    - File name: `[task-id].md`
-   - Location: `.olaf/core/skills/[skill-name]/tasks/[task-id].md`
+   - Location: `skills/[skill-name]/tasks/[task-id].md`
 
    **c) Use Task Template**:
    ```markdown
@@ -90,15 +90,15 @@ conditions: []
 - `context.extracted_tasks`: Array of created task file paths
   ```json
   [
-    ".olaf/core/skills/skill-name/tasks/task-1.md",
-    ".olaf/core/skills/skill-name/tasks/task-2.md"
+    "skills/skill-name/tasks/task-1.md",
+    "skills/skill-name/tasks/task-2.md"
   ]
   ```
 - `context.extraction_count`: Number of files created
 - `task_status.extract-tasks`: "completed"
 
 **Files Created**: 
-- Multiple task markdown files in `.olaf/core/skills/[skill-name]/tasks/`
+- Multiple task markdown files in `skills/[skill-name]/tasks/`
 
 **Context Passed to Next Tasks**:
 - `context.extracted_tasks` will be listed in master coordinator

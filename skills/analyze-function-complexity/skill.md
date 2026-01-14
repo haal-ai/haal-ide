@@ -4,14 +4,13 @@ description: Analyze a specific function's complexity, structure, and provide de
 license: Apache-2.0
 metadata:
   olaf_tags: [function-analysis, complexity, code-quality, metrics]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 
 
@@ -89,15 +88,15 @@ You WILL validate results:
 
 ## Output Format
 You WILL generate outputs following this structure:
-- **Primary deliverable**: Follow template `.olaf/core/skills/analyze-function-complexity/templates/function-complexity-analysis-template.md`
-- **Output location**: Save analysis in `[id:staging_dir]function-analyses/` subfolder
+- **Primary deliverable**: Follow template `templates/function-complexity-analysis-template.md`
+- **Output location**: Save analysis in `.olaf/work/staging/function-analyses/` subfolder
 - **Supporting files**: Include calculation methodology and reasoning in the report
 - **Documentation**: Complete report with all required sections populated
 
 **File Naming Convention**:
 - Format: `function-analysis-{function_name}-{timestamp}.md`
 - Example: `function-analysis-processUserData-20251119-1430.md`
-- Location: `[id:staging_dir]function-analyses/function-analysis-{function_name}-{timestamp}.md`
+- Location: `.olaf/work/staging/function-analyses/function-analysis-{function_name}-{timestamp}.md`
 
 The report MUST follow the exact template structure and include all sections:
 
@@ -134,7 +133,7 @@ You WILL provide these updates to the user:
 ### Completion Summary
 - Detailed report using the exact template format with all required sections populated
 - Template placeholders populated with actual analysis results
-- **File saved as**: `[id:staging_dir]function-analyses/function-analysis-{function_name}-{timestamp}.md`
+- **File saved as**: `.olaf/work/staging/function-analyses/function-analysis-{function_name}-{timestamp}.md`
 - **Analysis timestamp**: {YYYYMMDD-HHmm format}
 - **Report location**: Full path to generated analysis file in staging directory
 
@@ -168,7 +167,7 @@ You WILL consider the task complete when:
 - [ ] Specific recommendations provided with actionable guidance
 - [ ] Quality scores assigned on 1-10 scales
 - [ ] Test coverage requirements calculated
-- [ ] Analysis report saved in `[id:staging_dir]function-analyses/` subfolder
+- [ ] Analysis report saved in `.olaf/work/staging/function-analyses/` subfolder
 - [ ] File location provided to user with full staging directory path
 
 ## Required Actions

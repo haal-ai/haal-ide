@@ -4,9 +4,13 @@ description: Scaffold a new Quarkus microservice based on team practices, standa
 license: Apache-2.0
 metadata:
   olaf_tags: [java, quarkus, microservice, scaffolding, practices, git]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -34,11 +38,11 @@ You MUST follow the established interaction protocol strictly:
 You MUST load and internalize ALL practice files before scaffolding:
 
 **Required Practices (MUST load all):**
-- Read and apply: `[id:practices_dir]standards/universal-coding-standards.md`
+- Read and apply: `.olaf/data/practices/standards/universal-coding-standards.md`
   - Covers: SRP, Dependency Injection, function size, complexity, naming, error handling
-- Read and apply: `[id:practices_dir]guidances/coding/quarkus-microservice-scaffolding-guidance.md`
+- Read and apply: `.olaf/data/practices/guidances/coding/quarkus-microservice-scaffolding-guidance.md`
   - Covers: Quarkus baseline choices, extensions, structure, tests, quality gates
-- Read and apply: `[id:practices_dir]guidances/git/git-workflow-guidance.md`
+- Read and apply: `.olaf/data/practices/guidances/git/git-workflow-guidance.md`
   - Covers: Worktree setup, new branch, small commits
 
 You WILL confirm practices are loaded before proceeding.

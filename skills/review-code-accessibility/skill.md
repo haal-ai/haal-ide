@@ -4,9 +4,13 @@ description: Analyze code for WCAG 2.1 accessibility compliance and provide reme
 license: Apache-2.0
 metadata:
   olaf_tags: [accessibility, wcag, compliance, code-review]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -41,7 +45,7 @@ You WILL verify all requirements:
 - Read code files: Analyze provided files for accessibility patterns
 - Process file content according to WCAG 2.1 guidelines
 - Read staging template: `templates/accessibility-findings-report-template.md`
-- Create staging report: `[id:staging_dir]reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
+- Create staging report: `.olaf/work/staging/reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
 
 **Tool Operations**:
 - Validate accessibility tools: `npm list pa11y axe-core` or equivalent package manager
@@ -72,7 +76,7 @@ You WILL validate results:
 
 You WILL generate outputs following this structure:
 - **Primary deliverable**: Accessibility compliance report with violations and recommendations
-- **Actionable staging report**: Machine-readable staging file saved to `[id:staging_dir]reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
+- **Actionable staging report**: Machine-readable staging file saved to `.olaf/work/staging/reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
 - **Code examples**: Specific remediation code snippets for each violation
 - **Checklist**: Summary of WCAG 2.1 compliance status per principle
 
@@ -88,13 +92,13 @@ You WILL populate all template placeholders with actual staging data for model c
 - Confirmation when files are successfully analyzed
 - Summary of accessibility violations found per file
 - Timestamp identifier used: [YYYYMMDD-HHmm format]
-- Confirmation when staging report is saved to `[id:staging_dir]reports/`
+- Confirmation when staging report is saved to `.olaf/work/staging/reports/`
 
 ### Completion Summary
 - Total violations found categorized by WCAG principle
 - Priority recommendations for critical accessibility barriers
 - Code examples provided for top priority fixes
-- Actionable staging report saved: `[id:staging_dir]reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
+- Actionable staging report saved: `.olaf/work/staging/reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
 
 ### Next Steps
 
@@ -125,14 +129,14 @@ You WILL consider the task complete when:
 - [ ] Code examples generated for critical accessibility fixes
 - [ ] Testing guidance provided (pa11y, axe-core integration)
 - [ ] Priority assessment completed for identified violations
-- [ ] **Actionable staging report saved** to `[id:staging_dir]reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
+- [ ] **Actionable staging report saved** to `.olaf/work/staging/reports/[project_name]-accessibility-review-[YYYYMMDD-HHmm].md`
 - [ ] User communication completed with clear next steps
 
 ## Required Actions
 1. Validate all required input parameters and file accessibility
 2. Execute accessibility analysis following WCAG 2.1 guidelines
 3. Generate compliance report in specified format
-4. **Create actionable staging report** in `[id:staging_dir]reports/` with machine-readable format
+4. **Create actionable staging report** in `.olaf/work/staging/reports/` with machine-readable format
 5. Provide specific code remediation examples
 6. Define testing and integration next steps
 

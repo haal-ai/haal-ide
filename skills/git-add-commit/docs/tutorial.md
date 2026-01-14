@@ -18,12 +18,12 @@ Edit files in your project. For this example, let's say you updated a skill:
 
 ```bash
 # Modified files
-.olaf/core/skills/create-prompt/prompts/create-prompt.md
-.olaf/core/skills/create-prompt/skill-manifest.json
+skills/create-prompt/prompts/create-prompt.md
+skills/create-prompt/skill-manifest.json
 
 # New files
-.olaf/core/skills/create-prompt/kb/prompt-structure-schema.md
-.olaf/core/skills/create-prompt/kb/file-modification-rules.md
+skills/create-prompt/kb/prompt-structure-schema.md
+skills/create-prompt/kb/file-modification-rules.md
 ```
 
 ### Step 2: Invoke the Skill
@@ -119,10 +119,10 @@ corruption of auto-generated files.
 ────────────────────────────────────────
 
 Files (4):
-  M .olaf/core/skills/create-prompt/prompts/create-prompt.md
-  M .olaf/core/skills/create-prompt/skill-manifest.json
-  ?? .olaf/core/skills/create-prompt/kb/prompt-structure-schema.md
-  ?? .olaf/core/skills/create-prompt/kb/file-modification-rules.md
+  M skills/create-prompt/prompts/create-prompt.md
+  M skills/create-prompt/skill-manifest.json
+  ?? skills/create-prompt/kb/prompt-structure-schema.md
+  ?? skills/create-prompt/kb/file-modification-rules.md
 ```
 
 ### Step 7: Approve or Modify
@@ -152,9 +152,9 @@ If approved, the skill:
 
 ```bash
 # Stages all files
-git add .olaf/core/skills/create-prompt/prompts/create-prompt.md \
-        .olaf/core/skills/create-prompt/skill-manifest.json \
-        .olaf/core/skills/create-prompt/kb/
+git add skills/create-prompt/prompts/create-prompt.md \
+        skills/create-prompt/skill-manifest.json \
+        skills/create-prompt/kb/
 
 # Commits with message
 git commit -m "refactor(create-prompt): enforce KB-driven structure validation

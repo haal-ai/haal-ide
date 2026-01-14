@@ -14,7 +14,7 @@ conditions: []
 - `context.extracted_tasks`: Created task file paths
 - `context.reuse_count`: Number of common tasks reused
 **Required Files**: 
-- `.olaf/core/skills/common/kb/task-registry.json`
+- `skills/common/kb/task-registry.json`
 **Required Tools**: JSON editing
 
 ## Task Instructions
@@ -22,7 +22,7 @@ conditions: []
 ### Add New Tasks to Registry
 
 1. **Read Current Registry**:
-   - Load `.olaf/core/skills/common/kb/task-registry.json`
+   - Load `skills/common/kb/task-registry.json`
    - Parse JSON structure
 
 2. **For Each New Task** (skip common tasks):
@@ -35,7 +35,7 @@ conditions: []
      "description": "What this task does (from task definition)",
      "category": "environment|github|analysis|cleanup|user-interaction",
      "tags": ["tag1", "tag2"],
-     "current_location": ".olaf/core/skills/[skill-name]/tasks/[task-id].md",
+     "current_location": "skills/[skill-name]/tasks/[task-id].md",
      "used_in_skills": ["[skill-name]"],
      "dependencies": {
        "tools": [],
@@ -85,7 +85,7 @@ conditions: []
 **Files Created**: None (existing file modified)
 
 **Files Modified**:
-- `.olaf/core/skills/common/kb/task-registry.json`
+- `skills/common/kb/task-registry.json`
 
 **Context Passed to Next Tasks**:
 - Registry status for final summary

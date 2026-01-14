@@ -27,7 +27,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-22",
-    "updated": "2025-11-22",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "esdi",
       "primary_maintainer": "OLAF Framework Core Team"
@@ -56,12 +56,12 @@
     "templates": [
       {
         "name": "implementation-plan-template",
-        "path": "/templates/implementation-plan-template.md",
+        "path": "templates/implementation-plan-template.md",
         "description": "Template structure for implementation plans"
       },
       {
         "name": "bootstrap-command-template",
-        "path": "/templates/bootstrap-command-template.md",
+        "path": "templates/bootstrap-command-template.md",
         "description": "Template for bootstrap command instructions"
       }
     ],

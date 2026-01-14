@@ -4,6 +4,10 @@ description: "ESDI Chain - Exploration → Specification → Design → Implemen
 version: 1.0.0
 type: chain
 tags: [meta-skill, workflow, development-lifecycle, esdi]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # ESDI: Exploration → Specification → Design → Implementation
@@ -96,14 +100,14 @@ A meta-skill that chains together the complete development lifecycle from initia
 ```bash
 # Run complete ESDI workflow - outputs to .olaf/work/staging/esdi/YYYYMMDD-${topic}
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "idea=Repository onboarding system,topic=repo-scanner" \
   --tool-mode auto \
   --aws-profile bedrock
 
 # Custom output directory
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "idea=Repository onboarding system,topic=repo-scanner,output_dir=./my-competency" \
   --tool-mode auto \
   --aws-profile bedrock
@@ -114,7 +118,7 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
 ```bash
 # Resume from design phase
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "topic=repo-scanner,start_phase=design" \
   --tool-mode auto \
   --aws-profile bedrock
@@ -165,7 +169,7 @@ chain:
 The design phase uses guidance files to ensure consistent patterns:
 
 ```
-.olaf/core/skills/esdi/kb/
+skills/esdi/kb/
 ├── design-patterns-guidance.md
 │   ├── Layered architecture
 │   ├── Event-driven patterns

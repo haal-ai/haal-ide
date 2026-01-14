@@ -4,14 +4,13 @@ description: Generate engaging blog posts from presentation content or technical
 license: Apache-2.0
 metadata:
   olaf_tags: [technical-writing, content-creation, blog-post, documentation, presentation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -43,8 +42,8 @@ You WILL execute these operations:
 - Extract factual information only
 
 **Style Selection and Generation**:
-- **If "brochure" requested**: Use structured template `[id:skills_dir]generate-post-from-plan/templates/blog-post-brochure-template.md`
-- **If "conversational" requested**: Use narrative template `[id:skills_dir]generate-post-from-plan/templates/blog-post-conversational-template.md`
+- **If "brochure" requested**: Use structured template `templates/blog-post-brochure-template.md`
+- **If "conversational" requested**: Use narrative template `templates/blog-post-conversational-template.md`
 - **If "all" requested**: Generate both versions using respective templates
 
 **Content Creation**:
@@ -67,7 +66,7 @@ Generated blog posts will include:
 - **File naming**:
   - Single style: `blog-post-[style]-YYYYMMDD-HHmm.md`
   - Both styles: `blog-post-brochure-YYYYMMDD-HHmm.md` and `blog-post-conversational-YYYYMMDD-HHmm.md`
-- **Location**: `[id:staging_dir]blog-post-[style]-YYYYMMDD-HHmm.md`
+- **Location**: `.olaf/work/staging/blog-post-[style]-YYYYMMDD-HHmm.md`
 
 ## User Communication
 Communication patterns:
@@ -105,8 +104,8 @@ Error scenarios and responses:
 
 ## Templates
 Style-specific templates for consistent output:
-- **Brochure Style**: `[id:skills_dir]generate-post-from-plan/templates/blog-post-brochure-template.md`
-- **Conversational Style**: `[id:skills_dir]generate-post-from-plan/templates/blog-post-conversational-template.md`
+- **Brochure Style**: `templates/blog-post-brochure-template.md`
+- **Conversational Style**: `templates/blog-post-conversational-template.md`
 
 ## Notes
 Implementation details:

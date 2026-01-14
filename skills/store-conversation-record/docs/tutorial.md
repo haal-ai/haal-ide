@@ -62,7 +62,7 @@ Retrieves current time using terminal commands:
 
 ### Step 4: Validate File Location (CRITICAL)
 **What AI Does:**
-1. Reads memory map to resolve `[id:staging_dir]` reference
+1. Reads memory map to resolve `.olaf/work/staging/` reference
 2. Verifies resolved path is `.olaf/work/staging/conversation-records/`
 3. STOPS if path resolution fails or points elsewhere
 4. Ensures directory exists or creates it if missing

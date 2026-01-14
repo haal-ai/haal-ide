@@ -34,7 +34,7 @@ You can trigger this skill using any of these commands:
 
 ### Required Parameters
 - **prompt_name** (string) - The name/ID of the prompt to document
-  - Must match an existing prompt directory in `.olaf/core/skills/`
+  - Must match an existing prompt directory in `skills/`
   - If not provided, skill will list available prompts for selection
 
 ### Optional Parameters
@@ -55,7 +55,7 @@ You can trigger this skill using any of these commands:
 
 The skill generates a `description.md` file saved to:
 ```
-.olaf/core/skills/[prompt-name]/docs/description.md
+skills/[prompt-name]/docs/description.md
 ```
 
 ### Description Sections
@@ -81,7 +81,7 @@ Assistant: [Analyzes prompt and generates description]
          [Shows generated content]
          Ready to save this documentation? (yes/no/edit)
 User: yes
-Assistant: ✅ Documentation saved to .olaf/core/skills/review-code-quality/docs/description.md
+Assistant: ✅ Documentation saved to skills/review-code-quality/docs/description.md
 ```
 
 ### Example 2: Using Prompt Name Parameter

@@ -1,6 +1,6 @@
 # Create Skill
 
-**Source**: [id:skills_dir]create-skill/prompts/create-skill.md
+**Source**: skills/create-skill/prompts/create-skill.md
 
 ## Overview
 
@@ -38,7 +38,7 @@ None - all parameters are required for proper skill creation
 ## Output
 
 **Deliverables**:
-- Complete skill directory structure under `[id:skills_dir][skill_name]/`
+- Complete skill directory structure under `skills/[skill_name]/`
 - Main skill prompt file following OLAF template
 - Skill manifest (skill-manifest.json) conforming to schema
 - Documentation files (description.md, tutorial.md)
@@ -56,7 +56,7 @@ None - all parameters are required for proper skill creation
 - skill_name: "analyze-code-quality"
 - skill_type: "prompt"
 
-**Output**: Complete skill at `[id:skills_dir]analyze-code-quality/` with:
+**Output**: Complete skill at `skills/analyze-code-quality/` with:
 - `prompts/analyze-code-quality.md` - Main skill prompt
 - `skill-manifest.json` - Complete metadata and BOM
 - `docs/description.md` - Skill documentation

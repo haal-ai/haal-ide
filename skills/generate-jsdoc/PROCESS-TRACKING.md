@@ -78,7 +78,7 @@ This file is created automatically in your workspace and contains information ab
 ### Using the Check Tool
 
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 **Sample Output:**
@@ -109,7 +109,7 @@ Running Processes:
 ### JSON Output
 
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py --json
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py --json
 ```
 
 Returns raw JSON for programmatic processing.
@@ -117,7 +117,7 @@ Returns raw JSON for programmatic processing.
 ### Specifying Workspace
 
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py --workspace /path/to/workspace
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py --workspace /path/to/workspace
 ```
 
 ## Monitoring Process Progress
@@ -254,7 +254,7 @@ You can have multiple JSDoc generation processes running simultaneously for diff
 
 **View all:**
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 ## Best Practices

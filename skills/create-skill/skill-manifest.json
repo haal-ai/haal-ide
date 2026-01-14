@@ -34,7 +34,7 @@
     "version": "1.0.0",
     "author": "windsurf ai + p-square",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "xdlc prompt-engineers",
       "primary_maintainer": "windsurf",
@@ -52,13 +52,13 @@
     "templates": [
       {
         "name": "skill-template",
-        "path": "/templates/skill-template.md",
+        "path": "templates/skill-template.md",
         "type": "markdown",
         "description": "Template structure for new skill prompts"
       },
       {
         "name": "prompting-principles",
-        "path": "/templates/prompting-principles.md",
+        "path": "templates/prompting-principles.md",
         "type": "markdown",
         "description": "OLAF prompting principles and best practices"
       }

@@ -22,10 +22,10 @@ metadata:
 You MUST ensure that underlying tasks (especially `load-practices-for-diff`
 and `analyze-diff-with-router`) load and apply the same standards stack as
 `review-code`:
-- Repository practices from `[id:practices_dir]practices/good-bad/*.md`.
-- Any team- or language-specific standards in `[id:practices_dir]standards/`.
+- Repository practices from `.olaf/data/practices/practices/good-bad/*.md`.
+- Any team- or language-specific standards in `.olaf/data/practices/standards/`.
 - The **Universal Coding Standards** in
-  `[id:practices_dir]standards/universal-coding-standards.md`, treating the
+  `.olaf/data/practices/standards/universal-coding-standards.md`, treating the
   **Evolution/Refactoring Mode** as default for existing code and
   **Creation/New Code Mode** only when the diff introduces new modules.
 
@@ -195,6 +195,10 @@ Each task prompt MUST include:
 task_id: "task-name"
 task_name: "[descriptive name]"
 dependencies: ["context-variable-Y"]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Task: [Name]

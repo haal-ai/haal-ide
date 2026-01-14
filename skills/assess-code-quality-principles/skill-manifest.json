@@ -26,7 +26,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "developer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -86,7 +86,7 @@
     "primary": {
       "type": "assessment_report",
       "format": "markdown",
-      "location": "[id:staging_dir]assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md",
+      "location": ".olaf/work/staging/assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md",
       "description": "Comprehensive quality assessment report with scorecard and recommendations"
     },
     "artifacts": [

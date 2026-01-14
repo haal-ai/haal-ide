@@ -32,8 +32,8 @@ Project teams need to maintain a clear record of why decisions were made, what a
 - **decision**: The selected option if already determined (can be left blank for proposed decisions)
 
 ### Context Requirements
-- Access to decision records directory (`[id:decision_records_dir]`)
-- Access to decision records register (`[id:decision_records_dir]decision-records-register.md`)
+- Access to decision records directory (`.olaf/data/product/decision-records/`)
+- Access to decision records register (`.olaf/data/product/decision-records/decision-records-register.md`)
 - Access to changelog register for tracking the creation
 - Decision record template available at competency templates folder
 

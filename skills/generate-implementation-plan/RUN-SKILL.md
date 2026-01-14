@@ -6,7 +6,7 @@ Run this skill directly on an existing design.md file:
 
 ```powershell
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt ".olaf/core/skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
+  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
   --context "design_file=YOUR_DESIGN_FILE_PATH,output_file=YOUR_OUTPUT_FILE_PATH,skill_path=YOUR_SKILL_PATH" `
   --tool-mode standard `
   --aws-profile bedrock
@@ -17,8 +17,8 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 ```powershell
 # Assuming ESDI generated design.md in .olaf/work/staging/esdi/20251122-repo-scanner/
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt ".olaf/core/skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
-  --context "design_file=.olaf/work/staging/esdi/20251122-repo-scanner/design.md,output_file=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=.olaf/core/skills/repo-scanner" `
+  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
+  --context "design_file=.olaf/work/staging/esdi/20251122-repo-scanner/design.md,output_file=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/repo-scanner" `
   --tool-mode standard `
   --aws-profile bedrock
 ```
@@ -30,7 +30,7 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 - `output_file`: Path for IMPLEMENTATION-TASK-PLAN.md output
 
 **Optional**:
-- `skill_path`: Target path for skill (default: `.olaf/core/skills/${skill_name}`)
+- `skill_path`: Target path for skill (default: `skills/${skill_name}`)
 - `skill_name`: Override skill name (default: extracted from design)
 - `include_bootstrap`: Include bootstrap command (default: true)
 
@@ -71,7 +71,7 @@ This skill is automatically invoked in ESDI Phase 4:
 
 ```powershell
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" `
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" `
   --context "idea=Your idea here,topic=your-topic" `
   --tool-mode standard `
   --aws-profile bedrock

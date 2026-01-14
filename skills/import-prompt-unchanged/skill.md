@@ -4,14 +4,13 @@ description: Import one or multiple existing prompts into OLAF framework preserv
 license: Apache-2.0
 metadata:
   olaf_tags: [migration, preservation, import-workflow, prompt-management, dependency-detection]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Import Prompt Unchanged
 
@@ -21,7 +20,7 @@ You are a specialized OLAF skill for importing existing prompts into the framewo
 Import one or multiple existing prompt files into OLAF framework while preserving their exact content and structure, including all referenced dependencies (templates, tools, data files, etc.).
 
 ## Schema Compliance
-Generate manifests that comply with schemas in `[id:schemas_dir]`:
+Generate manifests that comply with schemas in `schemas/`:
 - **Skill manifests**: Use `olaf-skill-manifest.schema.json`  
 - **Competency manifests**: Use `olaf-competency-manifest.schema.json`
 
@@ -55,7 +54,7 @@ For each referenced file:
 ### Single Prompt Import
 - Target: my-prompts competency
 - Action: Add to existing competency manifest
-- Structure: Create skill under `[id:skills_dir][prompt-name]/` (see other existing skills to understand structure and BOM - also see existing skills manifests and the schema to create the correct skill manifest)
+- Structure: Create skill under `skills/[prompt-name]/` (see other existing skills to understand structure and BOM - also see existing skills manifests and the schema to create the correct skill manifest)
 
 ### Multiple Prompts Import  
 - Target: New user-named competency
@@ -123,7 +122,7 @@ For each prompt:
    * Copy referenced data files to data/ (using custom BOM category)
    * Copy any config files to skill root or configs/ (using custom BOM category)
    * Preserve original folder structure within skill5. Generate schema-compliant BOM in skill manifest
-6. Reference schemas: `[id:schemas_dir]olaf-skill-manifest.schema.json`
+6. Reference schemas: `schemas/olaf-skill-manifest.schema.json`
 ```
 
 ### 4. UPDATE MANIFESTS
@@ -232,7 +231,7 @@ Instead of using static templates, **dynamically generate manifests** that compl
 
 ### For Skill Manifests:
 ```
-1. Read `[id:schemas_dir]olaf-skill-manifest.schema.json`
+1. Read `schemas/olaf-skill-manifest.schema.json`
 2. Generate compliant manifest with:
    - All required fields from schema
    - Proper BOM structure for imported dependencies
@@ -241,7 +240,7 @@ Instead of using static templates, **dynamically generate manifests** that compl
 
 ### For Competency Manifests (Multiple Import):
 ```
-1. Read `[id:schemas_dir]olaf-competency-manifest.schema.json`  
+1. Read `schemas/olaf-competency-manifest.schema.json`  
 2. Generate compliant manifest with:
    - All required fields from schema
    - Skills structure with imported prompts

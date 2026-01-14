@@ -80,7 +80,7 @@ Help me refactor the create-feature-for-pr skill
 
 ### Directory Structure
 ```
-.olaf/core/skills/[skill-name]/
+skills/[skill-name]/
 ├── prompts/
 │   └── [skill-name].md          # Master coordinator (created/updated)
 ├── tasks/
@@ -97,7 +97,7 @@ Help me refactor the create-feature-for-pr skill
     {
       "id": "new-task-from-conversion",
       "name": "Task Name",
-      "current_location": ".olaf/core/skills/[skill-name]/tasks/new-task.md",
+      "current_location": "skills/[skill-name]/tasks/new-task.md",
       "used_in_skills": ["[skill-name]"],
       "reusability_score": 7,
       ...

@@ -4,14 +4,13 @@ description: Create comprehensive presentation plan based on requirements for Po
 license: Apache-2.0
 metadata:
   olaf_tags: [presentation, planning, technical-writing, content-creation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -55,14 +54,14 @@ You WILL execute these operations:
 - **SOURCE VALIDATION**: Each slide must reference actual findings from source documents - if content wasn't analyzed, state "Not covered in current analysis phase"
 
 **Template Usage**:
-- Use presentation plan template: `/templates/presentation-plan-template.md`
+- Use presentation plan template: `templates/presentation-plan-template.md`
 - Apply calculated slide count based on presentation type
 - Include image prompts only if specifically requested by user
 
 **File Operations**:
 - Create timestamped filename using YYYYMMDD-HHmm format
-- Ensure staging directory exists: `[id:staging_dir]`
-- Save plan file: `[id:staging_dir][presentation-name]-plan-YYYYMMDD-HHmm.md`
+- Ensure staging directory exists: `.olaf/work/staging/`
+- Save plan file: `.olaf/work/staging/[presentation-name]-plan-YYYYMMDD-HHmm.md`
 
 ### 3. Validation Phase
 You WILL confirm successful completion:

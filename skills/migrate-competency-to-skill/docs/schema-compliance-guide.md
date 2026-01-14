@@ -149,7 +149,7 @@ The OLAF skill manifest schema has two main sections:
 "templates": [
   {
     "name": "migration-report-template",
-    "path": "/templates/migration-report-template.md",
+    "path": "templates/migration-report-template.md",
     "type": "markdown"
   }
 ]
@@ -326,10 +326,10 @@ When migrating from competency to skill format:
 #### Update Path References
 ```markdown
 // Original competency reference
-[id:competencies_dir]researcher/templates/report-template.md
+competencies/researcher/templates/report-template.md
 
 // Skill format reference  
-[id:skills_dir]lean-and-search/templates/learning-report-template.md
+templates/learning-report-template.md
 ```
 
 #### Generate Proper Aliases

@@ -4,6 +4,10 @@ description: Multi-phase workflow to challenge a human-written specification and
 license: Apache-2.0
 metadata:
   olaf_tags: [api, openapi, requirements, spec-review, questionnaire]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.
@@ -62,8 +66,8 @@ You WILL execute the phases in order and carry forward artifacts between phases:
 
 During the process:
 - You MUST use `/kb/api-design-question-catalog.md` to ensure coverage of common API design blockers.
-- You MUST structure the final review using template: `/templates/review-output-format.md`
-- You MUST format the questions using template: `/templates/questions-table-format.md`
+- You MUST structure the final review using template: `templates/review-output-format.md`
+- You MUST format the questions using template: `templates/questions-table-format.md`
 <!-- </execution_phase> -->
 
 <!-- <output_phase> -->

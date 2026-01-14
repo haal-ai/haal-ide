@@ -1,21 +1,16 @@
 ---
 name: [verb-entity-complement prompt name]
 description: [Brief description of what this prompt accomplishes]
-tags: [tag1, tag2, tag3, tag4]
+license: Apache-2.0
+metadata:
+  tags: [tag1, tag2, tag3, tag4]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-**CRITICAL: MANDATORY FRAMEWORK LOADING**
-
-You MUST check for these markers in context: `<olaf-work-instructions>`, `<olaf-framework-validation>`
-
-If NOT present, you MUST IMMEDIATELY read:
-```
-[id:ack_dir]reference/.condensed/olaf-framework-condensed.md
-```
-
-DO NOT proceed without loading the complete framework (110 lines). The memory map contains ALL path references you need.
-
----
+<olaf>
 
 ## Time Retrieval
 Get current timestamp using time tools, fallback to shell command if needed
@@ -52,7 +47,7 @@ You WILL execute these operations as needed:
 
 **Terminal Operations** (when required):
 - Execute command: `[specific command with parameters]`
-- Execute script: `[id:tools_dir]/script-name.ps1` for automation
+- Execute script: `tools//script-name.ps1` for automation
 - Validate command execution success
 
 **Tool Operations** (when required):
@@ -60,7 +55,7 @@ You WILL execute these operations as needed:
 - Use MCP server tool: `mcp_server_name.tool_name` for [specific operation]
 
 **File Operations** (when required):
-- Read/Write file: `[id:file_reference]` or specific path
+- Read/Write file: `specific/file/path.md` or direct path reference
 - Process file content according to requirements
 
 **Core Logic**: Execute following protocol requirements
@@ -75,7 +70,7 @@ You WILL validate results:
 
 ## Output Format
 You WILL generate outputs following this structure:
-- Primary deliverable: Follow template `[id:competencies_dir][competency]/templates/[template-name].md`
+- Primary deliverable: Follow template `competencies/[competency]/templates/[template-name].md`
 - Supporting files: [location and naming convention]
 - Documentation: [specific format requirements]
 

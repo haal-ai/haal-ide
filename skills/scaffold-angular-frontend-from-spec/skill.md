@@ -4,6 +4,10 @@ description: Scaffold an Angular (Angular Material) consumer UI implementing spe
 license: Apache-2.0
 metadata:
   olaf_tags: [frontend, angular, angular-material, openapi, consumer, ui, scaffolding]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

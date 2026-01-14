@@ -4,14 +4,13 @@ description: Add a new entry to the main changelog file with proper formatting a
 license: Apache-2.0
 metadata:
   olaf_tags: [changelog, documentation, versioning, maintenance]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -30,7 +29,7 @@ Get current timestamp using time tools, fallback to shell command if needed
    - Parse and understand the required format
    - Validate against expected structure
 3. **Changelog Update**:
-   - Read current `[id:changelog_register]` content
+   - Read current `.olaf/data/projects/changelog-register.md` content
    - Locate or create appropriate date section
    - Insert new entry at the top of the day's entries
    - Maintain proper section hierarchy
@@ -55,7 +54,7 @@ Get current timestamp using time tools, fallback to shell command if needed
    - How to verify the entry
 
 ## Domain-Specific Rules
-- Rule 0: NEVER create, modify, or delete any file under `[id:global_olaf_dir]` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `[id:core_olaf_dir]`).
+- Rule 0: NEVER create, modify, or delete any file under `~/.olaf/` (e.g., `~/.olaf/`). All writes MUST be within the current repo workspace (i.e., paths rooted at `.olaf/`).
 - Rule 1: Always add new entries to the top of their day section
 - Rule 2: Maintain reverse chronological order for all entries
 - Rule 3: Use consistent timestamp format (YYYYMMDD HH:MM)

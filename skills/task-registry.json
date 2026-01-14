@@ -6,21 +6,21 @@
     {
       "task_id": "retrieve-timestamp",
       "task_name": "Retrieve Timestamp",
-      "path": ".olaf/core/skills/common/tasks/retrieve-timestamp.md",
+      "path": "skills/common/tasks/retrieve-timestamp.md",
       "reusability": "high",
       "description": "Get current timestamp for session and file naming"
     },
     {
       "task_id": "backup-file",
       "task_name": "Backup File",
-      "path": ".olaf/core/skills/common/tasks/backup-file.md",
+      "path": "skills/common/tasks/backup-file.md",
       "reusability": "high",
       "description": "Create timestamped backup of a file"
     },
     {
       "task_id": "call-straf-agent",
       "task_name": "Call STRAF Agent",
-      "path": ".olaf/core/skills/common/tasks/call-straf-agent.md",
+      "path": "skills/common/tasks/call-straf-agent.md",
       "reusability": "medium",
       "description": "Delegate work to STRAF agent"
     }
@@ -30,21 +30,21 @@
       {
         "task_id": "validate-research-topic",
         "task_name": "Validate Research Topic",
-        "path": ".olaf/core/skills/research-and-report-test-copy/tasks/validate-research-topic.md",
+        "path": "skills/research-and-report-test-copy/tasks/validate-research-topic.md",
         "reusability": "medium",
         "description": "Analyze research request and define scope"
       },
       {
         "task_id": "create-research-plan",
         "task_name": "Create Research Plan",
-        "path": ".olaf/core/skills/research-and-report-test-copy/tasks/create-research-plan.md",
+        "path": "skills/research-and-report-test-copy/tasks/create-research-plan.md",
         "reusability": "high",
         "description": "Generate structured research plan with chapters"
       },
       {
         "task_id": "conduct-research-chapter",
         "task_name": "Conduct Research Chapter",
-        "path": ".olaf/core/skills/research-and-report-test-copy/tasks/conduct-research-chapter.md",
+        "path": "skills/research-and-report-test-copy/tasks/conduct-research-chapter.md",
         "reusability": "medium",
         "description": "Research and write single chapter with web search",
         "iterative": true
@@ -52,14 +52,14 @@
       {
         "task_id": "validate-sources",
         "task_name": "Validate Sources",
-        "path": ".olaf/core/skills/research-and-report-test-copy/tasks/validate-sources.md",
+        "path": "skills/research-and-report-test-copy/tasks/validate-sources.md",
         "reusability": "high",
         "description": "Verify URLs are accessible and sources are current"
       },
       {
         "task_id": "finalize-report",
         "task_name": "Finalize Report",
-        "path": ".olaf/core/skills/research-and-report-test-copy/tasks/finalize-report.md",
+        "path": "skills/research-and-report-test-copy/tasks/finalize-report.md",
         "reusability": "medium",
         "description": "Compile chapters, add TOC, format final report"
       }

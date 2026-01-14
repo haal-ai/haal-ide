@@ -88,10 +88,10 @@ Completed audit of project-manager competency pack. Identified one prompt requir
 
 ## Key Files
 - **Current Job:** .kiro/specs/olaf-documentation-restructure/tasks.md - Main task list for documentation restructure
-- **Changelog:** [id:changelog_register] - Last entry: Completed business-analyst audit
+- **Changelog:** .olaf/data/projects/changelog-register.md - Last entry: Completed business-analyst audit
 - **Other Files:**
   - .kiro/specs/olaf-documentation-restructure/project-manager-audit-staging.md - Audit results
-  - [id:competencies_dir]project-manager/templates/ - Template directory
+  - competencies/project-manager/templates/ - Template directory
 
 ## Next Steps
 1. [ ] Create handover-template.md (Owner: Next Session)

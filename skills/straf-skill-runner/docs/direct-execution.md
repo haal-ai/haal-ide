@@ -35,12 +35,12 @@ from pathlib import Path
 import sys
 
 # Add STRAF utils to path
-sys.path.insert(0, str(Path.cwd() / "~/.olaf/core/skills/straf-skill-runner/utils"))
+sys.path.insert(0, str(Path.cwd() / "~/skills/straf-skill-runner/utils"))
 from direct_executor import execute_skill_direct
 
 # Execute skill directly - blocks until complete
 result = execute_skill_direct(
-    skill_path="~/.olaf/core/skills/search-and-learn/prompts/search-and-learn.md",
+    skill_path="~/skills/search-and-learn/prompts/search-and-learn.md",
     context_params={
         "learning_objective": "AWS Strands Agents multi-agent orchestration",
         "current_knowledge": "Exploring quick depth learning",
@@ -61,7 +61,7 @@ from direct_executor import execute_skill_direct
 
 # Execute in background - returns immediately
 result = execute_skill_direct(
-    skill_path="~/.olaf/core/skills/search-and-learn/prompts/search-and-learn.md",
+    skill_path="~/skills/search-and-learn/prompts/search-and-learn.md",
     context_params={
         "learning_objective": "GraphQL best practices",
         "current_knowledge": "Basic understanding",
@@ -82,8 +82,8 @@ print(f"Logs: {result['log_file']}")
 
 ```bash
 # Direct execution from command line (no intermediate file!)
-python ~/.olaf/core/skills/straf-skill-runner/utils/direct_executor.py \
-  --skill-path ~/.olaf/core/skills/search-and-learn/prompts/search-and-learn.md \
+python ~/skills/straf-skill-runner/utils/direct_executor.py \
+  --skill-path ~/skills/search-and-learn/prompts/search-and-learn.md \
   --context '{"learning_objective": "Docker best practices", "current_knowledge": "Beginner", "application_context": "Microservices"}' \
   --tool-mode full \
   --background
@@ -97,7 +97,7 @@ from pathlib import Path
 import sys
 
 # Import direct executor
-sys.path.insert(0, str(Path.cwd() / "~/.olaf/core/skills/straf-skill-runner/utils"))
+sys.path.insert(0, str(Path.cwd() / "~/skills/straf-skill-runner/utils"))
 from direct_executor import execute_skill_direct
 
 # Step 1: Analyze skill requirements (as before)

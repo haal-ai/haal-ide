@@ -90,7 +90,7 @@ The skill generates comprehensive JSDoc documentation including:
 
 ### Check Status
 ```bash
-python .olaf/core/skills/generate-jsdoc/tools/check-jsdoc-processes.py
+python skills/generate-jsdoc/tools/check-jsdoc-processes.py
 ```
 
 ### Monitor Progress

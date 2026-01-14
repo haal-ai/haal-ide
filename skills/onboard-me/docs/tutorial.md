@@ -41,7 +41,7 @@ Onboarding guides ready! Share QUICKSTART-OVERVIEW.md with new team members.
 The skill automatically runs the repository analyzer:
 
 ```bash
-python .olaf/core/skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me
+python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me
 ```
 
 This extracts:

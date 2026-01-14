@@ -52,5 +52,5 @@ Key point 3
 - [Resources needed]
 
 ## Output Requirements
-- Presentation plan file: `[id:staging_dir][presentation-name]-plan-YYYYMMDD-HHmm.md`
-- Generated PowerPoint: `[id:staging_dir][presentation-name]-YYYYMMDD-HHmm.pptx`
+- Presentation plan file: `.olaf/work/staging/[presentation-name]-plan-YYYYMMDD-HHmm.md`
+- Generated PowerPoint: `.olaf/work/staging/[presentation-name]-YYYYMMDD-HHmm.pptx`

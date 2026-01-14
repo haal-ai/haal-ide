@@ -26,7 +26,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-15",
-    "updated": "2025-11-15",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "prompt-engineer",
       "primary_maintainer": "OLAF Framework Core Team",
@@ -44,12 +44,12 @@
     "templates": [
       {
         "name": "step-by-step-tutorial-template",
-        "path": "/templates/technical-writer/step-by-step-tutorial-template.md",
+        "path": "templates/technical-writer/step-by-step-tutorial-template.md",
         "description": "Template for step-by-step-tutorial-template"
       },
       {
         "name": "step-by-step-tutorial-template",
-        "path": "/templates/technical-writer/step-by-step-tutorial-template.md",
+        "path": "templates/technical-writer/step-by-step-tutorial-template.md",
         "description": "Template for step-by-step-tutorial-template"
       }
     ],

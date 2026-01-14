@@ -4,12 +4,7 @@ description: "Coordinate the ESDI workflow: Exploration → Specification → De
 license: Apache-2.0
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Run-ESDI Workflow Coordinator
 
@@ -25,7 +20,7 @@ Orchestrate the complete development lifecycle from initial idea to executable i
 
 **Optional**:
 - `output_dir`: Directory to store ESDI outputs (default: auto-generated)
-- `design_patterns`: Path to design pattern guidance (default: `.olaf/core/skills/esdi/kb/design-patterns-guidance.md`)
+- `design_patterns`: Path to design pattern guidance (default: `skills/esdi/kb/design-patterns-guidance.md`)
 - `skip_reviews`: Skip review gates (default: false)
 - `start_phase`: Resume from specific phase (explore|specify|design|plan)
 
@@ -84,7 +79,7 @@ Use it as a reference guide for the 4-phase process.
 
 ```
 1. Get environment information and timestamp:
-   Run: python .olaf/core/skills/common/tools/get-env.py
+   Run: python skills/common/tools/get-env.py
    Extract: timestamp (YYYYMMDD format)
 
 2. List existing ESDI sessions:
@@ -244,8 +239,8 @@ Save state: design_complete = true
 Run via STRAF agent (command line):
 
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt ".olaf/core/skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
-  --context "specification_file=${output_dir}/specification.md,design_file=${output_dir}/design.md,output_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,skill_path=.olaf/core/skills/${topic}" `
+  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
+  --context "specification_file=${output_dir}/specification.md,design_file=${output_dir}/design.md,output_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/${topic}" `
   --tool-mode standard `
   --aws-profile bedrock
 
@@ -353,7 +348,7 @@ IF user cancels review:
 ```bash
 # Resume from specific phase with same topic
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "topic=repository-scanner,start_phase=design" \
   --tool-mode standard \
   --aws-profile bedrock
@@ -376,7 +371,7 @@ The coordinator will:
 ```bash
 # Start new ESDI workflow (auto-generated directory)
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "idea=Repository onboarding system,topic=repo-scanner" \
   --tool-mode auto \
   --aws-profile bedrock
@@ -385,7 +380,7 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
 
 # Start with custom output directory
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt ".olaf/core/skills/run-esdi/prompts/run-esdi-coordinator.md" \
+  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" \
   --context "idea=Repository onboarding system,topic=repo-scanner,output_dir=./custom/path" \
   --tool-mode auto \
   --aws-profile bedrock

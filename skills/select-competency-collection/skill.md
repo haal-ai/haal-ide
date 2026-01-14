@@ -6,12 +6,7 @@ metadata:
   olaf_tags: [collection, selection, configuration, framework, setup]
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 
 
@@ -32,9 +27,9 @@ You MUST follow the established interaction protocol strictly:
 ### 1. Validation Phase
 
 You WILL verify all requirements:
-- Confirm access to `[id:competency_collections]`
+- Confirm access to `reference/competency-collections.json`
 - Confirm access to `[id:ack_dir]scripts/olaf-structure-management/select_collection.py`
-- Confirm write access to `[id:condensed_framework]`
+- Confirm write access to `reference/.condensed/olaf-framework-condensed.md`
 - Check Python installation and availability
 
 ### 2. Execution Phase
@@ -42,14 +37,14 @@ You WILL verify all requirements:
 **Current Collection Detection:**
 
 You WILL execute:
-- Read `[id:competency_index]` to extract current collection name from "**Collection:**" field
+- Read `reference/query-competency-index.md` to extract current collection name from "**Collection:**" field
 - Display current collection prominently to user
 - If no collection detected, indicate "No collection currently selected"
 
 **List Available Collections:**
 
 You WILL execute:
-- Read `[id:competency_collections]`
+- Read `reference/competency-collections.json`
 - Extract all collections with their:
   - ID (unique identifier)
   - Name (display name)
@@ -67,7 +62,7 @@ You WILL execute:
 
 **Execute Collection Update:**
 
-You WILL execute the collection selector script located under `.olaf/core/scripts` using the **repository root** (the directory that contains `.olaf/`) as working directory.
+You WILL execute the collection selector script located under `scripts` using the **repository root** (the directory that contains `.olaf/`) as working directory.
 
 Steps:
 
@@ -78,7 +73,7 @@ Steps:
 2. From `repo_root`, run:
 
    ```powershell
-   python .olaf/core/scripts/olaf-structure-management/select_collection.py --collection [selected_collection_id]
+   python scripts/olaf-structure-management/select_collection.py --collection [selected_collection_id]
    ```
 - Capture output for status updates
 - Wait for script completion
@@ -87,8 +82,8 @@ Steps:
 **Verify Updates:**
 
 You WILL execute:
-- Read updated `[id:competency_index]` to confirm new collection
-- Read updated `[id:condensed_framework]` to confirm new patterns are between markers
+- Read updated `reference/query-competency-index.md` to confirm new collection
+- Read updated `reference/.condensed/olaf-framework-condensed.md` to confirm new patterns are between markers
 - Confirm pattern count matches expectations
 - Validate markers are intact: `<!-- OLAF_COMPETENCIES_START -->` and `<!-- OLAF_COMPETENCIES_END -->`
 - Verify condensed format uses ONLY path and protocol: `→path/file.md|Protocol` (NO keyword phrases)
@@ -123,7 +118,7 @@ You WILL generate outputs following this structure:
 ### Completion Summary
 - New collection name confirmed
 - Number of competency patterns now available
-- Files updated: `[id:competency_index]` and `[id:condensed_framework]`
+- Files updated: `reference/query-competency-index.md` and `reference/.condensed/olaf-framework-condensed.md`
 - Timestamp of update
 - Ready to use new collection
 
@@ -145,7 +140,7 @@ You MUST follow these constraints:
 - Rule 2: NEVER edit competency manifests during selection
 - Rule 3: ALWAYS display current collection before offering selection
 - Rule 4: ALWAYS validate Python script execution success
-- Rule 5: Script updates both `[id:competency_index]` AND `[id:condensed_framework]` automatically
+- Rule 5: Script updates both `reference/query-competency-index.md` AND `reference/.condensed/olaf-framework-condensed.md` automatically
 - Rule 6: MUST verify pattern markers are intact after update
 - Rule 7: Handle selection by number (1, 2, 3...) OR by collection ID (core, developer, etc.)
 - Rule 8: **CONDENSED FORMAT**: Generated condensed framework MUST use format `→path/file.md|Protocol` WITHOUT keyword phrases for compression
@@ -157,8 +152,8 @@ You WILL consider the task complete when:
 - [ ] All available collections listed with full details
 - [ ] User selection validated and confirmed
 - [ ] select_collection.py script executed successfully
-- [ ] `[id:competency_index]` updated with new patterns
-- [ ] `[id:condensed_framework]` updated with new patterns between markers
+- [ ] `reference/query-competency-index.md` updated with new patterns
+- [ ] `reference/.condensed/olaf-framework-condensed.md` updated with new patterns between markers
 - [ ] All validation checks passed
 - [ ] User notified of successful collection change
 

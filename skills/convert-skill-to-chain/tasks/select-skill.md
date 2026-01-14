@@ -18,7 +18,7 @@ conditions: []
 ### Get Skill Name from User
 
 1. **List Available Skills**:
-   - Read `.olaf/core/skills/` directory
+   - Read `skills/` directory
    - Filter out `common` folder and `task-registry.json`
    - Sort skill names alphabetically
    - Create numbered list for user selection
@@ -45,11 +45,11 @@ Enter the NUMBER or EXACT SKILL NAME you want to convert to master-chain pattern
    - **CRITICAL**: If user provides a skill name that exists in the list, treat it as a selection for CONVERSION
    - **DO NOT** attempt to execute the skill when user provides a skill name
    - Map number to corresponding skill name if number provided
-   - Validate skill exists in `.olaf/core/skills/[skill-name]`
+   - Validate skill exists in `skills/[skill-name]`
    - Confirm skill has a `prompts/` directory
 
 4. **Validate Skill Structure**:
-   - Check if `.olaf/core/skills/[skill-name]/prompts/[skill-name].md` exists
+   - Check if `skills/[skill-name]/prompts/[skill-name].md` exists
    - If not found, look for any `.md` file in `prompts/` directory
    - Confirm with user if multiple prompts found
 

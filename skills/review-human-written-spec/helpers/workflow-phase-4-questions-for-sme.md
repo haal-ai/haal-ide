@@ -28,7 +28,7 @@ For each question, you MUST provide:
 - What it blocks (e.g., endpoint design, schema, search)
 - Reference to spec section(s) (if available)
 
-You MUST format the questions according to template: `/templates/questions-table-format.md`.
+You MUST format the questions according to template: `templates/questions-table-format.md`.
 
 ## Output (Phase Artifact)
 You WILL output:

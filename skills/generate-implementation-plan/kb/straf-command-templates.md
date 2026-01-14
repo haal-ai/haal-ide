@@ -144,7 +144,7 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `skill_path` | Path to skill being built | `.olaf/core/competencies/onboard-me` |
+| `skill_path` | Path to skill being built | `competencies/onboard-me` |
 | `skill_name` | Name of skill | `onboard-me` |
 | `output_dir` | Output directory | `.olaf/work/staging/esdi/20251122-repo-scanner` |
 | `task_id` | Task identifier | `1.1`, `2.3` |
@@ -158,14 +158,14 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 #### Phase 0 (Setup)
 ```
 skill_name=onboard-me
-target_path=.olaf/core/competencies/onboard-me
+target_path=competencies/onboard-me
 layers=5
 pattern=sequential
 ```
 
 #### Phase 1+ (Layer Implementation)
 ```
-skill_path=.olaf/core/competencies/onboard-me
+skill_path=competencies/onboard-me
 layer_number=1
 input_file=.olaf/data/product/repo-name/design.md
 ```
@@ -198,7 +198,7 @@ python ./.olaf/core/agentic/straf/olaf_strands_agent.py \
 ### Literal Values (No Interpolation)
 ```powershell
 # Use actual values when variables not set
---context "skill_path=.olaf/core/competencies/onboard-me,layer_number=1"
+--context "skill_path=competencies/onboard-me,layer_number=1"
 ```
 
 ---

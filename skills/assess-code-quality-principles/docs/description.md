@@ -1,6 +1,6 @@
 # Assess Code Quality Principles
 
-**Source**: [id:skills_dir]assess-code-quality-principles/prompts/assess-code-quality-principles.md
+**Source**: skills/assess-code-quality-principles/prompts/assess-code-quality-principles.md
 
 ## Overview
 
@@ -48,7 +48,7 @@ Comprehensive quality assessment report with evidence-based scoring across multi
 - Prioritized improvement recommendations with effort estimates
 - Metrics and measurements for each assessment category
 
-**Format**: Markdown document saved to `[id:staging_dir]assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md`
+**Format**: Markdown document saved to `.olaf/work/staging/assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md`
 
 ## Examples
 

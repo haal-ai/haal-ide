@@ -4,11 +4,15 @@ description: Comprehensive competency management skill that handles the full lif
 license: Apache-2.0
 metadata:
   olaf_tags: [lifecycle-management, interactive-workflow, competency-operations, crud-operations, framework-administration]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Manage Competencies
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Context
 You are helping manage OLAF competencies through an interactive Python script. This skill provides four core operations: **create**, **edit**, **delete**, and **validate**.
@@ -41,7 +45,7 @@ Please specify (1-4):
 Execute the management script based on operation:
 
 ```bash
-python [id:skills_dir]manage-competencies/scripts/manage_competencies.py --operation {operation} [--name {competency_name}] [--pack {pack}]
+python skills/manage-competencies/scripts/manage_competencies.py --operation {operation} [--name {competency_name}] [--pack {pack}]
 ```
 
 **Script handles all interactions:**

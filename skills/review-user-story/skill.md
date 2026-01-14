@@ -4,9 +4,13 @@ description: Review user story against standard template to ensure quality, clar
 license: Apache-2.0
 metadata:
   olaf_tags: [documentation, analysis, user-story, quality, review]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -72,7 +76,7 @@ You WILL verify all requirements:
 
 You WILL create and save the structured review:
 - Format the complete review using the template structure
-- Save to: `[id:staging_dir]user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
+- Save to: `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
 - Confirm successful file creation and provide file location
 
 ## Output Format
@@ -81,7 +85,7 @@ You WILL generate outputs following this structure:
 - **User Story Analysis**: Complete evaluation against template checklist with Pass/Fail/NA status
 - **Structured Review Report**: Complete document following `templates/user-story-review-template.md`
 - **Constructive Feedback**: Specific strengths, improvement areas, and clarifying questions
-- **Saved Report**: File saved to `[id:staging_dir]user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
+- **Saved Report**: File saved to `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
 
 ### Report Generation
 
@@ -96,7 +100,7 @@ You WILL populate all template sections with actual analysis results:
 
 Follow template structure: `templates/user-story-review-template.md`
 
-**Save Output**: Create file `[id:staging_dir]user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md` where:
+**Save Output**: Create file `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md` where:
 - YYYYMMDD-HHmm is the current timestamp from background terminal command
 
 ## Output to USER
@@ -106,7 +110,7 @@ Follow template structure: `templates/user-story-review-template.md`
 - Status when template is loaded and evaluation criteria are ready
 - Summary of analysis results (checklist items evaluated, issues found, etc.)
 - Timestamp identifier used: [YYYYMMDD-HHmm format]
-- Confirmation when review is saved to `[id:staging_dir]user-story-reviews/`
+- Confirmation when review is saved to `.olaf/work/staging/user-story-reviews/`
 
 ### Completion Summary
 - User story reviewed: [title or identifier]
@@ -114,7 +118,7 @@ Follow template structure: `templates/user-story-review-template.md`
 - Key strengths identified: [number of positive elements with examples]
 - Improvement areas: [number of issues found with specific suggestions]
 - Clarifying questions generated: [number of questions for user]
-- Saved review location: `[id:staging_dir]user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
+- Saved review location: `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
 
 ### Next Steps
 
@@ -137,7 +141,7 @@ You WILL clearly define:
 2. Load and parse the user story review template for evaluation criteria
 3. Systematically evaluate the user story against every template checklist item
 4. Generate comprehensive review report with specific findings and recommendations
-5. Save formatted review to `[id:staging_dir]user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
+5. Save formatted review to `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
 6. Provide actionable feedback and clarifying questions based on analysis
 
 ## Error Handling

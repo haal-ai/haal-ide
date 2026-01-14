@@ -54,7 +54,7 @@ Refactored code with reduced complexity and preserved functionality.
 - New complexity measurements
 - Test validation results
 
-**Format**: Code transformations with complexity analysis, saved to `[id:staging_dir]code-evolution/`
+**Format**: Code transformations with complexity analysis, saved to `.olaf/work/staging/code-evolution/`
 
 ## Examples
 

@@ -4,16 +4,11 @@ description: Workflow skill that runs full code-mapper foundation analysis on a 
 license: Apache-2.0
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Analyze API Consistency with Code-Mapper
 
-You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `/templates/api-consistency-analysis-structure.md` template.
+You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `templates/api-consistency-analysis-structure.md` template.
 
 ## Goal
 
@@ -21,7 +16,7 @@ You WILL help the user:
 - Run full code-mapper foundation analysis on a target repository (NOT foundation-lite).
 - Use the code-map output to extract complete public API signatures.
 - Analyze naming, parameter, and return-pattern consistency across a module/package.
-- Produce a structured API consistency report following `/templates/api-consistency-analysis-structure.md`.
+- Produce a structured API consistency report following `templates/api-consistency-analysis-structure.md`.
 
 ## Workflow
 
@@ -29,7 +24,7 @@ You WILL help the user:
 
 You MUST ask the user for:
 - `project_path`: absolute path or **workspace-root–relative** path to the repository under analysis.
-- `code_mapper_path`: path to the OLAF code-mapper scripts **relative to the workspace root**. The default is `.olaf/core/scripts/code-mapper`.
+- `code_mapper_path`: path to the OLAF code-mapper scripts **relative to the workspace root**. The default is `scripts/code-mapper`.
 - Optional: target output location if different from the default `.olaf/work/staging/code-mapper/<repo-name>/` **under the workspace root**.
 - `modules`: one or more target modules/packages (language-appropriate notion, e.g. Go packages, Python modules, Java packages) to analyze for API consistency.
 
@@ -105,7 +100,7 @@ For each HIGH impact inconsistency, you WILL:
 
 ### 5. Generate API Consistency Report
 
-You WILL generate a structured API consistency report following `/templates/api-consistency-analysis-structure.md`.
+You WILL generate a structured API consistency report following `templates/api-consistency-analysis-structure.md`.
 
 You MUST:
 - Populate the "Extracted Public Function Signatures" section with a per-module list of public APIs and their signatures.
@@ -123,7 +118,7 @@ You MUST:
 - Include a risk assessment and rollback considerations.
 
 You WILL output **in the assistant response**:
-- A single markdown document that follows `/templates/api-consistency-analysis-structure.md`.
+- A single markdown document that follows `templates/api-consistency-analysis-structure.md`.
 - A short summary of key findings and recommended next steps (e.g., "standardize on struct-based RepoRef", "rename Load* to Fetch*", etc.).
 
 ### 6. Output and Saving
@@ -156,7 +151,7 @@ You MUST handle these situations explicitly:
 ### 8. Success Criteria
 
 You WILL consider the API consistency analysis successful when:
-- A complete report following `/templates/api-consistency-analysis-structure.md` has been produced.
+- A complete report following `templates/api-consistency-analysis-structure.md` has been produced.
 - All requested modules/packages have been analyzed, or clearly marked as not analyzable (with reasons).
 - Major naming, parameter, and return-pattern inconsistencies have been identified and categorized by severity.
 - Canonical patterns and a phased improvement roadmap have been proposed.

@@ -22,7 +22,7 @@
     "version": "1.0.0",
     "protocol": "Propose-Confirm-Act",
     "created": "2025-12-15",
-    "updated": "2025-12-15"
+    "updated": "2026-01-14"
   },
   "bom": {
     "prompts": [
@@ -60,22 +60,22 @@
     "templates": [
       {
         "name": "review-output-format",
-        "path": "/templates/review-output-format.md",
+        "path": "templates/review-output-format.md",
         "type": "markdown"
       },
       {
         "name": "business-decisions-output-format",
-        "path": "/templates/business-decisions-output-format.md",
+        "path": "templates/business-decisions-output-format.md",
         "type": "markdown"
       },
       {
         "name": "functional-spec-detailed-output-format",
-        "path": "/templates/functional-spec-detailed-output-format.md",
+        "path": "templates/functional-spec-detailed-output-format.md",
         "type": "markdown"
       },
       {
         "name": "questions-table-format",
-        "path": "/templates/questions-table-format.md",
+        "path": "templates/questions-table-format.md",
         "type": "markdown"
       }
     ],

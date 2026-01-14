@@ -4,12 +4,7 @@ description: Enhanced Fix Code Smells skill migrated from developer competency
 license: Apache-2.0
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 # Fix Code Smells
 
@@ -17,7 +12,7 @@ Get current timestamp using time tools, fallback to shell command if needed
 Get current timestamp using time tools, fallback to shell command if needed
 
 In addition, you MUST load and apply the **Universal Coding Standards**:
-- Read `[id:practices_dir]standards/universal-coding-standards.md`.
+- Read `.olaf/data/practices/standards/universal-coding-standards.md`.
 - Treat the **Evolution/Refactoring Mode** as default:
   - Preserve existing public APIs and observable behavior unless the user
     explicitly approves API changes.
@@ -187,11 +182,11 @@ curative action plan:
    - If the review clearly targets a single file or module path, use its
      basename (without extension) as entity_name.
 6. **Save Report**: Create file as
-   `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/review.md`.
+   `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/review.md`.
 7. **Create Curative Action Plan**: Use the same analysis to define a
    step-by-step fix plan for humans and LLMs.
 8. **Save Action Plan**: Create file as
-   `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/action-plan.md`.
+   `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/action-plan.md`.
 9. **Confirm Location**: Provide user with exact file paths for future
    reference.
 
@@ -239,8 +234,8 @@ You WILL generate outputs following this structure:
 
 ### Actionable Report (if requested)
 - **Report & Action Plan Location**:
-  - Review: `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/review.md`
-  - Action plan: `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/action-plan.md`
+  - Review: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/review.md`
+  - Action plan: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/action-plan.md`
 - **Contents**: Comprehensive analysis with implementation plan, metrics,
   success criteria, and the mandatory workflow/build/test tasks above
 

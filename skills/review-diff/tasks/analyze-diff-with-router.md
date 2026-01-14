@@ -15,10 +15,10 @@ conditions: []
 **Required Files**: 
 - `helpers/review-diff-router.md`: Router helper for language-specific analysis
 - Language-specific guidelines:
-  - `[id:practices_dir]guidances/code-reviews/review-guidelines-python.md`
-  - `[id:practices_dir]guidances/code-reviews/review-guidelines-cplusplus.md`
-  - `[id:practices_dir]guidances/code-reviews/review-guidelines-java.md`
-  - `[id:practices_dir]guidances/code-reviews/review-guidelines-go.md`
+  - `.olaf/data/practices/guidances/code-reviews/review-guidelines-python.md`
+  - `.olaf/data/practices/guidances/code-reviews/review-guidelines-cplusplus.md`
+  - `.olaf/data/practices/guidances/code-reviews/review-guidelines-java.md`
+  - `.olaf/data/practices/guidances/code-reviews/review-guidelines-go.md`
 **Required Tools**: None
 
 ## Task Instructions
@@ -35,22 +35,22 @@ conditions: []
    For each language category in `context.files_by_language`:
    
    **Python files**:
-   - Load: `[id:practices_dir]guidances/code-reviews/review-guidelines-python.md`
+   - Load: `.olaf/data/practices/guidances/code-reviews/review-guidelines-python.md`
    - Apply Python-specific quality checks
    - Check: PEP 8, typing, docstrings, imports
    
    **C++ files**:
-   - Load: `[id:practices_dir]guidances/code-reviews/review-guidelines-cplusplus.md`
+   - Load: `.olaf/data/practices/guidances/code-reviews/review-guidelines-cplusplus.md`
    - Apply C++ standards
    - Check: RAII, const correctness, memory management
    
    **Java files**:
-   - Load: `[id:practices_dir]guidances/code-reviews/review-guidelines-java.md`
+   - Load: `.olaf/data/practices/guidances/code-reviews/review-guidelines-java.md`
    - Apply Java conventions
    - Check: Naming, encapsulation, exception handling
    
    **Go files**:
-   - Load: `[id:practices_dir]guidances/code-reviews/review-guidelines-go.md`
+   - Load: `.olaf/data/practices/guidances/code-reviews/review-guidelines-go.md`
    - Apply Go standards
    - Check: gofmt, error handling, interfaces
    

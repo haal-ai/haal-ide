@@ -99,7 +99,7 @@ Suggested columns:
 Use checklist: `/kb/db-artifacts-request-checklist.md`.
 
 ## 7) Questions for the SME / DB owner
-Use the template: `/templates/questions-table-format.md`.
+Use the template: `templates/questions-table-format.md`.
 
 ### 7.1 How to provide answers (for the SME)
 - Answer **each question ID** (Q-001, Q-002, …).

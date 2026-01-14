@@ -27,7 +27,7 @@
     "protocol": "Propose-Confirm-Act",
     "author": "OLAF Framework",
     "created": "2025-12-15",
-    "updated": "2025-12-15"
+    "updated": "2026-01-14"
   },
   "bom": {
     "prompts": [
@@ -40,7 +40,7 @@
     "templates": [
       {
         "name": "contract-kit-output-format",
-        "path": "/templates/contract-kit-output-format.md",
+        "path": "templates/contract-kit-output-format.md",
         "type": "markdown"
       }
     ],

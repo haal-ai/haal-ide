@@ -26,7 +26,7 @@
       "analytics"
     ],
     "created": "2025-01-24",
-    "updated": "2025-01-24",
+    "updated": "2026-01-14",
     "author": "OLAF Framework",
     "aliases": [
       "ai impact",
@@ -57,12 +57,12 @@
     "templates": [
       {
         "name": "ai-impact-file-analysis-template",
-        "path": "/templates/ai-impact-file-analysis-template.md",
+        "path": "templates/ai-impact-file-analysis-template.md",
         "description": "Template for file-level analysis reports"
       },
       {
         "name": "quarterly-trends-template",
-        "path": "/templates/quarterly-trends-template.md",
+        "path": "templates/quarterly-trends-template.md",
         "description": "Template for quarterly trend reports"
       }
     ]

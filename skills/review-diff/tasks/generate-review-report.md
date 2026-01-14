@@ -111,7 +111,7 @@ conditions: []
 3. **Handle Output Method**:
    
    **Option A: Save to Staging Directory** (if save_report=true):
-   - Create directory: `[id:staging_dir]diff-reviews/`
+   - Create directory: `.olaf/work/staging/diff-reviews/`
    - Save report: `review-report-[timestamp].md`
    - If include_actions=true, save: `actions-[timestamp].md`
    - Display confirmation with file paths
@@ -145,8 +145,8 @@ conditions: []
 - `task_status.generate-review-report`: "completed"
 
 **Files Created**: 
-- `[id:staging_dir]diff-reviews/review-report-[timestamp].md` (if save_report=true)
-- `[id:staging_dir]diff-reviews/actions-[timestamp].md` (if save_report=true AND include_actions=true)
+- `.olaf/work/staging/diff-reviews/review-report-[timestamp].md` (if save_report=true)
+- `.olaf/work/staging/diff-reviews/actions-[timestamp].md` (if save_report=true AND include_actions=true)
 
 **Context Passed to Next Tasks**:
 - Report file path for cleanup tracking (if saved)

@@ -4,14 +4,13 @@ description: Create comprehensive conversation record capturing dialogue, action
 license: Apache-2.0
 metadata:
   olaf_tags: [conversation, record, documentation, archive, history]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -28,11 +27,11 @@ Get current timestamp using time tools, fallback to shell command if needed
    - **IMPORTANT**: Explicitly ask user to specify which AI model is being used
    - Do not attempt to infer or guess AI model - get this information directly from user
 2. **Validate File Location Before Creation**:
-   - **CRITICAL**: Conversation records go to `[id:staging_dir]conversation-records/`
+   - **CRITICAL**: Conversation records go to `.olaf/work/staging/conversation-records/`
    - **MANDATORY**: Verify staging directory exists
    - **ENSURE**: Create conversation-records subdirectory if missing using create_directory tool
 3. **Create New File**:
-   - Write file: `[id:staging_dir]conversation-records/conversation-record-[timestamp].md`
+   - Write file: `.olaf/work/staging/conversation-records/conversation-record-[timestamp].md`
    - **Create new file for each record - never append to existing files**
    - Use unique timestamp to ensure no filename conflicts
    - Initialize file with proper structure
@@ -60,12 +59,12 @@ Structure with logical topic sections:
 - Topics documented: [number of distinct conversation topics]
 - Actions captured: [number of tool calls and operations]
 - Files affected: [number of files created/modified/deleted]
-- Record location: `[id:staging_dir]conversation-records/conversation-record-[timestamp].md`
+- Record location: `.olaf/work/staging/conversation-records/conversation-record-[timestamp].md`
 
 ## Record Creation Rules
 - Rule 1: CRITICAL - Only create records when explicitly requested by user, never automatically
 - Rule 2: Always get AI model information directly from user - never infer or guess
 - Rule 3: Create new file for each record with unique timestamp - never append to existing
 - Rule 4: Capture complete conversation - include full narrative, never summarize content
-- Rule 5: **MANDATORY PATH** - Always save to `[id:staging_dir]conversation-records/`
+- Rule 5: **MANDATORY PATH** - Always save to `.olaf/work/staging/conversation-records/`
 - Rule 6: **FAIL-SAFE** - Create conversation-records subdirectory if it doesn't exist

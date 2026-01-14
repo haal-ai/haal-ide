@@ -1,15 +1,16 @@
 ---
 name: [verb-entity-complement skill name]
 description: [Brief description of what this skill accomplishes]
-tags: [tag1, tag2, tag3, tag4]
+license: Apache-2.0
+metadata:
+  tags: [tag1, tag2, tag3, tag4]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -51,7 +52,7 @@ You WILL execute these operations as needed:
 - Use MCP server tool: `mcp_server_name.tool_name` for [specific operation]
 
 **File Operations** (when required):
-- Read/Write file: `[id:staging_dir]/subfolder/file-name.md` or specific path when applicable
+- Read/Write file: `.olaf/work/staging//subfolder/file-name.md` or specific path when applicable
 - Process file content according to requirements
 
 **Core Logic**: Execute following protocol requirements
@@ -66,7 +67,7 @@ You WILL validate results:
 
 ## Output Format
 You WILL generate outputs following this structure:
-- Primary deliverable: Reference external template if needed: `/templates/[template-name].md`
+- Primary deliverable: Reference external template if needed: `templates/[template-name].md`
 - Supporting files: [location and naming convention]
 - Documentation: [specific format requirements]
 

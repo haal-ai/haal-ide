@@ -4,14 +4,13 @@ description: IDE-aware context switching with automatic repository discovery and
 license: Apache-2.0
 metadata:
   olaf_tags: [context, switching, ide, discovery, transitive, repository]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Framework Validation
 You MUST apply the <olaf-work-instructions> framework.
@@ -50,29 +49,29 @@ You MUST follow the established interaction protocol strictly:
 ## Workflow
 
 ### 1. List Available Contexts (Primary Step)
-- **ALWAYS START HERE**: Check `[id:context_dir]` directory for all context-*.md files first
+- **ALWAYS START HERE**: Check `.olaf/data/context/` directory for all context-*.md files first
 - Display available contexts (files matching pattern: context-*.md) 
 - Show current active context if exists
 - Present numbered list to user for selection
 
 ### 3. Switch Context
 When user specifies a context name (or selects from list):
-- Validate the requested context template exists: `[id:context_dir]context-{name}.md`
-- Use shell to copy template to active context: copy `[id:context_dir]context-{name}.md` `[id:context_current]`
+- Validate the requested context template exists: `.olaf/data/context/context-{name}.md`
+- Use shell to copy template to active context: copy `.olaf/data/context/context-{name}.md` `.olaf/data/context/context-current.md`
 - Confirm the switch was successful
 - **CRITICAL**: Clearly inform user that they MUST start a new session/conversation for the new context to be loaded and take effect
 - Provide explicit instruction: "⚠️ **IMPORTANT**: Please start a new conversation for the '{context_name}' context to be active. The context change will only take effect in a fresh session."
 
 ### 4. Clear Context
 If user wants to remove context:
-- Delete `[id:context_current]` if it exists
+- Delete `.olaf/data/context/context-current.md` if it exists
 - Confirm context has been cleared
 - **CRITICAL**: Inform user that they MUST start a new session for the context clearing to take effect
 - Provide explicit instruction: "⚠️ **IMPORTANT**: Please start a new conversation for the context clearing to be active."
 
 ## Commands Handled
 - "context switch {name}" - Switch to specific context
-- "context switch" or "context list" - List existing contexts in [id:context_dir] directory
+- "context switch" or "context list" - List existing contexts in .olaf/data/context/ directory
 - "context clear" - Remove current context
 - "context status" - Show current active context
 
@@ -118,8 +117,8 @@ You WILL provide clear communication throughout the workflow:
 - **Timeline**: Immediate effect after new session begins
 
 ## File Operations
-- Source templates: [id:context_dir]context-*.md
-- Active context: [id:context_current]
+- Source templates: .olaf/data/context/context-*.md
+- Active context: .olaf/data/context/context-current.md
 
 ## Success Criteria
 - User can seamlessly switch between available contexts
@@ -132,11 +131,11 @@ You WILL provide clear communication throughout the workflow:
 
 ## Implementation Notes
 - No repo scanning or generation.
-- Only operate on files under `[id:context_dir]`.
+- Only operate on files under `.olaf/data/context/`.
 - List existing `context-*.md`, switch by copying to `context-current.md`, or clear by deleting it.
 
 ### Validation Rules
-- List only existing context-*.md files from `[id:context_dir]`
+- List only existing context-*.md files from `.olaf/data/context/`
 - Validate user selection is within range for numbered choices
 - Confirm context file exists before copying
 

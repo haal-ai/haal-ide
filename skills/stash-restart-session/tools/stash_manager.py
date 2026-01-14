@@ -349,7 +349,7 @@ class OLAFStashManager:
 
 ## Restoration Commands:
 ```
-python .olaf/core/skills/delete-stash/tools/stash_manager.py restore {stash_path.name}
+python skills/delete-stash/tools/stash_manager.py restore {stash_path.name}
 ```
 
 ## Transition Notes:

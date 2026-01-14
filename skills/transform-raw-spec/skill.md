@@ -4,9 +4,13 @@ description: Propose–Act protocol to transform a raw rules/spec document into 
 license: Apache-2.0
 metadata:
   olaf_tags: [business-analyst, requirements, transformation, EARS, testability, mermaid, propose-act]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure OLAF condensed framework is loaded: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure OLAF condensed framework is loaded: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 

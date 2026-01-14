@@ -137,7 +137,7 @@ Context is passed between tasks using simple variables:
 ### 1. Initialize Session
 Get environment info and timestamp:
 ```bash
-python .olaf/core/skills/common/tools/get-env.py
+python skills/common/tools/get-env.py
 ```
 
 ### 2. Execute Task Chain Loop
@@ -183,6 +183,10 @@ Each task prompt MUST include:
 task_id: "task-X"
 task_name: "[descriptive name]"
 dependencies: ["context-variable-Y", "context-variable-Z"]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 # Task X: [Name]

@@ -24,7 +24,7 @@
       "succession-planning"
     ],
     "created": "2025-11-24",
-    "updated": "2025-11-24",
+    "updated": "2026-01-14",
     "author": "OLAF Framework",
     "aliases": [
       "analyze contributor risk",
@@ -50,7 +50,7 @@
     "templates": [
       {
         "name": "contributor-risk-report-template",
-        "path": "/templates/contributor-risk-report-template.md",
+        "path": "templates/contributor-risk-report-template.md",
         "description": "Template for risk analysis reports"
       }
     ]

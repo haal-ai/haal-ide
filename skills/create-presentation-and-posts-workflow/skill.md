@@ -4,14 +4,13 @@ description: Multi-format content creation workflow that transforms a topic into
 license: Apache-2.0
 metadata:
   olaf_tags: [content-creation, presentation, blog-writing, technical-writing, multi-format, workflow, powerpoint, automation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Role
 
@@ -39,7 +38,7 @@ Execute skill: `create-presentation-plan`
 - Gather requirements (topic, audience, type, language)
 - Calculate appropriate slide count
 - Create structured presentation plan
-- Save plan file: `[id:staging_dir]/pptx-folder/[name]-plan-YYYYMMDD-HHmm.md`
+- Save plan file: `.olaf/work/staging//pptx-folder/[name]-plan-YYYYMMDD-HHmm.md`
 - Inform user plan is ready for review
 
 **Output:** Presentation plan markdown file
@@ -51,7 +50,7 @@ Execute skill: `generate-pptx-from-plan`
 - Check Python dependencies (python-pptx)
 - Validate presentation plan file
 - Execute PowerPoint generation tool
-- Save PowerPoint file: `[id:staging_dir]/pptx-folder/[name]-YYYYMMDD-HHmm.pptx`
+- Save PowerPoint file: `.olaf/work/staging//pptx-folder/[name]-YYYYMMDD-HHmm.pptx`
 - Confirm successful generation
 
 **Output:** PowerPoint presentation file
@@ -64,7 +63,7 @@ Execute skill: `generate-post-from-plan`
 - Apply requested style(s): brochure, conversational, or both
 - Generate blog post(s) in target language
 - Save post file(s):
-  - Single style: `[id:staging_dir]/pptx-folder/blog-post-[style]-YYYYMMDD-HHmm.md`
+  - Single style: `.olaf/work/staging//pptx-folder/blog-post-[style]-YYYYMMDD-HHmm.md`
   - Both styles: separate files for brochure and conversational
 - Ensure under 2-minute reading time
 
@@ -89,7 +88,7 @@ Execute skill: `generate-post-from-plan`
 
 ## File Management
 
-All outputs saved to: `[id:staging_dir]/pptx-folder/`
+All outputs saved to: `.olaf/work/staging//pptx-folder/`
 
 **Naming Convention:**
 - Plan: `[name]-plan-YYYYMMDD-HHmm.md`

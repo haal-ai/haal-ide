@@ -168,7 +168,7 @@ Provide default: 3 (Phase 0) + 4 per layer
 ```
 Error: skill_path required for Task 0.0
 
-Default to: .olaf/core/skills/${skill_name}
+Default to: skills/${skill_name}
 Confirm with user.
 ```
 

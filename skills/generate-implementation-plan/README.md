@@ -60,12 +60,12 @@ ESDI will automatically:
 
 Execute the skill directly on an existing design.md:
 
-**Task Prompt**: `.olaf/core/skills/generate-implementation-plan/prompts/generate-implementation-plan.md`
+**Task Prompt**: `skills/generate-implementation-plan/prompts/generate-implementation-plan.md`
 
 **Context Variables**:
 - `design_file`: Path to design.md (required)
 - `output_file`: Where to write IMPLEMENTATION-TASK-PLAN.md (required)
-- `skill_path`: Target path for skill (optional, defaults to `.olaf/core/skills/${skill_name}`)
+- `skill_path`: Target path for skill (optional, defaults to `skills/${skill_name}`)
 - `include_bootstrap`: Include bootstrap command (optional, default: true)
 
 ---
@@ -212,14 +212,14 @@ Execute the ESDI workflow with your chosen execution method:
 ### 2. Execute Task 0.0
 
 **Task Prompt**: `olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`  
-**Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=.olaf/core/skills/repo-scanner`  
-**Output**: `.olaf/core/skills/repo-scanner/tasks/contexts/task-*.md` (47 files)
+**Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/repo-scanner`  
+**Output**: `skills/repo-scanner/tasks/contexts/task-*.md` (47 files)
 
 ### 3. Execute Bootstrap
 
 **Task Prompt**: `olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`  
 **Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md`  
-**Result**: Fully implemented `repo-scanner` skill in `.olaf/core/skills/repo-scanner/`
+**Result**: Fully implemented `repo-scanner` skill in `skills/repo-scanner/`
 
 ---
 

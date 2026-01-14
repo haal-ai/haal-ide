@@ -15,7 +15,7 @@ dependencies: ["skill_structure", "skill_prompt_file"]
 
 **Required Files**:
 - Source skill prompt file at `skill_prompt_file`
-- Pattern reference: `.olaf/core/skills/convert-skill-to-chain/kb/workflow-patterns.md`
+- Pattern reference: `skills/convert-skill-to-chain/kb/workflow-patterns.md`
 
 **Required Tools**: None
 
@@ -24,7 +24,7 @@ dependencies: ["skill_structure", "skill_prompt_file"]
 ### 1. Load Pattern Reference
 Read the workflow patterns KB:
 ```
-.olaf/core/skills/convert-skill-to-chain/kb/workflow-patterns.md
+skills/convert-skill-to-chain/kb/workflow-patterns.md
 ```
 
 ### 2. Analyze Skill Content

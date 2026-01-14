@@ -66,7 +66,7 @@
       {
         "name": "workflow-summary",
         "id": "workflow-summary",
-        "path": "/templates/workflow-summary-template.md",
+        "path": "templates/workflow-summary-template.md",
         "description": "Template for workflow completion summary"
       }
     ],

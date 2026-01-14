@@ -35,8 +35,8 @@ Projects involve multiple people with different roles, expertise, and availabili
 - **notes**: Additional relevant information, preferences, or context
 
 ### Context Requirements
-- Access to peoples directory (`[id:peoples_dir]`)
-- Access to people register (`[id:people_register]`)
+- Access to peoples directory (`.olaf/data/peoples/`)
+- Access to people register (`.olaf/data/peoples/people-register.md`)
 - Access to person record template
 - Privacy and data protection guidelines
 

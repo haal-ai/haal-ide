@@ -4,14 +4,13 @@ description: Incrementally improve code based on specific goals (performance, ma
 license: Apache-2.0
 metadata:
   olaf_tags: [refactoring, code-quality, optimization, iterative]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 
@@ -23,7 +22,7 @@ Get current timestamp using time tools, fallback to shell command if needed
 
 You MUST apply the **Evolution/Refactoring Mode** from the universal coding
 standards as the default:
-- Read `[id:practices_dir]standards/universal-coding-standards.md` and treat
+- Read `.olaf/data/practices/standards/universal-coding-standards.md` and treat
   public APIs and observable behavior as **frozen** unless the user explicitly
   requests API changes.
 - Focus changes on internal structure (private helpers, data flows, wiring),
@@ -72,7 +71,7 @@ The report should include:
 - Rollback instructions for each iteration
 - Final recommendations for future work
 
-Save iteration reports to: `[id:ads_dir]/code-evolution/YYYYMMDD-HHmm/`
+Save iteration reports to: `.olaf/work/staging//code-evolution/YYYYMMDD-HHmm/`
 
 ## Output to USER
 1. **Initial Analysis**:

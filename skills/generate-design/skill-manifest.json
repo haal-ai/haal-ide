@@ -28,7 +28,7 @@
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
     "created": "2025-11-22",
-    "updated": "2025-11-22",
+    "updated": "2026-01-14",
     "maintenance": {
       "team": "esdi",
       "primary_maintainer": "OLAF Framework Core Team"
@@ -52,7 +52,7 @@
     "templates": [
       {
         "name": "design-document-template",
-        "path": "/templates/design-document-template.md",
+        "path": "templates/design-document-template.md",
         "description": "Template for system design documentation"
       }
     ],

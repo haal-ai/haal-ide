@@ -4,25 +4,14 @@ description: Archive changelog entries older than a specified number of days to 
 license: Apache-2.0
 metadata:
   olaf_tags: [changelog, archive, maintenance, automation]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
-
-CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
-
-## Input Parameters
-
-**IMPORTANT**: When you don't have entries provided, ask the USER to provide them.
-- **days_to_keep**: number - (Optional) Number of days of changelog entries to keep (default: 7)
-- **changelog_path**: string - (Optional) Path to the main changelog register (default: `[id:changelog_register]`)
-- **archive_path**: string - (Optional) Path to the archive file (default: `[id:changelog_register_archive]`)
-
-## Process
-
-This process is fully automated using the Python script at `[id:tools_dir]archive_changelog_entries.py`. The script will:
+<olaf>
+This process is fully automated using the Python script at `tools/archive_changelog_entries.py`. The script will:
 1. Archive entries older than the specified number of days
 2. Maintain chronological order and formatting
 3. Add a maintenance entry to the changelog
@@ -67,15 +56,15 @@ The script will produce:
 
 import subprocess
 
-changelog_path = "[id:changelog_register]"
+changelog_path = ".olaf/data/projects/changelog-register.md"
 
-archive_path = "[id:changelog_register_archive]"
+archive_path = ".olaf/data/projects/changelog-archive.md"
 
 days_to_keep = 7  # Default value, can be overridden
 
 subprocess.run([
 
-    "python", "[id:tools_dir]archive_changelog_entries.py",
+    "python", "tools/archive_changelog_entries.py",
 
     changelog_path,
 

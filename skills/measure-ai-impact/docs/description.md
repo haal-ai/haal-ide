@@ -216,7 +216,7 @@ All reports are saved to `olaf-data/ai-impact/`:
 
 For issues, questions, or feature requests:
 - See `tutorial.md` for step-by-step examples
-- Check analyzer tool documentation in `.olaf/core/skills/onboard/tools/commons/project-onboarding/`
+- Check analyzer tool documentation in `skills/onboard/tools/commons/project-onboarding/`
 - Review OLAF core documentation
 
 ---

@@ -4,9 +4,13 @@ description: Comprehensive code review with multiple input modes - manual select
 license: Apache-2.0
 metadata:
   olaf_tags: [code-review, quality-assurance, security, best-practices, git, batch-processing, modified-files]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
@@ -35,11 +39,11 @@ CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-
 - **compliance_requirements**: array[string] - (Optional) Specific compliance standards (OWASP, NIST, company policies)
 
 **DEFAULT STANDARDS**: You MUST apply these universal coding standards:
-- **Universal Standards**: `[id:practices_dir]standards/universal-coding-standards.md` - Universal coding principles, including
+- **Universal Standards**: `.olaf/data/practices/standards/universal-coding-standards.md` - Universal coding principles, including
   the default **Evolution/Refactoring Mode** for existing code and **Creation/New Code Mode** for new modules.
-- **Team Standards Search**: Automatically search `[id:practices_dir]standards/` for team-specific standards files
-- **Integration Standards**: `[id:practices_dir]standards/integration-testing-standards.md` - If applicable
-- **OLAF Framework**: Only apply `[id:docs_dir]core-features/best-practices.md` for OLAF-specific development
+- **Team Standards Search**: Automatically search `.olaf/data/practices/standards/` for team-specific standards files
+- **Integration Standards**: `.olaf/data/practices/standards/integration-testing-standards.md` - If applicable
+- **OLAF Framework**: Only apply `.olaf/docs/core-features/best-practices.md` for OLAF-specific development
 
 When the code under review is part of an **existing system**, treat the
 **Evolution/Refactoring Mode** as default:
@@ -93,14 +97,14 @@ public API coherence, tests alongside new behavior).
 ### Phase 2: Practice Discovery & Standards Loading
 
 #### A. Repository Practices (LOAD FIRST)
-1. Search and read applicable repo practices in `[id:practices_dir]practices/good-bad/*.md`.
+1. Search and read applicable repo practices in `.olaf/data/practices/practices/good-bad/*.md`.
 2. Filter by detected programming `language` and the file/class under review.
 3. Build a short checklist of applicable "good/bad" practices to apply first.
 
 #### B. Standards Loading (After Practices)
-1. **Team/Current Standards**: Search `[id:practices_dir]standards/` for team-specific standards and load those first (if any)
-2. **Universal Standards**: Read `[id:practices_dir]standards/universal-coding-standards.md`
-3. **Integration Standards**: Read `[id:practices_dir]standards/integration-testing-standards.md` if applicable
+1. **Team/Current Standards**: Search `.olaf/data/practices/standards/` for team-specific standards and load those first (if any)
+2. **Universal Standards**: Read `.olaf/data/practices/standards/universal-coding-standards.md`
+3. **Integration Standards**: Read `.olaf/data/practices/standards/integration-testing-standards.md` if applicable
 4. **Confirm loaded set**: Ensure repo practices + team standards + universal standards are all loaded before proceeding
 
 #### C. Strategic Planning (After Practices and Standards)
@@ -115,14 +119,14 @@ public API coherence, tests alongside new behavior).
 ### Phase 3: In-Depth Analysis (Apply Loaded Standards)
 1. **Initial Analysis**:
    - Review code structure and organization
-   - **Apply loaded repo practices FIRST**: Use applicable items from `[id:practices_dir]practices/good-bad/*.md`
-   - **Apply loaded team-specific standards**: Use any team standards found in `[id:practices_dir]standards/`
-   - **Apply loaded universal coding standards**: Use the specific standards from `[id:practices_dir]standards/universal-coding-standards.md`
+   - **Apply loaded repo practices FIRST**: Use applicable items from `.olaf/data/practices/practices/good-bad/*.md`
+   - **Apply loaded team-specific standards**: Use any team standards found in `.olaf/data/practices/standards/`
+   - **Apply loaded universal coding standards**: Use the specific standards from `.olaf/data/practices/standards/universal-coding-standards.md`
    - **Check against loaded quality principles**: Readability, maintainability, function length, complexity
    - **Apply custom review standards** (if provided by user)
    - **Verify adherence to team conventions** (if specified)
    - Assess error handling and logging using loaded standards2. **Security Assessment** (Using Loaded Standards):
-   - **Apply loaded security standards**: Use security requirements from `[id:practices_dir]standards/universal-coding-standards.md`
+   - **Apply loaded security standards**: Use security requirements from `.olaf/data/practices/standards/universal-coding-standards.md`
    - Identify potential vulnerabilities based on loaded standards
    - Check input validation per loaded requirements
    - Review authentication/authorization against loaded standards
@@ -189,7 +193,7 @@ Use `templates/developer/code-review-template.md` to structure the review stagin
 1. **Files gathered**: [number of modified/new/deleted files]
 2. **Reviews completed**: [number of files successfully reviewed]
 3. **Individual reviews**: Generated for each analyzed file
-4. **Summary report created**: `[id:staging_dir]code-reviews/code-review-summary-YYYYMMDD-NNN.md` containing:
+4. **Summary report created**: `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md` containing:
    - Number of files reviewed by type (modified, new, deleted)
    - List of all generated code review files
    - Aggregated staging by severity level
@@ -216,16 +220,16 @@ Use `templates/developer/code-review-template.md` to structure the review stagin
    - For a single file: use the file basename without extension.
    - For a folder or repository: use the last path segment as name.
    - For copy-paste input: ask the user for a short, kebab-case entity name.
-8. **Save the review** to: `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/review.md`
+8. **Save the review** to: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/review.md`
 9. **AFTER SAVING**: Automatically propose a curative action plan with specific, actionable steps
-10. **Save the action plan** to: `[id:staging_dir]code-review/<entity_name>-YYYYMMDD/action-plan.md`
+10. **Save the action plan** to: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/action-plan.md`
 
 ### Git-Modified Mode Actions (Additional)
 6. **Filter non-reviewable files** before user confirmation (binary files, large data files)
 7. **Process in manageable batches** to avoid overwhelming output
 8. **Prioritize high-impact files** (core logic, frequently changed) first
 9. **Generate individual review files** before creating summary to ensure completeness
-10. **Create comprehensive summary** with serial number: `[id:staging_dir]code-reviews/code-review-summary-YYYYMMDD-NNN.md`
+10. **Create comprehensive summary** with serial number: `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md`
 11. **Aggregate staging** across all reviewed files by severity level
 12. **Identify common patterns** or issues found across multiple files
 

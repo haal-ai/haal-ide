@@ -16,7 +16,7 @@ conditions: []
 - `detected_pattern`: Detected workflow pattern (sequential|cyclic|session-chained|conditional|hybrid)
 - `pattern_metadata`: Pattern-specific details
 **Required Files**: 
-- `.olaf/core/skills/convert-skill-to-chain/kb/conversion-models.md`
+- `skills/convert-skill-to-chain/kb/conversion-models.md`
 **Required Tools**: File creation
 
 ## Task Instructions
@@ -25,7 +25,7 @@ conditions: []
 
 Read pattern-specific template:
 ```
-.olaf/core/skills/convert-skill-to-chain/kb/conversion-models.md
+skills/convert-skill-to-chain/kb/conversion-models.md
 ```
 
 Select model based on `detected_pattern`:
@@ -38,7 +38,7 @@ Select model based on `detected_pattern`:
 ### 2. Generate Master Coordinator File
 
 1. **Create Master Coordinator Path**:
-   - File: `.olaf/core/skills/[skill-name]/prompts/[skill-name].md`
+   - File: `skills/[skill-name]/prompts/[skill-name].md`
    - This will replace original skill prompt (backup already created)
 
 2. **Apply Pattern-Specific Template**:
@@ -150,7 +150,7 @@ Select model based on `detected_pattern`:
 - `task_status.create-master-coordinator`: "completed"
 
 **Files Created**: 
-- `.olaf/core/skills/[skill-name]/prompts/[skill-name].md`
+- `skills/[skill-name]/prompts/[skill-name].md`
 
 **Context Passed to Next Tasks**:
 - Master file path for summary reporting
