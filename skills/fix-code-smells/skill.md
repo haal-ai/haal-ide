@@ -1,3 +1,9 @@
+---
+name: fix-code-smells
+description: Enhanced Fix Code Smells skill migrated from developer competency
+license: Apache-2.0
+---
+
 # Fix Code Smells
 
 ---

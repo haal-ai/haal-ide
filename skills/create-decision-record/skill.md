@@ -1,11 +1,9 @@
 ---
-
 name: create-decision-record
-
 description: Create a new decision record following the standard template and update related indexes.
-
-tags: [documentation, decision-making, governance]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, decision-making, governance]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

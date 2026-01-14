@@ -1,8 +1,10 @@
 ---
 name: git-add-commit
 description: Intelligent git add and commit with dependency chasing and user approval gates
-tags: [developer-workflow, git-operations, version-control]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [developer-workflow, git-operations, version-control]
+  olaf_protocol: Act
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

@@ -1,7 +1,9 @@
 ---
 name: switch-context
 description: IDE-aware context switching with automatic repository discovery and transitive loading
-tags: [context, switching, ide, discovery, transitive, repository]
+license: Apache-2.0
+metadata:
+  olaf_tags: [context, switching, ide, discovery, transitive, repository]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

@@ -1,11 +1,9 @@
 ---
-
 name: improve-spec
-
 description: Enhance functional specifications with visual diagrams, detailed data definitions, and comprehensive terminology to improve clarity and utility.
-
-tags: [documentation, specification, visualization, data-modeling, technical-writing]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, specification, visualization, data-modeling, technical-writing]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

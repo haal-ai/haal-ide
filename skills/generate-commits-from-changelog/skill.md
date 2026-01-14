@@ -1,11 +1,9 @@
 ---
-
 name: generate-commits-from-changelog
-
 description: Generate meaningful Git commits from changelog entries and repository changes, ensuring consistency between documentation and version control.
-
-tags: [git, commits, changelog, version-control, documentation]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [git, commits, changelog, version-control, documentation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 

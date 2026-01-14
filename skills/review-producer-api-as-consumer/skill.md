@@ -1,7 +1,9 @@
 ---
 name: review-producer-api-as-consumer
 description: Review functional spec + OpenAPI from a consumer perspective and produce questions for producers plus early dev priorities
-tags: [api, openapi, consumer, spec-review, questions, integration]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, consumer, spec-review, questions, integration]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

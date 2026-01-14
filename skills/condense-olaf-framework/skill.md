@@ -1,7 +1,9 @@
 ---
 name: condense-olaf-framework
 description: Design-time skill to condense OLAF framework reference files into optimized single file for distribution
-tags: [framework, optimization, compression, olaf, design-time]
+license: Apache-2.0
+metadata:
+  olaf_tags: [framework, optimization, compression, olaf, design-time]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

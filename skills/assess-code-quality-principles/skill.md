@@ -1,7 +1,9 @@
 ---
 name: assess-code-quality-principles
 description: Critical evaluation of codebase against established engineering principles (SOLID, DRY, YAGNI) with evidence-based scoring and specific improvement recommendations.
-tags: [code-quality, assessment, solid-principles, best-practices, evaluation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [code-quality, assessment, solid-principles, best-practices, evaluation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

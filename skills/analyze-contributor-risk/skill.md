@@ -1,8 +1,10 @@
 ---
 name: analyze-contributor-risk
 description: Analyze bus factor, knowledge concentration, and contributor risk patterns in repositories
-tags: [contributors, bus-factor, risk, knowledge-concentration, team-health]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [contributors, bus-factor, risk, knowledge-concentration, team-health]
+  olaf_protocol: Act
 ---
 
 # Analyze Contributor Risk

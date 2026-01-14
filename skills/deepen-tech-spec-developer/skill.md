@@ -1,11 +1,9 @@
 ---
-
 name: deepen-tech-spec-developer
-
 description: Deep-dive technical analysis focused on developer concerns - code quality, unit testing, architecture patterns, design principles assessment with evidence-based evaluation
-
-tags: [documentation, technical-spec, deep-dive, developer-analysis, code-quality, unit-testing]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, technical-spec, deep-dive, developer-analysis, code-quality, unit-testing]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

@@ -1,7 +1,9 @@
 ---
 name: validate-prompt-value
 description: Comprehensive evaluation of prompt effectiveness, business value, and implementation quality
-tags: [validation, effectiveness, value-assessment, quality-assurance]
+license: Apache-2.0
+metadata:
+  olaf_tags: [validation, effectiveness, value-assessment, quality-assurance]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

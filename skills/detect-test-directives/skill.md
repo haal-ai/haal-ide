@@ -1,8 +1,9 @@
 ---
 name: detect-test-directives
 description: Use this prompt to reproduce the workflow in any repository (any language/framework).
-aliases: ["detect test directives", "discover test directives"]
-protocol: Propose-Confirm-Act
+license: Apache-2.0
+metadata:
+  olaf_protocol: Propose-Confirm-Act
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

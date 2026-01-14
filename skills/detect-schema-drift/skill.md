@@ -1,7 +1,9 @@
 ---
 name: detect-schema-drift
 description: Enhanced Detect Schema Drift skill migrated from olaf-specific-tools competency
-tags: [quality-assurance, consistency, schema-validation, framework-maintenance, drift-detection]
+license: Apache-2.0
+metadata:
+  olaf_tags: [quality-assurance, consistency, schema-validation, framework-maintenance, drift-detection]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

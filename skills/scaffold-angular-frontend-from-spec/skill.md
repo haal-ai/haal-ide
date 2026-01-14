@@ -1,7 +1,9 @@
 ---
 name: scaffold-angular-frontend-from-spec
 description: Scaffold an Angular (Angular Material) consumer UI implementing spec-defined journeys beyond CRUD
-tags: [frontend, angular, angular-material, openapi, consumer, ui, scaffolding]
+license: Apache-2.0
+metadata:
+  olaf_tags: [frontend, angular, angular-material, openapi, consumer, ui, scaffolding]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

@@ -1,7 +1,9 @@
 ---
 name: review-code
 description: Comprehensive code review with multiple input modes - manual selection, git-modified files, or batch processing. Focuses on quality, security, and maintainability.
-tags: [code-review, quality-assurance, security, best-practices, git, batch-processing, modified-files]
+license: Apache-2.0
+metadata:
+  olaf_tags: [code-review, quality-assurance, security, best-practices, git, batch-processing, modified-files]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

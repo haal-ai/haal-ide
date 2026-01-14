@@ -1,7 +1,9 @@
 ---
 name: report-my-daily
 description: Generate daily work report by analyzing git activity, files, PRs, carry-overs, jobs, and changelog with iterative user refinement
-tags: [daily, report, git, activity, summary]
+license: Apache-2.0
+metadata:
+  olaf_tags: [daily, report, git, activity, summary]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

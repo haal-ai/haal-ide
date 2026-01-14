@@ -1,8 +1,9 @@
 ---
 name: use-skill
 description: Intelligent skill discovery and execution router that searches condensed framework, local filesystem, and invokes help-me-olaf when needed
-tags: [skill, discovery, routing, search, execution, workflow]
-aliases: [find skill, search skill, use workflow, execute skill, run skill]
+license: Apache-2.0
+metadata:
+  olaf_tags: [skill, discovery, routing, search, execution, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

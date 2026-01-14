@@ -1,7 +1,9 @@
 ---
 name: generate-contract-kit
 description: Collect OpenAPI, specifications, SDK, and tests into a consumer-ready contract-kit with examples and scenario walkthroughs
-tags: [api, openapi, contract, kit, examples, sdk, bruno, testing]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, contract, kit, examples, sdk, bruno, testing]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

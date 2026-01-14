@@ -1,7 +1,9 @@
 ---
 name: create-practice-from-evidence
 description: Create a standardized good/bad practice document from user-provided evidence (file/commit) and intent.
-tags: [practices, documentation, git, merge, review, good-bad]
+license: Apache-2.0
+metadata:
+  olaf_tags: [practices, documentation, git, merge, review, good-bad]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied. Follow Propose-Confirm-Act when writing files.

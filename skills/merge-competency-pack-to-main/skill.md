@@ -1,14 +1,9 @@
 ---
-name: Merge Competency Pack to Main
+name: merge-competency-pack-to-main
 description: Orchestrates the process of merging a competency pack from feature/olaf-feature-system to main branch through a proper PR workflow
-tags: ["git-workflow", "competency-pack", "merge", "pr-creation", "olaf-internal"]
-role: orchestrator
-version: 1.0.0
-created: 2025-11-12
-updated: 2025-11-12
-author: OLAF Framework
-category: olaf-internal
-llm: Claude Sonnet 4.5+
+license: Apache-2.0
+metadata:
+  olaf_tags: "[\"git-workflow\", \"competency-pack\", \"merge\", \"pr-creation\", \"olaf-internal\"]"
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

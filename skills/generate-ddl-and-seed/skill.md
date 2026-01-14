@@ -1,7 +1,9 @@
 ---
 name: generate-ddl-and-seed
 description: Generate a new database schema (DDL) and initialization data from the latest OpenAPI contract and DB↔API fit analysis when no DB exists yet
-tags: [database, ddl, seed-data, postgres, h2, mysql, openapi, api]
+license: Apache-2.0
+metadata:
+  olaf_tags: [database, ddl, seed-data, postgres, h2, mysql, openapi, api]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

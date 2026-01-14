@@ -1,11 +1,9 @@
 ---
-
 name: generate-workflow
-
 description: Create structured workflows from templates or specifications
-
-tags: [workflow, automation, code-generation, templates]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [workflow, automation, code-generation, templates]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

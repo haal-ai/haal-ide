@@ -1,7 +1,9 @@
 ---
 name: prepare-conversation-handover
 description: Create a clear and concise handover document to ensure smooth transition between conversation sessions or team members.
-tags: [handover, documentation, workflow, collaboration]
+license: Apache-2.0
+metadata:
+  olaf_tags: [handover, documentation, workflow, collaboration]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

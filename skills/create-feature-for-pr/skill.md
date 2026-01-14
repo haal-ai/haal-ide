@@ -1,11 +1,9 @@
 ---
-
 name: create-feature-for-pr
-
 description: Extract features from integration branch to create a feature branch and PR to main
-
-tags: [git, feature, branch, pr, workflow]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [git, feature, branch, pr, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

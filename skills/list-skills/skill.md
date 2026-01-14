@@ -1,7 +1,9 @@
 ---
 name: list-skills
 description: Present a concise list of all available skills from the current index
-tags: [skill, list, index, query]
+license: Apache-2.0
+metadata:
+  olaf_tags: [skill, list, index, query]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

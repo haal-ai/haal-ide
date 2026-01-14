@@ -1,8 +1,10 @@
 ---
 name: learn-and-search
-description: "Systematic learning and knowledge discovery through iterative research"
-tags: [research, learning, knowledge, discovery, iterative]
-protocol: Propose-Confirm-Act
+description: Systematic learning and knowledge discovery through iterative research
+license: Apache-2.0
+metadata:
+  olaf_tags: [research, learning, knowledge, discovery, iterative]
+  olaf_protocol: Propose-Confirm-Act
 ---
 
 # Learn and Search

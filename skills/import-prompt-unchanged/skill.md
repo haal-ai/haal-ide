@@ -1,8 +1,9 @@
 ---
 name: import-prompt-unchanged
 description: Import one or multiple existing prompts into OLAF framework preserving their exact content and structure. Single prompts are added to my-prompts competency, multiple prompts create a new user-named competency. No conversion or modification - pure preservation with OLAF discoverability benefits.
-tags: [migration, preservation, import-workflow, prompt-management, dependency-detection]
-aliases: [import unchanged, import as-is]
+license: Apache-2.0
+metadata:
+  olaf_tags: [migration, preservation, import-workflow, prompt-management, dependency-detection]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

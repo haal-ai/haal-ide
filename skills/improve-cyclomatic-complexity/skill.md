@@ -1,11 +1,9 @@
 ---
-
 name: improve-cyclomatic-complexity
-
 description: Systematically reduce cyclomatic complexity of code sections while preserving functionality and improving maintainability
-
-tags: [refactoring, complexity, code-quality, testing]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [refactoring, complexity, code-quality, testing]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

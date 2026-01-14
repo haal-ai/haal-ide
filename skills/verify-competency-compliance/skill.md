@@ -1,3 +1,9 @@
+---
+name: verify-competency-compliance
+description: Verify a competency package complies with OLAF standards and required artifacts
+license: Apache-2.0
+---
+
 # verify-competency-compliance
 
 You verify that a given OLAF competency package is compliant.

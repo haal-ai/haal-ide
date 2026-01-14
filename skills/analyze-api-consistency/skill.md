@@ -1,3 +1,9 @@
+---
+name: analyze-api-consistency
+description: Workflow skill that runs full code-mapper foundation analysis on a target repository, extracts public API signatures from the code-map output, and generates a structured API consistency report for selected modules or packages.
+license: Apache-2.0
+---
+
 # Analyze API Consistency with Code-Mapper
 
 You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `/templates/api-consistency-analysis-structure.md` template.

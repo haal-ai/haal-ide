@@ -1,7 +1,9 @@
 ---
 name: convert-prompt-to-skill
 description: Create a structured skill from existing prompt file(s) using OLAF templates and principles
-tags: [prompt, conversion, refactor, template, generation, skill]
+license: Apache-2.0
+metadata:
+  olaf_tags: [prompt, conversion, refactor, template, generation, skill]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

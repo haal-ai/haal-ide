@@ -1,11 +1,9 @@
 ---
-
 name: import-prompts-to-competency
-
 description: Analyze external prompts collection and generate mapping recommendations for OLAF competency integration
-
-tags: [import, analysis, mapping, batch, prompts, collection]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [import, analysis, mapping, batch, prompts, collection]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

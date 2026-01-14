@@ -1,7 +1,9 @@
 ---
 name: generate-validation-report
 description: Enhanced Generate Validation Report skill migrated from olaf-specific-tools competency
-tags: [quality-assurance, reporting, validation, compliance-checking, maintainer-tools]
+license: Apache-2.0
+metadata:
+  olaf_tags: [quality-assurance, reporting, validation, compliance-checking, maintainer-tools]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

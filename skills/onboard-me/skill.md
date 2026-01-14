@@ -1,8 +1,7 @@
 ---
-skill: onboard-me
-version: 2.0
+name: onboard-me
 description: Generate persona-focused 30-min productivity guides from repository analysis
-triggers: ["onboard me", "create onboarding", "developer guide"]
+license: Apache-2.0
 ---
 
 # Onboard-Me: Adaptive Repository Onboarding

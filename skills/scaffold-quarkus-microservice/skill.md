@@ -1,7 +1,9 @@
 ---
 name: scaffold-quarkus-microservice
 description: Scaffold a new Quarkus microservice based on team practices, standards, and Git workflow guidance
-tags: [java, quarkus, microservice, scaffolding, practices, git]
+license: Apache-2.0
+metadata:
+  olaf_tags: [java, quarkus, microservice, scaffolding, practices, git]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

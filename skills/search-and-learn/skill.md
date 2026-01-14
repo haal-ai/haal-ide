@@ -1,8 +1,10 @@
 ---
 name: search-and-learn
 description: Master coordinator for systematic information discovery, knowledge acquisition, and practical application with lean methodology
-tags: [research, learning, information, knowledge, search, discovery, systematic, master-chain]
-protocol: Propose-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [research, learning, information, knowledge, search, discovery, systematic, master-chain]
+  olaf_protocol: Propose-Act
 ---
 
 # Search and Learn - Master Chain Coordinator

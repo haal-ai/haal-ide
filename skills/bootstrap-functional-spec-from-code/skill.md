@@ -1,11 +1,9 @@
 ---
-
 name: bootstrap-functional-spec-from-code
-
 description: Analyze source code to extract and describe its functionalities from a business and user perspective, creating a draft functional specification.
-
-tags: [generation, documentation, analysis, functional-spec]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [generation, documentation, analysis, functional-spec]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

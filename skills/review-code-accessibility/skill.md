@@ -1,7 +1,9 @@
 ---
 name: review-code-accessibility
 description: Analyze code for WCAG 2.1 accessibility compliance and provide remediation guidance
-tags: [accessibility, wcag, compliance, code-review]
+license: Apache-2.0
+metadata:
+  olaf_tags: [accessibility, wcag, compliance, code-review]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

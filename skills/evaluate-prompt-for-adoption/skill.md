@@ -1,7 +1,9 @@
 ---
 name: evaluate-prompt-for-adoption
 description: Fetch and evaluate external prompts for potential adoption into OLAF
-tags: [evaluation, adoption, quality-assessment, prompt-curation, external-sources]
+license: Apache-2.0
+metadata:
+  olaf_tags: [evaluation, adoption, quality-assessment, prompt-curation, external-sources]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

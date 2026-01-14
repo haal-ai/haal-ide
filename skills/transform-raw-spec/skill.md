@@ -1,7 +1,9 @@
 ---
 name: transform-raw-spec
 description: Propose–Act protocol to transform a raw rules/spec document into a complete, testable specification via Steps 1–7, using curated templates, best examples, and timestamped outputs.
-tags: [business-analyst, requirements, transformation, EARS, testability, mermaid, propose-act]
+license: Apache-2.0
+metadata:
+  olaf_tags: [business-analyst, requirements, transformation, EARS, testability, mermaid, propose-act]
 ---
 
 CRITICAL: Ensure OLAF condensed framework is loaded: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

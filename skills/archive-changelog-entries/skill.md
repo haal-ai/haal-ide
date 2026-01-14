@@ -1,11 +1,9 @@
 ---
-
 name: archive-changelog-entries
-
 description: Archive changelog entries older than a specified number of days to maintain a clean and organized changelog register.
-
-tags: [changelog, archive, maintenance, automation]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [changelog, archive, maintenance, automation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

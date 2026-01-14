@@ -1,3 +1,9 @@
+---
+name: validate-all-competency-packs
+description: Validate all competency packs in the workspace for schema and structure compliance
+license: Apache-2.0
+---
+
 # validate-all-competency-packs
 
 You validate all OLAF competency packs available in the current workspace.

@@ -1,7 +1,9 @@
 ---
 name: help-me-olaf
 description: Intelligent help router that discovers available skills and prompts, or captures new needs for skill creation
-tags: [help, discovery, skill-search, prompt-routing, assistance, olaf]
+license: Apache-2.0
+metadata:
+  olaf_tags: [help, discovery, skill-search, prompt-routing, assistance, olaf]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

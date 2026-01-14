@@ -1,8 +1,10 @@
 ---
 name: get-bms-expertise
 description: Load BMS expert persona with deep C/C++ build system knowledge and problem-solving capabilities
-tags: [bms, build-system, c-cpp, expertise, persona, amadeus]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [bms, build-system, c-cpp, expertise, persona, amadeus]
+  olaf_protocol: Act
 ---
 
 # BMS Expert - Amadeus Build System Specialist

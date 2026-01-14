@@ -1,7 +1,9 @@
 ---
 name: review-human-written-spec
 description: Multi-phase workflow to challenge a human-written specification and produce SME questions needed for API design
-tags: [api, openapi, requirements, spec-review, questionnaire]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, requirements, spec-review, questionnaire]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

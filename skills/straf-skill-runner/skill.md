@@ -1,3 +1,9 @@
+---
+name: straf-skill-runner
+description: Automatically analyze OLAF skill input requirements, intelligently gather required parameters from workspace context or user input, and execute skills via STRAF agent in fully autonomous spawned mode
+license: Apache-2.0
+---
+
  ---
 name: straf-skill-runner
 description: Interactive skill launcher - lists skills, analyzes requirements, gathers parameters, and launches via STRAF

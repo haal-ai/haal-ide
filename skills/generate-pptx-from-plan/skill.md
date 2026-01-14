@@ -1,7 +1,9 @@
 ---
 name: generate-pptx-from-plan
 description: Generate PowerPoint presentations from existing presentation plans using automated Python tools
-tags: [presentation, powerpoint, automation, technical-writer, content-creation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [presentation, powerpoint, automation, technical-writer, content-creation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

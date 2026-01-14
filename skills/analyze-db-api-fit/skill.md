@@ -1,7 +1,9 @@
 ---
 name: analyze-db-api-fit
 description: Analyze functional spec + OpenAPI against existing database schemas to identify data gaps and integration risks for microservices
-tags: [api, openapi, database, microservices, gap-analysis, data-fit]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, database, microservices, gap-analysis, data-fit]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

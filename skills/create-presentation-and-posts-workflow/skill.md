@@ -1,7 +1,9 @@
 ---
 name: create-presentation-and-posts-workflow
 description: Multi-format content creation workflow that transforms a topic into presentation plan, PowerPoint file, and blog posts
-tags: [content-creation, presentation, blog-writing, technical-writing, multi-format, workflow, powerpoint, automation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [content-creation, presentation, blog-writing, technical-writing, multi-format, workflow, powerpoint, automation]
 ---
 
 ## Time Retrieval

@@ -1,7 +1,9 @@
 ---
 name: find-expert-contact
 description: Analyze person registers and records to recommend appropriate contacts for specific questions or problems based on expertise matching
-tags: [contact-lookup, expertise-matching, team-directory, people-analysis]
+license: Apache-2.0
+metadata:
+  olaf_tags: [contact-lookup, expertise-matching, team-directory, people-analysis]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full framework from reference/.condensed/olaf-framework-condensed.md.

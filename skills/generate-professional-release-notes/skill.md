@@ -1,11 +1,9 @@
 ---
-
 name: generate-professional-release-notes
-
 description: Generate professional release notes by analyzing git commit history between two tags.
-
-tags: [project-management, release-notes, git, documentation]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [project-management, release-notes, git, documentation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 

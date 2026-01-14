@@ -1,8 +1,10 @@
 ---
 name: challenge-me
 description: Interactive ideation engine that challenges ideas through iterative cycles with research-backed insights and file generation
-tags: [ideation, challenge, research, collaboration, cyclic]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [ideation, challenge, research, collaboration, cyclic]
+  olaf_protocol: Act
 ---
 
 **CRITICAL: MANDATORY FRAMEWORK LOADING**

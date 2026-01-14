@@ -1,7 +1,9 @@
 ---
 name: check-todos-in-code
 description: Search, analyze, and provide solutions for TODO comments with user decision tracking
-tags: [todo, code-analysis, technical-debt, cleanup]
+license: Apache-2.0
+metadata:
+  olaf_tags: [todo, code-analysis, technical-debt, cleanup]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

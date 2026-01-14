@@ -1,7 +1,9 @@
 ---
 name: analyze-business-requirements
 description: Guide the process of reviewing a business requirements document to identify potential issues and generate clarifying questions
-tags: [business, requirements, analysis, review, documentation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [business, requirements, analysis, review, documentation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

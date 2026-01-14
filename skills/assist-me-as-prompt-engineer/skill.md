@@ -1,7 +1,9 @@
 ---
 name: assist-me-as-prompt-engineer
 description: Guide prompt engineers through available skills based on expertise level
-tags: [prompt-engineering, assistant, learning, guidance, workflow]
+license: Apache-2.0
+metadata:
+  olaf_tags: [prompt-engineering, assistant, learning, guidance, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

@@ -1,7 +1,9 @@
 ---
 name: delete-stash
 description: Delete unwanted stash directories permanently to clean up the workspace
-tags: [stash, delete, cleanup, workspace]
+license: Apache-2.0
+metadata:
+  olaf_tags: [stash, delete, cleanup, workspace]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

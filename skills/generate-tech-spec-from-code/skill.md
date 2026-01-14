@@ -1,11 +1,9 @@
 ---
-
 name: generate-tech-spec-from-code
-
 description: Create comprehensive technical specifications by analyzing existing codebases. Fast breadth analysis covering all essential aspects for all technical stakeholders (developers, SRE, testers, architects).
-
-tags: [documentation, technical-spec, code-analysis, reverse-engineering, breadth-analysis]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, technical-spec, code-analysis, reverse-engineering, breadth-analysis]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

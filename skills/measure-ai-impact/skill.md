@@ -1,8 +1,10 @@
 ---
 name: measure-ai-impact
 description: Measure AI's impact on code quality and team productivity through file analysis and quarterly metrics
-tags: [ai, impact, metrics, productivity, quality, halstead, maintainability]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [ai, impact, metrics, productivity, quality, halstead, maintainability]
+  olaf_protocol: Act
 ---
 
 # Measure AI Impact

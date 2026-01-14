@@ -1,3 +1,9 @@
+---
+name: check-prompt-compliance
+description: Check a prompt for compliance with OLAF prompt standards
+license: Apache-2.0
+---
+
 # check-prompt-compliance
 
 You check a user-provided prompt for compliance with OLAF prompt conventions.

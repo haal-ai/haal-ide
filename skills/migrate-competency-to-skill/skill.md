@@ -1,7 +1,9 @@
 ---
 name: migrate-competency-to-skill
 description: Extract and migrate specific competency features from another branch and transform them into standalone skills
-tags: [migration, competency, skill, git, transformation, architecture]
+license: Apache-2.0
+metadata:
+  olaf_tags: [migration, competency, skill, git, transformation, architecture]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

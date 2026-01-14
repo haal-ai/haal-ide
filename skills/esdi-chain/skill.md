@@ -1,9 +1,7 @@
 ---
-name: run-esdi-coordinator
+name: esdi-chain
 description: "Coordinate the ESDI workflow: Exploration → Specification → Design → Implementation planning"
-type: coordinator
-chain: run-esdi
-version: 1.0.0
+license: Apache-2.0
 ---
 
 # Run-ESDI Workflow Coordinator

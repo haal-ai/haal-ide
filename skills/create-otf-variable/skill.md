@@ -1,7 +1,9 @@
 ---
 name: create-otf-variable
 description: Guide developers through creating OTF variables with proper XML configuration and C++ accessor code
-tags: [otf, configuration, feature-flags, c-cpp, xml, amadeus]
+license: Apache-2.0
+metadata:
+  olaf_tags: [otf, configuration, feature-flags, c-cpp, xml, amadeus]
 ---
 
 # Create OTF Variable

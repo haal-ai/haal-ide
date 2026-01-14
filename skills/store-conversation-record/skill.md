@@ -1,7 +1,9 @@
 ---
 name: store-conversation-record
 description: Create comprehensive conversation record capturing dialogue, actions taken, files affected, and AI models used
-tags: [conversation, record, documentation, archive, history]
+license: Apache-2.0
+metadata:
+  olaf_tags: [conversation, record, documentation, archive, history]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

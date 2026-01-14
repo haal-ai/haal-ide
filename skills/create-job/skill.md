@@ -1,11 +1,9 @@
 ---
-
-name: create-job-pml
-
+name: create-job
 description: Create a new job file in the jobs directory following the job template structure with proper ID generation and system integration
-
-tags: [job, creation, template, project-management]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [job, creation, template, project-management]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

@@ -1,7 +1,9 @@
 ---
 name: scaffold-api-from-spec
 description: Incrementally scaffold a Quarkus API, TypeScript SDK, and Bruno CLI tests from the latest functional spec, OpenAPI contract, and DB↔API fit analysis
-tags: [api, openapi, quarkus, typescript, sdk, bruno, testing, scaffolding]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, quarkus, typescript, sdk, bruno, testing, scaffolding]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

@@ -1,11 +1,9 @@
 ---
-
 name: analyze-function-complexity
-
 description: Analyze a specific function's complexity, structure, and provide detailed metrics similar to complexity analyzer output
-
-tags: [function-analysis, complexity, code-quality, metrics]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [function-analysis, complexity, code-quality, metrics]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

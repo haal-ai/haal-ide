@@ -1,7 +1,9 @@
 ---
 name: plan-db-api-remediation
 description: Translate DB↔API fit mismatches into delivery impact decisions and a phased remediation plan
-tags: [api, openapi, database, delivery, migration, remediation, impact]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, database, delivery, migration, remediation, impact]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

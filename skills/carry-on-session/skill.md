@@ -1,7 +1,9 @@
 ---
 name: carry-on-session
 description: Load the latest carry-over note and propose the immediate next action for session continuation
-tags: [session, carry-on, continuation, workflow]
+license: Apache-2.0
+metadata:
+  olaf_tags: [session, carry-on, continuation, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

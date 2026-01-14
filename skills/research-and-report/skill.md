@@ -1,7 +1,9 @@
 ---
 name: research-and-report
 description: Structured research with comprehensive reporting and current information validation
-tags: [research, reporting, web-search, analysis, documentation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [research, reporting, web-search, analysis, documentation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

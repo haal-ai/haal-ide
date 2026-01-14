@@ -1,9 +1,7 @@
 ---
 name: generate-implementation-plan
-description: "Transform design document into executable implementation task plan with Task 0.0, requirement traceability, and bootstrap integration"
-type: coordinator
-chain: generate-implementation-plan
-version: 2.0.0
+description: Transform design document into executable implementation task plan with Task 0.0, requirement traceability, and bootstrap integration
+license: Apache-2.0
 ---
 
 # Generate Implementation Plan - Master Coordinator

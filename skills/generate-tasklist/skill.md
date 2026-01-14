@@ -1,11 +1,9 @@
 ---
-
-name: generate-tasklist-new
-
+name: generate-tasklist
 description: Generate structured tasklists with iteration-task-subtask hierarchy and status tracking
-
-tags: [tasklist, planning, project, iteration, tasks]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [tasklist, planning, project, iteration, tasks]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

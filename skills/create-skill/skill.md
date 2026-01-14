@@ -1,7 +1,9 @@
 ---
 name: create-skill
 description: Generate structured skills following established template and principles for OLAF skills architecture
-tags: [skill, generation, engineering, template, prompt-engineer]
+license: Apache-2.0
+metadata:
+  olaf_tags: [skill, generation, engineering, template, prompt-engineer]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

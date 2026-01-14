@@ -1,7 +1,9 @@
 ---
 name: align-spec-openapi-code-tests
 description: Detect drift and align functional spec, OpenAPI, implementation code, and tests with least-impact recommendations
-tags: [api, openapi, drift, alignment, testing, bruno, quarkus, workflow]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, drift, alignment, testing, bruno, quarkus, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

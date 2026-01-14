@@ -1,11 +1,9 @@
 ---
-
 name: generate-questionnaire
-
 description: Create a well-structured questionnaire for gathering specific information from a target audience.
-
-tags: [generation, survey, research, feedback]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [generation, survey, research, feedback]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 

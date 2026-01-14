@@ -1,11 +1,9 @@
 ---
-
 name: create-changelog-entry
-
 description: Add a new entry to the main changelog file with proper formatting and structure.
-
-tags: [changelog, documentation, versioning, maintenance]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [changelog, documentation, versioning, maintenance]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

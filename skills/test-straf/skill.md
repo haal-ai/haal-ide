@@ -1,8 +1,10 @@
 ---
 name: test-straf
 description: Test STRAF agent integration for code review
-tags: [straf, code-review, test, agentic]
-protocol: Propose-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [straf, code-review, test, agentic]
+  olaf_protocol: Propose-Act
 ---
 
 # STRAF Code Review Test - Master Chain

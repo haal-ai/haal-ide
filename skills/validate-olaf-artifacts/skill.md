@@ -1,7 +1,9 @@
 ---
 name: validate-olaf-artifacts
 description: Enhanced Validate Olaf Artifacts skill migrated from olaf-specific-tools competency
-tags: [quality-assurance, compliance-checking, artifact-validation, framework-standards, consistency-verification]
+license: Apache-2.0
+metadata:
+  olaf_tags: [quality-assurance, compliance-checking, artifact-validation, framework-standards, consistency-verification]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

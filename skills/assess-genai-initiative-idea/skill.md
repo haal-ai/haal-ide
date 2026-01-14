@@ -1,7 +1,9 @@
 ---
-name: assess-genai-solution
+name: assess-genai-initiative-idea
 description: Conduct comprehensive assessment of GenAI solution requests through structured questionnaire and research
-tags: [genai, assessment, questionnaire, research]
+license: Apache-2.0
+metadata:
+  olaf_tags: [genai, assessment, questionnaire, research]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full framework from the condensed reference. 

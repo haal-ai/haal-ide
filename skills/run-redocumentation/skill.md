@@ -1,3 +1,8 @@
+---
+name: run-redocumentation
+description: Enhanced Run Redocumentation skill migrated from project-manager competency
+license: Apache-2.0
+---
 
 ---
 name: run-redocumentation

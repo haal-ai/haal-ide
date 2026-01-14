@@ -1,3 +1,9 @@
+---
+name: generate-code-mapper-docs
+description: Workflow skill that guides the user to run OLAF code-mapper foundation analysis and contextual reads, then uses the generated artifacts to produce structured technical project documentation.
+license: Apache-2.0
+---
+
 # Generate Code-Mapper Documentation
 
 You WILL act as a workflow skill that generates structured technical documentation for a codebase using OLAF code-mapper outputs. You MUST keep the Python scripts and tooling in the existing `.olaf/core/scripts/code-mapper` area and reference them, not duplicate them.

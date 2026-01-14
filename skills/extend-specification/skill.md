@@ -1,11 +1,9 @@
 ---
-
 name: extend-specification
-
 description: Review and extend a functional specification document to ensure it's comprehensive and ready for application modernization.
-
-tags: [documentation, specification, requirements, analysis, frontend]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, specification, requirements, analysis, frontend]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

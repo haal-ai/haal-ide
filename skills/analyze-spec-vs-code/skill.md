@@ -1,7 +1,9 @@
 ---
 name: analyze-spec-vs-code
 description: Propose–Act protocol to compare an EARS specification against the codebase, produce Phase 1 gaps, Phase 2 impact analysis, and Phase 3 remediation plan.
-tags: [business-analyst, requirements, EARS, gap-analysis, impact-analysis, remediation-plan, propose-act]
+license: Apache-2.0
+metadata:
+  olaf_tags: [business-analyst, requirements, EARS, gap-analysis, impact-analysis, remediation-plan, propose-act]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

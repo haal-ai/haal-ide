@@ -1,7 +1,9 @@
 ---
 name: manage-competencies
 description: Comprehensive competency management skill that handles the full lifecycle of OLAF competencies including creation of new competencies from scratch or existing files, editing existing competencies (structure, files, manifest), safe deletion with dependency checking, and validation of competency structure and integrity.
-tags: [lifecycle-management, interactive-workflow, competency-operations, crud-operations, framework-administration]
+license: Apache-2.0
+metadata:
+  olaf_tags: [lifecycle-management, interactive-workflow, competency-operations, crud-operations, framework-administration]
 ---
 
 # Manage Competencies

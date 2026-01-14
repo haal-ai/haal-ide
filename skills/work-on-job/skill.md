@@ -1,11 +1,9 @@
 ---
-
 name: work-on-job
-
 description: Guide the process of working on an existing job by identifying the job, executing tasks, tracking progress, updating documentation, and maintaining the job status.
-
-tags: [job-management, workflow, task-tracking, documentation]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [job-management, workflow, task-tracking, documentation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

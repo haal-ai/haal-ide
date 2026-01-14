@@ -1,8 +1,10 @@
 ---
 name: tell-me
 description: Lightweight knowledge retrieval from existing artifacts with smart fallback to analysis
-tags: [knowledge-retrieval, search, artifacts, onboarding]
-protocol: Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [knowledge-retrieval, search, artifacts, onboarding]
+  olaf_protocol: Act
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

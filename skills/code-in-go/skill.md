@@ -1,7 +1,9 @@
 ---
 name: code-in-go
 description: Assist developers coding in Go by enforcing team practices, SOLID principles, and Git workflow standards
-tags: [go, golang, coding, developer, practices]
+license: Apache-2.0
+metadata:
+  olaf_tags: [go, golang, coding, developer, practices]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

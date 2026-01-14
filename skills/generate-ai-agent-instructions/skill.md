@@ -1,8 +1,10 @@
 ---
 name: generate-ai-agent-instructions
 description: Analyze codebase to generate platform-agnostic AI agent instruction files (AGENTS.md, .cursorrules, .windsurfrules, .kiro/steering, etc.)
-tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding]
-protocol: Propose-Confirm-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding]
+  olaf_protocol: Propose-Confirm-Act
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

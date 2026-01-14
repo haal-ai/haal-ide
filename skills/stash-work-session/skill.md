@@ -1,7 +1,9 @@
 ---
 name: stash-work-session
 description: Create a complete work stash that preserves both context documentation and all unstaged files
-tags: [stash, session, preservation, workflow, context]
+license: Apache-2.0
+metadata:
+  olaf_tags: [stash, session, preservation, workflow, context]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

@@ -1,7 +1,9 @@
 ---
-skill_id: "generate-jsdoc"
-protocol: "Propose-Confirm-Act"
-interaction_mode: "spawn"
+name: generate-jsdoc
+description: Generates inline JSDoc documentation for JavaScript and TypeScript files using AWS Strands multi-agent system. MODIFIES source code by adding comprehensive @param, @returns, @throws, @example, and @remarks comments. Runs in spawn mode to allow parallel work. Creates git branch by default for safety. Supports in-place modification or copy-to-folder mode.
+license: Apache-2.0
+metadata:
+  olaf_protocol: "\"Propose-Confirm-Act\""
 ---
 
 # Generate JSDoc Documentation

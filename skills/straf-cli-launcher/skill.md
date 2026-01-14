@@ -1,7 +1,9 @@
 ---
-skill_id: "straf-cli-launcher"
-protocol: "Propose-Confirm-Act"
-interaction_mode: "spawn-or-interactive"
+name: straf-cli-launcher
+description: Presents available straf-cli commands, explains what each does, collects required parameters from the user, and then runs the selected command either in background spawn mode or in interactive console mode where the user can see output.
+license: Apache-2.0
+metadata:
+  olaf_protocol: "\"Propose-Confirm-Act\""
 ---
 
 # STRAF CLI Launcher

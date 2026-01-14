@@ -1,8 +1,10 @@
 ---
 name: convert-skill-to-chain
 description: Master coordinator for converting existing OLAF skills to the master-chain pattern
-tags: [skill-conversion, refactoring, master-chain, automation]
-protocol: Propose-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [skill-conversion, refactoring, master-chain, automation]
+  olaf_protocol: Propose-Act
 ---
 
 # Convert Skill to Master Chain - Coordinator

@@ -1,11 +1,9 @@
 ---
-
 name: create-person-record
-
 description: Create a new person record following the standard template and update related indexes.
-
-tags: [documentation, people, team]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, people, team]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

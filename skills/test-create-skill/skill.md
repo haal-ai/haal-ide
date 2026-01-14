@@ -1,7 +1,9 @@
 ---
 name: test-create-skill
 description: Regression test to ensure create-skill functionality always works correctly
-tags: [testing, regression, create-skill, validation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [testing, regression, create-skill, validation]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

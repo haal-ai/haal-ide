@@ -1,8 +1,10 @@
 ---
 name: review-diff
 description: Master coordinator for comprehensive code review of git diffs using language-specific standards
-tags: [code-review, git, diff, quality, standards, workflow, master-chain]
-protocol: Propose-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [code-review, git, diff, quality, standards, workflow, master-chain]
+  olaf_protocol: Propose-Act
 ---
 
 # Review Diff - Master Chain Coordinator

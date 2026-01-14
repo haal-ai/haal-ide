@@ -1,7 +1,9 @@
 ---
 name: should-i-use-ai
 description: Analyze user task and recommend whether to use AI/LLM or IDE tools based on task categorization guide
-tags: [ai, recommendation, analysis, task, guidance]
+license: Apache-2.0
+metadata:
+  olaf_tags: [ai, recommendation, analysis, task, guidance]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

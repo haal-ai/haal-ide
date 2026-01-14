@@ -1,7 +1,9 @@
 ---
 name: review-progress
 description: Conduct a comprehensive work review to assess progress, identify accomplishments, and plan upcoming priorities.
-tags: [review, progress, planning, assessment]
+license: Apache-2.0
+metadata:
+  olaf_tags: [review, progress, planning, assessment]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

@@ -1,7 +1,9 @@
 ---
 name: generate-step-by-step-tutorial
 description: Generate step-by-step tutorial documents from conversations or workflow files
-tags: [tutorial, documentation, step-by-step, workflow]
+license: Apache-2.0
+metadata:
+  olaf_tags: [tutorial, documentation, step-by-step, workflow]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

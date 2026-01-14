@@ -1,7 +1,9 @@
 ---
 name: augment-code-unit-test
 description: Iteratively improve unit test coverage by analyzing code complexity and enhancing tests for the most complex modules
-tags: [iterative, unit-testing, code-analysis, complexity, coverage]
+license: Apache-2.0
+metadata:
+  olaf_tags: [iterative, unit-testing, code-analysis, complexity, coverage]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

@@ -1,7 +1,9 @@
 ---
 name: create-competency-package
 description: Enhanced Create Competency Package skill migrated from prompt-engineer competency
-tags: [framework-developer, packaging, modular-design, reusable-components, structure-creation]
+license: Apache-2.0
+metadata:
+  olaf_tags: [framework-developer, packaging, modular-design, reusable-components, structure-creation]
 ---
 
 # Create Competency Package

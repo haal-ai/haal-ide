@@ -1,9 +1,10 @@
 ---
 name: generate-design
-description: "Master coordinator for transforming EARS specification into layered system design"
-tags: [design, architecture, specification, layered-design, master-chain]
-protocol: Propose-Act
-version: 1.0.0
+description: Master coordinator for transforming EARS specification into layered system design
+license: Apache-2.0
+metadata:
+  olaf_tags: [design, architecture, specification, layered-design, master-chain]
+  olaf_protocol: Propose-Act
 ---
 
 # Generate System Design - Master Chain Coordinator

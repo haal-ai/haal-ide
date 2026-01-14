@@ -1,8 +1,10 @@
 ---
 name: share-prompt-to-olaf
-description: "Contribute prompts to OLAF core framework"
-tags: [contribution, sharing, community, prompt-engineer, core]
-protocol: Propose-Confirm-Act
+description: Contribute prompts to OLAF core framework
+license: Apache-2.0
+metadata:
+  olaf_tags: [contribution, sharing, community, prompt-engineer, core]
+  olaf_protocol: Propose-Confirm-Act
 ---
 
 # Share Prompt to OLAF Core

@@ -1,7 +1,9 @@
 ---
 name: add-product-changelog-entry
 description: Add entries to functional or technical product changelogs with linked detail files
-tags: [changelog, product, documentation, functional, technical]
+license: Apache-2.0
+metadata:
+  olaf_tags: [changelog, product, documentation, functional, technical]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

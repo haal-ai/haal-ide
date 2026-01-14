@@ -1,8 +1,9 @@
 ---
 name: propose-commit-thread
 description: View git repository changes (new, modified, tracked, untracked files) and propose meaningful, logical commit sets for user approval
-core_purpose: Analyze what files have changed and group them into sensible commits with clear purposes
-tags: [git, version-control, commit-management, repository-analysis, change-grouping, workflow-automation, interactive, github-integration]
+license: Apache-2.0
+metadata:
+  olaf_tags: [git, version-control, commit-management, repository-analysis, change-grouping, workflow-automation, interactive, github-integration]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

@@ -1,7 +1,9 @@
 ---
 name: analyze-api-change-impact-from-deprecation-spec
 description: Analyze consumer code impact from changed/evolved/deprecated endpoints and generate a modification + retest tasklist
-tags: [api, openapi, consumer, impact-analysis, deprecation, migration, testing]
+license: Apache-2.0
+metadata:
+  olaf_tags: [api, openapi, consumer, impact-analysis, deprecation, migration, testing]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.

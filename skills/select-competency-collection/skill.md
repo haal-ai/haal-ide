@@ -1,7 +1,9 @@
 ---
 name: select-competency-collection
 description: Guide user to select a competency collection and update the OLAF framework accordingly
-tags: [collection, selection, configuration, framework, setup]
+license: Apache-2.0
+metadata:
+  olaf_tags: [collection, selection, configuration, framework, setup]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].

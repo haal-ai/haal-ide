@@ -1,3 +1,9 @@
+---
+name: deliver-mission
+description: Analyze the current JavaFX UI implementation and produce a thorough, discovery-led plan to analyze, design, and execute a migration to an Angular 18 frontend, including an agentic execution approach suitable for AWS Strands (Python).
+license: Apache-2.0
+---
+
 Olaf ,  you  first need to  lookinto the context-current.md in ~/.olaf/data/context/ to understand the context of the mission.
 It should be in between  teh tag <olaf-mission> and </olaf-mission>
 IF it is not then you need to aply the  instruction given to yu  below in between the tags <init-mission> and </init-mission>

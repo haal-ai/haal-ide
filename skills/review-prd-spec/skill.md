@@ -1,7 +1,9 @@
 ---
 name: review-prd-spec
 description: Review evolution requests/PRDs for completeness, query user with improvement questions, and save in standardized template format
-tags: [prd, review, specification, evolution-request]
+license: Apache-2.0
+metadata:
+  olaf_tags: [prd, review, specification, evolution-request]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md

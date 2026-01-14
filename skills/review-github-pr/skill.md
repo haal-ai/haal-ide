@@ -1,8 +1,10 @@
 ---
 name: review-github-pr
 description: Master coordinator for chained GitHub Pull Request review execution
-tags: [code-review, github, pull-request, master-chain]
-protocol: Propose-Act
+license: Apache-2.0
+metadata:
+  olaf_tags: [code-review, github, pull-request, master-chain]
+  olaf_protocol: Propose-Act
 ---
 
 # GitHub PR Review - Master Chain Coordinator

@@ -1,11 +1,9 @@
 ---
-
 name: review-user-story
-
 description: Review user story against standard template to ensure quality, clarity, and completeness
-
-tags: [documentation, analysis, user-story, quality, review]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [documentation, analysis, user-story, quality, review]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.

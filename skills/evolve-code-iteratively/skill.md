@@ -1,11 +1,9 @@
 ---
-
 name: evolve-code-iteratively
-
 description: Incrementally improve code based on specific goals (performance, maintainability, testability) using a structured, iterative approach.
-
-tags: [refactoring, code-quality, optimization, iterative]
-
+license: Apache-2.0
+metadata:
+  olaf_tags: [refactoring, code-quality, optimization, iterative]
 ---
 
 CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
