@@ -52,7 +52,7 @@ You WILL execute these operations as needed:
 **File Operations** (when required):
 - Read file: `.olaf/data/projects/changelog-register.md` - Extract entries since start_date
 - Read files: `[prompt_dir]` - Verify prompt files against changelog entries
-- Read file: `templates/changelog-analysis-report-template.md` - Structure output format
+- Read file: `skills/analyze-changelog-and-report/templates/changelog-analysis-report-template.md` - Structure output format
 - Write file: `.olaf/work/staging/ChangelogSummaries/YYYYMMDD-HHMM-summary.md` - Save analysis report
 
 **Core Logic**: Execute following protocol requirements
