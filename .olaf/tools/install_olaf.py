@@ -1493,10 +1493,11 @@ def main() -> int:
         global_collection_id = _pick_collection_id_from_file(
             target_dir / "core" / "reference" / "competency-collections.json"
         )
-        if not global_collection_id:
-            global_collection_id = "core"
-        global_index_path = generate_query_competency_index(target_dir, collection_id=global_collection_id)
-        print(f"Global install: competency index generated -> {global_index_path}")
+        if local_root is None:
+            if not global_collection_id:
+                global_collection_id = "core"
+            global_index_path = generate_query_competency_index(target_dir, collection_id=global_collection_id)
+            print(f"Global install: competency index generated -> {global_index_path}")
 
         # Rewrite any hardcoded references to ~/.olaf inside the installed target
         rewritten = rewrite_olaf_paths(target_dir, target_dir)
