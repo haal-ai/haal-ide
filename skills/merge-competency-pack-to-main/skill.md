@@ -6,7 +6,7 @@ metadata:
   olaf_tags: "[\"git-workflow\", \"competency-pack\", \"merge\", \"pr-creation\", \"olaf-internal\"]"
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
 # Merge Competency Pack to Main
 

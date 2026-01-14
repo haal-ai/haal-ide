@@ -198,7 +198,7 @@ You MUST follow these constraints:
 
 ### Condensed Framework Search
 ```
-1. Read [id:ack_dir]reference/.condensed/olaf-framework-condensed.md2. Find markers: <!-- OLAF_COMPETENCIES_START --> to <!-- OLAF_COMPETENCIES_END -->
+1. Read .olaf/work/reference/.condensed/olaf-framework-condensed.md2. Find markers: <!-- OLAF_COMPETENCIES_START --> to <!-- OLAF_COMPETENCIES_END -->
 3. Parse each line: aliases→path|Protocol4. Split aliases by | (pipe character)
 5. Match user keywords against each alias6. Score: exact match=100, partial=80, synonym=60
 7. Return all matches with scores ≥ 75%

@@ -5,7 +5,7 @@ tags: [code-review, git, diff, quality, standards, workflow]
 protocol: Act
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
 ## Diff Review Process
 **EXECUTION PROTOCOL**: Act - Execute directly without user confirmation for standard reviews

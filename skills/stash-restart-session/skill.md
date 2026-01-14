@@ -10,7 +10,7 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
 ## Time Retrieval
 Use this common helper only when saving a file or creating a folder that embeds a timestamp in its name: `skills/time-retrieval/prompts/time-retrieval.md`. Do not prompt for time when merely reading or loading files.

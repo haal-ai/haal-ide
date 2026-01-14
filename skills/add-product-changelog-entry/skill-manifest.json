@@ -20,8 +20,10 @@
     "exposure": "export",
     "protocol": "Act",
     "aliases": [
-      "add product changelog entry",
-      "add-product-changelog-entry skill"
+      "add changelog entry",
+      "changelog entry",
+      "product changelog",
+      "update changelog"
     ],
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",

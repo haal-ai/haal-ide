@@ -25,7 +25,7 @@ PATH_MAPPINGS = {
     # Skills and competencies
     '[id:skills_dir]': 'skills/',
     '[id:local_skills_dir]': 'skills/',
-    '[id:global_skills_dir]': '~/.olaf/core/skills/',
+    '[id:global_skills_dir]': '~/.olaf/skills/',
     '[id:competencies_dir]': 'competencies/',
     '[id:schemas_dir]': 'schemas/',
     '[id:reference_dir]': 'reference/',

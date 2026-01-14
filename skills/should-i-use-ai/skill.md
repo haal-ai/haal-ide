@@ -10,8 +10,9 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
+>
 # Should I Use AI?
 
 **Purpose**: Analyze user task and recommend whether to use AI/LLM or IDE tools based on task categorization guide 

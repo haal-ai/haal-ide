@@ -383,7 +383,7 @@ class CollectionSelector:
         if isinstance(entry_point, str):
             # Simple file path string - default to global
             file_path = f"{competency_id}/{entry_point}"
-            return f'  [[], "~/.olaf/core/skills/{file_path}", "Act"]'
+            return f'  [[], "~/.olaf/skills/{file_path}", "Act"]'
         
         # Dictionary format with metadata
         aliases = entry_point.get('aliases', [])
@@ -395,7 +395,7 @@ class CollectionSelector:
         if location == 'local':
             file_path = f"skills/{file_path}"
         else:
-            file_path = f"~/.olaf/core/skills/{file_path}"
+            file_path = f"~/.olaf/skills/{file_path}"
         
         # Format: [["alias1", "alias2", ...], "path/to/file.md", "Protocol"]
         aliases_str = ', '.join(f'"{a}"' for a in aliases)
@@ -513,7 +513,7 @@ class CollectionSelector:
                 if skill_location == 'local':
                     full_path = f"skills/{full_path}"
                 else:  # global or any other value defaults to global
-                    full_path = f"~/.olaf/core/skills/{full_path}"
+                    full_path = f"~/.olaf/skills/{full_path}"
                 
                 # Deduplicate by skill_id and merge aliases
                 if not skill_id:

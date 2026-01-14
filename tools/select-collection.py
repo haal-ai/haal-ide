@@ -381,20 +381,20 @@ class CollectionSelector:
         # Handle both dict and string entry_point formats
         if isinstance(entry_point, str):
             # Simple file path string - default to global
-            file_path = f"{competency_id}/{entry_point}"
-            return f'  [[], "[id:global_skills_dir]{file_path}", "Act"]'
+            file_path = f"{competency_id}/{entry_point}".replace("\\", "/")
+            return f'  [[], "~/.olaf/skills/{file_path}", "Act"]'
         
         # Dictionary format with metadata
         aliases = entry_point.get('aliases', [])
-        file_path = f"{competency_id}/{entry_point.get('file', '')}"
+        file_path = f"{competency_id}/{entry_point.get('file', '')}".replace("\\", "/")
         protocol = entry_point.get('protocol', 'Act')
         location = entry_point.get('location', 'global')  # Default to global
         
-        # Add memory map ID prefix
+        # Emit direct paths (no memory map IDs)
         if location == 'local':
-            file_path = f"[id:local_skills_dir]{file_path}"
+            file_path = f"skills/{file_path}"
         else:
-            file_path = f"[id:global_skills_dir]{file_path}"
+            file_path = f"~/.olaf/skills/{file_path}"
         
         # Format: [["alias1", "alias2", ...], "path/to/file.md", "Protocol"]
         aliases_str = ', '.join(f'"{a}"' for a in aliases)
@@ -505,14 +505,14 @@ class CollectionSelector:
                 prompt_path = first_prompt.get('path', '').lstrip('/')
                 
                 # Build final path: skills/{skill-id}/{prompt-path}
-                skill_dir = Path(skill_manifest_path).parent  # e.g., skills/review-code
-                full_path = f"{skill_dir}/{prompt_path}"
+                skill_dir = Path(skill_manifest_path).parent.as_posix()  # e.g., skills/review-code
+                full_path = f"{skill_dir}/{prompt_path}".replace("\\", "/")
                 
-                # Add memory map ID prefix based on skill_location
-                if skill_location == 'local':
-                    full_path = f"[id:local_skills_dir]{full_path}"
-                else:  # global or any other value defaults to global
-                    full_path = f"[id:global_skills_dir]{full_path}"
+                # Emit direct paths (no memory map IDs)
+                # - local skills are relative to repo root: skills/...
+                # - global skills live under ~/.olaf: ~/.olaf/skills/...
+                if skill_location != 'local':
+                    full_path = f"~/.olaf/{full_path}"
                 
                 # Deduplicate by skill_id and merge aliases
                 if not skill_id:
@@ -782,11 +782,12 @@ end-of-competency-index
                 first_prompt = prompts[0]
                 prompt_path = first_prompt.get('path', '').lstrip('/')  # e.g., prompts/main.md
                 
-                # Build path based on location
-                if skill_location == "global":
-                    full_path = f"~/.olaf/{skill_dir}/{prompt_path}"
-                else:  # local
-                    full_path = f"./{skill_dir}/{prompt_path}"
+                # Emit direct paths (no memory map IDs)
+                # - local skills are relative to repo root: skills/...
+                # - global skills live under ~/.olaf: ~/.olaf/skills/...
+                full_path = prompt_path.replace("\\", "/")
+                if skill_location != 'local':
+                    full_path = f"~/.olaf/{full_path}"
                     
                 competency_map[skill_id] = full_path
         

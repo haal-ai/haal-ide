@@ -4,6 +4,10 @@ description: Guide user to select a competency collection and update the OLAF fr
 license: Apache-2.0
 metadata:
   olaf_tags: [collection, selection, configuration, framework, setup]
+  copyright: Copyright (c) 2026 @pjmp020564
+  author: @pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 <olaf>
@@ -28,8 +32,8 @@ You MUST follow the established interaction protocol strictly:
 
 You WILL verify all requirements:
 - Confirm access to `reference/competency-collections.json`
-- Confirm access to `[id:ack_dir]scripts/olaf-structure-management/select_collection.py`
-- Confirm write access to `reference/.condensed/olaf-framework-condensed.md`
+- Confirm access to `tools/select_collection.py`
+- Confirm access to `~/.olaf/reference/.condensed/olaf-framework-condensed.md`
 - Check Python installation and availability
 
 ### 2. Execution Phase
@@ -62,7 +66,7 @@ You WILL execute:
 
 **Execute Collection Update:**
 
-You WILL execute the collection selector script located under `scripts` using the **repository root** (the directory that contains `.olaf/`) as working directory.
+You WILL execute the collection selector script located under `tools/` using the **repository root** as working directory.
 
 Steps:
 

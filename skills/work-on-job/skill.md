@@ -10,7 +10,7 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full ~/reference/.condensed/olaf-framework-condensed.md
+<olaf>
 
 ## Input Parameters
 

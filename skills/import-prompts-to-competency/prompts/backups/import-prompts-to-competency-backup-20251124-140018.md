@@ -8,7 +8,7 @@ tags: [import, analysis, mapping, batch, prompts, collection]
 
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
 ## Framework Validation
 

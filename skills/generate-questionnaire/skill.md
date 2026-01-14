@@ -42,7 +42,7 @@ metadata:
 
 Follow template structure: `templates/business-analyst/questionnaire-template.md.md`
 
-**Save Output**: Create file `[id:ack_dir]questionnaires/questionnaire-<concise purpose>.md` where:
+**Save Output**: Create file `.olaf/work/questionnaires/questionnaire-<concise purpose>.md` where:
 - Markdown document with:
   - Title and introduction
   - Clear instructions

@@ -10,10 +10,7 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>.
-
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -83,7 +80,11 @@ You WILL consider the task complete when:
 ## Error Handling
 You WILL handle these scenarios:
 - **Demand folder not found**: Ask the user for the correct `demand_folder`
-- **Spec directory not found**: Ask the user to confirm where `04-specifications` lives
+- **Spec directory not found**: Ask the user to provide the correct `spec_dir` (folder that contains BOTH the functional spec markdown and the OpenAPI file).
+  - Default expected location is: `{demand_root}/{demand_folder}/04-specifications`
+  - If there are multiple candidate folders, ask them to provide explicit paths for BOTH:
+    - `functional_spec_path` (the markdown spec you should review)
+    - `openapi_path` (the OpenAPI contract, typically `*.yaml` / `*.yml` and often named like `*-openapi.yaml`)
 - **OpenAPI missing**: Ask the user for explicit `openapi_path`
 - **Functional spec missing**: Ask the user for explicit `functional_spec_path`
 

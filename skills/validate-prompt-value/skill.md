@@ -10,9 +10,7 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/reference/.condensed/olaf-framework-condensed.md.
-
-## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
+<olaf>
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
