@@ -4,11 +4,17 @@ description: Analyze the current JavaFX UI implementation and produce a thorough
 license: Apache-2.0
 ---
 
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
+
 Olaf ,  you  first need to  lookinto the context-current.md in ~/.olaf/data/context/ to understand the context of the mission.
 It should be in between  teh tag <olaf-mission> and </olaf-mission>
 IF it is not then you need to aply the  instruction given to yu  below in between the tags <init-mission> and </init-mission>
 If it is present  then you need to apply the instruction  below in between the tags <work-on-mission> and </work-on-mission>
-
 
 <init-mission>
 You will have to read in full all instructions given to you below  and teh files that are listed. Once done you will need to add the scetion in context-current.md in ~/.olaf/data/context/ to describe your mission.

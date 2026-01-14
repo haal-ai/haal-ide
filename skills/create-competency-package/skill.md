@@ -6,9 +6,14 @@ metadata:
   olaf_tags: [framework-developer, packaging, modular-design, reusable-components, structure-creation]
 ---
 
-# Create Competency Package
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full ~/.olaf/core/reference/.condensed/olaf-framework-condensed.md.
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
+
+# Create Competency Package
 
 ## Context
 You are helping a user package their developed prompts, scripts, templates, and related work into a self-contained OLAF competency package. This creates a modular, reusable component that can be shared, maintained, and integrated independently.

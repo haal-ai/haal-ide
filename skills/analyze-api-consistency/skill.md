@@ -4,6 +4,13 @@ description: Workflow skill that runs full code-mapper foundation analysis on a 
 license: Apache-2.0
 ---
 
+CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full [id:condensed_framework].
+
+CRITICAL: Skill-local resource resolution: if this prompt references `templates/...`, `kb/...`, `docs/...`, `tools/...`, or `scripts/...`, you MUST search for and resolve those paths within THIS SAME SKILL directory. Concretely, resolve them relative to this skill root directory (the parent folder of `prompts/`).
+
+## Time Retrieval
+Get current timestamp using time tools, fallback to shell command if needed
+
 # Analyze API Consistency with Code-Mapper
 
 You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `/templates/api-consistency-analysis-structure.md` template.
