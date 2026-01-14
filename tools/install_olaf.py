@@ -1197,6 +1197,9 @@ def rewrite_olaf_paths(root: Path, target_dir: Path, *, name_prefix: str | None 
         "$HOME/.olaf/": target_str + os.sep,
         "$env:USERPROFILE\\.olaf": target_str,
         "%USERPROFILE%\\.olaf": target_str,
+        # Handle old core structure paths
+        "~/.olaf/core/reference/.condensed": target_str + os.sep + "reference" + os.sep + ".condensed",
+        "~/.olaf/core/reference/.condensed/": target_str + os.sep + "reference" + os.sep + ".condensed" + os.sep,
     }
 
     for p in root.rglob("*"):

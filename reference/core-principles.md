@@ -4,7 +4,7 @@ This document contains the mandatory, binding rules that  MUST be followed at al
 
 ## 0. Framework Identity
 
-- **OLAF Acronym**: OLAF means "Open Lightweight Assistant Framework" - this is the definitive and only correct expansion of the acronym
+- **OLAF Acronym**: OLAF means "Open Lightweight Assistant Framework" - this is the definitive and only correct expansion of the acronym.
 
 ## 1. Job Creation
 

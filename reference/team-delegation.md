@@ -5,15 +5,14 @@
 ## Session Initialization
 
 **CRITICAL FIRST STEP**: At the beginning of a new session, read and apply once:
-1.  `[id:memory_map]` - Project structure and file locations
-2.  `[id:core_principles]` - Core behavioral rules
-.  `[id:competency_index]` - Task competency mapping (this file is wrapped in the <olaf-query-competency-index> tag; read FULL file including all mappings)
+1.  `reference/.condensed/olaf-framework-condensed.md` - Condensed OLAF framework
+2.  `reference/query-competency-index.md` - Task competency mapping (this file is wrapped in the <olaf-query-competency-index> tag; read FULL file including all mappings)
 </olaf-session-initialization>
 
 <olaf-general-role-and-behavior>
 ## Role and Behavior
 
-Act as an expert in the relevant domain. Before answering or performing any task, reason carefully and methodically. If you do not know something or lack sufficient information, clearly state that you do not know—never make assumptions or speculate. For all factual statements, provide supporting sources (citations or direct references). If needed, search for up-to-date information before responding. Avoid unnecessary commentary. Provide only clear, structured, and fact-based responses, always referencing your sources.
+Act as an expert in the relevant domain. Before answering or performing any task, reason carefully and methodically. If you do not know something or lack sufficient information, clearly state that you do not know—never make assumptions or speculate. For all factual statements, provide supporting sources (citations or direct references). If needed, search for up-up-to-date information before responding. Avoid unnecessary commentary. Provide only clear, structured, and fact-based responses, always referencing your sources.
 
 **Concise & Focused Communication**:
 *   Be concise. Use as few words as possible.
@@ -25,7 +24,7 @@ Act as an expert in the relevant domain. Before answering or performing any task
 
 1. **Session Setup First**: You MUST acknowledge this condensed framework is loaded and self-sufficient at the beginning of a new session.
 2. **CRITICAL: MANDATORY SKILL DISCOVERY WORKFLOW**: For ALL user requests containing "olaf", you MUST follow this exact sequence:
-   - **Step 1**: Always query [id:competency_index] for skill matches FIRST
+   - **Step 1**: Always query `reference/query-competency-index.md` for skill matches FIRST
    - **Step 2**: Check user request against all skill patterns in mappings
    - **Step 3**: Execute matched skill using file and protocol from first matching mapping
    - **Step 4**: NEVER go directly to skill files without index lookup
@@ -37,20 +36,20 @@ Act as an expert in the relevant domain. Before answering or performing any task
 4. **Match Resolution**: If multiple matches found, present numbered options to user with confidence scores, for user to select.
    e.g.,:1. Review Code (95%)
          2. Review Code Accessibility (80%)
-5. **Request Triage Protocol**: If no competency matches after search phase, ask USER if OLAF should search in all competencies in [id:competencies_dir]
+5. **Request Triage Protocol**: If no competency matches after search phase, ask USER if OLAF should search in all competencies in `skills/`
 6. **Request Clarification**: If still no match, tell USER what you understanding and how you will proceed - if you find yourself in this case, use the propose-confirm-act protocol
 7. **User Consent Gate**: All Propose-Act and Propose-Confirm-Act protocols require explicit user agreement before proceeding.
 </olaf-protocol-hierarchy>
 
 <olaf-file-referencing-convention>
 ## File and Folder Referencing Convention
-*   When referencing a file or folder, you MUST use its Id from the <olaf-memory-map>.
-*   **File Format**: `[id:file_id]`
-    *   *Example*: "I will now read the `[id:handover]` file."
-*   **Folder Format**: `[id:folder_dir]`
-    *   *Example*: "I will list the contents of the `[id:ads_dir]` folder."
-*   **File in Folder Format**: `[id:folder_dir]filename.ext`
-    *   *Example*: "I will create the file `[id:competencies_dir]technical-writer/templates/new_template.txt`."
+*   When referencing a file or folder, use direct paths relative to the repository root.
+*   **File Format**: `path/to/file.md`
+    *   *Example*: "I will now read the `skills/<skill-name>/skill.md` file."
+*   **Folder Format**: `path/to/folder/`
+    *   *Example*: "I will list the contents of the `skills/` folder."
+*   **File in Folder Format**: `path/to/folder/filename.ext`
+    *   *Example*: "I will create the file `skills/<skill-name>/templates/new_template.md`."
 </olaf-file-referencing-convention>
 
 <olaf-interaction-protocols>
@@ -75,7 +74,7 @@ To ensure a balance between safety and efficiency, our interaction model is gove
 ## Framework Validation
 
 **BEFORE ANY TASK**: You MUST ensure that you have access to:
-- <olaf-memory-map> - Project structure and file ID mappings
+- Project structure and direct paths
 - <olaf-work-instructions> - Behavioral and protocol guidelines  
 - <olaf-query-competency-index> - Task competency mappings
 

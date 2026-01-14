@@ -25,7 +25,6 @@ You MUST strictly apply <olaf-framework-validation>.
 You WILL verify all requirements:
 - Confirm access to source reference files:
   - `reference/team-delegation.md`
-  - `reference/memory-map.md`
   - `reference/core-principles.md`
 - Verify NO files in `.condensed/` subdirectory are processed
 - Check write access to output location
@@ -34,8 +33,8 @@ You WILL verify all requirements:
 You WILL execute following protocol requirements:
 
 **Source Analysis:**
-- Read ONLY the three specified source files
-- Use `var=path/` format for memory map
+- Read ONLY the two specified source files
+- Use direct paths for all references
 - Keep all XML tags and embed them with relevant sections
 
 **Core Logic:**
@@ -57,7 +56,7 @@ You WILL execute following protocol requirements:
   ```
 - Protocol Hierarchy & Execution (extracted from team-delegation.md)
 - Interaction Protocols section (extracted from team-delegation.md)
-- Memory Map section (extracted from memory-map.md)
+- Path Structure section (hard-coded direct paths)
 - Core Principles section (extracted from core-principles.md)
 - General Role and Behavior section (extracted from team-delegation.md)
 - Framework Validation section
@@ -77,22 +76,22 @@ You WILL generate outputs following this structure:
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
-- Rule 1: ONLY process the three source files specified
+- Rule 1: ONLY process the two source files specified
 - Rule 2: Do NOT add any content from open editors or templates
 - Rule 3: MUST preserve ALL XML tags with complete content
 - Rule 4: Protocol Hierarchy MUST extract content from team-delegation.md source file
-- Rule 5: All file references MUST use `[id:file_id]` format
+- Rule 5: All file references MUST use direct paths (no [id:] format)
 - Rule 6: NO markdown headers beyond ##
 - Rule 7: Target metrics: ~3,500-4,000 characters, 70-80% reduction
 
 ## Success Criteria
 You WILL consider the task complete when:
-- [ ] All three source files successfully read and analyzed
+- [ ] All two source files successfully read and analyzed
 - [ ] XML tags from all source files extracted and embedded
-- [ ] Memory Map converted to var=path/ format
+- [ ] Path Structure using direct paths (hard-coded)
 - [ ] **Protocol Hierarchy extracted from team-delegation.md source file**
 - [ ] **Session Initialization uses the hard-coded simplified version**
-- [ ] **All content sourced from the three specified files only**
+- [ ] **All content sourced from the two specified files only**
 - [ ] Compression achieved 70-80% reduction from original
 - [ ] All functionality preserved with NO feature loss
 - [ ] Output saved to correct location
@@ -108,7 +107,7 @@ You WILL handle these scenarios:
 - **File Size Validation Failed**: Review compression techniques and remove verbose descriptions
 
 ⚠️ **Critical Requirements**
-- MANDATORY: Process ONLY the three specified source files
+- MANDATORY: Process ONLY the two specified source files
 - MANDATORY: Preserve ALL XML tags with complete content
 - MANDATORY: Use hard-coded session initialization
 - NEVER add content from external files or open editors
