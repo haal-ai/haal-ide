@@ -1,10 +1,12 @@
 # Contributing to HAAL
 
-**Note**: This repository is currently in wait-and-see mode and may not be actively maintained as we explore standardizing on Anthropic's Agent skill format.
+> **⚠️ DEPRECATED - NO CONTRIBUTIONS ACCEPTED**
 
-## Current Status
+This repository is **deprecated** and no longer accepts contributions. It remains available for **archive purposes only** until at least **end of June 2026**.
 
-This is a proof-of-concept repository for No contribution is expected at this time.
+## Migration
+
+Please see **[haal-skills](https://github.com/haal-ai/haal-skills)** for the active project using Anthropic's™ Agent Skills format.
 
 ## Questions or Feedback
 
@@ -12,4 +14,4 @@ If you have questions or feedback about this project, please open an issue.
 
 ---
 
-**Last Updated**: January 7, 2026
+**Last Updated**: January 25, 2026
