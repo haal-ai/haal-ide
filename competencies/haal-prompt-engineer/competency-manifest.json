@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": "1a-prompt-engineer",
+    "name": "1A Prompt Engineer",
+    "shortDescription": "Internal superset of Prompt Engineer",
+    "description": "Internal prompt engineer competency including all OSS skills; can host organization-specific prompt workflows.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide prompt creation, conversion, and validation capabilities",
+      "Enable core workflows for prompt-engineer"
+    ],
+    "tags": ["prompt", "engineering", "llm", "prompt-generation", "workflow", "templates", "best-practices", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": { "team": "1a-prompt-engineer", "primary_maintainer": "OLAF Framework Core Team" }
+  },
+  "bom": {
+    "skills": [
+      "condense-olaf-framework",
+      "convert-prompt-to-skill",
+      "create-competency-package",
+      "generate-step-by-step-tutorial",
+      "generate-workflow",
+      "import-prompts-to-competency",
+      "select-competency-collection"
+    ],
+    "entry_points": [
+      { "id": "condense-olaf-framework", "manifest": "skills/condense-olaf-framework/skill-manifest.json" },
+      { "id": "convert-prompt-to-skill", "manifest": "skills/convert-prompt-to-skill/skill-manifest.json" },
+      { "id": "create-competency-package", "manifest": "skills/create-competency-package/skill-manifest.json" },
+      { "id": "generate-step-by-step-tutorial", "manifest": "skills/generate-step-by-step-tutorial/skill-manifest.json" },
+      { "id": "generate-workflow", "manifest": "skills/generate-workflow/skill-manifest.json" },
+      { "id": "import-prompts-to-competency", "manifest": "skills/import-prompts-to-competency/skill-manifest.json" },
+      { "id": "select-competency-collection", "manifest": "skills/select-competency-collection/skill-manifest.json" }
+    ]
+  }
+}

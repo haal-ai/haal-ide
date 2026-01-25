@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "id": "olaf-specific-tools",
+    "name": "OLAF-Specific Tools",
+    "shortDescription": "OLAF-Specific Tools: quality assurance and validation for OLAF artifacts",
+    "description": "Comprehensive quality assurance and validation tools for OLAF framework artifacts including manifest validation, schema migration, template compliance checking, and documentation integrity verification",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide OLAF artifact validation and QA capabilities",
+      "Enable core workflows for olaf-specific-tools"
+    ],
+    "tags": [
+      "validation",
+      "quality-assurance",
+      "manifest",
+      "schema",
+      "documentation",
+      "olaf-internal"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-10-27",
+    "updated": "2025-11-18",
+    "maintenance": {
+      "team": "core",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Kiro AI Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Python 3.12+, JSON parsing libraries",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "detect-schema-drift",
+      "generate-validation-report",
+      "merge-competency-pack-to-main",
+      "validate-olaf-artifacts"
+    ],
+    "entry_points": [
+      {
+        "id": "detect-schema-drift",
+        "manifest": "skills/detect-schema-drift/skill-manifest.json"
+      },
+      {
+        "id": "generate-validation-report",
+        "manifest": "skills/generate-validation-report/skill-manifest.json"
+      },
+      {
+        "id": "merge-competency-pack-to-main",
+        "manifest": "skills/merge-competency-pack-to-main/skill-manifest.json"
+      },
+      {
+        "id": "validate-olaf-artifacts",
+        "manifest": "skills/validate-olaf-artifacts/skill-manifest.json"
+      }
+    ]
+  }
+}

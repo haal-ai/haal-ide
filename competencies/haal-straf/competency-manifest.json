@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "id": "1a-straf",
+    "name": "1A STRAF",
+    "shortDescription": "Internal STRAF-related developer tooling",
+    "description": "Internal competency for STRAF-related developer tooling and documentation automation.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide internal STRAF documentation automation",
+      "Support redocumentation and JS doc generation workflows"
+    ],
+    "tags": ["straf", "documentation", "automation", "developer", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": { "team": "1a-straf", "primary_maintainer": "OLAF Framework Core Team" }
+  },
+  "bom": {
+    "skills": [
+      "run-redocumentation",
+      "generate-jsdoc",
+      "straf-skill-runner",
+      "test-straf",
+      "straf-cli-launcher"
+    ],
+    "entry_points": [
+      { "id": "run-redocumentation", "manifest": "skills/run-redocumentation/skill-manifest.json" },
+      { "id": "generate-jsdoc", "manifest": "skills/generate-jsdoc/skill-manifest.json" },
+      { "id": "straf-skill-runner", "manifest": "skills/straf-skill-runner/skill-manifest.json" },
+      { "id": "test-straf", "manifest": "skills/test-straf/skill-manifest.json" },
+      { "id": "straf-cli-launcher", "manifest": "skills/straf-cli-launcher/skill-manifest.json" }
+    ]
+  }
+}

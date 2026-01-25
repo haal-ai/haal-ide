@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://OLAF-xdlc.github.io/schemas/OLAF-seed.schema.json",
+  "title": "OLAF Seed Configuration",
+  "description": "Schema covering OLAF-seed.json files describing the source repository",
+  "type": "object",
+  "required": ["organization", "repo"],
+  "properties": {
+    "organization": {
+      "type": "string",
+      "description": "GitHub organization or owner name"
+    },
+    "repo": {
+      "type": "string",
+      "description": "Repository name within the organization"
+    },
+    "branch": {
+      "type": "string",
+      "description": "Optional branch name to target"
+    }
+  },
+  "additionalProperties": false
+}

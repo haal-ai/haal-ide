@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "1a-developer",
+    "name": "1A Developer",
+    "shortDescription": "OLAF-specific developer workflows (internal superset of OSS developer)",
+    "description": "Internal developer competency that includes all OSS developer skills and can add organization-specific capabilities.",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide developer code review and quality improvement capabilities",
+      "Enable core workflows for developer"
+    ],
+    "tags": ["developer", "code-review", "refactoring", "testing", "quality", "analysis", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "1a-developer",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "review-code",
+      "review-code-accessibility",
+      "review-github-pr",
+      "analyze-function-complexity",
+      "improve-cyclomatic-complexity",
+      "fix-code-smells",
+      "augment-code-unit-test",
+      "evolve-code-iteratively",
+      "generate-tech-spec-from-code",
+      "deepen-tech-spec-developer",
+      "check-todos-in-code",
+      "assess-code-quality-principles",
+      "detect-test-directives",
+      "review-diff",
+      "create-practice-from-evidence",
+      "code-in-go",
+      "code-in-rust",
+      "scaffold-quarkus-microservice"
+    ],
+    "entry_points": [
+      { "id": "review-code", "manifest": "skills/review-code/skill-manifest.json" },
+      { "id": "review-code-accessibility", "manifest": "skills/review-code-accessibility/skill-manifest.json" },
+      { "id": "review-github-pr", "manifest": "skills/review-github-pr/skill-manifest.json" },
+      { "id": "analyze-function-complexity", "manifest": "skills/analyze-function-complexity/skill-manifest.json" },
+      { "id": "improve-cyclomatic-complexity", "manifest": "skills/improve-cyclomatic-complexity/skill-manifest.json" },
+      { "id": "fix-code-smells", "manifest": "skills/fix-code-smells/skill-manifest.json" },
+      { "id": "augment-code-unit-test", "manifest": "skills/augment-code-unit-test/skill-manifest.json" },
+      { "id": "evolve-code-iteratively", "manifest": "skills/evolve-code-iteratively/skill-manifest.json" },
+      { "id": "generate-tech-spec-from-code", "manifest": "skills/generate-tech-spec-from-code/skill-manifest.json" },
+      { "id": "deepen-tech-spec-developer", "manifest": "skills/deepen-tech-spec-developer/skill-manifest.json" },
+      { "id": "check-todos-in-code", "manifest": "skills/check-todos-in-code/skill-manifest.json" },
+      { "id": "assess-code-quality-principles", "manifest": "skills/assess-code-quality-principles/skill-manifest.json" },
+      { "id": "detect-test-directives", "manifest": "skills/detect-test-directives/skill-manifest.json" },
+      { "id": "review-diff", "manifest": "skills/review-diff/skill-manifest.json" },
+      { "id": "create-practice-from-evidence", "manifest": "skills/create-practice-from-evidence/skill-manifest.json" },
+      { "id": "code-in-go", "manifest": "skills/code-in-go/skill-manifest.json" },
+      { "id": "code-in-rust", "manifest": "skills/code-in-rust/skill-manifest.json" },
+      { "id": "scaffold-quarkus-microservice", "manifest": "skills/scaffold-quarkus-microservice/skill-manifest.json" }
+    ]
+  }
+}

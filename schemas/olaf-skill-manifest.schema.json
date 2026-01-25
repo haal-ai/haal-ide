@@ -1,0 +1,392 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://OLAF-xdlc.github.io/schemas/skill-manifest.schema.json",
+  "title": "OLAF Skill Manifest",
+  "description": "Schema for defining a self-sufficient OLAF skill with metadata and bill of materials",
+  "type": "object",
+  "required": ["metadata", "bom"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Metadata describing the skill",
+      "required": [
+        "id",
+        "name",
+        "shortDescription",
+        "objectives",
+        "tags",
+        "status",
+        "exposure",
+        "version",
+        "protocol"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique skill identifier in kebab-case format (3-4 words: verb-entity-complement)",
+          "pattern": "^[a-z]+(-[a-z]+){2,3}$",
+          "examples": ["create-prompt-template", "generate-spec-from-code", "analyze-code-quality"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name of the skill",
+          "minLength": 3,
+          "examples": ["Create Prompt Template", "Generate Spec From Code", "Analyze Code Quality"]
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "One-line explanation of what the skill does",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the skill",
+          "minLength": 10
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version number (MAJOR.MINOR.PATCH)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": ["1.0.0", "2.1.3"]
+        },
+        "objectives": {
+          "type": "array",
+          "description": "List of skill objectives",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags for persona, intents, and use cases",
+          "items": {
+            "type": "string",
+            "minLength": 2
+          },
+          "minItems": 1
+        },
+        "author": {
+          "type": "string",
+          "description": "Author's first and last name",
+          "pattern": "^[A-Za-z]+\\s+[A-Za-z]+.*$",
+          "examples": ["John Doe", "Jane Smith"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Skill maturity status",
+          "enum": ["experimental", "proven", "mainstream", "deprecated"]
+        },
+        "exposure": {
+          "type": "string",
+          "description": "Skill visibility level",
+          "enum": ["export", "internal", "kernel"]
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Interaction protocol used by this skill",
+          "enum": ["Act", "Propose-Act", "Propose-Confirm-Act", "Analyze-Report"],
+          "examples": ["Act", "Propose-Act", "Propose-Confirm-Act"]
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Alternative command phrases to trigger this skill",
+          "items": {
+            "type": "string",
+            "minLength": 2
+          },
+          "minItems": 1,
+          "examples": [["find competency", "search competency", "use workflow"]]
+        },
+        "created": {
+          "type": "string",
+          "description": "Creation date in ISO 8601 format",
+          "format": "date",
+          "examples": ["2025-11-14"]
+        },
+        "updated": {
+          "type": "string",
+          "description": "Last update date in ISO 8601 format",
+          "format": "date",
+          "examples": ["2025-11-14"]
+        },
+        "maintenance": {
+          "type": "object",
+          "description": "Maintenance information",
+          "properties": {
+            "team": {
+              "type": "string",
+              "description": "Maintaining team name"
+            },
+            "primary_maintainer": {
+              "type": "string",
+              "description": "Primary maintainer name"
+            },
+            "created_by": {
+              "type": "string",
+              "description": "Creator name"
+            }
+          }
+        },
+        "technical_requirements": {
+          "type": "object",
+          "description": "Technical requirements and dependencies",
+          "properties": {
+            "recommended_llm": {
+              "type": "string",
+              "description": "Recommended LLM model"
+            },
+            "tool_dependency": {
+              "type": "string",
+              "description": "Required tools and dependencies"
+            },
+            "platform_limitations": {
+              "type": "string",
+              "description": "Platform compatibility notes"
+            }
+          }
+        },
+        "sharing": {
+          "type": "object",
+          "description": "Tracking information for shared user-created skills",
+          "properties": {
+            "shared_date": {
+              "type": "string",
+              "description": "Date when skill was shared in ISO 8601 format",
+              "format": "date",
+              "examples": ["2025-11-14"]
+            },
+            "shared_to_repository": {
+              "type": "string",
+              "description": "Repository URL where skill was shared",
+              "pattern": "^https://github\\.com/[^/]+/[^/]+$",
+              "examples": ["https://github.com/OLAF-ai/OLAF-ide"]
+            },
+            "shared_to_branch": {
+              "type": "string",
+              "description": "Branch name where skill was shared",
+              "examples": ["contributions", "main"]
+            },
+            "contribution_note": {
+              "type": "string",
+              "description": "Optional note about the contribution"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "bom": {
+      "type": "object",
+      "description": "Bill of materials - components of the skill",
+      "required": ["prompts"],
+      "properties": {
+        "prompts": {
+          "type": "array",
+          "description": "Exposed prompts with their locations relative to skill root",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Prompt identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "pattern": "^/prompts/",
+                "examples": ["/prompts/main-workflow.md", "/prompts/analyzer.md"]
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional prompt description"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "helpers": {
+          "type": "array",
+          "description": "Helper prompts used internally by other prompts",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Helper identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "examples": ["/helpers/validator.md", "/helpers/formatter.md"]
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional helper description"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "templates": {
+          "type": "array",
+          "description": "Template files used by prompts or helpers",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Template identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "examples": ["/templates/output.md", "/templates/report.json"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Template file type",
+                "examples": ["markdown", "json", "yaml", "text"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "Scripts and tools used by prompts, helpers, or other tools",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Tool identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "examples": ["/tools/parser.py", "/tools/validator.sh"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Tool type or language",
+                "examples": ["python", "shell", "javascript", "executable"]
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional tool description"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "docs": {
+          "type": "array",
+          "description": "Documentation files describing the skill",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Document identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "examples": ["/docs/description.md", "/docs/tutorial.md"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Document type",
+                "examples": ["description", "tutorial", "reference", "guide"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "kb": {
+          "type": "array",
+          "description": "Knowledge base files used by prompts or helpers",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Knowledge base item identifier"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from skill root",
+                "examples": ["/kb/domain-knowledge.md", "/kb/api-specs.yaml"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Knowledge base content type",
+                "examples": ["reference", "specification", "examples", "data"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "skill_dependencies": {
+          "type": "array",
+          "description": "Other skills that this skill depends on or invokes",
+          "items": {
+            "type": "object",
+            "required": ["skill_id", "path"],
+            "properties": {
+              "skill_id": {
+                "type": "string",
+                "description": "Skill identifier (kebab-case)",
+                "pattern": "^[a-z]+(-[a-z]+)*$",
+                "examples": ["time-retrieval", "validate-syntax", "analyze-code"]
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path to the skill's main prompt from skills root",
+                "pattern": "^skills/[a-z]+(-[a-z]+)*/prompts/[a-z]+(-[a-z]+)*\\.md$",
+                "examples": ["skills/time-retrieval/prompts/time-retrieval.md", "skills/validate-syntax/prompts/validate-syntax.md"]
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional description of how this dependency is used"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "array",
+        "description": "Additional custom BOM categories",
+        "items": {
+          "type": "object",
+          "required": ["name", "path"],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "id": "architect",
+    "name": "Software Architect",
+    "shortDescription": "Generic software architecture, design patterns, and system design",
+    "description": "Provides generic architecture and design capabilities for open-source projects. NOTE: This competency needs additional typical architect skills to be added.",
+    "version": "1.0.0",
+    "objectives": [
+      "Bootstrap functional specifications from existing code",
+      "Apply proven architecture patterns and best practices",
+      "Support generic architecture workflows"
+    ],
+    "tags": ["architecture", "design", "esdi", "patterns", "system-design"],
+    "author": "OLAF Framework Core Team",
+    "status": "mainstream",
+    "exposure": "export",
+    "created": "2025-11-24",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "architect",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "assess-code-quality-principles",
+      "bootstrap-functional-spec-from-code",
+      "onboard-me",
+      "create-practice-from-evidence"
+    ],
+    "entry_points": [
+      {
+        "id": "assess-code-quality-principles",
+        "manifest": "skills/assess-code-quality-principles/skill-manifest.json"
+      },
+      {
+        "id": "bootstrap-functional-spec-from-code",
+        "manifest": "skills/bootstrap-functional-spec-from-code/skill-manifest.json"
+      },
+      {
+        "id": "onboard-me",
+        "manifest": "skills/onboard-me/skill-manifest.json"
+      },
+      {
+        "id": "create-practice-from-evidence",
+        "manifest": "skills/create-practice-from-evidence/skill-manifest.json"
+      }
+    ]
+  }
+}

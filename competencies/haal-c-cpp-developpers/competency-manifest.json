@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "id": "1a-c-cpp-developpers",
+    "name": "1A C/C++ Developers",
+    "shortDescription": "hall enterprise tools and frameworks expertise",
+    "description": "Provides specialized knowledge and skills for hall-specific enterprise tools including OTF (Open Transaction Framework) configuration management and BMS (Build Management System) for C/C++ build infrastructure.",
+    "version": "1.0.0",
+    "objectives": [
+      "Guide OTF variable creation and configuration",
+      "Provide BMS expertise for enterprise C/C++ builds",
+      "Support hall-specific development workflows",
+      "Ensure best practices for enterprise tool usage"
+    ],
+    "tags": ["hall", "enterprise", "otf", "bms", "c-cpp", "build-system"],
+    "author": "OLAF Framework Core Team",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-24",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "1a-c-cpp-developpers",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "create-otf-variable",
+      "get-bms-expertise"
+    ],
+    "entry_points": [
+      {
+        "id": "create-otf-variable",
+        "manifest": "skills/create-otf-variable/skill-manifest.json"
+      },
+      {
+        "id": "get-bms-expertise",
+        "manifest": "skills/get-bms-expertise/skill-manifest.json"
+      }
+    ]
+  }
+}

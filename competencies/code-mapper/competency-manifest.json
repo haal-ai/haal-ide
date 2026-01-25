@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "id": "code-mapper",
+    "name": "Code-Mapper Competency Package",
+    "shortDescription": "Competency package for OLAF code-mapper driven repository discovery and documentation workflows.",
+    "description": "Competency focused on using OLAF code-mapper scripts and artifacts to understand repositories, discover tools and applications, and generate technical documentation and related assets.",
+    "version": "1.0.0",
+    "objectives": [
+      "Enable repository discovery based on OLAF code-mapper analyses",
+      "Support generation of structured documentation from code-mapper outputs"
+    ],
+    "tags": [
+      "code-mapper",
+      "repository-discovery",
+      "documentation",
+      "developer"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-12-09",
+    "updated": "2025-12-09",
+    "maintenance": {
+      "team": "code-mapper",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Cascade"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Same class of models validated for core OLAF skills",
+      "tool_dependency": "Python runtime and OLAF code-mapper scripts available in the workspace.",
+      "platform_limitations": "Assumes local access to repositories and ability to execute Python scripts."
+    }
+  },
+  "bom": {
+    "skills": [
+      "generate-code-mapper-docs",
+      "analyze-api-consistency"
+    ],
+    "entry_points": [
+      {
+        "id": "generate-code-mapper-docs",
+        "manifest": "skills/generate-code-mapper-docs/skill-manifest.json",
+        "name": "Generate Code-Mapper Documentation",
+        "description": "Generate structured technical documentation for a repository using OLAF code-mapper outputs.",
+        "required": true
+      },
+      {
+        "id": "analyze-api-consistency",
+        "manifest": "skills/analyze-api-consistency/skill-manifest.json",
+        "name": "Analyze API Consistency with Code-Mapper",
+        "description": "Analyze API naming, parameter, and return-pattern consistency using code-mapper full foundation outputs.",
+        "required": false
+      }
+    ]
+  }
+}

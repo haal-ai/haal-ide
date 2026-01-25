@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "id": "1a-architects",
+    "name": "1A Architects",
+    "shortDescription": "hall-specific ESDI architecture workflow",
+    "description": "Provides hall enterprise architecture capabilities including ESDI workflow (Exploration → Specification → Design → Implementation), layered architecture patterns, and system design from requirements to implementation plans.",
+    "version": "1.0.0",
+    "objectives": [
+      "Execute complete ESDI workflow from idea to implementation plan",
+      "Transform specifications into layered system designs",
+      "Generate implementation plans with task breakdowns",
+      "Apply hall architecture patterns and best practices"
+    ],
+    "tags": ["architecture", "design", "esdi", "patterns", "system-design", "hall", "1a"],
+    "author": "OLAF Framework Core Team",
+    "status": "mainstream",
+    "exposure": "internal",
+    "created": "2025-11-24",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "1a-architects",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "skills": [
+      "analyze-contributor-risk",
+      "analyze-function-complexity",
+      "assess-code-quality-principles",
+      "esdi-chain",
+      "generate-design",
+      "generate-implementation-plan",
+      "generate-external-docs",
+      "transform-raw-spec",
+      "bootstrap-functional-spec-from-code",
+      "onboard-me",
+      "create-practice-from-evidence"
+    ],
+    "entry_points": [
+      {
+        "id": "analyze-contributor-risk",
+        "manifest": "skills/analyze-contributor-risk/skill-manifest.json"
+      },
+      {
+        "id": "analyze-function-complexity",
+        "manifest": "skills/analyze-function-complexity/skill-manifest.json"
+      },
+      {
+        "id": "assess-code-quality-principles",
+        "manifest": "skills/assess-code-quality-principles/skill-manifest.json"
+      },
+      {
+        "id": "esdi-chain",
+        "manifest": "skills/esdi-chain/skill-manifest.json"
+      },
+      {
+        "id": "generate-design",
+        "manifest": "skills/generate-design/skill-manifest.json"
+      },
+      {
+        "id": "generate-implementation-plan",
+        "manifest": "skills/generate-implementation-plan/skill-manifest.json"
+      },
+      {
+        "id": "generate-external-docs",
+        "manifest": "skills/generate-external-docs/skill-manifest.json"
+      },
+      {
+        "id": "transform-raw-spec",
+        "manifest": "skills/transform-raw-spec/skill-manifest.json"
+      },
+      {
+        "id": "bootstrap-functional-spec-from-code",
+        "manifest": "skills/bootstrap-functional-spec-from-code/skill-manifest.json"
+      },
+      {
+        "id": "onboard-me",
+        "manifest": "skills/onboard-me/skill-manifest.json"
+      },
+      {
+        "id": "create-practice-from-evidence",
+        "manifest": "skills/create-practice-from-evidence/skill-manifest.json"
+      }
+    ]
+  }
+}

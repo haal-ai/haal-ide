@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": "technical-writer",
+    "name": "Technical Writer Competency Package",
+    "shortDescription": "Technical Writer: content creation, presentation planning, and professional documentation",
+    "description": "Comprehensive technical writer competency package for content creation, presentation development, workflow management, and professional documentation with specialized templates and best practices",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide content creation and documentation capabilities",
+      "Enable presentation planning and development workflows",
+      "Support professional release notes and documentation"
+    ],
+    "tags": ["technical-writer", "content", "presentation", "documentation", "release-notes", "workflow"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-11-19",
+    "updated": "2025-11-19",
+    "maintenance": {
+      "team": "technical-writer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "OLAF Framework"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Optional: PowerPoint/presentation tools, document processing tools",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "generate-post-from-plan",
+      "create-presentation-plan"
+    ],
+    "entry_points": [
+      { "id": "generate-post-from-plan", "manifest": "skills/generate-post-from-plan/skill-manifest.json" },
+      { "id": "create-presentation-plan", "manifest": "skills/create-presentation-plan/skill-manifest.json" }
+    ]
+  }
+}

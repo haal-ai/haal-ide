@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "id": "api-consumers",
+    "name": "API Consumers Competency Package",
+    "shortDescription": "API Consumers: review producer contracts, scaffold a consumer UI, and analyze change impact.",
+    "description": "Competency package focused on consuming producer APIs from a consumer perspective: reviewing specifications and OpenAPI contracts, scaffolding consumer-facing UI journeys, and analyzing change/deprecation impact on consumer code.",
+    "version": "1.0.0",
+    "objectives": [
+      "Review producer specs and OpenAPI from a consumer perspective",
+      "Scaffold consumer UI journeys from spec and OpenAPI",
+      "Analyze consumer impact from changed, evolved, or deprecated endpoints"
+    ],
+    "tags": ["api", "openapi", "consumer", "frontend", "angular", "impact-analysis", "deprecation"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-12-15",
+    "updated": "2025-12-15"
+  },
+  "bom": {
+    "skills": [
+      "review-producer-api-as-consumer",
+      "scaffold-angular-frontend-from-spec",
+      "analyze-api-change-impact-from-deprecation-spec"
+    ],
+    "entry_points": [
+      {
+        "id": "review-producer-api-as-consumer",
+        "manifest": "skills/review-producer-api-as-consumer/skill-manifest.json",
+        "name": "Review Producer API As Consumer",
+        "description": "Review functional spec + OpenAPI from a consumer perspective to identify questions for producers and early development issues.",
+        "required": true
+      },
+      {
+        "id": "scaffold-angular-frontend-from-spec",
+        "manifest": "skills/scaffold-angular-frontend-from-spec/skill-manifest.json",
+        "name": "Scaffold Angular Frontend From Spec",
+        "description": "Generate an Angular (Angular Material) consumer UI scaffold implementing spec-defined journeys beyond CRUD.",
+        "required": false
+      },
+      {
+        "id": "analyze-api-change-impact-from-deprecation-spec",
+        "manifest": "skills/analyze-api-change-impact-from-deprecation-spec/skill-manifest.json",
+        "name": "Analyze API Change Impact From Deprecation Spec",
+        "description": "From change/deprecation documentation and optional OpenAPI diffs, analyze consumer code impact and produce a modification + retest tasklist.",
+        "required": false
+      }
+    ]
+  }
+}

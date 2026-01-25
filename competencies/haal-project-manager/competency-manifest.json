@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "id": "1a-project-manager",
+    "name": "OLAF Project Manager Competency Package",
+    "shortDescription": "OLAF-specific project management with AI impact metrics and professional release notes",
+    "description": "OLAF-specific project manager competency package including all OSS project management skills plus OLAF-specific AI impact measurement and professional release note generation",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide all standard project management capabilities",
+      "Enable OLAF-specific AI impact measurement",
+      "Generate professional release notes for OLAF products"
+    ],
+    "tags": ["project-manager", "olaf", "ai-impact", "release-notes", "internal"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2025-11-26",
+    "updated": "2025-11-26",
+    "maintenance": {
+      "team": "project-manager",
+      "primary_maintainer": "OLAF Framework Team",
+      "created_by": "GitHub Copilot"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Git for version control and tracking",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "add-product-changelog-entry",
+      "analyze-contributor-risk",
+      "create-decision-record",
+      "create-job",
+      "create-person-record",
+      "find-expert-contact",
+      "generate-tasklist",
+      "review-progress",
+      "work-on-job",
+      "measure-ai-impact",
+      "generate-professional-release-notes"
+    ],
+    "entry_points": [
+      { "id": "add-product-changelog-entry", "manifest": "skills/add-product-changelog-entry/skill-manifest.json" },
+      { "id": "analyze-contributor-risk", "manifest": "skills/analyze-contributor-risk/skill-manifest.json" },
+      { "id": "create-decision-record", "manifest": "skills/create-decision-record/skill-manifest.json" },
+      { "id": "create-job", "manifest": "skills/create-job/skill-manifest.json" },
+      { "id": "create-person-record", "manifest": "skills/create-person-record/skill-manifest.json" },
+      { "id": "find-expert-contact", "manifest": "skills/find-expert-contact/skill-manifest.json" },
+      { "id": "generate-tasklist", "manifest": "skills/generate-tasklist/skill-manifest.json" },
+      { "id": "review-progress", "manifest": "skills/review-progress/skill-manifest.json" },
+      { "id": "work-on-job", "manifest": "skills/work-on-job/skill-manifest.json" },
+      { "id": "measure-ai-impact", "manifest": "skills/measure-ai-impact/skill-manifest.json" },
+      { "id": "generate-professional-release-notes", "manifest": "skills/generate-professional-release-notes/skill-manifest.json" }
+    ]
+  }
+}

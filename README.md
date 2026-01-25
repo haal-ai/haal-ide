@@ -1,4 +1,6 @@
-# HAAL IDE (Work in Progress as of 08 Jan 2025.. stay tuned)
+# HAAL IDE
+
+> **⚠️ DEPRECATED**: haal-ide is now deprecated in favor of **[haal-skills](https://github.com/haal-ai/haal-skills)**. The new standard for skills is [Overview - Agent Skills](https://github.com/anthropics/anthropic-cookbook/tree/main/misc/prompt_caching/agent_skills).
 
 **HAAL** (Human AI Assistant Layer) IDE provides seamless integration between humans and AI assistants (for both IDE and some CLI-based agents), enabling better communication and collaboration through intelligent skills, tools, templates and guidance.
 
@@ -47,14 +49,7 @@ As compared to OLAF v1, it retains and augments:
 
 ## 🔗 HAAL AI Ecosystem
 
-haal-ide is part of the [HAAL AI](https://github.com/haal-ai) organization ecosystem:
-
-- **[haal-cli](https://github.com/haal-ai/haal-cli)** - Installer and configurators
-- **[haal-skills](https://github.com/haal-ai/haal-skills)** - Core skill definitions using Anthropic's™ Agent Skills format
-- **[haal-skills-sdk](https://github.com/haal-ai/haal-skills-sdk)** - Enhanced SDK with HAAL-specific extensions  
-- **[haal-skills-agentic-aws](https://github.com/haal-ai/haal-skills-agentic-aws)** - AWS integration for cloud deployment
-
-See the [main README](https://github.com/haal-ai/haal-ai-org/blob/main/README.md) for a complete overview of all repositories.
+See **[haal-skills](https://github.com/haal-ai/haal-skills)** for the active project using Anthropic's™ Agent Skills format.
 
 
 ## 📄 License

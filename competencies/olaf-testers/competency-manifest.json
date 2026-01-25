@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": "olaf-testers",
+    "name": "OLAF Testers",
+    "shortDescription": "Testing and validation competency for OLAF framework components",
+    "description": "Specialized competency focused on testing, validation, and quality assurance of OLAF framework skills, competencies, and system components. Ensures reliability and regression prevention.",
+    "objectives": [
+      "Validate OLAF skill creation functionality",
+      "Perform regression testing on framework components",
+      "Ensure quality standards compliance",
+      "Automate testing workflows"
+    ],
+    "tags": ["testing", "validation", "quality-assurance", "regression", "olaf-framework"],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "author": "windsurf ai + p-square",
+    "created": "20251118-1435",
+    "updated": "20251118-1435",
+    "maintenance": {
+      "team": "xdlc prompt-engineers",
+      "primary_maintainer": "windsurf",
+      "created_by": "windsurf"
+    }
+  },
+  "bom": {
+    "skills": [
+      "test-create-skill"
+    ],
+    "entry_points": [
+      {
+        "id": "test-create-skill",
+        "manifest": "skills/test-create-skill/skill-manifest.json",
+        "name": "Test Create Skill",
+        "description": "Regression test for create-skill functionality"
+      }
+    ]
+  }
+}

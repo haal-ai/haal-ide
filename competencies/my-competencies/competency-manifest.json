@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "id": "my-competencies",
+    "name": "My Competencies",
+    "shortDescription": "User-maintained competency that aggregates personal skills.",
+    "description": "Personal competency package intended to hold user-created skills.",
+    "version": "1.0.0",
+    "objectives": [
+      "Group personal skills",
+      "Expose personal skills via the OLAF competency index"
+    ],
+    "tags": [
+      "user",
+      "personal"
+    ],
+    "author": "User",
+    "status": "experimental",
+    "exposure": "internal",
+    "created": "2026-01-11",
+    "updated": "2026-01-11"
+  },
+  "bom": {
+    "skills": [],
+    "entry_points": []
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "id": "developer",
+    "name": "Developer Competency Package",
+    "shortDescription": "Developer: code review, analysis, refactoring, and quality improvement",
+    "description": "Comprehensive developer competency package aggregating code review, analysis, testing, and quality improvement capabilities with specialized workflows for software development tasks",
+    "version": "1.0.0",
+    "objectives": [
+      "Provide developer code review and quality improvement capabilities",
+      "Enable core workflows for developer"
+    ],
+    "tags": ["developer", "code-review", "refactoring", "testing", "quality", "analysis"],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "created": "2025-10-21",
+    "updated": "2025-10-21",
+    "maintenance": {
+      "team": "developer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Kiro AI Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Git, programming language tools, code analysis tools",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "skills": [
+      "review-code",
+      "analyze-function-complexity",
+      "fix-code-smells",
+      "generate-tech-spec-from-code",
+      "check-todos-in-code",
+      "assess-code-quality-principles",
+      "review-diff",
+      "create-practice-from-evidence",
+      "find-expert-contact",
+      "code-in-go",
+      "code-in-rust",
+      "scaffold-quarkus-microservice"
+    ],
+    "entry_points": [
+      { "id": "review-code", "manifest": "skills/review-code/skill-manifest.json" },
+      { "id": "analyze-function-complexity", "manifest": "skills/analyze-function-complexity/skill-manifest.json" },
+      { "id": "fix-code-smells", "manifest": "skills/fix-code-smells/skill-manifest.json" },
+      { "id": "generate-tech-spec-from-code", "manifest": "skills/generate-tech-spec-from-code/skill-manifest.json" },
+      { "id": "check-todos-in-code", "manifest": "skills/check-todos-in-code/skill-manifest.json" },
+      { "id": "assess-code-quality-principles", "manifest": "skills/assess-code-quality-principles/skill-manifest.json" },
+      { "id": "review-diff", "manifest": "skills/review-diff/skill-manifest.json" },
+      { "id": "create-practice-from-evidence", "manifest": "skills/create-practice-from-evidence/skill-manifest.json" },
+      { "id": "find-expert-contact", "manifest": "skills/find-expert-contact/skill-manifest.json" },
+      { "id": "code-in-go", "manifest": "skills/code-in-go/skill-manifest.json" },
+      { "id": "code-in-rust", "manifest": "skills/code-in-rust/skill-manifest.json" },
+      { "id": "scaffold-quarkus-microservice", "manifest": "skills/scaffold-quarkus-microservice/skill-manifest.json" }
+    ]
+  }
+}
